@@ -33,6 +33,18 @@ set(PROJECT_SOURCES
         src/model/datagen/DataGeneratorWorker.cpp
         src/model/datagen/DataGeneratorWorker.h
         src/tests/testDavide.h
+        src/controller/storage/StorageController.cpp
+        src/controller/storage/StorageController.h
+        src/controller/storage/core/AbstractController.cpp
+        src/controller/storage/core/AbstractController.h
+        src/controller/LocatorController.cpp
+        src/controller/LocatorController.h
+        src/controller/window/WindowController.cpp
+        src/controller/window/WindowController.h
+        src/controller/business/BusinessController.cpp
+        src/controller/business/BusinessController.h
+        src/utility/Logger.cpp
+        src/utility/Logger.h
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
