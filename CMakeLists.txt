@@ -18,6 +18,18 @@ set(PROJECT_SOURCES
         main.cpp
         src/mainwindow.cpp
         src/mainwindow.h
+        src/controller/Controller.cpp
+        src/controller/Controller.h
+        src/view/MainView.cpp
+        src/view/MainView.h
+        src/view/AbstractContainer.cpp
+        src/view/AbstractContainer.h
+        src/view/AbstractView.cpp
+        src/view/AbstractView.h
+        src/view/SidebarWidget.cpp
+        src/view/SidebarWidget.h
+        src/view/MainContentWidget.cpp
+        src/view/MainContentWidget.h
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
