@@ -18,6 +18,21 @@ set(PROJECT_SOURCES
         main.cpp
         src/mainwindow.cpp
         src/mainwindow.h
+        src/model/datagen/AbstractDataGen.cpp
+        src/model/datagen/AbstractDataGen.h
+        src/model/core/AbstractItem.cpp
+        src/model/core/AbstractItem.h
+        src/model/core/Category.cpp
+        src/model/core/Category.h
+        src/model/core/Sensor.cpp
+        src/model/core/Sensor.h
+        src/model/datagen/LinearDataGen.cpp
+        src/model/datagen/LinearDataGen.h
+        src/model/datagen/RandomDataGen.cpp
+        src/model/datagen/RandomDataGen.h
+        src/model/datagen/DataGeneratorWorker.cpp
+        src/model/datagen/DataGeneratorWorker.h
+        src/tests/testDavide.h
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
