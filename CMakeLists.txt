@@ -26,10 +26,16 @@ set(PROJECT_SOURCES
         src/view/AbstractContainer.h
         src/view/AbstractView.cpp
         src/view/AbstractView.h
-        src/view/SidebarWidget.cpp
-        src/view/SidebarWidget.h
-        src/view/MainContentWidget.cpp
-        src/view/MainContentWidget.h
+        src/view/SidebarContainer.cpp
+        src/view/SidebarContainer.h
+        src/view/MainContentContainer.cpp
+        src/view/MainContentContainer.h
+        src/view/GroupListView.cpp
+        src/view/GroupListView.h
+        src/view/SingleView.cpp
+        src/view/SingleView.h
+        src/view/ModifyView.cpp
+        src/view/ModifyView.h
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)

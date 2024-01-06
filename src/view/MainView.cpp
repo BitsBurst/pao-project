@@ -5,20 +5,12 @@ MainView::MainView(Controller * controller, QWidget* parent)
 {
     setMinimumSize(QSize(640, 360));
 
-    QSize view_size(600, 450);
-    resize(view_size);
-
     central_widget_ = new QWidget(this);
     central_widget_->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
 
     // Create Components
     createMenu();
-
-    sidebar_ = new SidebarWidget(central_widget_);
-    sidebar_->setMaximumWidth(200);
-    sidebar_->show();
-    content_ = new MainContentWidget(central_widget_);
-    content_->show();
+    createDefaultView();
 
     // Pallet. TODO: Remove
     QPalette pal = QPalette();
@@ -48,5 +40,43 @@ void MainView::createMenu() {
     menu_bar_->addMenu(file);
     menu_bar_->addMenu(sensors);
 
+    // Menu Sensors
+    QAction * single_view = new QAction("Visione Singola", sensors);
+    QAction * modify_view = new QAction("Modifica Sensore", sensors);
+
+    sensors->addAction(single_view);
+    sensors->addAction(modify_view);
+
+    // Connect Action
+    connect(single_view, SIGNAL(triggered()), this, SLOT(showSingleView()));
+    connect(modify_view, SIGNAL(triggered()), this, SLOT(showModifyView()));
+
     setMenuBar(menu_bar_);
+}
+
+void MainView::createDefaultView() {
+
+    // Generate all views
+    single_view_ = new SingleView();
+    group_list_view_ = new GroupListView();
+    modify_view_ = new ModifyView();
+
+    // Sidebar Default
+    sidebar_ = new SidebarContainer(group_list_view_, central_widget_);
+    sidebar_->setMaximumWidth(200);
+    sidebar_->show();
+
+    // Content Default
+    content_ = new MainContentContainer(single_view_, central_widget_);
+    content_->show();
+}
+
+
+// Slots
+void MainView::showSingleView() {
+    content_->setCurrentView(single_view_);
+}
+
+void MainView::showModifyView() {
+    content_->setCurrentView(modify_view_);
 }
