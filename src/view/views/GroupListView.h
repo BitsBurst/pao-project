@@ -2,7 +2,7 @@
 #define SMARTSENSORS_GROUPLISTVIEW_H
 
 #include <QLabel>
-#include "AbstractView.h"
+#include "../core/AbstractView.h"
 
 
 class GroupListView : public AbstractView {

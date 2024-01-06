@@ -4,7 +4,7 @@
 #define SMARTSENSORS_MODIFYVIEW_H
 
 #include <QLabel>
-#include "AbstractView.h"
+#include "../core/AbstractView.h"
 
 class ModifyView : public AbstractView {
 Q_OBJECT

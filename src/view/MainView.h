@@ -7,12 +7,12 @@
 #include <QHBoxLayout>
 #include <QMenuBar>
 #include "../controller/Controller.h"
-#include "AbstractContainer.h"
-#include "SidebarContainer.h"
-#include "MainContentContainer.h"
-#include "GroupListView.h"
-#include "SingleView.h"
-#include "ModifyView.h"
+#include "core/AbstractContainer.h"
+#include "containers/SidebarContainer.h"
+#include "containers/MainContentContainer.h"
+#include "views/GroupListView.h"
+#include "views/SingleView.h"
+#include "views/ModifyView.h"
 
 class Controller;
 

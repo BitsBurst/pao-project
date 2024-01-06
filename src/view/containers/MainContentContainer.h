@@ -1,7 +1,8 @@
 #ifndef SMARTSENSORS_MAINCONTENTCONTAINER_H
 #define SMARTSENSORS_MAINCONTENTCONTAINER_H
 
-#include "AbstractContainer.h"
+#include <QLabel>
+#include "../core/AbstractContainer.h"
 
 class MainContentContainer : public AbstractContainer {
     Q_OBJECT

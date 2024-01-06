@@ -1,4 +1,3 @@
-#include <QLabel>
 #include "SidebarContainer.h"
 
 SidebarContainer::SidebarContainer(AbstractView * current_view, QWidget* parent)

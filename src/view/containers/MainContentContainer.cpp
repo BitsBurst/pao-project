@@ -1,4 +1,3 @@
-#include <QLabel>
 #include "MainContentContainer.h"
 
 MainContentContainer::MainContentContainer(AbstractView * current_view, QWidget* parent)

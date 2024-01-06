@@ -16,26 +16,24 @@ find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets)
 
 set(PROJECT_SOURCES
         main.cpp
-        src/mainwindow.cpp
-        src/mainwindow.h
         src/controller/Controller.cpp
         src/controller/Controller.h
         src/view/MainView.cpp
         src/view/MainView.h
-        src/view/AbstractContainer.cpp
-        src/view/AbstractContainer.h
-        src/view/AbstractView.cpp
-        src/view/AbstractView.h
-        src/view/SidebarContainer.cpp
-        src/view/SidebarContainer.h
-        src/view/MainContentContainer.cpp
-        src/view/MainContentContainer.h
-        src/view/GroupListView.cpp
-        src/view/GroupListView.h
-        src/view/SingleView.cpp
-        src/view/SingleView.h
-        src/view/ModifyView.cpp
-        src/view/ModifyView.h
+        src/view/core/AbstractContainer.cpp
+        src/view/core/AbstractContainer.h
+        src/view/core/AbstractView.cpp
+        src/view/core/AbstractView.h
+        src/view/containers/SidebarContainer.cpp
+        src/view/containers/SidebarContainer.h
+        src/view/containers/MainContentContainer.cpp
+        src/view/containers/MainContentContainer.h
+        src/view/views/GroupListView.cpp
+        src/view/views/GroupListView.h
+        src/view/views/SingleView.cpp
+        src/view/views/SingleView.h
+        src/view/views/ModifyView.cpp
+        src/view/views/ModifyView.h
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)

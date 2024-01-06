@@ -2,7 +2,7 @@
 #define SMARTSENSORS_SINGLEVIEW_H
 
 #include <QLabel>
-#include "AbstractView.h"
+#include "../core/AbstractView.h"
 
 class SingleView : public AbstractView {
     Q_OBJECT

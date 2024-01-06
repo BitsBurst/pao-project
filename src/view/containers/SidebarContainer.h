@@ -1,7 +1,8 @@
 #ifndef SMARTSENSORS_SIDEBARCONTAINER_H
 #define SMARTSENSORS_SIDEBARCONTAINER_H
 
-#include "AbstractContainer.h"
+#include <QLabel>
+#include "../core/AbstractContainer.h"
 
 class SidebarContainer : public AbstractContainer {
     Q_OBJECT
