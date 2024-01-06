@@ -1,11 +1,13 @@
 #ifndef SMARTSENSORS_STORAGEUTILITY_H
 #define SMARTSENSORS_STORAGEUTILITY_H
 #include <QString>
-template <typename T>
+#include "../model/core/Sensor.h"
 class StorageUtility {
 public:
-	static void Store(T data, QString filename);
-	static T Load(QString filename);
+	template <typename T>
+	static bool Store(T data, QString filename);
+	template<typename T>
+	static T* Load(QString filename);
 };
 
 #endif //SMARTSENSORS_STORAGEUTILITY_H

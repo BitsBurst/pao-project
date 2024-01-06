@@ -5,6 +5,8 @@
 #include "../core/AbstractController.h"
 #include "../../model/core/Category.h"
 #include "../../model/core/Sensor.h"
+#include "../../utility/StorageUtility.h"
+
 class StorageController: public AbstractController {
 public:
 	StorageController();

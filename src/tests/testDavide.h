@@ -3,9 +3,11 @@
 #include <QFile>
 #include "../model/core/Category.h"
 #include "../model/core/Sensor.h"
+#include "../utility/StorageUtility.h"
 class TestDavide {
 public:
 	static void runTest();
+	static void runTestV2();
 };
 void TestDavide::runTest()
 {
@@ -36,5 +38,13 @@ void TestDavide::runTest()
 		qDebug() << category2.getName();
 		qDebug() << category2.getUnitMeasure();
 	}
+}
+void TestDavide::runTestV2()
+{
+	//Sensor sensor("1", "Cucina", Category("1", "Temperature", "Celsius", nullptr));
+	//StorageUtility::Store(sensor, "sensors.dat");
+	Sensor* s = StorageUtility::Load("sensors.dat");
+	qDebug() << s->getId();
+	qDebug() << s->getName();
 }
 #endif //SMARTSENSORS_TESTDAVIDE_H
