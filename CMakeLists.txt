@@ -16,8 +16,22 @@ find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets)
 
 set(PROJECT_SOURCES
         main.cpp
-        src/mainwindow.cpp
-        src/mainwindow.h
+        src/view/MainView.cpp
+        src/view/MainView.h
+        src/view/core/AbstractContainer.cpp
+        src/view/core/AbstractContainer.h
+        src/view/core/AbstractView.cpp
+        src/view/core/AbstractView.h
+        src/view/containers/SidebarContainer.cpp
+        src/view/containers/SidebarContainer.h
+        src/view/containers/MainContentContainer.cpp
+        src/view/containers/MainContentContainer.h
+        src/view/views/GroupListView.cpp
+        src/view/views/GroupListView.h
+        src/view/views/SingleView.cpp
+        src/view/views/SingleView.h
+        src/view/views/ModifyView.cpp
+        src/view/views/ModifyView.h
         src/model/datagen/AbstractDataGen.cpp
         src/model/datagen/AbstractDataGen.h
         src/model/core/AbstractItem.cpp

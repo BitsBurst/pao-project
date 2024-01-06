@@ -1,6 +1,7 @@
 #include "src/controller/LocatorController.h"
 #include "src/utility/Logger.h"
 #include <QApplication>
+
 int main(int argc, char *argv[])
 {
 	Logger::Init();
