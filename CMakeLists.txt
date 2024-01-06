@@ -34,6 +34,35 @@ set(PROJECT_SOURCES
         src/view/views/SingleView.h
         src/view/views/ModifyView.cpp
         src/view/views/ModifyView.h
+        src/mainwindow.cpp
+        src/mainwindow.h
+        src/model/datagen/AbstractDataGen.cpp
+        src/model/datagen/AbstractDataGen.h
+        src/model/core/AbstractItem.cpp
+        src/model/core/AbstractItem.h
+        src/model/core/Category.cpp
+        src/model/core/Category.h
+        src/model/core/Sensor.cpp
+        src/model/core/Sensor.h
+        src/model/datagen/LinearDataGen.cpp
+        src/model/datagen/LinearDataGen.h
+        src/model/datagen/RandomDataGen.cpp
+        src/model/datagen/RandomDataGen.h
+        src/model/datagen/DataGeneratorWorker.cpp
+        src/model/datagen/DataGeneratorWorker.h
+        src/tests/testDavide.h
+        src/controller/storage/StorageController.cpp
+        src/controller/storage/StorageController.h
+        src/controller/core/AbstractController.cpp
+        src/controller/core/AbstractController.h
+        src/controller/LocatorController.cpp
+        src/controller/LocatorController.h
+        src/controller/window/WindowController.cpp
+        src/controller/window/WindowController.h
+        src/controller/business/BusinessController.cpp
+        src/controller/business/BusinessController.h
+        src/utility/Logger.cpp
+        src/utility/Logger.h
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
