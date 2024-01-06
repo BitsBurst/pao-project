@@ -16,8 +16,6 @@ find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets)
 
 set(PROJECT_SOURCES
         main.cpp
-        src/controller/Controller.cpp
-        src/controller/Controller.h
         src/view/MainView.cpp
         src/view/MainView.h
         src/view/core/AbstractContainer.cpp
@@ -34,8 +32,6 @@ set(PROJECT_SOURCES
         src/view/views/SingleView.h
         src/view/views/ModifyView.cpp
         src/view/views/ModifyView.h
-        src/mainwindow.cpp
-        src/mainwindow.h
         src/model/datagen/AbstractDataGen.cpp
         src/model/datagen/AbstractDataGen.h
         src/model/core/AbstractItem.cpp

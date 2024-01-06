@@ -1,7 +1,7 @@
 #include "MainView.h"
 
-MainView::MainView(Controller * controller, QWidget* parent)
-    :   QMainWindow(parent), controller_(controller)
+MainView::MainView(QWidget* parent)
+    :   QMainWindow(parent)
 {
     setMinimumSize(QSize(640, 360));
 

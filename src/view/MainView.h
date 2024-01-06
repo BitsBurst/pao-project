@@ -6,7 +6,6 @@
 #include <QLabel>
 #include <QHBoxLayout>
 #include <QMenuBar>
-#include "../controller/Controller.h"
 #include "core/AbstractContainer.h"
 #include "containers/SidebarContainer.h"
 #include "containers/MainContentContainer.h"
@@ -14,13 +13,9 @@
 #include "views/SingleView.h"
 #include "views/ModifyView.h"
 
-class Controller;
-
 class MainView : public QMainWindow {
     Q_OBJECT
 private:
-    Controller * controller_;
-
     QWidget * central_widget_;
     QLayout * layout_;
 
@@ -38,7 +33,7 @@ private:
     void createDefaultView();
 
 public:
-    explicit MainView(Controller * controller, QWidget * parent = nullptr);
+    explicit MainView(QWidget * parent = nullptr);
 
 public slots:
     void showSingleView();
