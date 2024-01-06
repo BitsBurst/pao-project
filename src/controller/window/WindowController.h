@@ -1,7 +1,7 @@
 #ifndef SMARTSENSORS_WINDOWCONTROLLER_H
 #define SMARTSENSORS_WINDOWCONTROLLER_H
 
-#include "../storage/core/AbstractController.h"
+#include "../core/AbstractController.h"
 #include "../../mainwindow.h"
 class WindowController: public AbstractController {
 public:

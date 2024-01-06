@@ -1,7 +1,7 @@
 #ifndef SMARTSENSORS_STORAGECONTROLLER_H
 #define SMARTSENSORS_STORAGECONTROLLER_H
 
-#include "core/AbstractController.h"
+#include "../core/AbstractController.h"
 class StorageController: public AbstractController {
 public:
 	StorageController();
