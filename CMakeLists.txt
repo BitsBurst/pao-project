@@ -35,8 +35,8 @@ set(PROJECT_SOURCES
         src/tests/testDavide.h
         src/controller/storage/StorageController.cpp
         src/controller/storage/StorageController.h
-        src/controller/storage/core/AbstractController.cpp
-        src/controller/storage/core/AbstractController.h
+        src/controller/core/AbstractController.cpp
+        src/controller/core/AbstractController.h
         src/controller/LocatorController.cpp
         src/controller/LocatorController.h
         src/controller/window/WindowController.cpp
