@@ -4,7 +4,7 @@
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
 {
-	TestDavide::runTestV2();
+	//TestDavide::runTest();
 }
 
 MainWindow::~MainWindow() {}
