@@ -59,7 +59,6 @@ set(PROJECT_SOURCES
         src/controller/business/BusinessController.h
         src/utility/Logger.cpp
         src/utility/Logger.h
-        src/utility/StorageUtility.cpp
         src/utility/StorageUtility.h
 )
 

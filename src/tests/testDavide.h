@@ -41,10 +41,13 @@ void TestDavide::runTest()
 }
 void TestDavide::runTestV2()
 {
-	//Sensor sensor("1", "Cucina", Category("1", "Temperature", "Celsius", nullptr));
-	//StorageUtility::Store(sensor, "sensors.dat");
-	Sensor* s = StorageUtility::Load("sensors.dat");
-	qDebug() << s->getId();
-	qDebug() << s->getName();
+	QList<Category> categories;
+	Category* category = new Category("1", "Temperature", "Celsius", nullptr);
+	categories.append(*category);
+	StorageUtility::Store<QList<Category>>(categories, "categories.dat");
+	QList<Category>* categories2 = StorageUtility::Load<QList<Category>>("categories.dat");
+	qDebug() << categories2->front().getId();
+	qDebug() << categories2->front().getName();
+	qDebug() << categories2->front().getUnitMeasure();
 }
 #endif //SMARTSENSORS_TESTDAVIDE_H
