@@ -12,3 +12,14 @@ AbstractView::AbstractView(QLayout * layout, QWidget *parent)
 void AbstractView::toggle() {
     setVisible(!isVisible());
 }
+
+void AbstractView::setCustomLayout(QLayout* layout)
+{
+    if (layout != nullptr) {
+        delete layout_;
+        layout_ = layout;
+        layout_->setParent(this);
+    }
+
+    setLayout(layout_);
+}

@@ -12,11 +12,13 @@ MainView::MainView(QWidget* parent)
     createMenu();
     createDefaultView();
 
-    // Pallet. TODO: Remove
+    /*
+     * TODO[Luca]: Remove Color palette.
     QPalette pal = QPalette();
     pal.setColor(QPalette::Window, Qt::darkBlue);
     central_widget_->setAutoFillBackground(true);
     central_widget_->setPalette(pal);
+    */
 
     // Layout Settings
     layout_ = new QHBoxLayout(central_widget_);
@@ -43,13 +45,24 @@ void MainView::createMenu() {
     // Menu Sensors
     QAction * single_view = new QAction("Visione Singola", sensors);
     QAction * modify_view = new QAction("Modifica Sensore", sensors);
+    QAction * create_view = new QAction("Crea Sensore", sensors);
 
     sensors->addAction(single_view);
     sensors->addAction(modify_view);
+    sensors->addAction(create_view);
+
+
+    // Menu File
+    QAction * settings_view = new QAction("Impostazioni App", file);
+
+    file->addAction(settings_view);
+
 
     // Connect Action
     connect(single_view, SIGNAL(triggered()), this, SLOT(showSingleView()));
     connect(modify_view, SIGNAL(triggered()), this, SLOT(showModifyView()));
+    connect(create_view, SIGNAL(triggered()), this, SLOT(showCreateView()));
+    connect(settings_view, SIGNAL(triggered()), this, SLOT(showSettingsView()));
 
     setMenuBar(menu_bar_);
 }
@@ -60,6 +73,8 @@ void MainView::createDefaultView() {
     single_view_ = new SingleView();
     group_list_view_ = new GroupListView();
     modify_view_ = new ModifyView();
+    create_view_ = new CreateView();
+    settings_view_ = new SettingsView();
 
     // Sidebar Default
     sidebar_ = new SidebarContainer(group_list_view_, central_widget_);
@@ -79,4 +94,12 @@ void MainView::showSingleView() {
 
 void MainView::showModifyView() {
     content_->setCurrentView(modify_view_);
+}
+
+void MainView::showCreateView() {
+    content_->setCurrentView(create_view_);
+}
+
+void MainView::showSettingsView() {
+    content_->setCurrentView(settings_view_);
 }

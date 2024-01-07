@@ -12,6 +12,8 @@
 #include "views/GroupListView.h"
 #include "views/SingleView.h"
 #include "views/ModifyView.h"
+#include "views/SettingsView.h"
+#include "views/CreateView.h"
 
 class MainView : public QMainWindow {
     Q_OBJECT
@@ -28,6 +30,10 @@ private:
     SingleView * single_view_;
     GroupListView * group_list_view_;
     ModifyView * modify_view_;
+    CreateView * create_view_;
+    SettingsView * settings_view_;
+
+
 
     void createMenu();
     void createDefaultView();
@@ -38,6 +44,8 @@ public:
 public slots:
     void showSingleView();
     void showModifyView();
+    void showCreateView();
+    void showSettingsView();
 
 };
 

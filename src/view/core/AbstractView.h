@@ -13,6 +13,8 @@ protected:
 public:
     explicit AbstractView(QLayout * layout = nullptr, QWidget *parent = nullptr);
     void toggle();
+
+    void setCustomLayout(QLayout* layout);
 };
 
 #endif //SMARTSENSORS_ABSTRACTVIEW_H

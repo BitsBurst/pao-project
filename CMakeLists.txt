@@ -59,6 +59,14 @@ set(PROJECT_SOURCES
         src/controller/business/BusinessController.h
         src/utility/Logger.cpp
         src/utility/Logger.h
+        src/view/views/CreateView.cpp
+        src/view/views/CreateView.h
+        src/view/views/SettingsView.cpp
+        src/view/views/SettingsView.h
+        src/view/widgets/GroupItemWidget.cpp
+        src/view/widgets/GroupItemWidget.h
+        src/view/core/AbstractWidget.cpp
+        src/view/core/AbstractWidget.h
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
