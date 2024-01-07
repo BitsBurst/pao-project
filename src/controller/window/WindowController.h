@@ -5,6 +5,7 @@
 #include "../../view/MainView.h"
 
 class WindowController: public AbstractController {
+Q_OBJECT
 public:
 	WindowController();
 	bool Init();

@@ -60,6 +60,8 @@ set(PROJECT_SOURCES
         src/utility/Logger.cpp
         src/utility/Logger.h
         src/utility/StorageUtility.h
+        src/model/storage/StorageObject.cpp
+        src/model/storage/StorageObject.h
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)

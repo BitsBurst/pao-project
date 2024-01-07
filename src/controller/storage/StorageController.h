@@ -6,14 +6,21 @@
 #include "../../model/core/Category.h"
 #include "../../model/core/Sensor.h"
 #include "../../utility/StorageUtility.h"
+#include "../../model/storage/StorageObject.h"
 
 class StorageController: public AbstractController {
+	Q_OBJECT
 public:
 	StorageController();
 	bool Init();
 private:
-	QList<Category> categories_;
-	QList<Sensor> sensors_;
+	static const QString directory_name_;
+	StorageObject* storage_;
+	void LoadStorage();
+	void StoreStorage();
+	void reinitializeStorage();
+signals:
+	void ErrorLoadingStorage();
 };
 
 #endif //SMARTSENSORS_STORAGECONTROLLER_H

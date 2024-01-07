@@ -4,6 +4,7 @@
 #include "../model/core/Category.h"
 #include "../model/core/Sensor.h"
 #include "../utility/StorageUtility.h"
+#include "../model/storage/StorageObject.h"
 class TestDavide {
 public:
 	static void runTest();
@@ -41,13 +42,15 @@ void TestDavide::runTest()
 }
 void TestDavide::runTestV2()
 {
-	QList<Category> categories;
 	Category* category = new Category("1", "Temperature", "Celsius", nullptr);
-	categories.append(*category);
-	StorageUtility::Store<QList<Category>>(categories, "categories.dat");
-	QList<Category>* categories2 = StorageUtility::Load<QList<Category>>("categories.dat");
-	qDebug() << categories2->front().getId();
-	qDebug() << categories2->front().getName();
-	qDebug() << categories2->front().getUnitMeasure();
+	Category* category2 = new Category("2", "Temperature", "Celsius", nullptr);
+	StorageObject* storeObject = new StorageObject();
+	storeObject->addCategory(*category);
+	storeObject->addCategory(*category2);
+	StorageUtility::Store<StorageObject>(*storeObject, "data/testData.dat");
+	qDebug() << storeObject->categories_.size();
+	storeObject->removeCategory(*category2);
+	qDebug() << storeObject->categories_.size();
+	qDebug() << storeObject->categories_.front().getId();
 }
 #endif //SMARTSENSORS_TESTDAVIDE_H
