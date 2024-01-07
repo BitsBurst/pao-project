@@ -9,7 +9,15 @@ GroupListView::GroupListView(QLayout * layout, QWidget* parent)
     auto item_2 = new GroupItemWidget("1", "Titolo Esempio 2", "Movimento", "", this);
     item_2->show();
 
+    auto item_3 = new GroupItemWidget("1", "Titolo Esempio 2", "Movimento", "", this);
+    item_3->show();
+
+    auto item_4 = new GroupItemWidget("1", "Titolo Esempio 2", "Movimento", "", this);
+    item_4->show();
+
     layout_->addWidget(item_);
     layout_->addWidget(item_2);
-    layout_->addItem(new QSpacerItem(0, 0, QSizePolicy::Expanding, QSizePolicy::Expanding));
+    layout_->addWidget(item_3);
+    layout_->addWidget(item_4);
+    layout_->addItem(new QSpacerItem(0, 0, QSizePolicy::Minimum, QSizePolicy::Expanding));
 }

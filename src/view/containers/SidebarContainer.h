@@ -3,10 +3,12 @@
 
 #include <QLabel>
 #include "../core/AbstractContainer.h"
+#include "../widgets/SidebarLowControlWidget.h"
 
 class SidebarContainer : public AbstractContainer {
     Q_OBJECT
 private:
+    SidebarLowControlWidget * low_control_widget_;
 public:
     explicit SidebarContainer(AbstractView * current_view = nullptr,QWidget * parent = nullptr);
 };

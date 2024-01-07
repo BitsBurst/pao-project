@@ -67,6 +67,8 @@ set(PROJECT_SOURCES
         src/view/widgets/GroupItemWidget.h
         src/view/core/AbstractWidget.cpp
         src/view/core/AbstractWidget.h
+        src/view/widgets/SidebarLowControlWidget.cpp
+        src/view/widgets/SidebarLowControlWidget.h
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)

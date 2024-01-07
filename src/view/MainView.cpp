@@ -6,7 +6,6 @@ MainView::MainView(QWidget* parent)
     setMinimumSize(QSize(640, 360));
 
     central_widget_ = new QWidget(this);
-    central_widget_->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
 
     // Create Components
     createMenu();
@@ -78,7 +77,6 @@ void MainView::createDefaultView() {
 
     // Sidebar Default
     sidebar_ = new SidebarContainer(group_list_view_, central_widget_);
-    sidebar_->setMaximumWidth(200);
     sidebar_->show();
 
     // Content Default
