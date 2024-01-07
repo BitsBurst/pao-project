@@ -6,6 +6,7 @@ QString Category::getUnitMeasure()
 void Category::setUnitMeasure(QString unit_measure)
 {
 	unit_measure_ = unit_measure;
+	modelChangedHandler();
 }
 Category::~Category()
 {

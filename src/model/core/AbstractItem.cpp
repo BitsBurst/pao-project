@@ -1,4 +1,5 @@
 #include "AbstractItem.h"
+void (*AbstractItem::modelChanged)() = nullptr;
 AbstractItem::~AbstractItem()
 = default;
 QDataStream& operator<<(QDataStream& stream, const AbstractItem& abstract_item)
@@ -13,7 +14,6 @@ QDataStream& operator>>(QDataStream& stream, AbstractItem& abstract_item)
 }
 AbstractItem::AbstractItem(QString id, QString name): id_(id), name_(name)
 {
-
 }
 QString AbstractItem::getId()
 {
@@ -21,7 +21,8 @@ QString AbstractItem::getId()
 }
 void AbstractItem::setId(QString id)
 {
-id_ = id;
+	id_ = id;
+	modelChangedHandler();
 }
 QString AbstractItem::getName()
 {
@@ -29,5 +30,17 @@ QString AbstractItem::getName()
 }
 void AbstractItem::setName(QString name)
 {
-name_ = name;
+	name_ = name;
+	modelChangedHandler();
+}
+void AbstractItem::modelChangedHandler()
+{
+	if (AbstractItem::modelChanged != nullptr)
+	{
+		AbstractItem::modelChanged();
+	}
+}
+void AbstractItem::setModelChangedHandler(void (*fp)())
+{
+	AbstractItem::modelChanged = fp;
 }

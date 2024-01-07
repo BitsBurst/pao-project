@@ -14,9 +14,13 @@ public:
 	 void setId(QString id);
 	 QString getName();
 	 void setName(QString name);
+	 static void setModelChangedHandler(void (*)());
 private:
 	QString id_;
 	QString name_ ;
+	static void (*modelChanged)();
+protected:
+	static void modelChangedHandler();
 };
 QDataStream &operator<<(QDataStream &, const AbstractItem &);
 QDataStream &operator>>(QDataStream &, AbstractItem &);

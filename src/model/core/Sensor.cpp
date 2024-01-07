@@ -14,6 +14,7 @@ double Sensor::getMinRange()
 void Sensor::setMinRange(double min_range)
 {
 	min_range_ = min_range;
+	modelChangedHandler();
 }
 double Sensor::getMaxRange()
 {
@@ -22,6 +23,7 @@ double Sensor::getMaxRange()
 void Sensor::setMaxRange(double max_range)
 {
 	max_range_ = max_range;
+	modelChangedHandler();
 }
 Category Sensor::getCategory()
 {
@@ -30,6 +32,7 @@ Category Sensor::getCategory()
 void Sensor::setCategory(Category category)
 {
 	category_ = category;
+	modelChangedHandler();
 }
 QDataStream& operator<<(QDataStream& stream, const Sensor& sensor)
 {
