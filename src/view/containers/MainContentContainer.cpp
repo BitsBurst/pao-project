@@ -10,6 +10,6 @@ MainContentContainer::MainContentContainer(AbstractView * current_view, QWidget*
     setPalette(pal);
     */
 
-    setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+    // Layout Widgets
     layout_->addWidget(current_view_);
 }

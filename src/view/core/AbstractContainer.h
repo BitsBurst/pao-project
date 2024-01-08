@@ -6,13 +6,12 @@
 #include <QWidget>
 #include <QVBoxLayout>
 #include "AbstractView.h"
+#include "AbstractGraphicalElement.h"
 
-class AbstractContainer : public QWidget {
+class AbstractContainer : public AbstractGraphicalElement {
     Q_OBJECT
-
 protected:
     AbstractView * current_view_;
-    QVBoxLayout * layout_;
 
 public:
     explicit AbstractContainer(AbstractView * current_view = nullptr, QWidget * parent = nullptr);

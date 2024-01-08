@@ -1,20 +1,21 @@
 #include "GroupItemWidget.h"
 
-// TODO[Luca]: Rivedere utilizzo ereditarietà per i layout
+#include <utility>
+
 GroupItemWidget::GroupItemWidget(QString id, QString title, QString description, QString icon_src, QWidget* parent)
-    : AbstractWidget(nullptr, parent),  id_(id), icon_src_(icon_src) {
-
-    QVBoxLayout *layout = new QVBoxLayout();
-    layout->setContentsMargins(16, 16, 16, 0);
-    layout->setSpacing(4);
-
-    setCustomLayout(layout);
-
-    // Initialize Elements
+    : AbstractWidget(new QVBoxLayout, parent),  id_(std::move(id)), icon_src_(std::move(icon_src))
+{
+    // Initialization
     title_label_ = new QLabel(title);
     description_label_ = new QLabel(description);
 
-    // Layout
+    // Layout Settings
+    layout_->setContentsMargins(16, 16, 16, 0);
+    layout_->setSpacing(4);
+
+    setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
+
+    // Fonts
     QFont title_font;
     title_font.setFamily("Roboto");
     title_font.setPixelSize(18);
@@ -30,10 +31,9 @@ GroupItemWidget::GroupItemWidget(QString id, QString title, QString description,
     title_label_->setFont(title_font);
     description_label_->setFont(description_font);
 
+    // Layout Widgets
     layout_->addWidget(description_label_);
     layout_->addWidget(title_label_);
-
-    setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
 }
 
 void GroupItemWidget::show() {

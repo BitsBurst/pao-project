@@ -3,20 +3,16 @@
 
 #include <QWidget>
 #include <QLayout>
+#include "AbstractGraphicalElement.h"
 
-class AbstractView : public QWidget {
+class AbstractView : public AbstractGraphicalElement {
     Q_OBJECT
-
 protected:
-    QLayout *layout_;
-
 public:
-    explicit AbstractView(QWidget *parent = nullptr);
-    explicit AbstractView(QLayout * layout = nullptr, QWidget *parent = nullptr);
+    explicit AbstractView(QLayout * layout, QWidget *parent = nullptr);
+
     void toggle();
     void show();
-
-    void setCustomLayout(QLayout* layout);
 };
 
 #endif //SMARTSENSORS_ABSTRACTVIEW_H

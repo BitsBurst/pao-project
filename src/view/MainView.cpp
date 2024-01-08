@@ -1,31 +1,35 @@
 #include "MainView.h"
 
 MainView::MainView(QWidget* parent)
-    :   QMainWindow(parent),
-    central_widget_(new QWidget), layout_(new QHBoxLayout)
+    : QMainWindow(parent), central_widget_(new QWidget), layout_(new QHBoxLayout)
 {
+    // General Settings
     setMinimumSize(QSize(640, 360));
 
     // Creation Calls
     createMenu();
     createDefaultView();
 
-    // Layout
+    // Layout Settings
     layout_->setAlignment(Qt::AlignHCenter | Qt::AlignCenter);
 
+    // Layout Widgets
     layout_->addWidget(sidebar_);
     layout_->addWidget(content_);
 
     // Central Widget
     central_widget_->setLayout(layout_);
     central_widget_->setSizePolicy(QSizePolicy::Maximum, QSizePolicy::Maximum);
+
     setCentralWidget(central_widget_);
 }
 
 void MainView::createMenu() {
+
+    // Initialization
     menu_bar_ = new QMenuBar(this);
 
-    // set MenuBar
+    // Menu Bar
     QMenu * file = new QMenu("File", menu_bar_);
     QMenu * sensors = new QMenu("Sensori", menu_bar_);
     menu_bar_->addMenu(file);
@@ -40,12 +44,10 @@ void MainView::createMenu() {
     sensors->addAction(modify_view);
     sensors->addAction(create_view);
 
-
     // Menu File
     QAction * settings_view = new QAction("Impostazioni App", file);
 
     file->addAction(settings_view);
-
 
     // Connect Action
     connect(single_view, SIGNAL(triggered()), this, SLOT(showSingleView()));
@@ -58,7 +60,7 @@ void MainView::createMenu() {
 
 void MainView::createDefaultView() {
 
-    // Initialize Views
+    // Initialization - Views
     single_view_ = new SingleView();
     modify_view_ = new ModifyView();
     create_view_ = new CreateView();
@@ -66,7 +68,7 @@ void MainView::createDefaultView() {
 
     group_list_view_ = new GroupListView();
 
-    // Initialize Container
+    // Initialization - Contianer
     content_ = new MainContentContainer(single_view_, central_widget_);
     content_->show();
 

@@ -2,12 +2,11 @@
 #include "../../utility/Logger.h"
 
 AbstractContainer::AbstractContainer(AbstractView* current_view, QWidget* parent)
-    : QWidget(parent), current_view_(current_view), layout_(new QVBoxLayout(this)) {
+    : AbstractGraphicalElement(new QVBoxLayout, parent), current_view_(current_view) {
 
+    // General settings for containers
     layout_->setAlignment(Qt::AlignHCenter | Qt::AlignCenter);
-    setLayout(layout_);
-
-    setSizePolicy(QSizePolicy::MinimumExpanding, QSizePolicy::Expanding );
+    setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
 }
 
 AbstractView* AbstractContainer::getCurrentView() const
@@ -17,6 +16,8 @@ AbstractView* AbstractContainer::getCurrentView() const
 
 void AbstractContainer::setCurrentView(AbstractView* current_view)
 {
+
+    // TODO[Luca]: Review this function logic!
     hide();
 
     if (current_view_ !=nullptr) {

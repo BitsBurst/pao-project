@@ -1,13 +1,14 @@
 #ifndef SMARTSENSORS_ABSTRACTWIDGET_H
 #define SMARTSENSORS_ABSTRACTWIDGET_H
 
-#include "AbstractView.h"
+#include <QVBoxLayout>
+#include "AbstractGraphicalElement.h"
 
-class AbstractWidget : public AbstractView {
+class AbstractWidget : public AbstractGraphicalElement {
     Q_OBJECT
 private:
 public:
-    explicit AbstractWidget(QLayout * layout = nullptr, QWidget * parent = nullptr);
+    explicit AbstractWidget(QLayout * layout = new QVBoxLayout(), QWidget * parent = nullptr);
 };
 
 #endif //SMARTSENSORS_ABSTRACTWIDGET_H

@@ -2,20 +2,18 @@
 #include "../../utility/Logger.h"
 
 GroupListView::GroupListView(QWidget* parent)
-    : AbstractView(parent), scroll_area_(new QScrollArea) {
-
-    layout_ = new QVBoxLayout(this);
-    QWidget * scroll_area_list = new QWidget(scroll_area_);
-    QVBoxLayout * scroll_area_layout = new QVBoxLayout(scroll_area_list);
-
-    setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding );
-
+    : AbstractView(new QVBoxLayout, parent), scroll_area_(new QScrollArea)
+{
     /*
     QPalette pal = QPalette();
     pal.setColor(QPalette::Window, Qt::red);
     setAutoFillBackground(true);
     setPalette(pal);
     */
+
+    // Initialization
+    QWidget * scroll_area_list = new QWidget(scroll_area_);
+    QVBoxLayout * scroll_area_layout = new QVBoxLayout(scroll_area_list);
 
     // TODO[Luca]: Remove data gen
 
@@ -33,8 +31,6 @@ GroupListView::GroupListView(QWidget* parent)
     scroll_area_->setWidget(scroll_area_list);
 
     layout_->addWidget(scroll_area_);
-
-    setLayout(layout_);
 }
 
 void GroupListView::show() {

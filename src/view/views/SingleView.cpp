@@ -1,11 +1,8 @@
 #include "SingleView.h"
 
 SingleView::SingleView(QWidget* parent)
-        : AbstractView(parent)
+        : AbstractView(new QVBoxLayout, parent)
 {
-    layout_ = new QVBoxLayout(this);
-    setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding );
-
     /*
     QPalette pal = QPalette();
     pal.setColor(QPalette::Window, Qt::red);
@@ -13,13 +10,13 @@ SingleView::SingleView(QWidget* parent)
     setPalette(pal);
     */
 
+    // Initialization
     label1_ = new QLabel("Single View");
     label2_ = new QLabel("Single View");
 
+    // Layout Widgets
     layout_->addWidget(label1_);
     layout_->addWidget(label2_);
-
-    setLayout(layout_);
 }
 
 void SingleView::show() {

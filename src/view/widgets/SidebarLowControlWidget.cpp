@@ -1,14 +1,12 @@
 #include "SidebarLowControlWidget.h"
 
 SidebarLowControlWidget::SidebarLowControlWidget(QWidget* parent)
-    : AbstractWidget(nullptr, parent) {
+    : AbstractWidget(new QVBoxLayout, parent) {
 
-    setCustomLayout(new QVBoxLayout());
-
-    // Initialize Field
+    // Initialization
     title_label_ = new QLabel("Low Settings");
 
-    // Layout Settings
+    // Layout Widgets
     layout_->addWidget(title_label_);
 }
 
