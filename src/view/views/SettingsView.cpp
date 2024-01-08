@@ -1,7 +1,7 @@
 #include "SettingsView.h"
 
-SettingsView::SettingsView(QLayout* layout, QWidget* parent)
-        :AbstractView(parent)
+SettingsView::SettingsView(QWidget* parent)
+        : AbstractView(parent)
 {
     layout_ = new QVBoxLayout(this);
     setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding );

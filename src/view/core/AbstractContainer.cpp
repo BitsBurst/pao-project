@@ -19,10 +19,12 @@ void AbstractContainer::setCurrentView(AbstractView* current_view)
 {
     hide();
 
-    current_view_ = current_view;
-
-    if (current_view_ !=nullptr)
+    if (current_view_ !=nullptr) {
+        layout_->removeWidget(current_view_);
+        current_view_ = current_view;
         current_view_->setParent(this);
+        layout_->addWidget(current_view_);
+    }
 
     show();
 }

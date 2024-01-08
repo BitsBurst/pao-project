@@ -9,7 +9,7 @@ class SettingsView : public AbstractView {
 private:
     QLabel * label1_, *label2_;
 public:
-    explicit SettingsView(QLayout * layout = nullptr, QWidget *parent = nullptr);
+    explicit SettingsView(QWidget *parent = nullptr);
     void show();
 };
 
