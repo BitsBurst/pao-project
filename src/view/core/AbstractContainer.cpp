@@ -1,11 +1,13 @@
 #include "AbstractContainer.h"
+#include "../../utility/Logger.h"
 
 AbstractContainer::AbstractContainer(AbstractView* current_view, QWidget* parent)
     : QWidget(parent), current_view_(current_view), layout_(new QVBoxLayout(this)) {
+
+    layout_->setAlignment(Qt::AlignHCenter | Qt::AlignCenter);
     setLayout(layout_);
 
-    if (current_view_ !=nullptr)
-        current_view_->setParent(this);
+    setSizePolicy(QSizePolicy::MinimumExpanding, QSizePolicy::Expanding );
 }
 
 AbstractView* AbstractContainer::getCurrentView() const
@@ -19,15 +21,12 @@ void AbstractContainer::setCurrentView(AbstractView* current_view)
 
     current_view_ = current_view;
 
-    if (current_view_ !=nullptr)
-        current_view_->setParent(this);
-
     show();
 }
 
 void AbstractContainer::show() {
     if (current_view_ !=nullptr)
-        current_view_->toggle();
+        current_view_->show();
 }
 void AbstractContainer::update() {
     if (current_view_ !=nullptr)

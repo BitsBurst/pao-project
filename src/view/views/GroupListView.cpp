@@ -1,23 +1,27 @@
 #include "GroupListView.h"
+#include "../../utility/Logger.h"
 
-GroupListView::GroupListView(QLayout * layout, QWidget* parent)
-    : AbstractView(layout, parent) {
+GroupListView::GroupListView(QWidget* parent)
+    : AbstractView(parent) {
 
-    item_ = new GroupItemWidget("1", "Titolo Esempio", "Temperatura", "", this);
-    item_->show();
+    layout_ = new QVBoxLayout(this);
+    setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding );
 
-    auto item_2 = new GroupItemWidget("1", "Titolo Esempio 2", "Movimento", "", this);
-    item_2->show();
+    QPalette pal = QPalette();
+    pal.setColor(QPalette::Window, Qt::red);
+    setAutoFillBackground(true);
+    setPalette(pal);
 
-    auto item_3 = new GroupItemWidget("1", "Titolo Esempio 2", "Movimento", "", this);
-    item_3->show();
+    label1_ = new QLabel("Single View");
+    label2_ = new QLabel("Single View");
 
-    auto item_4 = new GroupItemWidget("1", "Titolo Esempio 2", "Movimento", "", this);
-    item_4->show();
+    layout_->addWidget(label1_);
+    layout_->addWidget(label2_);
 
-    layout_->addWidget(item_);
-    layout_->addWidget(item_2);
-    layout_->addWidget(item_3);
-    layout_->addWidget(item_4);
-    layout_->addItem(new QSpacerItem(0, 0, QSizePolicy::Minimum, QSizePolicy::Expanding));
+    setLayout(layout_);
+}
+
+void GroupListView::show() {
+    label1_->show();
+    label2_->show();
 }

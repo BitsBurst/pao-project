@@ -7,8 +7,10 @@
 class SingleView : public AbstractView {
     Q_OBJECT
 private:
+    QLabel *label1_, *label2_;
 public:
-    explicit SingleView(QLayout * layout = nullptr, QWidget *parent = nullptr);
+    explicit SingleView(QWidget *parent = nullptr);
+    void show();
 };
 
 #endif //SMARTSENSORS_SINGLEVIEW_H

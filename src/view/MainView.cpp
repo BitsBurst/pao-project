@@ -1,34 +1,24 @@
 #include "MainView.h"
 
 MainView::MainView(QWidget* parent)
-    :   QMainWindow(parent)
+    :   QMainWindow(parent),
+    central_widget_(new QWidget), layout_(new QHBoxLayout)
 {
     setMinimumSize(QSize(640, 360));
 
-    central_widget_ = new QWidget(this);
-
-    // Create Components
+    // Creation Calls
     createMenu();
     createDefaultView();
 
-    /*
-     * TODO[Luca]: Remove Color palette.
-    QPalette pal = QPalette();
-    pal.setColor(QPalette::Window, Qt::darkBlue);
-    central_widget_->setAutoFillBackground(true);
-    central_widget_->setPalette(pal);
-    */
-
-    // Layout Settings
-    layout_ = new QHBoxLayout(central_widget_);
-    layout_->setContentsMargins(0,0,0,0);
-    layout_->setSpacing(0);
+    // Layout
+    layout_->setAlignment(Qt::AlignHCenter | Qt::AlignCenter);
 
     layout_->addWidget(sidebar_);
     layout_->addWidget(content_);
 
+    // Central Widget
     central_widget_->setLayout(layout_);
-
+    central_widget_->setSizePolicy(QSizePolicy::Maximum, QSizePolicy::Maximum);
     setCentralWidget(central_widget_);
 }
 
@@ -68,20 +58,17 @@ void MainView::createMenu() {
 
 void MainView::createDefaultView() {
 
-    // Generate all views
+    // Initialize Views
     single_view_ = new SingleView();
+
     group_list_view_ = new GroupListView();
-    modify_view_ = new ModifyView();
-    create_view_ = new CreateView();
-    settings_view_ = new SettingsView();
 
-    // Sidebar Default
-    sidebar_ = new SidebarContainer(group_list_view_, central_widget_);
-    sidebar_->show();
-
-    // Content Default
+    // Initialize Container
     content_ = new MainContentContainer(single_view_, central_widget_);
     content_->show();
+
+    sidebar_ = new SidebarContainer(group_list_view_, central_widget_);
+    sidebar_->show();
 }
 
 
@@ -90,6 +77,7 @@ void MainView::showSingleView() {
     content_->setCurrentView(single_view_);
 }
 
+/*
 void MainView::showModifyView() {
     content_->setCurrentView(modify_view_);
 }
@@ -101,3 +89,4 @@ void MainView::showCreateView() {
 void MainView::showSettingsView() {
     content_->setCurrentView(settings_view_);
 }
+ */

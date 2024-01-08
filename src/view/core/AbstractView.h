@@ -11,8 +11,10 @@ protected:
     QLayout *layout_;
 
 public:
+    explicit AbstractView(QWidget *parent = nullptr);
     explicit AbstractView(QLayout * layout = nullptr, QWidget *parent = nullptr);
     void toggle();
+    void show();
 
     void setCustomLayout(QLayout* layout);
 };
