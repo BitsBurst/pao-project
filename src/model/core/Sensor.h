@@ -8,8 +8,8 @@ class Sensor: public AbstractItem {
 	friend QDataStream &operator<<(QDataStream &, const Sensor &);
 	friend QDataStream &operator>>(QDataStream &, Sensor &);
 public:
-	Sensor(QString, QString, Category);
-	Sensor();
+	Sensor(QString, QString, Category,  void (**)() = nullptr);
+	Sensor(void (**)() = nullptr);
 	~Sensor();
 	double getMinRange();
 	void setMinRange(double min_range);

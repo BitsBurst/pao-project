@@ -1,5 +1,6 @@
 #include "src/controller/LocatorController.h"
 #include "src/utility/Logger.h"
+#include "src/tests/testDavide.h"
 #include <QApplication>
 
 int main(int argc, char *argv[])
@@ -9,5 +10,6 @@ int main(int argc, char *argv[])
 
     QApplication a(argc, argv);
 	LocatorController::Init();
+	TestDavide::runTestV2();
     return a.exec();
 }

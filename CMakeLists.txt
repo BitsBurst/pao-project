@@ -71,6 +71,11 @@ set(PROJECT_SOURCES
         src/view/widgets/SidebarLowControlWidget.h
         src/view/core/AbstractGraphicalElement.cpp
         src/view/core/AbstractGraphicalElement.h
+        src/utility/StorageUtility.h
+        src/model/storage/StorageObject.cpp
+        src/model/storage/StorageObject.h
+        src/model/exception/BaseException.cpp
+        src/model/exception/BaseException.h
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)

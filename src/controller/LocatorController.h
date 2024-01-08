@@ -8,12 +8,12 @@
 class LocatorController {
 private:
 	static StorageController* storage_controller_;
-	static StorageController* StorageControllerInstance();
 	static WindowController* window_controller_;
-	static WindowController* WindowControllerInstance();
 	static BusinessController* business_controller_;
-	static BusinessController* BusinessControllerInstance();
 public:
+	static StorageController* StorageControllerInstance();
+	static WindowController* WindowControllerInstance();
+	static BusinessController* BusinessControllerInstance();
 	static bool Init();
 
 };
