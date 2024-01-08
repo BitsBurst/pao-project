@@ -11,10 +11,7 @@ void AbstractGraphicalElement::setCustomLayout(QLayout* layout)
     if (layout == nullptr)
         return;
 
-    if (layout != layout_) {
-        delete layout_;
-        layout_ = layout;
-    }
+    layout_ = layout;
 
     setLayout(layout_);
 }
