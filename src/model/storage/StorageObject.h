@@ -8,10 +8,11 @@ class StorageObject: public QObject {
 	friend QDataStream &operator<<(QDataStream &, const StorageObject &);
 	friend QDataStream &operator>>(QDataStream &, StorageObject &);
 private:
-
-public:
+	void (*modelChanged)();
 	QList<Category> categories_;
 	QList<Sensor> sensors_;
+	static void modelChangedEvent();
+public:
 	StorageObject();
 	~StorageObject();
 	StorageObject(const StorageObject &);
@@ -22,6 +23,8 @@ public:
 	void findCategory(QString);
 	void findSensor(QString);
 	QList<Sensor> filterSensorsByCategory(Category);
+signals:
+	void modelChangedSignal();
 };
 QDataStream &operator<<(QDataStream &, const StorageObject&);
 QDataStream &operator>>(QDataStream &, StorageObject &);

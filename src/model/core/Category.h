@@ -7,8 +7,8 @@ class Category: public AbstractItem {
 	friend QDataStream &operator<<(QDataStream &, const Category &);
 	friend QDataStream &operator>>(QDataStream &, Category &);
 public:
-	Category();
-	Category(QString, QString, QString, AbstractDataGen* = nullptr);
+	Category(void (**)() = nullptr);
+	Category(QString, QString, QString, AbstractDataGen* = nullptr, void (**)() = nullptr);
 	~Category();
 	QString getUnitMeasure();
 	void setUnitMeasure(QString unit_measure);

@@ -1,5 +1,5 @@
 #include "AbstractItem.h"
-void (*AbstractItem::modelChanged)() = nullptr;
+void (*AbstractItem::modelChangedStatic_)() = nullptr;
 AbstractItem::~AbstractItem()
 = default;
 QDataStream& operator<<(QDataStream& stream, const AbstractItem& abstract_item)
@@ -12,8 +12,11 @@ QDataStream& operator>>(QDataStream& stream, AbstractItem& abstract_item)
 	stream >> abstract_item.name_ >> abstract_item.id_;
 	return stream;
 }
-AbstractItem::AbstractItem(QString id, QString name): id_(id), name_(name)
+AbstractItem::AbstractItem(QString id, QString name, void (**modelChangedHandlerPointer)()):id_(id), name_(name), modelChangedInstance_(modelChangedHandlerPointer)
 {
+	if(modelChangedInstance_ == nullptr) {
+		modelChangedInstance_ = &modelChangedStatic_;
+	}
 }
 QString AbstractItem::getId()
 {
@@ -35,12 +38,16 @@ void AbstractItem::setName(QString name)
 }
 void AbstractItem::modelChangedHandler()
 {
-	if (AbstractItem::modelChanged != nullptr)
+	if (modelChangedInstance_ != nullptr && *modelChangedInstance_ != nullptr)
 	{
-		AbstractItem::modelChanged();
+		(*modelChangedInstance_)();
 	}
 }
-void AbstractItem::setModelChangedHandler(void (*fp)())
+void AbstractItem::setModelChangedPointer(void (**modelChanged)())
 {
-	AbstractItem::modelChanged = fp;
+	modelChangedInstance_ = modelChanged;
+}
+void AbstractItem::setModelChangedPointerStatic(void (*modelChangedStatic)())
+{
+	modelChangedStatic_ = modelChangedStatic;
 }

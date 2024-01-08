@@ -2,7 +2,7 @@
 const QString StorageController::directory_name_ = "data";
 StorageController::StorageController()
 {
-
+	AbstractItem::setModelChangedPointerStatic(&modelChanged);
 }
 bool StorageController::Init()
 {
@@ -32,4 +32,14 @@ void StorageController::reinitializeStorage()
 	storage_ = new StorageObject();
 	StoreStorage();
 	Logger::Log(LogLevel::INFO, __FILE__, __LINE__, __FUNCTION__, LogMethod::OUT);
+}
+void StorageController::modelChanged()
+{
+	Logger::Log(LogLevel::INFO, __FILE__, __LINE__, __FUNCTION__, LogMethod::IN);
+	qDebug() << "model changed";
+	Logger::Log(LogLevel::INFO, __FILE__, __LINE__, __FUNCTION__, LogMethod::OUT);
+}
+StorageObject* StorageController::GetStorage()
+{
+	return storage_;
 }

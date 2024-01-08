@@ -9,18 +9,22 @@ class AbstractItem {
 	friend QDataStream &operator>>(QDataStream &, AbstractItem &);
 public:
 	 ~AbstractItem();
-	 AbstractItem(QString, QString);
+	 AbstractItem(QString, QString, void (**)() = nullptr);
 	 QString getId();
 	 void setId(QString id);
 	 QString getName();
 	 void setName(QString name);
-	 static void setModelChangedHandler(void (*)());
+	 void setModelChangedPointer(void (**)());
+	 static void setModelChangedPointerStatic(void (*)());
+	 static void (*modelChangedStatic_)();
+
 private:
 	QString id_;
-	QString name_ ;
-	static void (*modelChanged)();
+	QString name_;
+	void (**modelChangedInstance_)();
+
 protected:
-	static void modelChangedHandler();
+	void modelChangedHandler();
 };
 QDataStream &operator<<(QDataStream &, const AbstractItem &);
 QDataStream &operator>>(QDataStream &, AbstractItem &);

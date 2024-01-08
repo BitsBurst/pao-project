@@ -1,5 +1,5 @@
 #include "Sensor.h"
-Sensor::Sensor(QString id, QString name, Category category):AbstractItem(id, name), min_range_(0), max_range_(0), category_(category)
+Sensor::Sensor(QString id, QString name, Category category, void (**ptfp)()):AbstractItem(id, name, ptfp), min_range_(0), max_range_(0), category_(category)
 {
 
 }
@@ -44,7 +44,7 @@ QDataStream& operator>>(QDataStream& stream, Sensor& sensor)
 	stream >> dynamic_cast<AbstractItem&>(sensor) >> sensor.min_range_ >> sensor.max_range_ >> sensor.category_;
 	return stream;
 }
-Sensor::Sensor(): AbstractItem("", ""), min_range_(0), max_range_(0), category_(Category())
+Sensor::Sensor(void (**ptfp)()): AbstractItem("", "", ptfp), min_range_(0), max_range_(0), category_(Category())
 {
 
 }

@@ -13,12 +13,14 @@ class StorageController: public AbstractController {
 public:
 	StorageController();
 	bool Init();
+	StorageObject* GetStorage();
 private:
 	static const QString directory_name_;
 	StorageObject* storage_;
 	void LoadStorage();
 	void StoreStorage();
 	void reinitializeStorage();
+	static void modelChanged();
 signals:
 	void ErrorLoadingStorage();
 };

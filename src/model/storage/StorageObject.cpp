@@ -1,6 +1,7 @@
 #include "StorageObject.h"
 StorageObject::StorageObject(): categories_(), sensors_()
 {
+	modelChanged = &modelChangedEvent;
 }
 QDataStream& operator<<(QDataStream& stream, const StorageObject& obj)
 {
@@ -14,10 +15,12 @@ QDataStream& operator>>(QDataStream& stream, StorageObject& obj)
 }
 void StorageObject::addCategory(Category category)
 {
+	category.setModelChangedPointer(&modelChanged);
 	categories_.append(category);
 }
 void StorageObject::addSensor(Sensor sensor)
 {
+	sensor.setModelChangedPointer(&modelChanged);
 	sensors_.append(sensor);
 }
 void StorageObject::removeCategory(Category category)
@@ -38,6 +41,10 @@ void StorageObject::removeSensor(Sensor sensor)
 }
 StorageObject::StorageObject(const StorageObject& obj): categories_(obj.categories_), sensors_(obj.sensors_)
 {
+}
+void StorageObject::modelChangedEvent()
+{
+
 }
 StorageObject::~StorageObject()
 = default;
