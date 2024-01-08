@@ -62,6 +62,8 @@ set(PROJECT_SOURCES
         src/utility/StorageUtility.h
         src/model/storage/StorageObject.cpp
         src/model/storage/StorageObject.h
+        src/model/exception/BaseException.cpp
+        src/model/exception/BaseException.h
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
