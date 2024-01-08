@@ -1,4 +1,5 @@
 #include "StorageController.h"
+#include "../LocatorController.h"
 const QString StorageController::directory_name_ = "data";
 StorageController::StorageController()
 {
@@ -36,6 +37,7 @@ void StorageController::reinitializeStorage()
 void StorageController::modelChanged()
 {
 	Logger::Log(LogLevel::INFO, __FILE__, __LINE__, __FUNCTION__, LogMethod::IN);
+	LocatorController::StorageControllerInstance()->StoreStorage();
 	qDebug() << "model changed";
 	Logger::Log(LogLevel::INFO, __FILE__, __LINE__, __FUNCTION__, LogMethod::OUT);
 }

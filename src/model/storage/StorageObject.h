@@ -9,10 +9,13 @@ class StorageObject: public QObject {
 	friend QDataStream &operator>>(QDataStream &, StorageObject &);
 private:
 	void (*modelChanged)();
-	QList<Category> categories_;
-	QList<Sensor> sensors_;
+
 	static void modelChangedEvent();
 public:
+	// to be privatized
+	QList<Category> categories_;
+	QList<Sensor> sensors_;
+	// to be privatized
 	StorageObject();
 	~StorageObject();
 	StorageObject(const StorageObject &);
