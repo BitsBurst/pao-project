@@ -8,12 +8,12 @@
 class StorageUtility {
 public:
 	template <typename T>
-	static bool Store(T data, QString filename);
+	static bool Store(T*, QString);
 	template<typename T>
-	static T* Load(QString filename);
+	static T* Load(QString, T* = nullptr);
 };
 template <typename T>
-bool StorageUtility::Store(T data, QString filename)
+bool StorageUtility::Store(T* data, QString filename)
 {
 	QFileInfo fi(filename);
 	QDir dir(fi.absoluteDir().absoluteFilePath("."));
@@ -24,7 +24,8 @@ bool StorageUtility::Store(T data, QString filename)
 	QFile file(fi.absoluteFilePath());
 	if (file.open(QIODevice::WriteOnly)) {
 		QDataStream out(&file);
-		out << data;
+		out << *data;
+		file.waitForBytesWritten(10000);
 		return true;
 	}
 	else {
@@ -33,7 +34,7 @@ bool StorageUtility::Store(T data, QString filename)
 	}
 }
 template <typename T>
-T* StorageUtility::Load(QString filename)
+T* StorageUtility::Load(QString filename, T* obj )
 {
 	QFileInfo fi(filename);
 	QFile loadFile(fi.absoluteFilePath());
@@ -42,8 +43,11 @@ T* StorageUtility::Load(QString filename)
 		throw std::runtime_error("Couldn't open saved file.");
 	}
 	QDataStream in(&loadFile);
-	T* loadDoc = new T();
-	in >> *loadDoc;
-	return loadDoc;
+	if(obj ==nullptr){
+		obj = new T();
+	}
+	in >> *obj;
+	loadFile.waitForReadyRead(10000);
+	return obj;
 }
 #endif //SMARTSENSORS_STORAGEUTILITY_H

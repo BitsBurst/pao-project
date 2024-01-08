@@ -8,24 +8,26 @@ class StorageObject: public QObject {
 	friend QDataStream &operator<<(QDataStream &, const StorageObject &);
 	friend QDataStream &operator>>(QDataStream &, StorageObject &);
 private:
-	void (*modelChanged)();
+	void (*modelChanged_)();
 
-	static void modelChangedEvent();
+	void modelChangedEvent();
 public:
 	// to be privatized
 	QList<Category> categories_;
 	QList<Sensor> sensors_;
 	// to be privatized
-	StorageObject();
+	StorageObject(void (*)() = nullptr);
 	~StorageObject();
 	StorageObject(const StorageObject &);
-	void addCategory(Category);
-	void addSensor(Sensor);
-	void removeCategory(Category);
-	void removeSensor(Sensor);
+	void addCategory(Category*);
+	void addSensor(Sensor*);
+	void removeCategory(Category*);
+	void removeSensor(Sensor*);
 	Category* findCategory(Category);
 	Sensor* findSensor(Sensor);
 	QList<Sensor> filterSensorsByCategory(Category);
+	QList<Sensor> filterSensorsByName(QString name);
+QList<Category> filterCategoriesByName(QString name);
 signals:
 	void modelChangedSignal();
 };

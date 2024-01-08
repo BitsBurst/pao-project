@@ -5,18 +5,25 @@ AbstractItem::~AbstractItem()
 QDataStream& operator<<(QDataStream& stream, const AbstractItem& abstract_item)
 {
 	stream << abstract_item.name_ << abstract_item.id_;
+	if(abstract_item.modelChangedInstance_ == nullptr) {
+		const_cast<AbstractItem&>(abstract_item).modelChangedInstance_ = &AbstractItem::modelChangedStatic_;
+	}
 	return stream;
 }
 QDataStream& operator>>(QDataStream& stream, AbstractItem& abstract_item)
 {
 	stream >> abstract_item.name_ >> abstract_item.id_;
+	if(abstract_item.modelChangedInstance_ == nullptr) {
+		abstract_item.modelChangedInstance_ = &AbstractItem::modelChangedStatic_;
+	}
 	return stream;
 }
 AbstractItem::AbstractItem(QString id, QString name, void (**modelChangedHandlerPointer)()):id_(id), name_(name), modelChangedInstance_(modelChangedHandlerPointer)
 {
-	if(modelChangedInstance_ == nullptr) {
+	// Note: WARNING: This is a hack. It is not a good idea to emit modelChanged event for every object created. LAVE IT AS IT IS.
+	/*if(modelChangedInstance_ == nullptr) {
 		modelChangedInstance_ = &modelChangedStatic_;
-	}
+	}*/
 }
 QString AbstractItem::getId()
 {
@@ -45,9 +52,13 @@ void AbstractItem::modelChangedHandler()
 }
 void AbstractItem::setModelChangedPointer(void (**modelChanged)())
 {
-	modelChangedInstance_ = modelChanged;
+		modelChangedInstance_ = modelChanged;
 }
 void AbstractItem::setModelChangedPointerStatic(void (*modelChangedStatic)())
 {
 	modelChangedStatic_ = modelChangedStatic;
+}
+AbstractItem::AbstractItem():id_(""), name_(""), modelChangedInstance_(nullptr)
+{
+
 }

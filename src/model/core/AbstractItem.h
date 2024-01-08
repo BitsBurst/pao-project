@@ -9,6 +9,7 @@ class AbstractItem {
 	friend QDataStream &operator>>(QDataStream &, AbstractItem &);
 public:
 	 ~AbstractItem();
+	AbstractItem();
 	 AbstractItem(QString, QString, void (**)() = nullptr);
 	 QString getId();
 	 void setId(QString id);

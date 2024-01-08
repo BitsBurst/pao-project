@@ -5,10 +5,15 @@
 #include "../model/core/Sensor.h"
 #include "../utility/StorageUtility.h"
 #include "../model/storage/StorageObject.h"
+#include "../controller/LocatorController.h"
 class TestDavide {
 public:
 	static void runTest();
 	static void runTestV2();
+	static void runTestV3();
+	static void runTestV4();
+	static void runTestV5();
+	static  void runTestV6();
 };
 void TestDavide::runTest()
 {
@@ -45,12 +50,42 @@ void TestDavide::runTestV2()
 	Category* category = new Category("1", "Temperature", "Celsius", nullptr);
 	Category* category2 = new Category("2", "Temperature", "Celsius", nullptr);
 	StorageObject* storeObject = new StorageObject();
-	storeObject->addCategory(*category);
-	storeObject->addCategory(*category2);
-	StorageUtility::Store<StorageObject>(*storeObject, "data/testData.dat");
-	qDebug() << storeObject->categories_.size();
-	storeObject->removeCategory(*category2);
-	qDebug() << storeObject->categories_.size();
-	qDebug() << storeObject->categories_.front().getId();
+	storeObject->addCategory(category);
+	storeObject->addCategory(category2);
+	StorageUtility::Store<StorageObject>(storeObject, "data/testData.dat");
+	//qDebug() << storeObject->categories_.size();
+	storeObject->removeCategory(category2);
+	//qDebug() << storeObject->categories_.size();
+	//qDebug() << storeObject->categories_.front().getId();
+}
+void ChangedModel()
+{
+	qDebug() << "Model changed";
+}
+void TestDavide::runTestV3()
+{
+	void (*f)() = &ChangedModel;
+	Category* category = new Category("1", "Temperature", "Celsius", nullptr, &f);
+	category->setUnitMeasure("Temperatura");
+	category->setId("Temperatura");
+}
+void TestDavide::runTestV4()
+{
+	Category* category = new Category("1", "Temperature", "Celsius", nullptr);
+	LocatorController::StorageControllerInstance()->GetStorage()->addCategory(category);
+	qDebug() << LocatorController::StorageControllerInstance()->GetStorage()->categories_.size();
+	qDebug() << LocatorController::StorageControllerInstance()->GetStorage()->categories_.front().getId();
+	LocatorController::StorageControllerInstance()->GetStorage()->categories_.front().setId("1"+LocatorController::StorageControllerInstance()->GetStorage()->categories_.front().getId());
+	qDebug() << LocatorController::StorageControllerInstance()->GetStorage()->categories_.front().getId();
+}
+void TestDavide::runTestV5()
+{
+	qDebug() << LocatorController::StorageControllerInstance()->GetStorage()->categories_.size();
+	qDebug() << LocatorController::StorageControllerInstance()->GetStorage()->categories_.front().getId();
+	LocatorController::StorageControllerInstance()->GetStorage()->categories_.front().setId("1"+LocatorController::StorageControllerInstance()->GetStorage()->categories_.front().getId());
+}
+void TestDavide::runTestV6()
+{
+
 }
 #endif //SMARTSENSORS_TESTDAVIDE_H
