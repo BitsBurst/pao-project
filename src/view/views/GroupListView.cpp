@@ -2,26 +2,45 @@
 #include "../../utility/Logger.h"
 
 GroupListView::GroupListView(QWidget* parent)
-    : AbstractView(parent) {
+    : AbstractView(parent), scroll_area_(new QScrollArea) {
 
     layout_ = new QVBoxLayout(this);
+    QWidget * scroll_area_list = new QWidget(scroll_area_);
+    QVBoxLayout * scroll_area_layout = new QVBoxLayout(scroll_area_list);
+
     setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding );
 
+    /*
     QPalette pal = QPalette();
     pal.setColor(QPalette::Window, Qt::red);
     setAutoFillBackground(true);
     setPalette(pal);
+    */
 
-    label1_ = new QLabel("Single View");
-    label2_ = new QLabel("Single View");
+    // TODO[Luca]: Remove data gen
 
-    layout_->addWidget(label1_);
-    layout_->addWidget(label2_);
+    for (int i = 0; i < 10; ++i) {
+        item_lists_.push_back(new GroupItemWidget("0", QString::fromStdString("Item " + std::to_string(i + 1)), "Temperatura", "", scroll_area_));
+    }
+
+    for (auto item : item_lists_) {
+        scroll_area_layout->addWidget(item);
+    }
+
+    scroll_area_list->setLayout(scroll_area_layout);
+
+    // Scroll Area
+    scroll_area_->setWidget(scroll_area_list);
+
+    layout_->addWidget(scroll_area_);
 
     setLayout(layout_);
 }
 
 void GroupListView::show() {
-    label1_->show();
-    label2_->show();
+    for (auto item : item_lists_) {
+        item->show();
+    }
+
+    scroll_area_->show();
 }

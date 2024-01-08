@@ -29,11 +29,9 @@ private:
     // Available Views
     SingleView * single_view_;
     GroupListView * group_list_view_;
-    /*
     ModifyView * modify_view_;
     CreateView * create_view_;
     SettingsView * settings_view_;
-    */
 
 
     void createMenu();
@@ -44,11 +42,9 @@ public:
 
 public slots:
     void showSingleView();
-    /*
     void showModifyView();
     void showCreateView();
     void showSettingsView();
-    */
 };
 
 #endif //SMARTSENSORS_MAINVIEW_H

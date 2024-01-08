@@ -6,10 +6,12 @@ SingleView::SingleView(QWidget* parent)
     layout_ = new QVBoxLayout(this);
     setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding );
 
+    /*
     QPalette pal = QPalette();
     pal.setColor(QPalette::Window, Qt::red);
     setAutoFillBackground(true);
     setPalette(pal);
+    */
 
     label1_ = new QLabel("Single View");
     label2_ = new QLabel("Single View");

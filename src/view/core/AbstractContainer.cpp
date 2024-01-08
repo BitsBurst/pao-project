@@ -21,6 +21,9 @@ void AbstractContainer::setCurrentView(AbstractView* current_view)
 
     current_view_ = current_view;
 
+    if (current_view_ !=nullptr)
+        current_view_->setParent(this);
+
     show();
 }
 

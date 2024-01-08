@@ -2,7 +2,7 @@
 
 // TODO[Luca]: Rivedere utilizzo ereditarietà per i layout
 GroupItemWidget::GroupItemWidget(QString id, QString title, QString description, QString icon_src, QWidget* parent)
-    :AbstractWidget(nullptr, parent),  id_(id), icon_src_(icon_src) {
+    : AbstractWidget(nullptr, parent),  id_(id), icon_src_(icon_src) {
 
     QVBoxLayout *layout = new QVBoxLayout();
     layout->setContentsMargins(16, 16, 16, 0);

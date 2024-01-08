@@ -15,10 +15,10 @@ void AbstractView::show() {
 
 void AbstractView::setCustomLayout(QLayout* layout)
 {
-    if (layout != nullptr) {
-        delete layout_;
-        layout_ = layout;
-    }
+    if (layout != nullptr){
+        // TODO[Luca]: Delete old layout.
 
-    setLayout(layout_);
+        layout_ = layout;
+        setLayout(layout_);
+    }
 }

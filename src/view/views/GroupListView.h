@@ -10,8 +10,7 @@ class GroupListView : public AbstractView {
     Q_OBJECT
 private:
     QScrollArea * scroll_area_;
-    QVector<GroupItemWidget *> * item_lists_;
-    QLabel *label1_, *label2_;
+    QVector<GroupItemWidget *> item_lists_;
 public:
     explicit GroupListView(QWidget *parent = nullptr);
     void show();

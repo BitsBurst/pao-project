@@ -1,13 +1,28 @@
 #include "ModifyView.h"
 
 ModifyView::ModifyView(QLayout* layout, QWidget* parent)
-        :AbstractView(layout, parent)
+        :AbstractView(parent)
 {
-    QLabel * label = new QLabel("Modify View");
-    label->show();
-    QLabel * label2 = new QLabel("Modify View");
-    label->show();
+    layout_ = new QVBoxLayout(this);
+    setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding );
 
-    layout_->addWidget(label);
-    layout_->addWidget(label2);
+    /*
+    QPalette pal = QPalette();
+    pal.setColor(QPalette::Window, Qt::red);
+    setAutoFillBackground(true);
+    setPalette(pal);
+    */
+
+    label1_ = new QLabel("Modify View");
+    label2_ = new QLabel("Modify View");
+
+    layout_->addWidget(label1_);
+    layout_->addWidget(label2_);
+
+    setLayout(layout_);
+}
+
+void ModifyView::show() {
+    label1_->show();
+    label2_->show();
 }

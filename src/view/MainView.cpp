@@ -60,6 +60,9 @@ void MainView::createDefaultView() {
 
     // Initialize Views
     single_view_ = new SingleView();
+    modify_view_ = new ModifyView();
+    create_view_ = new CreateView();
+    settings_view_ = new SettingsView();
 
     group_list_view_ = new GroupListView();
 
@@ -77,7 +80,6 @@ void MainView::showSingleView() {
     content_->setCurrentView(single_view_);
 }
 
-/*
 void MainView::showModifyView() {
     content_->setCurrentView(modify_view_);
 }
@@ -89,4 +91,3 @@ void MainView::showCreateView() {
 void MainView::showSettingsView() {
     content_->setCurrentView(settings_view_);
 }
- */

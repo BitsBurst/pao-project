@@ -1,13 +1,28 @@
 #include "CreateView.h"
 
 CreateView::CreateView(QLayout* layout, QWidget* parent)
-        :AbstractView(layout, parent)
+        :AbstractView(parent)
 {
-    QLabel * label = new QLabel("Create View");
-    label->show();
-    QLabel * label2 = new QLabel("Create View");
-    label->show();
+    layout_ = new QVBoxLayout(this);
+    setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding );
 
-    layout_->addWidget(label);
-    layout_->addWidget(label2);
+    /*
+    QPalette pal = QPalette();
+    pal.setColor(QPalette::Window, Qt::red);
+    setAutoFillBackground(true);
+    setPalette(pal);
+    */
+
+    label1_ = new QLabel("Create View");
+    label2_ = new QLabel("Create View");
+
+    layout_->addWidget(label1_);
+    layout_->addWidget(label2_);
+
+    setLayout(layout_);
+}
+
+void CreateView::show() {
+    label1_->show();
+    label2_->show();
 }
