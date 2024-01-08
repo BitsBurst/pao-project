@@ -3,7 +3,9 @@
 const QString StorageController::directory_name_ = "data";
 StorageController::StorageController()
 {
+	Logger::Log(LogLevel::INFO, __FILE__, __LINE__, __FUNCTION__, LogMethod::IN);
 	AbstractItem::setModelChangedPointerStatic(&modelChanged);
+	Logger::Log(LogLevel::INFO, __FILE__, __LINE__, __FUNCTION__, LogMethod::OUT);
 }
 bool StorageController::Init()
 {
@@ -13,9 +15,10 @@ bool StorageController::Init()
 void StorageController::LoadStorage()
 {
 	Logger::Log(LogLevel::INFO, __FILE__, __LINE__, __FUNCTION__, LogMethod::IN);
-	storage_ = StorageUtility::Load<StorageObject>(QString("%1/data.dat").arg(StorageController::directory_name_));
-	if (storage_ == nullptr) {
-		Logger::Log(LogLevel::ERROR, __FILE__, __LINE__, __FUNCTION__, QString("Couldn't load storage."));
+	try {
+		storage_ = StorageUtility::Load<StorageObject>(QString("%1/data.dat").arg(StorageController::directory_name_));
+	}catch (std::runtime_error& e) {
+		Logger::Log(LogLevel::ERROR, __FILE__, __LINE__, __FUNCTION__, QString("Couldn't load storage: %1").arg(e.what()));
 		emit ErrorLoadingStorage();
 		reinitializeStorage();
 	}
@@ -37,11 +40,17 @@ void StorageController::reinitializeStorage()
 void StorageController::modelChanged()
 {
 	Logger::Log(LogLevel::INFO, __FILE__, __LINE__, __FUNCTION__, LogMethod::IN);
+	Logger::Log(LogLevel::INFO, __FILE__, __LINE__, __FUNCTION__, "Storing Storage");
 	LocatorController::StorageControllerInstance()->StoreStorage();
-	qDebug() << "model changed";
+	Logger::Log(LogLevel::INFO, __FILE__, __LINE__, __FUNCTION__, "Storing Storage done");
 	Logger::Log(LogLevel::INFO, __FILE__, __LINE__, __FUNCTION__, LogMethod::OUT);
 }
 StorageObject* StorageController::GetStorage()
 {
+	if (storage_ == nullptr)
+	{
+		Logger::Log(LogLevel::ERROR, __FILE__, __LINE__, __FUNCTION__, "Storage not initialized");
+		throw std::runtime_error("Storage not initialized");
+	}
 	return storage_;
 }

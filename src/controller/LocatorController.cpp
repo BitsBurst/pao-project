@@ -36,5 +36,6 @@ bool LocatorController::Init()
 	result &= BusinessControllerInstance()->Init();
 	result &= StorageControllerInstance()->Init();
 	result &= WindowControllerInstance()->Init();
+	Logger::Log(LogLevel::INFO, __FILE__, __LINE__, __FUNCTION__, "Locator Finished" + QString(result ? "successfully" : "with errors"));
 	return result;
 }

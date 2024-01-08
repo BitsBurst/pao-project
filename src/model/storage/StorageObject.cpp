@@ -39,6 +39,22 @@ void StorageObject::removeSensor(Sensor sensor)
 			i.remove();
 	}
 }
+Sensor* StorageObject::findSensor(Sensor sensor)
+{
+	for (auto& i : sensors_) {
+		if (i.getId() == sensor.getId())
+			return &i;
+	}
+	return nullptr;
+}
+Category* StorageObject::findCategory(Category category)
+{
+	for (auto& i : categories_) {
+		if (i.getId() == category.getId())
+			return &i;
+	}
+	return nullptr;
+}
 StorageObject::StorageObject(const StorageObject& obj): categories_(obj.categories_), sensors_(obj.sensors_)
 {
 }

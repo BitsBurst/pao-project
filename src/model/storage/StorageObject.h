@@ -23,8 +23,8 @@ public:
 	void addSensor(Sensor);
 	void removeCategory(Category);
 	void removeSensor(Sensor);
-	void findCategory(QString);
-	void findSensor(QString);
+	Category* findCategory(Category);
+	Sensor* findSensor(Sensor);
 	QList<Sensor> filterSensorsByCategory(Category);
 signals:
 	void modelChangedSignal();
