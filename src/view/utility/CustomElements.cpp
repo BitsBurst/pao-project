@@ -2,72 +2,98 @@
 #include "CustomElements.h"
 #include "../../utility/Logger.h"
 
-QFont* CustomElements::getFontH1()
-{
-    QFont * font = new QFont();
-    font->setFamily("roboto");
-    font->setPointSize(60);
-    font->setHintingPreference(QFont::HintingPreference::PreferNoHinting);
-    font->setWeight(QFont::Normal);
+// Initialization
+QFont *CustomElements::font_h1_instance_ = nullptr;
+QFont *CustomElements::font_h2_instance_ = nullptr;
+QFont *CustomElements::font_h3_instance_ = nullptr;
+QFont *CustomElements::font_h4_instance_ = nullptr;
+QFont *CustomElements::font_paragraph_instance_ = nullptr;
+QFont *CustomElements::font_details_instance_ = nullptr;
 
-    return font;
+const QFont& CustomElements::getFontH1()
+{
+    if (font_h1_instance_ == nullptr)
+    {
+        font_h1_instance_ = new QFont();
+        font_h1_instance_->setFamily("roboto");
+        font_h1_instance_->setPointSize(60);
+        font_h1_instance_->setHintingPreference(QFont::HintingPreference::PreferNoHinting);
+        font_h1_instance_->setWeight(QFont::Normal);
+    }
+
+    return const_cast<QFont&>(*font_h1_instance_);
 }
 
-QFont* CustomElements::getFontH2()
+const QFont& CustomElements::getFontH2()
 {
-    QFont * font = new QFont();
-    font->setFamily("roboto");
-    font->setPointSize(32);
-    font->setHintingPreference(QFont::HintingPreference::PreferNoHinting);
-    font->setWeight(QFont::Normal);;
+    if (font_h2_instance_ == nullptr)
+    {
+        font_h2_instance_ = new QFont();
+        font_h2_instance_->setFamily("roboto");
+        font_h2_instance_->setPointSize(32);
+        font_h2_instance_->setHintingPreference(QFont::HintingPreference::PreferNoHinting);
+        font_h2_instance_->setWeight(QFont::Normal);
+    }
 
-    return font;
+    return const_cast<QFont&>(*font_h2_instance_);
 }
 
-QFont* CustomElements::getFontH3()
+const QFont& CustomElements::getFontH3()
 {
-    QFont * font = new QFont();
-    font->setFamily("roboto");
-    font->setPointSize(24);
-    font->setHintingPreference(QFont::HintingPreference::PreferNoHinting);
-    font->setWeight(QFont::Normal);
+    if (font_h3_instance_ == nullptr)
+    {
+        font_h3_instance_ = new QFont();
+        font_h3_instance_->setFamily("roboto");
+        font_h3_instance_->setPointSize(24);
+        font_h3_instance_->setHintingPreference(QFont::HintingPreference::PreferNoHinting);
+        font_h3_instance_->setWeight(QFont::Normal);
+    }
 
-    return font;
+    return const_cast<QFont&>(*font_h3_instance_);
 }
 
-QFont* CustomElements::getFontH4()
+const QFont& CustomElements::getFontH4()
 {
-    QFont * font = new QFont();
-    font->setFamily("roboto");
-    font->setPointSize(18);
-    font->setHintingPreference(QFont::HintingPreference::PreferNoHinting);
-    font->setWeight(QFont::Normal);
+    if (font_h4_instance_ == nullptr)
+    {
+        font_h4_instance_ = new QFont();
+        font_h4_instance_->setFamily("roboto");
+        font_h4_instance_->setPointSize(18);
+        font_h4_instance_->setHintingPreference(QFont::HintingPreference::PreferNoHinting);
+        font_h4_instance_->setWeight(QFont::Normal);
+    }
 
-    return font;
+    return const_cast<QFont&>(*font_h4_instance_);
 }
 
-QFont* CustomElements::getFontParagraph()
+const QFont& CustomElements::getFontParagraph()
 {
-    QFont * font = new QFont();
-    font->setFamily("roboto");
-    font->setPointSize(16);
-    font->setHintingPreference(QFont::HintingPreference::PreferNoHinting);
-    font->setWeight(QFont::Light);
+    if (font_paragraph_instance_ == nullptr)
+    {
+        font_paragraph_instance_ = new QFont();
+        font_paragraph_instance_->setFamily("roboto");
+        font_paragraph_instance_->setPointSize(16);
+        font_paragraph_instance_->setHintingPreference(QFont::HintingPreference::PreferNoHinting);
+        font_paragraph_instance_->setWeight(QFont::Light);
+    }
 
-    return font;
+    return const_cast<QFont&>(*font_paragraph_instance_);
 }
 
-QFont* CustomElements::getFontDetails()
+const QFont& CustomElements::getFontDetails()
 {
-    QFont * font = new QFont();
-    font->setFamily("roboto");
-    font->setPointSize(8);
-    font->setWeight(QFont::Medium);
-    font->setHintingPreference(QFont::HintingPreference::PreferNoHinting);
-    font->setLetterSpacing(QFont::AbsoluteSpacing, 1);
-    font->setCapitalization(QFont::AllUppercase);
+    if (font_details_instance_ == nullptr)
+    {
+        font_details_instance_ = new QFont();
+        font_details_instance_->setFamily("roboto");
+        font_details_instance_->setPointSize(8);
+        font_details_instance_->setWeight(QFont::Medium);
+        font_details_instance_->setHintingPreference(QFont::HintingPreference::PreferNoHinting);
+        font_details_instance_->setLetterSpacing(QFont::AbsoluteSpacing, 1);
+        font_details_instance_->setCapitalization(QFont::AllUppercase);
+    }
 
-    return font;
+    return const_cast<QFont&>(*font_details_instance_);
 }
 
 QSpacerItem* CustomElements::getTerminalSpacer()
@@ -77,6 +103,7 @@ QSpacerItem* CustomElements::getTerminalSpacer()
 
 void CustomElements::Init()
 {
+    // Import Fonts
     QFontDatabase::addApplicationFont(":/roboto-black.ttf");
     QFontDatabase::addApplicationFont(":/roboto-bold.ttf");
     QFontDatabase::addApplicationFont(":/roboto-light.ttf");

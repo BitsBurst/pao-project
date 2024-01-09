@@ -12,22 +12,22 @@ SingleView::SingleView(QWidget* parent)
 
     // Initialization
     label1_ = new QLabel("Titolo H1");
-    label1_->setFont(*CustomElements::getFontH1());
+    label1_->setFont(CustomElements::getFontH1());
 
     label2_ = new QLabel("Titolo H2");
-    label2_->setFont(*CustomElements::getFontH2());
+    label2_->setFont(CustomElements::getFontH2());
 
     label3_ = new QLabel("Titolo H3");
-    label3_->setFont(*CustomElements::getFontH3());
+    label3_->setFont(CustomElements::getFontH3());
 
     label4_ = new QLabel("Titolo H4");
-    label4_->setFont(*CustomElements::getFontH4());
+    label4_->setFont(CustomElements::getFontH4());
 
     label5_ = new QLabel("Paragrafo: Questo è un esempio di paragrafo.");
-    label5_->setFont(*CustomElements::getFontParagraph());
+    label5_->setFont(CustomElements::getFontParagraph());
 
     label6_ = new QLabel("Detail");
-    label6_->setFont(*CustomElements::getFontDetails());
+    label6_->setFont(CustomElements::getFontDetails());
 
     // Layout Widgets
     layout_->addWidget(label1_);

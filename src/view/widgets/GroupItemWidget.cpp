@@ -19,8 +19,8 @@ GroupItemWidget::GroupItemWidget(QString id, QString title, QString description,
     title_font.setPixelSize(18);
     title_font.setWeight(QFont::Medium);
 
-    title_label_->setFont(*CustomElements::getFontH4());
-    description_label_->setFont(*CustomElements::getFontDetails());
+    title_label_->setFont(CustomElements::getFontH4());
+    description_label_->setFont(CustomElements::getFontDetails());
 
     // Layout Widgets
     layout_->addWidget(description_label_);
