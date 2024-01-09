@@ -111,3 +111,51 @@ void CustomElements::Init()
     QFontDatabase::addApplicationFont(":/roboto-regular.ttf");
     QFontDatabase::addApplicationFont(":/roboto-thin.ttf");
 }
+
+QVBoxLayout* CustomElements::getVerticalLayout(int margin)
+{
+    QVBoxLayout * temp = new QVBoxLayout;
+    temp->setContentsMargins(margin, margin, margin, margin);
+
+    return temp;
+}
+
+QVBoxLayout* CustomElements::getVerticalLayout(int h_margin, int v_margin)
+{
+    QVBoxLayout * temp = new QVBoxLayout;
+    temp->setContentsMargins(h_margin,v_margin,h_margin,v_margin);
+
+    return temp;
+}
+
+QVBoxLayout* CustomElements::getVerticalLayout(int left_margin, int right_margin, int top_margin, int bottom_margin)
+{
+    QVBoxLayout * temp = new QVBoxLayout;
+    temp->setContentsMargins(left_margin,top_margin,right_margin,bottom_margin);
+
+    return temp;
+}
+
+QHBoxLayout* CustomElements::getHorizontalLayout(int margin)
+{
+    QHBoxLayout * temp = new QHBoxLayout;
+    temp->setContentsMargins(margin, margin, margin, margin);
+
+    return temp;
+}
+
+QHBoxLayout* CustomElements::getHorizontalLayout(int h_margin, int v_margin)
+{
+    QHBoxLayout * temp = new QHBoxLayout;
+    temp->setContentsMargins(h_margin,v_margin,h_margin,v_margin);
+
+    return temp;
+}
+
+QHBoxLayout* CustomElements::getHorizontalLayout(int left_margin, int right_margin, int top_margin, int bottom_margin)
+{
+    QHBoxLayout * temp = new QHBoxLayout;
+    temp->setContentsMargins(left_margin,top_margin,right_margin,bottom_margin);
+
+    return temp;
+}
