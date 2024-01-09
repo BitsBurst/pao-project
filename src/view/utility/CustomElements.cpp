@@ -10,7 +10,7 @@ QFont *CustomElements::font_h4_instance_ = nullptr;
 QFont *CustomElements::font_paragraph_instance_ = nullptr;
 QFont *CustomElements::font_details_instance_ = nullptr;
 
-const QFont& CustomElements::getFontH1()
+QFont& CustomElements::getFontH1()
 {
     if (font_h1_instance_ == nullptr)
     {
@@ -21,10 +21,10 @@ const QFont& CustomElements::getFontH1()
         font_h1_instance_->setWeight(QFont::Normal);
     }
 
-    return const_cast<QFont&>(*font_h1_instance_);
+    return *font_h1_instance_;
 }
 
-const QFont& CustomElements::getFontH2()
+QFont& CustomElements::getFontH2()
 {
     if (font_h2_instance_ == nullptr)
     {
@@ -35,10 +35,10 @@ const QFont& CustomElements::getFontH2()
         font_h2_instance_->setWeight(QFont::Normal);
     }
 
-    return const_cast<QFont&>(*font_h2_instance_);
+    return *font_h2_instance_;
 }
 
-const QFont& CustomElements::getFontH3()
+QFont& CustomElements::getFontH3()
 {
     if (font_h3_instance_ == nullptr)
     {
@@ -49,10 +49,10 @@ const QFont& CustomElements::getFontH3()
         font_h3_instance_->setWeight(QFont::Normal);
     }
 
-    return const_cast<QFont&>(*font_h3_instance_);
+    return *font_h3_instance_;
 }
 
-const QFont& CustomElements::getFontH4()
+QFont& CustomElements::getFontH4()
 {
     if (font_h4_instance_ == nullptr)
     {
@@ -63,10 +63,10 @@ const QFont& CustomElements::getFontH4()
         font_h4_instance_->setWeight(QFont::Normal);
     }
 
-    return const_cast<QFont&>(*font_h4_instance_);
+    return *font_h4_instance_;
 }
 
-const QFont& CustomElements::getFontParagraph()
+QFont& CustomElements::getFontParagraph()
 {
     if (font_paragraph_instance_ == nullptr)
     {
@@ -77,10 +77,10 @@ const QFont& CustomElements::getFontParagraph()
         font_paragraph_instance_->setWeight(QFont::Light);
     }
 
-    return const_cast<QFont&>(*font_paragraph_instance_);
+    return *font_paragraph_instance_;
 }
 
-const QFont& CustomElements::getFontDetails()
+QFont& CustomElements::getFontDetails()
 {
     if (font_details_instance_ == nullptr)
     {
@@ -93,7 +93,7 @@ const QFont& CustomElements::getFontDetails()
         font_details_instance_->setCapitalization(QFont::AllUppercase);
     }
 
-    return const_cast<QFont&>(*font_details_instance_);
+    return *font_details_instance_;
 }
 
 QSpacerItem* CustomElements::getTerminalSpacer()

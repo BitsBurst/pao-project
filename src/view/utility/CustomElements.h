@@ -18,13 +18,13 @@ public:
 
     static void Init();
 
-    static const QFont& getFontH1();
-    static const QFont& getFontH2();
-    static const QFont& getFontH3();
-    static const QFont& getFontH4();
+    static QFont& getFontH1();
+    static QFont& getFontH2();
+    static QFont& getFontH3();
+    static QFont& getFontH4();
 
-    static const QFont& getFontParagraph();
-    static const QFont& getFontDetails();
+    static QFont& getFontParagraph();
+    static QFont& getFontDetails();
 
     static QSpacerItem* getTerminalSpacer();
 
