@@ -4,6 +4,7 @@
 #include <QWidget>
 #include <QLabel>
 #include "../core/AbstractWidget.h"
+#include "../utility/CustomElements.h"
 
 class GroupItemWidget : public AbstractWidget {
     Q_OBJECT

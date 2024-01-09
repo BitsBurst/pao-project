@@ -9,6 +9,9 @@ int main(int argc, char *argv[])
 	Logger::Log(LogLevel::INFO, __FILE__, __LINE__, __FUNCTION__, "Application Start");
 
     QApplication a(argc, argv);
+    Q_INIT_RESOURCE(resources);
+
+    CustomElements::Init();
 	LocatorController::Init();
 	TestDavide::runTestV2();
     return a.exec();
