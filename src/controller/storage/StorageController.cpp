@@ -4,7 +4,6 @@ const QString StorageController::directory_name_ = "data";
 StorageController::StorageController():storage_(nullptr), worker_(new StorageWorker(&storage_, QString("%1/data.json").arg(directory_name_)))
 {
 	Logger::Log(LogLevel::INFO, __FILE__, __LINE__, __FUNCTION__, LogMethod::IN);
-	AbstractItem::setModelChangedPointerStatic(&modelChanged);
 	connect(worker_, &StorageWorker::onStorageReady, this, &StorageController::storageReadyEvent);
 	Logger::Log(LogLevel::INFO, __FILE__, __LINE__, __FUNCTION__, LogMethod::OUT);
 }

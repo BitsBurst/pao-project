@@ -8,7 +8,7 @@ MyApp::~MyApp()
 MyApp::MyApp(int i, char** p_string): QApplication(i, p_string) {
 	try {
 		LocatorController::Init();
-		TestDavide::runTestV6();
+		//TestDavide::runTestV6();
 	}
 	catch (NormalException& e) {
 		LocatorController::ErrorControllerInstance()->manageException(e);

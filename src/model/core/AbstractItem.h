@@ -16,8 +16,6 @@ public:
 	 QString getName();
 	 void setName(QString name);
 	 void setModelChangedPointer(void (**)());
-	 static void setModelChangedPointerStatic(void (*)());
-	 static void (*modelChangedStatic_)();
 	 QJsonObject toJson() const;
 	 static AbstractItem fromJson(QJsonObject const &);
 

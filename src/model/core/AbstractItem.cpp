@@ -1,13 +1,8 @@
 #include "AbstractItem.h"
-void (*AbstractItem::modelChangedStatic_)() = nullptr;
 AbstractItem::~AbstractItem()
 = default;
 AbstractItem::AbstractItem(QString name, void (**modelChangedHandlerPointer)()):id_(QUuid::createUuid().toString()), name_(name), modelChangedInstance_(modelChangedHandlerPointer)
 {
-	// Note: WARNING: This is a hack. It is not a good idea to emit modelChanged event for every object created. LAVE IT AS IT IS.
-	/*if(modelChangedInstance_ == nullptr) {
-		modelChangedInstance_ = &modelChangedStatic_;
-	}*/
 }
 QString AbstractItem::getId()
 {
@@ -37,10 +32,6 @@ void AbstractItem::modelChangedHandler()
 void AbstractItem::setModelChangedPointer(void (**modelChanged)())
 {
 		modelChangedInstance_ = modelChanged;
-}
-void AbstractItem::setModelChangedPointerStatic(void (*modelChangedStatic)())
-{
-	modelChangedStatic_ = modelChangedStatic;
 }
 AbstractItem::AbstractItem():id_(QUuid::createUuid().toString()), name_(""), modelChangedInstance_(nullptr)
 {
