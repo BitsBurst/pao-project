@@ -1,7 +1,7 @@
 #ifndef PAO_PROJECT_CATEGORY_H
 #define PAO_PROJECT_CATEGORY_H
 #include "AbstractItem.h"
-#include "../datagen/AbstractDataGen.h"
+#include "../datagen/DataGenObj.h"
 #include "../../utility/datagenerator/RandomDataGenerator.h"
 #include <QString>
 class Category: public AbstractItem {
@@ -14,6 +14,7 @@ public:
 	QJsonObject toJson() const;
 	static Category fromJson(QJsonObject const &);
 	int getDistributionType();
+	Category& operator=(Category const &category);
 private:
 	QString unit_measure_;
 	DistributionType distribution_type_;

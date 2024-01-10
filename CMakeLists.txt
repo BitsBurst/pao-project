@@ -33,8 +33,8 @@ set(PROJECT_SOURCES
         src/view/views/SingleView.h
         src/view/views/ModifyView.cpp
         src/view/views/ModifyView.h
-        src/model/datagen/AbstractDataGen.cpp
-        src/model/datagen/AbstractDataGen.h
+        src/model/datagen/DataGen.cpp
+        src/model/datagen/DataGenObj.h
         src/model/core/AbstractItem.cpp
         src/model/core/AbstractItem.h
         src/model/core/Category.cpp
@@ -86,6 +86,7 @@ set(PROJECT_SOURCES
         src/utility/storage/StorageUtility.cpp
         src/utility/datagenerator/RandomDataGenerator.cpp
         src/utility/datagenerator/RandomDataGenerator.h
+        src/utility/event/EventHandler.h
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)

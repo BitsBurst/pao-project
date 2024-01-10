@@ -53,3 +53,9 @@ AbstractItem AbstractItem::fromJson(const QJsonObject& object)
 		abstract_item.name_ = object["name"].toString();
 	return abstract_item;
 }
+AbstractItem::AbstractItem(const AbstractItem& abstract_item)
+{
+	id_ = abstract_item.id_;
+	name_ = abstract_item.name_;
+	modelChangedInstance_ = abstract_item.modelChangedInstance_;
+}

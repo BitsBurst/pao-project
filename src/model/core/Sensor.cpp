@@ -1,10 +1,11 @@
 #include "Sensor.h"
-Sensor::Sensor(QString name, Category category, void (**ptfp)()):AbstractItem(name, ptfp), min_range_(0), max_range_(0), category_(category), seed_(QDateTime::currentDateTime().toSecsSinceEpoch()), data_()
+Sensor::Sensor(QString name, Category category, void (**ptfp)()):AbstractItem(name, ptfp), min_range_(0), max_range_(0), category_(category), seed_(QDateTime::currentDateTime().toSecsSinceEpoch()), data_(), data_generator_worker_(nullptr)
 {
 
 }
 Sensor::~Sensor()
 {
+	if(data_generator_worker_ != nullptr)
 	delete data_generator_worker_;
 }
 double Sensor::getMinRange()
@@ -62,8 +63,10 @@ Sensor Sensor::fromJson(const QJsonObject& object)
 }
 void Sensor::startDataGeneration()
 {
-	if(data_generator_worker_ == nullptr)
-		data_generator_worker_ = new DataGeneratorWorker(category_.getDistributionType(), min_range_, max_range_, seed_);
+	if(data_generator_worker_ == nullptr){
+		data_generator_worker_ = new DataGeneratorWorker(max_range_, min_range_, seed_, 500, DistributionType::UNIFORM);
+		data_generator_worker_->newDataEvent.subscribe(std::bind(&Sensor::dataGenerated, this, std::placeholders::_1));
+	}
 	data_generator_worker_->start();
 
 }
@@ -72,8 +75,9 @@ void Sensor::stopDataGeneration()
 	data_generator_worker_->exit();
 	delete data_generator_worker_;
 }
-void Sensor::dataGenerated(double v, QDateTime t)
+void Sensor::dataGenerated(DataGenObj obj)
 {
-	data_.insert(t, v);
+	data_.insert(obj.getTimestamp(), obj.getData());
 	modelChangedHandler();
+	onDataGenerated.notifyAsync();
 }

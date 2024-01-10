@@ -33,7 +33,15 @@ void TestDavide::runTestV4()
 void TestDavide::runTestV5()
 {
 }
+void DataGenerated()
+{
+	qDebug() << "Data generated";
+}
 void TestDavide::runTestV6()
 {
+	Category c1("c1", "c1");
+	Sensor* s1 = new Sensor("s1", c1);
+	s1->onDataGenerated.subscribe(DataGenerated);
+	s1->startDataGeneration();
 }
 #endif //SMARTSENSORS_TESTDAVIDE_H

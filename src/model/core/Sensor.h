@@ -19,6 +19,7 @@ public:
 	static Sensor fromJson(QJsonObject const &);
 	void startDataGeneration();
 	void stopDataGeneration();
+	EventHandlerVoid onDataGenerated;
 private:
 	double min_range_;
 	double max_range_;
@@ -26,6 +27,6 @@ private:
 	qint64 seed_;
 	QMap<QDateTime, double> data_;
 	DataGeneratorWorker* data_generator_worker_;
-	void dataGenerated(double, QDateTime);
+	void dataGenerated(DataGenObj);
 };
 #endif //PAO_PROJECT_SENSOR_H

@@ -5,12 +5,12 @@
 #include <QDataStream>
 #include <QUuid>
 #include <QJsonObject>
-
 class AbstractItem {
 public:
 	 ~AbstractItem();
-	AbstractItem();
+	 AbstractItem();
 	 AbstractItem(QString, void (**)() = nullptr);
+	 AbstractItem(AbstractItem const &abstract_item);
 	 QString getId();
 	 void setId(QString id);
 	 QString getName();

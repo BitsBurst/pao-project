@@ -39,3 +39,12 @@ int Category::getDistributionType()
 {
 	return distribution_type_;
 }
+Category& Category::operator=(const Category& category)
+{
+	id_ = category.id_;
+	name_ = category.name_;
+	unit_measure_ = category.unit_measure_;
+	distribution_type_ = category.distribution_type_;
+	modelChangedInstance_ = category.modelChangedInstance_;
+	return *this;
+}
