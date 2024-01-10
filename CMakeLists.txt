@@ -88,6 +88,8 @@ set(PROJECT_SOURCES
         src/utility/storage/StorageWorker.cpp
         src/utility/storage/StorageWorker.h
         src/utility/storage/StorageUtility.cpp
+        src/utility/datagenerator/RandomDataGenerator.cpp
+        src/utility/datagenerator/RandomDataGenerator.h
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
