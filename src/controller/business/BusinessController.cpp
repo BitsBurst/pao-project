@@ -11,14 +11,14 @@ bool BusinessController::Init()
 }
 void BusinessController::subscribeToEvents()
 {
-	connect(LocatorController::StorageControllerInstance(), &StorageController::ErrorLoadingStorage, this, &BusinessController::loadStorageError);
+	connect(LocatorController::StorageControllerInstance(), &StorageController::StorageReady, this, &BusinessController::storageReady);
 }
 
-void BusinessController::loadStorageError()
-{
-	qDebug() << "loadStorageError";
-}
 void BusinessController::Destroy()
 {
 
+}
+void BusinessController::storageReady()
+{
+	LocatorController::WindowControllerInstance()->setDisabled(false);
 }

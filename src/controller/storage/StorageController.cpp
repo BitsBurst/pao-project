@@ -43,5 +43,6 @@ void StorageController::isStorageReady()
 void StorageController::storageReadyEvent()
 {
 	Logger::Log(LogLevel::INFO, __FILE__, __LINE__, __FUNCTION__, LogMethod::IN);
+	emit StorageReady();
 	Logger::Log(LogLevel::INFO, __FILE__, __LINE__, __FUNCTION__, LogMethod::OUT);
 }

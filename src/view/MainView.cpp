@@ -5,7 +5,7 @@ MainView::MainView(QWidget* parent)
 {
     // General Settings
     setMinimumSize(QSize(640, 360));
-
+	setDisabled(true);
     // Creation Calls
     createMenu();
     createDefaultView();

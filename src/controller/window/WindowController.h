@@ -10,6 +10,7 @@ public:
 	WindowController();
 	bool Init();
 	void Destroy();
+	void setDisabled(bool);
 private:
 	MainView* main_window_;
 };

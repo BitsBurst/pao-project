@@ -27,7 +27,7 @@ private:
 	static void modelChanged();
 	void storageReadyEvent();
 signals:
-	void ErrorLoadingStorage();
+	void StorageReady();
 };
 
 #endif //SMARTSENSORS_STORAGECONTROLLER_H

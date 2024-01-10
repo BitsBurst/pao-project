@@ -13,6 +13,7 @@ public:
 private:
 	void subscribeToEvents();
 	void loadStorageError();
+	void storageReady();
 };
 
 #endif //SMARTSENSORS_BUSINESSCONTROLLER_H
