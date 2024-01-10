@@ -1,3 +1,4 @@
+#include <QJsonArray>
 #include "Sensor.h"
 Sensor::Sensor(QString name, Category category, void (**ptfp)()):AbstractItem(name, ptfp), min_range_(0), max_range_(0), category_(category), seed_(QDateTime::currentDateTime().toSecsSinceEpoch()), data_(), data_generator_worker_(nullptr)
 {
@@ -5,8 +6,6 @@ Sensor::Sensor(QString name, Category category, void (**ptfp)()):AbstractItem(na
 }
 Sensor::~Sensor()
 {
-	if(data_generator_worker_ != nullptr)
-	delete data_generator_worker_;
 }
 double Sensor::getMinRange()
 {
@@ -35,7 +34,7 @@ void Sensor::setCategory(Category category)
 	category_ = category;
 	modelChangedHandler();
 }
-Sensor::Sensor(void (**ptfp)()): AbstractItem("", ptfp), min_range_(0), max_range_(0), category_(Category())
+Sensor::Sensor(void (**ptfp)()): AbstractItem("", ptfp), min_range_(0), max_range_(0), category_(Category()), seed_(QDateTime::currentDateTime().toSecsSinceEpoch()), data_(), data_generator_worker_(nullptr)
 {
 
 }
@@ -45,6 +44,16 @@ QJsonObject Sensor::toJson() const
 	json["min_range"] = min_range_;
 	json["max_range"] = max_range_;
 	json["category"] = category_.toJson();
+	json["seed"] = seed_;
+	QJsonArray array;
+	for(auto it = data_.begin(); it != data_.end(); ++it)
+	{
+		QJsonObject obj;
+		obj["timestamp"] = it.key().toString();
+		obj["data"] = it.value();
+		array.append(obj);
+	}
+	json["data"] = array;
 	return json;
 }
 Sensor Sensor::fromJson(const QJsonObject& object)

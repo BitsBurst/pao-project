@@ -41,7 +41,8 @@ void TestDavide::runTestV6()
 {
 	Category c1("c1", "c1");
 	Sensor* s1 = new Sensor("s1", c1);
-	s1->onDataGenerated.subscribe(DataGenerated);
-	s1->startDataGeneration();
+	s1->setMinRange(0);
+	s1->setMaxRange(100);
+	//LocatorController::StorageControllerInstance()->GetStorage()->addSensor(s1);
 }
 #endif //SMARTSENSORS_TESTDAVIDE_H

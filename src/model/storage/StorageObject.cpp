@@ -124,6 +124,7 @@ StorageObject *StorageObject::fromJson(const QJsonObject& obj)
 			Sensor sensor = Sensor::fromJson(i.toObject());
 			sensor.setModelChangedPointer(&storage->modelChanged_);
 			storage->sensors_.append(sensor);
+			storage->sensors_.last().startDataGeneration();
 		}
 	}
 	return storage;
