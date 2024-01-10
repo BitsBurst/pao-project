@@ -27,7 +27,13 @@ void StorageWorker::run() {
 		changed = false;
 		QDateTime currentDateTime = QDateTime::currentDateTime();
 		int diff = 0;
+		int wait = 0;
 		while (diff = lastUpdate.msecsTo(currentDateTime) < 1000) {
+			wait += diff;
+			if (wait > 5000) {
+				break;
+			}
+			qDebug() << "Waiting for " << wait << "ms";
 			currentDateTime = QDateTime::currentDateTime();
 		}
 		Store();
