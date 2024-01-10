@@ -1,25 +1,25 @@
 #include "DataGeneratorWorker.h"
-
-DataGeneratorWorker::DataGeneratorWorker(QObject* parent, AbstractDataGen* dataGenerator)
-		:QThread(parent), dataGenerator(dataGenerator), counter(0)
+DataGeneratorWorker::DataGeneratorWorker(int maxrange, int minrange, int seed, int time, DistributionType distribution_type, QObject* parent)
+		:QThread(parent), counter(0), maxrange(maxrange), minrange(minrange), speed(time), seed(seed), distributionType(distribution_type)
 {
 
 }
 void DataGeneratorWorker::run()
 {
+	RandomDataGenerator data_generator(seed);
+	data_generator.setDistributionType(distributionType);
 	while (true)
 	{
 		counter++;
-		emit dataGenerated(dataGenerator->generateData(), QDateTime::currentDateTime());
+		std::vector<double> data = data_generator.generateData(minrange, maxrange,1);
+		emit dataGenerated(data.front(), QDateTime::currentDateTime());
+		QThread::msleep(speed);
 	}
 }
 void DataGeneratorWorker::start(QThread::Priority priority)
 {
-	if (dataGenerator == nullptr)
-	{
-		throw std::runtime_error("DataGeneratorWorker::start: dataGenerator is nullptr");
-	}
 	QThread::start(priority);
 }
+
 DataGeneratorWorker::~DataGeneratorWorker()
 = default;

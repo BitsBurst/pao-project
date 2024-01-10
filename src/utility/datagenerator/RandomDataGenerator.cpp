@@ -1,7 +1,7 @@
 #include "RandomDataGenerator.h"
 #include "../logger/Logger.h"
 
-RandomDataGenerator::RandomDataGenerator(int seed) : generator(seed) {}
+RandomDataGenerator::RandomDataGenerator(int seed) : generator(seed), distributionType(NORMAL) {}
 
 void RandomDataGenerator::setDistributionType(DistributionType type) {
 	distributionType = type;

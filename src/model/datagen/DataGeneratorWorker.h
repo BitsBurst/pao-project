@@ -4,16 +4,24 @@
 #include <QThread>
 #include <QDateTime>
 #include "AbstractDataGen.h"
+#include "../../utility/datagenerator/RandomDataGenerator.h"
 
 class DataGeneratorWorker: public QThread{
 	Q_OBJECT
+
+
 public:
-	DataGeneratorWorker(QObject * = nullptr, AbstractDataGen * = nullptr);
+	DataGeneratorWorker(int maxrange, int minrange, int seed, int time = 500, DistributionType distribution_type = UNIFORM,
+			QObject* parent= nullptr);
 	~DataGeneratorWorker();
 	void start(Priority = InheritPriority);
 private:
 	int counter;
-	AbstractDataGen *dataGenerator;
+	int maxrange;
+	int minrange;
+	int speed;
+	int seed;
+	DistributionType distributionType;
 protected:
 	void run() override;
 signals:

@@ -41,10 +41,6 @@ set(PROJECT_SOURCES
         src/model/core/Category.h
         src/model/core/Sensor.cpp
         src/model/core/Sensor.h
-        src/model/datagen/LinearDataGen.cpp
-        src/model/datagen/LinearDataGen.h
-        src/model/datagen/RandomDataGen.cpp
-        src/model/datagen/RandomDataGen.h
         src/model/datagen/DataGeneratorWorker.cpp
         src/model/datagen/DataGeneratorWorker.h
         src/tests/testDavide.h

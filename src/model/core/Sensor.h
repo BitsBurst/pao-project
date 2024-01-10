@@ -17,10 +17,15 @@ public:
 	void setCategory(Category category);
 	QJsonObject toJson() const;
 	static Sensor fromJson(QJsonObject const &);
+	void startDataGeneration();
+	void stopDataGeneration();
 private:
 	double min_range_;
 	double max_range_;
 	Category category_;
+	qint64 seed_;
 	QMap<QDateTime, double> data_;
+	DataGeneratorWorker* data_generator_worker_;
+	void dataGenerated(double, QDateTime);
 };
 #endif //PAO_PROJECT_SENSOR_H

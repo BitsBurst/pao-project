@@ -11,11 +11,11 @@ void Category::setUnitMeasure(QString unit_measure)
 Category::~Category()
 {
 }
-Category::Category(QString name, QString unit_measure, AbstractDataGen* data_gen, void (**ptfp)()):AbstractItem(name, ptfp), unit_measure_(unit_measure), data_gen_(data_gen)
+Category::Category(QString name, QString unit_measure, DistributionType distribution_type, void (**ptfp)()):AbstractItem(name, ptfp), unit_measure_(unit_measure), distribution_type_(distribution_type)
 {
 
 }
-Category::Category(void (**ptfp)()):AbstractItem("", ptfp), unit_measure_(""), data_gen_(nullptr)
+Category::Category(void (**ptfp)()):AbstractItem("", ptfp), unit_measure_(""), distribution_type_(UNIFORM)
 {
 
 }
@@ -34,4 +34,8 @@ Category Category::fromJson(const QJsonObject& obj)
 	if(const QJsonValue& unit_measure = obj["unit_measure"]; unit_measure.isString())
 		category.unit_measure_ = unit_measure.toString();
 	return category;
+}
+int Category::getDistributionType()
+{
+	return distribution_type_;
 }
