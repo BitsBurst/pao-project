@@ -9,6 +9,7 @@ Q_OBJECT
 public:
 	BusinessController();
 	bool Init();
+	void Destroy();
 private:
 	void subscribeToEvents();
 	void loadStorageError();

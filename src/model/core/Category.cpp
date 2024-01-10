@@ -11,21 +11,27 @@ void Category::setUnitMeasure(QString unit_measure)
 Category::~Category()
 {
 }
-Category::Category(QString id, QString name, QString unit_measure, AbstractDataGen* data_gen, void (**ptfp)()):AbstractItem(id, name, ptfp), unit_measure_(unit_measure), data_gen_(data_gen)
+Category::Category(QString name, QString unit_measure, AbstractDataGen* data_gen, void (**ptfp)()):AbstractItem(name, ptfp), unit_measure_(unit_measure), data_gen_(data_gen)
 {
 
 }
-Category::Category(void (**ptfp)()):AbstractItem("", "", ptfp), unit_measure_(""), data_gen_(nullptr)
+Category::Category(void (**ptfp)()):AbstractItem("", ptfp), unit_measure_(""), data_gen_(nullptr)
 {
 
 }
-QDataStream& operator<<(QDataStream& stream, const Category& category)
+QJsonObject Category::toJson() const
 {
-	stream << dynamic_cast<const AbstractItem&>(category) << category.unit_measure_;
-	return stream;
+	QJsonObject json = AbstractItem::toJson();
+	json["unit_measure"] = unit_measure_;
+	return json;
 }
-QDataStream& operator>>(QDataStream& stream, Category& category)
+Category Category::fromJson(const QJsonObject& obj)
 {
-	stream >> dynamic_cast<AbstractItem&>(category) >> category.unit_measure_;
-	return stream;
+	AbstractItem abs_item = AbstractItem::fromJson(obj);
+	Category category;
+	category.id_ = abs_item.getId();
+	category.name_ = abs_item.getName();
+	if(const QJsonValue& unit_measure = obj["unit_measure"]; unit_measure.isString())
+		category.unit_measure_ = unit_measure.toString();
+	return category;
 }

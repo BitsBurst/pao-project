@@ -2,43 +2,6 @@
 StorageObject::StorageObject(void (*modelChanged)()): modelChanged_(modelChanged), categories_(), sensors_()
 {
 }
-/*QDataStream &operator<<(QDataStream &out, const QList<AbstractItem> &list)
-{
-	out << list.size();
-	for (auto &i : list) {
-		const_cast<AbstractItem &>(i).setModelChangedPointer(&AbstractItem::modelChangedStatic_);
-		out << i;
-	}
-	return out;
-}
-QDataStream &operator>>(QDataStream &in, QList<AbstractItem> &list)
-{
-	int size;
-	in >> size;
-	for (int i = 0; i < size; i++) {
-		AbstractItem item;
-		item.setModelChangedPointer(&AbstractItem::modelChangedStatic_);
-		in >> item;
-		list.append(item);
-	}
-	return in;
-}*/
-QDataStream& operator<<(QDataStream& stream, const StorageObject& obj)
-{
-	stream << obj.categories_ << obj.sensors_;
-	foreach(auto& i, obj.categories_) {
-		const_cast<Category&>(i).setModelChangedPointer(&Category::modelChangedStatic_);
-	}
-	foreach(auto& i, obj.sensors_) {
-		const_cast<Sensor&>(i).setModelChangedPointer(&Sensor::modelChangedStatic_);
-	}
-	return stream;
-}
-QDataStream& operator>>(QDataStream& stream, StorageObject& obj)
-{
-	stream >> obj.categories_ >> obj.sensors_;
-	return stream;
-}
 void StorageObject::addCategory(Category* category)
 {
 	category->setModelChangedPointer(&modelChanged_);
@@ -121,6 +84,68 @@ QList<Category> StorageObject::filterCategoriesByName(QString name)
 			list.append(i);
 	}
 	return list;
+}
+QList<Category>* StorageObject::getCategories()
+{
+	checkCategories();
+	return &categories_;
+}
+QList<Sensor>* StorageObject::getSensors()
+{
+	checkSensors();
+	return &sensors_;
+}
+void StorageObject::checkCategories()
+{
+	if (categories_.size() == 0)
+	{
+		throw std::invalid_argument("Categories list is empty");
+	}
+}
+void StorageObject::checkSensors()
+{
+	if (sensors_.size() == 0)
+	{
+		throw std::invalid_argument("Sensors list is empty");
+	}
+}
+StorageObject *StorageObject::fromJson(const QJsonObject& obj)
+{
+	StorageObject * storage = new StorageObject();
+	if (const QJsonValue& categories = obj["categories"]; categories.isArray()) {
+		for (auto i : categories.toArray()) {
+			Category category = Category::fromJson(i.toObject());
+			category.setModelChangedPointer(&storage->modelChanged_);
+			storage->categories_.append(category);
+		}
+	}
+	if (const QJsonValue& sensors = obj["sensors"]; sensors.isArray()) {
+		for (auto i : sensors.toArray()) {
+			Sensor sensor = Sensor::fromJson(i.toObject());
+			sensor.setModelChangedPointer(&storage->modelChanged_);
+			storage->sensors_.append(sensor);
+		}
+	}
+	return storage;
+}
+QJsonObject StorageObject::toJson() const
+{
+	QJsonObject json;
+	QJsonArray categories;
+	QJsonArray sensors;
+	for (auto& i : categories_) {
+		categories.append(i.toJson());
+	}
+	for (auto& i : sensors_) {
+		sensors.append(i.toJson());
+	}
+	json["categories"] = categories;
+	json["sensors"] = sensors;
+	return json;
+}
+void StorageObject::setModelChangedPointer(void (*modelChanged)())
+{
+	modelChanged_ = modelChanged;
 }
 StorageObject::~StorageObject()
 = default;

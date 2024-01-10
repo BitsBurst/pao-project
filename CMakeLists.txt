@@ -13,6 +13,7 @@ set(CMAKE_PREFIX_PATH $ENV{QT_PATH})
 
 find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Widgets)
 find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets)
+string(TOLOWER ${CMAKE_BUILD_TYPE} build_type)
 
 set(PROJECT_SOURCES
         main.cpp
@@ -57,8 +58,8 @@ set(PROJECT_SOURCES
         src/controller/window/WindowController.h
         src/controller/business/BusinessController.cpp
         src/controller/business/BusinessController.h
-        src/utility/Logger.cpp
-        src/utility/Logger.h
+        src/utility/logger/Logger.cpp
+        src/utility/logger/Logger.h
         src/view/views/CreateView.cpp
         src/view/views/CreateView.h
         src/view/views/SettingsView.cpp
@@ -71,11 +72,22 @@ set(PROJECT_SOURCES
         src/view/widgets/SidebarLowControlWidget.h
         src/view/core/AbstractGraphicalElement.cpp
         src/view/core/AbstractGraphicalElement.h
-        src/utility/StorageUtility.h
+        src/utility/storage/StorageUtility.h
         src/model/storage/StorageObject.cpp
         src/model/storage/StorageObject.h
         src/model/exception/BaseException.cpp
         src/model/exception/BaseException.h
+        src/controller/error/ErrorController.cpp
+        src/controller/error/ErrorController.h
+        src/model/exception/FatalException.cpp
+        src/model/exception/FatalException.h
+        src/model/exception/NormalException.cpp
+        src/model/exception/NormalException.h
+        src/MyApp.cpp
+        src/MyApp.h
+        src/controller/storage/StorageSaveWorker.cpp
+        src/controller/storage/StorageSaveWorker.h
+        src/utility/storage/StorageUtility.cpp
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
@@ -118,3 +130,10 @@ install(TARGETS SmartSensors
 if(QT_VERSION_MAJOR EQUAL 6)
     qt_finalize_executable(SmartSensors)
 endif()
+#if (build_type STREQUAL release)
+#target_compile_definitions(${PROJECT_NAME} PUBLIC
+#        QT_NO_DEBUG_OUTPUT
+#        QT_NO_INFO_OUTPUT
+#        QT_NO_WARNING_OUTPUT
+#)
+#endif()

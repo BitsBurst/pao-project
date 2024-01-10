@@ -3,14 +3,14 @@
 
 #include <QString>
 #include <QDataStream>
+#include <QUuid>
+#include <QJsonObject>
 
 class AbstractItem {
-	friend QDataStream &operator<<(QDataStream &, const AbstractItem &);
-	friend QDataStream &operator>>(QDataStream &, AbstractItem &);
 public:
 	 ~AbstractItem();
 	AbstractItem();
-	 AbstractItem(QString, QString, void (**)() = nullptr);
+	 AbstractItem(QString, void (**)() = nullptr);
 	 QString getId();
 	 void setId(QString id);
 	 QString getName();
@@ -18,8 +18,10 @@ public:
 	 void setModelChangedPointer(void (**)());
 	 static void setModelChangedPointerStatic(void (*)());
 	 static void (*modelChangedStatic_)();
+	 QJsonObject toJson() const;
+	 static AbstractItem fromJson(QJsonObject const &);
 
-private:
+protected:
 	QString id_;
 	QString name_;
 	void (**modelChangedInstance_)();
@@ -27,6 +29,4 @@ private:
 protected:
 	void modelChangedHandler();
 };
-QDataStream &operator<<(QDataStream &, const AbstractItem &);
-QDataStream &operator>>(QDataStream &, AbstractItem &);
 #endif //PAO_PROJECT_ABSTRACTITEM_H

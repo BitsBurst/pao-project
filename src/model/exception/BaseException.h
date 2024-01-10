@@ -8,8 +8,9 @@ public:
 	BaseException();
 	BaseException(QString);
 	virtual ~BaseException();
-	virtual QString getMessage() const = 0;
-
+	virtual QString getMessage() const;
+private:
+	QString message;
 };
 
 #endif //SMARTSENSORS_BASEEXCEPTION_H

@@ -1,5 +1,5 @@
 #include "GroupListView.h"
-#include "../../utility/Logger.h"
+#include "../../utility/logger/Logger.h"
 
 GroupListView::GroupListView(QWidget* parent)
     : AbstractView(new QVBoxLayout, parent), scroll_area_(new QScrollArea)

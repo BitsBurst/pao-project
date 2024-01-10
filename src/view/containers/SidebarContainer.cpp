@@ -1,5 +1,5 @@
 #include "SidebarContainer.h"
-#include "../../utility/Logger.h"
+#include "../../utility/logger/Logger.h"
 
 SidebarContainer::SidebarContainer(AbstractView * current_view, QWidget* parent)
     : AbstractContainer(current_view, parent)

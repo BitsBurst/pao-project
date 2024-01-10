@@ -7,3 +7,7 @@ bool WindowController::Init()
 	main_window_->show();
 	return true;
 }
+void WindowController::Destroy()
+{
+
+}

@@ -18,3 +18,7 @@ void BusinessController::loadStorageError()
 {
 	qDebug() << "loadStorageError";
 }
+void BusinessController::Destroy()
+{
+
+}

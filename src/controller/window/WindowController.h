@@ -9,6 +9,7 @@ Q_OBJECT
 public:
 	WindowController();
 	bool Init();
+	void Destroy();
 private:
 	MainView* main_window_;
 };

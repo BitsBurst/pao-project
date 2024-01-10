@@ -7,6 +7,7 @@ class AbstractController : public QObject{
 public:
 	~AbstractController();
 	virtual bool Init() = 0;
+	virtual void Destroy() = 0;
 };
 
 #endif //SMARTSENSORS_ABSTRACTCONTROLLER_H

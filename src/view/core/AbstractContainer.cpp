@@ -1,5 +1,5 @@
 #include "AbstractContainer.h"
-#include "../../utility/Logger.h"
+#include "../../utility/logger/Logger.h"
 
 AbstractContainer::AbstractContainer(AbstractView* current_view, QWidget* parent)
     : AbstractGraphicalElement(new QVBoxLayout, parent), current_view_(current_view) {

@@ -1,5 +1,5 @@
 #include "Sensor.h"
-Sensor::Sensor(QString id, QString name, Category category, void (**ptfp)()):AbstractItem(id, name, ptfp), min_range_(0), max_range_(0), category_(category)
+Sensor::Sensor(QString name, Category category, void (**ptfp)()):AbstractItem(name, ptfp), min_range_(0), max_range_(0), category_(category)
 {
 
 }
@@ -34,17 +34,29 @@ void Sensor::setCategory(Category category)
 	category_ = category;
 	modelChangedHandler();
 }
-QDataStream& operator<<(QDataStream& stream, const Sensor& sensor)
-{
-	stream << dynamic_cast<const AbstractItem&>(sensor) << sensor.min_range_ << sensor.max_range_ << sensor.category_;
-	return stream;
-}
-QDataStream& operator>>(QDataStream& stream, Sensor& sensor)
-{
-	stream >> dynamic_cast<AbstractItem&>(sensor) >> sensor.min_range_ >> sensor.max_range_ >> sensor.category_;
-	return stream;
-}
-Sensor::Sensor(void (**ptfp)()): AbstractItem("", "", ptfp), min_range_(0), max_range_(0), category_(Category())
+Sensor::Sensor(void (**ptfp)()): AbstractItem("", ptfp), min_range_(0), max_range_(0), category_(Category())
 {
 
+}
+QJsonObject Sensor::toJson() const
+{
+	QJsonObject json = AbstractItem::toJson();
+	json["min_range"] = min_range_;
+	json["max_range"] = max_range_;
+	json["category"] = category_.toJson();
+	return json;
+}
+Sensor Sensor::fromJson(const QJsonObject& object)
+{
+	AbstractItem abs_item = AbstractItem::fromJson(object);
+	Sensor sensor;
+	sensor.id_ = abs_item.getId();
+	sensor.name_ = abs_item.getName();
+	if(const QJsonValue& min_range = object["min_range"]; min_range.isDouble())
+		sensor.min_range_ = min_range.toDouble();
+	if(const QJsonValue& max_range = object["max_range"]; max_range.isDouble())
+		sensor.max_range_ = max_range.toDouble();
+	if(const QJsonValue& category = object["category"]; category.isObject())
+		sensor.category_ = Category::fromJson(category.toObject());
+	return sensor;
 }
