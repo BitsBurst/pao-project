@@ -64,12 +64,15 @@ void TestDavide::runTestV6()
 {
 	qDebug() << "runTestV6";
 	//qDebug() << LocatorController::StorageControllerInstance()->GetStorage()->getCategories()->size();
+	LocatorController::StorageControllerInstance()->isStorageReady();
+	qDebug() << "isStorageReady";
 	Category* category = new Category("Temperature", "Celsius", nullptr);
-	for(int i = 0; i<100000; i++)
+
+	for(int i = 0; i<10000; i++)
 	{
 		//Logger::Log(LogLevel::INFO, __FILE__, __LINE__, __FUNCTION__, QString("i: %1").arg(i));
-		LocatorController::StorageControllerInstance()->GetStorage()->addCategory(category);
 		//LocatorController::StorageControllerInstance()->GetStorage()->getCategories()->front().setId("1");
+		LocatorController::StorageControllerInstance()->GetStorage()->addCategory(category);
 	}
 	qDebug() << LocatorController::StorageControllerInstance()->GetStorage()->getCategories()->size();
 	//LocatorController::StorageControllerInstance()->GetStorage()->getCategories()->front();

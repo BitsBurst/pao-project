@@ -1,10 +1,11 @@
 #include "StorageController.h"
 #include "../LocatorController.h"
 const QString StorageController::directory_name_ = "data";
-StorageController::StorageController():storage_(nullptr), worker_(new StorageSaveWorker(&storage_, QString("%1/data.json").arg(directory_name_)))
+StorageController::StorageController():storage_(nullptr), worker_(new StorageWorker(&storage_, QString("%1/data.json").arg(directory_name_)))
 {
 	Logger::Log(LogLevel::INFO, __FILE__, __LINE__, __FUNCTION__, LogMethod::IN);
 	AbstractItem::setModelChangedPointerStatic(&modelChanged);
+	connect(worker_, &StorageWorker::onStorageReady, this, &StorageController::storageReadyEvent);
 	Logger::Log(LogLevel::INFO, __FILE__, __LINE__, __FUNCTION__, LogMethod::OUT);
 }
 bool StorageController::Init()
@@ -35,4 +36,13 @@ void StorageController::Destroy()
 QString StorageController::getDirectory() const
 {
 	return directory_name_;
+}
+void StorageController::isStorageReady()
+{
+	worker_->isStorageInitialized();
+}
+void StorageController::storageReadyEvent()
+{
+	Logger::Log(LogLevel::INFO, __FILE__, __LINE__, __FUNCTION__, LogMethod::IN);
+	Logger::Log(LogLevel::INFO, __FILE__, __LINE__, __FUNCTION__, LogMethod::OUT);
 }

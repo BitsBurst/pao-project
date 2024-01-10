@@ -85,8 +85,8 @@ set(PROJECT_SOURCES
         src/model/exception/NormalException.h
         src/MyApp.cpp
         src/MyApp.h
-        src/controller/storage/StorageSaveWorker.cpp
-        src/controller/storage/StorageSaveWorker.h
+        src/utility/storage/StorageWorker.cpp
+        src/utility/storage/StorageWorker.h
         src/utility/storage/StorageUtility.cpp
 )
 

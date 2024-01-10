@@ -1,5 +1,5 @@
-#ifndef SMARTSENSORS_STORAGESAVEWORKER_H
-#define SMARTSENSORS_STORAGESAVEWORKER_H
+#ifndef SMARTSENSORS_STORAGEWORKER_H
+#define SMARTSENSORS_STORAGEWORKER_H
 
 #include <QThread>
 #include <deque>
@@ -7,31 +7,26 @@
 #include <QMutex>
 #include <QFile>
 #include "../../model/storage/StorageObject.h"
-class StorageSaveWorker: public QThread {
+class StorageWorker: public QThread {
 Q_OBJECT
 public:
-	StorageSaveWorker(StorageObject**, QString, QObject * = nullptr);
-	~StorageSaveWorker();
+	StorageWorker(StorageObject**, QString, QObject * = nullptr);
+	~StorageWorker();
 	void isWatingSomethingToStore();
 	void SaveStorage();
 	void isStorageInitialized();
 private:
 	StorageObject** storagePointer;
-	QSemaphore initializedMutex;
-	QMutex changeMutex;
-	QMutex storeMutex;
 	QMutex writingMutex;
 	QString filename_;
-	QFile* file;
 	bool changed;
 	void Store();
 	void Load();
 protected:
 	void run() override;
 	QDateTime lastUpdate;
-	void BytesWritten();
-	void BytesRead();
-	bool writing;
+signals:
+	void onStorageReady();
 };
 
-#endif //SMARTSENSORS_STORAGESAVEWORKER_H
+#endif //SMARTSENSORS_STORAGEWORKER_H

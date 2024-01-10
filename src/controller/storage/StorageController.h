@@ -7,24 +7,25 @@
 #include "../../model/core/Sensor.h"
 #include "../../utility/storage/StorageUtility.h"
 #include "../../model/storage/StorageObject.h"
-#include "StorageSaveWorker.h"
+#include "../../utility/storage/StorageWorker.h"
 
 class StorageController: public AbstractController {
 	Q_OBJECT
-	friend class StorageSaveWorker;
+	friend class StorageWorker;
 public:
 	StorageController();
 	bool Init();
 	void Destroy();
 	StorageObject* GetStorage();
 	QString getDirectory() const;
+	void isStorageReady();
 private:
 	static const QString directory_name_;
 	StorageObject* storage_;
-	StorageSaveWorker* worker_;
+	StorageWorker* worker_;
 	void StoreStorage();
-	void reinitializeStorage();
 	static void modelChanged();
+	void storageReadyEvent();
 signals:
 	void ErrorLoadingStorage();
 };
