@@ -2,7 +2,7 @@
 #include "../../utility/Logger.h"
 
 GroupListView::GroupListView(QWidget* parent)
-    : AbstractView(new QVBoxLayout, parent), scroll_area_(new QScrollArea)
+    : AbstractView(CustomElements::getCustomLayoutPrototype(SINGLE_SPACING), parent), scroll_area_(new QScrollArea)
 {
     /*
     QPalette pal = QPalette();

@@ -5,6 +5,7 @@
 
 #include <QWidget>
 #include <QVBoxLayout>
+#include "../utility/CustomElements.h"
 #include "AbstractView.h"
 #include "AbstractGraphicalElement.h"
 

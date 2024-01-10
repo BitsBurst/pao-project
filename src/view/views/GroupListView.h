@@ -5,6 +5,7 @@
 #include <QScrollArea>
 #include "../core/AbstractView.h"
 #include "../widgets/GroupItemWidget.h"
+#include "../utility/CustomElements.h"
 
 class GroupListView : public AbstractView {
     Q_OBJECT

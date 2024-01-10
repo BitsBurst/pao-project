@@ -1,7 +1,7 @@
 #include "MainView.h"
 
 MainView::MainView(QWidget* parent)
-    : QMainWindow(parent), central_widget_(new QWidget), layout_(new QHBoxLayout)
+    : QMainWindow(parent), central_widget_(new QWidget), layout_(CustomElements::getCustomLayoutPrototype(H_NO_BORDER))
 {
     // General Settings
     setMinimumSize(QSize(640, 360));
@@ -9,9 +9,6 @@ MainView::MainView(QWidget* parent)
     // Creation Calls
     createMenu();
     createDefaultView();
-
-    // Layout Settings
-    layout_->setAlignment(Qt::AlignHCenter | Qt::AlignCenter);
 
     // Layout Widgets
     layout_->addWidget(sidebar_);

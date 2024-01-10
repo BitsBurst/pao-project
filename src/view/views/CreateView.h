@@ -2,6 +2,7 @@
 #define SMARTSENSORS_CREATEVIEW_H
 
 #include <QLabel>
+#include "../utility/CustomElements.h"
 #include "../core/AbstractView.h"
 
 class CreateView : public AbstractView {

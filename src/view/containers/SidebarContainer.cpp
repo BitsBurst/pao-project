@@ -15,7 +15,7 @@ SidebarContainer::SidebarContainer(AbstractView * current_view, QWidget* parent)
     low_control_widget_ = new SidebarLowControlWidget(this);
 
     // Layout Settings
-    setMaximumWidth(250);
+    setMaximumWidth(300);
 
     // Layout Widgets
     layout_->addWidget(current_view_);

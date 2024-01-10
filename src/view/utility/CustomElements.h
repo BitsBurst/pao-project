@@ -8,6 +8,8 @@
 #include <QFont>
 #include <QSpacerItem>
 
+enum LayoutPrototype {H_NO_BORDER, V_CONTAINER, SINGLE_SPACING, DOUBLE_SPACING, QUAD_SPACING};
+
 class CustomElements : QObject {
 private:
     static QFont* font_h1_instance_;
@@ -38,6 +40,8 @@ public:
     static QHBoxLayout* getHorizontalLayout(int margins = 0);
     static QHBoxLayout* getHorizontalLayout(int h_margin, int v_margin);
     static QHBoxLayout* getHorizontalLayout(int left_margin, int right_margin, int top_margin, int bottom_margin);
+
+    static QLayout* getCustomLayoutPrototype(LayoutPrototype);
 };
 
 #endif //SMARTSENSORS_CUSTOMELEMENTS_H

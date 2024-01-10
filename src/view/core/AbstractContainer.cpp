@@ -2,10 +2,9 @@
 #include "../../utility/Logger.h"
 
 AbstractContainer::AbstractContainer(AbstractView* current_view, QWidget* parent)
-    : AbstractGraphicalElement(new QVBoxLayout, parent), current_view_(current_view) {
+    : AbstractGraphicalElement(CustomElements::getCustomLayoutPrototype(V_CONTAINER), parent), current_view_(current_view) {
 
     // General settings for containers
-    layout_->setAlignment(Qt::AlignHCenter | Qt::AlignCenter);
     setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
 }
 

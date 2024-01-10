@@ -159,3 +159,35 @@ QHBoxLayout* CustomElements::getHorizontalLayout(int left_margin, int right_marg
 
     return temp;
 }
+
+QLayout* CustomElements::getCustomLayoutPrototype(LayoutPrototype prototype)
+{
+    QLayout * temp;
+
+    switch (prototype) {
+        case V_CONTAINER:
+            temp = CustomElements::getVerticalLayout(16);
+            temp->setAlignment(Qt::AlignHCenter | Qt::AlignCenter);
+            temp->setSpacing(8);
+            break;
+        case H_NO_BORDER:
+            temp = CustomElements::getHorizontalLayout(0);
+            temp->setSpacing(0);
+            temp->setAlignment(Qt::AlignHCenter | Qt::AlignCenter);
+            break;
+        case SINGLE_SPACING:
+            temp = CustomElements::getVerticalLayout(0);
+            temp->setSpacing(8);
+            break;
+        case DOUBLE_SPACING:
+            temp = CustomElements::getVerticalLayout(0);
+            temp->setSpacing(16);
+            break;
+        case QUAD_SPACING:
+            temp = CustomElements::getVerticalLayout(0);
+            temp->setSpacing(32);
+            break;
+    }
+
+    return temp;
+}

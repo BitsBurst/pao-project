@@ -1,7 +1,7 @@
 #include "SingleView.h"
 
 SingleView::SingleView(QWidget* parent)
-        : AbstractView(new QVBoxLayout, parent)
+        : AbstractView(CustomElements::getCustomLayoutPrototype(SINGLE_SPACING), parent)
 {
     /*
     QPalette pal = QPalette();

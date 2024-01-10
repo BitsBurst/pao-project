@@ -3,6 +3,7 @@
 
 #include <QLabel>
 #include "../core/AbstractView.h"
+#include "../utility/CustomElements.h"
 
 class SettingsView : public AbstractView {
     Q_OBJECT
