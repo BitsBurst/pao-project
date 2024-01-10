@@ -12,7 +12,6 @@ enum DistributionType {
 	POISSON,
 	BINOMIAL,
 	GAMMA,
-	TRIANGULAR,
 	WEIBULL
 };
 
@@ -34,7 +33,6 @@ private:
 	void generatePoissonData(int rangeStart, int rangeEnd, int dataSize, std::vector<double>& data);
 	void generateBinomialData(int rangeStart, int rangeEnd, int dataSize, std::vector<double>& data);
 	void generateGammaData(int rangeStart, int rangeEnd, int dataSize, std::vector<double>& data);
-	void generateTriangularData(int rangeStart, int rangeEnd, int dataSize, std::vector<double>& data);
 	void generateWeibullData(int rangeStart, int rangeEnd, int dataSize, std::vector<double>& data);
 };
 

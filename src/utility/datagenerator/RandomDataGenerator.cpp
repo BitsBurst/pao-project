@@ -1,4 +1,5 @@
 #include "RandomDataGenerator.h"
+#include "../logger/Logger.h"
 
 RandomDataGenerator::RandomDataGenerator(int seed) : generator(seed) {}
 
@@ -28,14 +29,11 @@ std::vector<double> RandomDataGenerator::generateData(int rangeStart, int rangeE
 	case GAMMA:
 		generateGammaData(rangeStart, rangeEnd, dataSize, data);
 		break;
-	case TRIANGULAR:
-		generateTriangularData(rangeStart, rangeEnd, dataSize, data);
-		break;
 	case WEIBULL:
 		generateWeibullData(rangeStart, rangeEnd, dataSize, data);
 		break;
 	default:
-		std::cerr << "Tipo di distribuzione non supportato" << std::endl;
+		Logger::Log(LogLevel::ERROR, __FILE__, __LINE__, __FUNCTION__, "Invalid distribution type");
 	}
 
 	return data;
@@ -96,14 +94,6 @@ void RandomDataGenerator::generateGammaData(int rangeStart, int rangeEnd, int da
 	double beta = 1.5;
 
 	std::gamma_distribution<double> distribution(alpha, beta);
-
-	for (int i = 0; i < dataSize; ++i) {
-		data.push_back(distribution(generator));
-	}
-}
-
-void RandomDataGenerator::generateTriangularData(int rangeStart, int rangeEnd, int dataSize, std::vector<double>& data) {
-	std::piecewise_linear_distribution<double> distribution({rangeStart, (rangeStart + rangeEnd) / 2.0, rangeEnd});
 
 	for (int i = 0; i < dataSize; ++i) {
 		data.push_back(distribution(generator));
