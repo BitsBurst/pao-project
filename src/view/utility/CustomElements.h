@@ -9,6 +9,7 @@
 #include <QSpacerItem>
 
 enum LayoutPrototype {H_NO_BORDER, V_CONTAINER, SINGLE_SPACING, DOUBLE_SPACING, QUAD_SPACING};
+enum SpacerDirection {VERTICAL, HORIZONTAL};
 
 class CustomElements : QObject {
 private:
@@ -31,7 +32,7 @@ public:
     static QFont& getFontParagraph();
     static QFont& getFontDetails();
 
-    static QSpacerItem* getTerminalSpacer();
+    static QSpacerItem* getTerminalSpacer(SpacerDirection direction = VERTICAL);
 
     static QVBoxLayout* getVerticalLayout(int margins = 0);
     static QVBoxLayout* getVerticalLayout(int h_margin, int v_margin);

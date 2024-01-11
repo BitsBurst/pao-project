@@ -1,4 +1,5 @@
 #include "MainView.h"
+#include "views/SingleViewSensor.h"
 
 MainView::MainView(QWidget* parent)
     : QMainWindow(parent), central_widget_(new QWidget), layout_(CustomElements::getCustomLayoutPrototype(H_NO_BORDER))
@@ -58,7 +59,7 @@ void MainView::createMenu() {
 void MainView::createDefaultView() {
 
     // Initialization - Views
-    single_view_ = new SingleView();
+    single_view_ = new SingleViewSensor();
     modify_view_ = new ModifyView();
     create_view_ = new CreateView();
     settings_view_ = new SettingsView();

@@ -10,7 +10,7 @@
 #include "containers/SidebarContainer.h"
 #include "containers/MainContentContainer.h"
 #include "views/GroupListView.h"
-#include "views/SingleView.h"
+#include "views/AbstractSingleView.h"
 #include "views/ModifyView.h"
 #include "views/SettingsView.h"
 #include "views/CreateView.h"
@@ -27,7 +27,7 @@ private:
     QMenuBar *menu_bar_;
 
     // Available Views
-    SingleView * single_view_;
+    AbstractSingleView * single_view_;
     GroupListView * group_list_view_;
     ModifyView * modify_view_;
     CreateView * create_view_;

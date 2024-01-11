@@ -11,8 +11,8 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 set(CMAKE_PREFIX_PATH $ENV{QT_PATH})
 
-find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Widgets)
-find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets)
+find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Widgets Charts Core PrintSupport)
+find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets Charts Core PrintSupport)
 
 set(PROJECT_SOURCES
         main.cpp
@@ -28,8 +28,8 @@ set(PROJECT_SOURCES
         src/view/containers/MainContentContainer.h
         src/view/views/GroupListView.cpp
         src/view/views/GroupListView.h
-        src/view/views/SingleView.cpp
-        src/view/views/SingleView.h
+        src/view/views/AbstractSingleView.cpp
+        src/view/views/AbstractSingleView.h
         src/view/views/ModifyView.cpp
         src/view/views/ModifyView.h
         src/model/datagen/AbstractDataGen.cpp
@@ -79,6 +79,8 @@ set(PROJECT_SOURCES
         src/view/utility/CustomElements.h
         src/view/utility/CustomElements.cpp
         resources.qrc
+        src/view/views/SingleViewSensor.cpp
+        src/view/views/SingleViewSensor.h
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
@@ -98,7 +100,10 @@ else()
     endif()
 endif()
 
-target_link_libraries(SmartSensors PRIVATE Qt${QT_VERSION_MAJOR}::Widgets)
+add_library(qcustomplot include/CustomPlot/qcustomplot.h include/CustomPlot/qcustomplot.cpp)
+target_link_libraries(qcustomplot PUBLIC Qt${QT_VERSION_MAJOR}::Core Qt${QT_VERSION_MAJOR}::PrintSupport)
+
+target_link_libraries(SmartSensors PRIVATE Qt${QT_VERSION_MAJOR}::Widgets Qt${QT_VERSION_MAJOR}::Charts qcustomplot)
 
 if(${QT_VERSION} VERSION_LESS 6.1.0)
   set(BUNDLE_ID_OPTION MACOSX_BUNDLE_GUI_IDENTIFIER com.example.SmartSensors)

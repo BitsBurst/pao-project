@@ -96,9 +96,19 @@ QFont& CustomElements::getFontDetails()
     return *font_details_instance_;
 }
 
-QSpacerItem* CustomElements::getTerminalSpacer()
+QSpacerItem* CustomElements::getTerminalSpacer(SpacerDirection direction)
 {
-    return new QSpacerItem(0, 0, QSizePolicy::Minimum, QSizePolicy::Expanding);
+    QSpacerItem *temp;
+    switch (direction) {
+    case VERTICAL:
+        temp = new QSpacerItem(0, 0, QSizePolicy::Minimum, QSizePolicy::Expanding);
+        break;
+    case HORIZONTAL:
+        temp = new QSpacerItem(0, 0, QSizePolicy::Expanding, QSizePolicy::Minimum);
+        break;
+    }
+
+    return temp;
 }
 
 void CustomElements::Init()
