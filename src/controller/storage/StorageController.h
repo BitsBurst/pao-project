@@ -24,7 +24,7 @@ private:
 	StorageObject* storage_;
 	StorageWorker* worker_;
 	void StoreStorage();
-	static void modelChanged();
+	void modelChanged();
 	void storageReadyEvent();
 signals:
 	void StorageReady();

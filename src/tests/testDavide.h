@@ -33,16 +33,17 @@ void TestDavide::runTestV4()
 void TestDavide::runTestV5()
 {
 }
-void DataGenerated()
+void addSensors()
 {
-	qDebug() << "Data generated";
+	Category* category = new Category("Category " + QString::number(1), "Unit measure " + QString::number(1));
+	Sensor* sensor = new Sensor("Sensor " + QString::number(1), *category);
+	for (int i = 0; i < 100; i++) {
+		LocatorController::StorageControllerInstance()->GetStorage()->addSensor(sensor);
+	}
 }
 void TestDavide::runTestV6()
 {
-	Category c1("c1", "c1");
-	Sensor* s1 = new Sensor("s1", c1);
-	s1->setMinRange(0);
-	s1->setMaxRange(100);
-	//LocatorController::StorageControllerInstance()->GetStorage()->addSensor(s1);
+	//addSensors();
+	qDebug() << "Storage size: " << LocatorController::StorageControllerInstance()->GetStorage()->getSensors()->size();
 }
 #endif //SMARTSENSORS_TESTDAVIDE_H

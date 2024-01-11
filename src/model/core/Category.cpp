@@ -6,16 +6,16 @@ QString Category::getUnitMeasure()
 void Category::setUnitMeasure(QString unit_measure)
 {
 	unit_measure_ = unit_measure;
-	modelChangedHandler();
+	modelChangedEvent.notifyAsync();
 }
 Category::~Category()
 {
 }
-Category::Category(QString name, QString unit_measure, DistributionType distribution_type, void (**ptfp)()):AbstractItem(name, ptfp), unit_measure_(unit_measure), distribution_type_(distribution_type)
+Category::Category(QString name, QString unit_measure, DistributionType distribution_type):AbstractItem(name), unit_measure_(unit_measure), distribution_type_(distribution_type)
 {
 
 }
-Category::Category(void (**ptfp)()):AbstractItem("", ptfp), unit_measure_(""), distribution_type_(UNIFORM)
+Category::Category():AbstractItem(""), unit_measure_(""), distribution_type_(UNIFORM)
 {
 
 }
@@ -25,14 +25,14 @@ QJsonObject Category::toJson() const
 	json["unit_measure"] = unit_measure_;
 	return json;
 }
-Category Category::fromJson(const QJsonObject& obj)
+Category * Category::fromJson(const QJsonObject& obj)
 {
-	AbstractItem abs_item = AbstractItem::fromJson(obj);
-	Category category;
-	category.id_ = abs_item.getId();
-	category.name_ = abs_item.getName();
+	AbstractItem* abs_item = AbstractItem::fromJson(obj);
+	Category* category = new Category();
+	category->id_ = abs_item->getId();
+	category->name_ = abs_item->getName();
 	if(const QJsonValue& unit_measure = obj["unit_measure"]; unit_measure.isString())
-		category.unit_measure_ = unit_measure.toString();
+		category->unit_measure_ = unit_measure.toString();
 	return category;
 }
 int Category::getDistributionType()
@@ -45,6 +45,5 @@ Category& Category::operator=(const Category& category)
 	name_ = category.name_;
 	unit_measure_ = category.unit_measure_;
 	distribution_type_ = category.distribution_type_;
-	modelChangedInstance_ = category.modelChangedInstance_;
 	return *this;
 }

@@ -6,13 +6,13 @@
 #include <QString>
 class Category: public AbstractItem {
 public:
-	Category(void (**)() = nullptr);
-	Category(QString, QString, DistributionType = UNIFORM, void (**)() = nullptr);
+	Category();
+	Category(QString, QString, DistributionType = UNIFORM);
 	~Category();
 	QString getUnitMeasure();
 	void setUnitMeasure(QString unit_measure);
 	QJsonObject toJson() const;
-	static Category fromJson(QJsonObject const &);
+	static Category* fromJson(QJsonObject const &);
 	int getDistributionType();
 	Category& operator=(Category const &category);
 private:

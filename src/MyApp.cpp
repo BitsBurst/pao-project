@@ -1,5 +1,4 @@
 #include "MyApp.h"
-#include "tests/testDavide.h"
 MyApp::~MyApp()
 {
 	LocatorController::Destroy();
@@ -8,7 +7,6 @@ MyApp::~MyApp()
 MyApp::MyApp(int i, char** p_string): QApplication(i, p_string) {
 	try {
 		LocatorController::Init();
-		TestDavide::runTestV6();
 	}
 	catch (NormalException& e) {
 		LocatorController::ErrorControllerInstance()->manageException(e);

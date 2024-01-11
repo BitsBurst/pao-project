@@ -15,18 +15,19 @@ public:
 	void isWatingSomethingToStore();
 	void SaveStorage();
 	void isStorageInitialized();
+	EventHandlerVoid onStorageReadyEvent;
 private:
 	StorageObject** storagePointer;
 	QMutex writingMutex;
 	QString filename_;
 	bool changed;
+	bool closing;
 	void Store();
 	void Load();
 protected:
 	void run() override;
 	QDateTime lastUpdate;
-signals:
-	void onStorageReady();
+	bool storageInitialized;
 };
 
 #endif //SMARTSENSORS_STORAGEWORKER_H

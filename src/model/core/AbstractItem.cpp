@@ -1,7 +1,7 @@
 #include "AbstractItem.h"
 AbstractItem::~AbstractItem()
 = default;
-AbstractItem::AbstractItem(QString name, void (**modelChangedHandlerPointer)()):id_(QUuid::createUuid().toString()), name_(name), modelChangedInstance_(modelChangedHandlerPointer)
+AbstractItem::AbstractItem(QString name):id_(QUuid::createUuid().toString()), name_(name)
 {
 }
 QString AbstractItem::getId()
@@ -24,16 +24,9 @@ void AbstractItem::setName(QString name)
 }
 void AbstractItem::modelChangedHandler()
 {
-	if (modelChangedInstance_ != nullptr && *modelChangedInstance_ != nullptr)
-	{
-		(*modelChangedInstance_)();
-	}
+	modelChangedEvent.notifyAsync();
 }
-void AbstractItem::setModelChangedPointer(void (**modelChanged)())
-{
-		modelChangedInstance_ = modelChanged;
-}
-AbstractItem::AbstractItem():id_(QUuid::createUuid().toString()), name_(""), modelChangedInstance_(nullptr)
+AbstractItem::AbstractItem():id_(QUuid::createUuid().toString()), name_("")
 {
 
 }
@@ -44,18 +37,17 @@ QJsonObject AbstractItem::toJson() const
 	json["name"] = name_;
 	return json;
 }
-AbstractItem AbstractItem::fromJson(const QJsonObject& object)
+AbstractItem * AbstractItem::fromJson(const QJsonObject& object)
 {
-	AbstractItem abstract_item;
+	AbstractItem * abstract_item = new AbstractItem();
 	if (const QJsonValue v = object["id"]; v.isString())
-		abstract_item.id_ = object["id"].toString();
+		abstract_item->id_ = object["id"].toString();
 	if (const QJsonValue v = object["name"]; v.isString())
-		abstract_item.name_ = object["name"].toString();
+		abstract_item->name_ = object["name"].toString();
 	return abstract_item;
 }
 AbstractItem::AbstractItem(const AbstractItem& abstract_item)
 {
 	id_ = abstract_item.id_;
 	name_ = abstract_item.name_;
-	modelChangedInstance_ = abstract_item.modelChangedInstance_;
 }

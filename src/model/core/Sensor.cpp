@@ -1,6 +1,6 @@
 #include <QJsonArray>
 #include "Sensor.h"
-Sensor::Sensor(QString name, Category category, void (**ptfp)()):AbstractItem(name, ptfp), min_range_(0), max_range_(0), category_(category), seed_(QDateTime::currentDateTime().toSecsSinceEpoch()), data_(), data_generator_worker_(nullptr)
+Sensor::Sensor(QString name, Category category):AbstractItem(name), min_range_(0), max_range_(0), category_(category), seed_(QDateTime::currentDateTime().toSecsSinceEpoch()), data_(), data_generator_worker_(nullptr)
 {
 
 }
@@ -14,7 +14,7 @@ double Sensor::getMinRange()
 void Sensor::setMinRange(double min_range)
 {
 	min_range_ = min_range;
-	modelChangedHandler();
+	modelChangedEvent.notifyAsync();
 }
 double Sensor::getMaxRange()
 {
@@ -23,7 +23,7 @@ double Sensor::getMaxRange()
 void Sensor::setMaxRange(double max_range)
 {
 	max_range_ = max_range;
-	modelChangedHandler();
+	modelChangedEvent.notifyAsync();
 }
 Category Sensor::getCategory()
 {
@@ -32,9 +32,9 @@ Category Sensor::getCategory()
 void Sensor::setCategory(Category category)
 {
 	category_ = category;
-	modelChangedHandler();
+	modelChangedEvent.notifyAsync();
 }
-Sensor::Sensor(void (**ptfp)()): AbstractItem("", ptfp), min_range_(0), max_range_(0), category_(Category()), seed_(QDateTime::currentDateTime().toSecsSinceEpoch()), data_(), data_generator_worker_(nullptr)
+Sensor::Sensor(): AbstractItem(""), min_range_(0), max_range_(0), category_(Category()), seed_(QDateTime::currentDateTime().toSecsSinceEpoch()), data_(), data_generator_worker_(nullptr)
 {
 
 }
@@ -56,18 +56,18 @@ QJsonObject Sensor::toJson() const
 	json["data"] = array;
 	return json;
 }
-Sensor Sensor::fromJson(const QJsonObject& object)
+Sensor* Sensor::fromJson(const QJsonObject& object)
 {
-	AbstractItem abs_item = AbstractItem::fromJson(object);
-	Sensor sensor;
-	sensor.id_ = abs_item.getId();
-	sensor.name_ = abs_item.getName();
+	AbstractItem * abs_item = AbstractItem::fromJson(object);
+	Sensor* sensor = new Sensor();
+	sensor->id_ = abs_item->getId();
+	sensor->name_ = abs_item->getName();
 	if(const QJsonValue& min_range = object["min_range"]; min_range.isDouble())
-		sensor.min_range_ = min_range.toDouble();
+		sensor->min_range_ = min_range.toDouble();
 	if(const QJsonValue& max_range = object["max_range"]; max_range.isDouble())
-		sensor.max_range_ = max_range.toDouble();
+		sensor->max_range_ = max_range.toDouble();
 	if(const QJsonValue& category = object["category"]; category.isObject())
-		sensor.category_ = Category::fromJson(category.toObject());
+		sensor->category_ = *Category::fromJson(category.toObject());
 	return sensor;
 }
 void Sensor::startDataGeneration()

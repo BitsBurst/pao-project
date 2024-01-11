@@ -1,33 +1,34 @@
 #include "StorageObject.h"
-StorageObject::StorageObject(void (*modelChanged)()): modelChanged_(modelChanged), categories_(), sensors_()
+StorageObject::StorageObject(): categories_(), sensors_()
 {
 }
 void StorageObject::addCategory(Category* category)
 {
-	category->setModelChangedPointer(&modelChanged_);
-	categories_.append(*category);
+	categories_.append(category);
+	category->modelChangedEvent.subscribe(std::bind(&StorageObject::modelChangedEvent, this));
 	modelChangedEvent();
 }
 void StorageObject::addSensor(Sensor* sensor)
 {
-	sensor->setModelChangedPointer(&modelChanged_);
-	sensors_.append(*sensor);
+	sensors_.append(sensor);
+	sensor->modelChangedEvent.subscribe(std::bind(&StorageObject::modelChangedEvent, this));
+	sensor->startDataGeneration();
 	modelChangedEvent();
 }
 void StorageObject::removeCategory(Category* category)
 {
-	QMutableListIterator<Category> i(categories_);
+	QMutableListIterator<Category*> i(categories_);
 	while (i.hasNext()) {
-		if (i.next().getId() == category->getId())
+		if (i.next()->getId() == category->getId())
 			i.remove();
 	}
 	modelChangedEvent();
 }
 void StorageObject::removeSensor(Sensor* sensor)
 {
-	QMutableListIterator<Sensor> i(sensors_);
+	QMutableListIterator<Sensor*> i(sensors_);
 	while (i.hasNext()) {
-		if (i.next().getId() == sensor->getId())
+		if (i.next()->getId() == sensor->getId())
 			i.remove();
 	}
 	modelChangedEvent();
@@ -35,16 +36,16 @@ void StorageObject::removeSensor(Sensor* sensor)
 Sensor* StorageObject::findSensor(Sensor sensor)
 {
 	for (auto& i : sensors_) {
-		if (i.getId() == sensor.getId())
-			return &i;
+		if (i->getId() == sensor.getId())
+			return i;
 	}
 	return nullptr;
 }
 Category* StorageObject::findCategory(Category category)
 {
 	for (auto& i : categories_) {
-		if (i.getId() == category.getId())
-			return &i;
+		if (i->getId() == category.getId())
+			return i;
 	}
 	return nullptr;
 }
@@ -53,44 +54,41 @@ StorageObject::StorageObject(const StorageObject& obj): categories_(obj.categori
 }
 void StorageObject::modelChangedEvent()
 {
-	if (modelChanged_ != nullptr)
-	{
-		modelChanged_();
-	}
+	onModelChangedEvent.notifyAsync();
 }
-QList<Sensor> StorageObject::filterSensorsByCategory(Category category)
+QList<Sensor*> StorageObject::filterSensorsByCategory(Category category)
 {
-	QList<Sensor> list;
+	QList<Sensor*> list;
 	for (auto& i : sensors_) {
-		if (i.getCategory().getId() == category.getId())
+		if (i->getCategory().getId() == category.getId())
 			list.append(i);
 	}
 	return list;
 }
-QList<Sensor> StorageObject::filterSensorsByName(QString name)
+QList<Sensor*> StorageObject::filterSensorsByName(QString name)
 {
-	QList<Sensor> list;
+	QList<Sensor*> list;
 	for (auto& i : sensors_) {
-		if (i.getName().contains(name))
+		if (i->getName().contains(name))
 			list.append(i);
 	}
 	return list;
 }
-QList<Category> StorageObject::filterCategoriesByName(QString name)
+QList<Category*> StorageObject::filterCategoriesByName(QString name)
 {
-	QList<Category> list;
+	QList<Category*> list;
 	for (auto& i : categories_) {
-		if (i.getName().contains(name))
+		if (i->getName().contains(name))
 			list.append(i);
 	}
 	return list;
 }
-QList<Category>* StorageObject::getCategories()
+QVector<Category*>* StorageObject::getCategories()
 {
 	checkCategories();
 	return &categories_;
 }
-QList<Sensor>* StorageObject::getSensors()
+QVector<Sensor*>* StorageObject::getSensors()
 {
 	checkSensors();
 	return &sensors_;
@@ -114,17 +112,17 @@ StorageObject *StorageObject::fromJson(const QJsonObject& obj)
 	StorageObject * storage = new StorageObject();
 	if (const QJsonValue& categories = obj["categories"]; categories.isArray()) {
 		for (auto i : categories.toArray()) {
-			Category category = Category::fromJson(i.toObject());
-			category.setModelChangedPointer(&storage->modelChanged_);
-			storage->categories_.append(category);
+			Category* category = Category::fromJson(i.toObject());
+			category->modelChangedEvent.subscribe(std::bind(&StorageObject::modelChangedEvent, storage));
+			storage->categories_.push_front(category);
 		}
 	}
 	if (const QJsonValue& sensors = obj["sensors"]; sensors.isArray()) {
 		for (auto i : sensors.toArray()) {
-			Sensor sensor = Sensor::fromJson(i.toObject());
-			sensor.setModelChangedPointer(&storage->modelChanged_);
-			storage->sensors_.append(sensor);
-			storage->sensors_.last().startDataGeneration();
+			Sensor* sensor = Sensor::fromJson(i.toObject());
+			sensor->modelChangedEvent.subscribe(std::bind(&StorageObject::modelChangedEvent, storage));
+			storage->sensors_.push_front(sensor);
+			sensor->startDataGeneration();
 		}
 	}
 	return storage;
@@ -135,18 +133,14 @@ QJsonObject StorageObject::toJson() const
 	QJsonArray categories;
 	QJsonArray sensors;
 	for (auto& i : categories_) {
-		categories.append(i.toJson());
+		categories.append(i->toJson());
 	}
 	for (auto& i : sensors_) {
-		sensors.append(i.toJson());
+		sensors.append(i->toJson());
 	}
 	json["categories"] = categories;
 	json["sensors"] = sensors;
 	return json;
-}
-void StorageObject::setModelChangedPointer(void (*modelChanged)())
-{
-	modelChanged_ = modelChanged;
 }
 StorageObject::~StorageObject()
 = default;

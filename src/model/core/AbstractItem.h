@@ -5,24 +5,24 @@
 #include <QDataStream>
 #include <QUuid>
 #include <QJsonObject>
+#include "../../utility/event/EventHandler.h"
 class AbstractItem {
 public:
 	 ~AbstractItem();
 	 AbstractItem();
-	 AbstractItem(QString, void (**)() = nullptr);
+	 AbstractItem(QString);
 	 AbstractItem(AbstractItem const &abstract_item);
 	 QString getId();
 	 void setId(QString id);
 	 QString getName();
 	 void setName(QString name);
-	 void setModelChangedPointer(void (**)());
 	 QJsonObject toJson() const;
-	 static AbstractItem fromJson(QJsonObject const &);
+	 static AbstractItem * fromJson(QJsonObject const &);
+	 EventHandlerVoid modelChangedEvent;
 
 protected:
 	QString id_;
 	QString name_;
-	void (**modelChangedInstance_)();
 
 protected:
 	void modelChangedHandler();

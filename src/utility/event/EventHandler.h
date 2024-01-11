@@ -4,6 +4,8 @@
 #include <iostream>
 #include <functional>
 #include <vector>
+#include <thread>
+#include <QThread>
 
 template<typename... Args>
 class EventHandler {
@@ -28,10 +30,11 @@ public:
 	}
 
 	void notifyAsync(Args... args) {
-		for (const auto& callback : callbacks) {
-			std::thread* t = new std::thread(callback, args...);
-		}
+		std::thread([this, args...]() {
+		  notify(args...);
+		}).detach();
 	}
+
 
 private:
 	std::vector<Callback> callbacks;
@@ -68,9 +71,9 @@ public:
 	}
 
 	void notifyAsync() {
-		for (const auto& callback : callbacks) {
-			std::thread* t = new std::thread(callback);
-		}
+		std::thread([this]() {
+		  notify();
+		}).detach();
 	}
 
 private:

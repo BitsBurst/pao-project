@@ -1,5 +1,6 @@
 #include "BusinessController.h"
 #include "../LocatorController.h"
+#include "../../tests/testDavide.h"
 BusinessController::BusinessController()
 {
 
@@ -21,4 +22,5 @@ void BusinessController::Destroy()
 void BusinessController::storageReady()
 {
 	LocatorController::WindowControllerInstance()->setDisabled(false);
+	//TestDavide::runTestV6();
 }
