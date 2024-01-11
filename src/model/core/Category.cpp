@@ -23,6 +23,7 @@ QJsonObject Category::toJson() const
 {
 	QJsonObject json = AbstractItem::toJson();
 	json["unit_measure"] = unit_measure_;
+	json["distribution_type"] = distribution_type_;
 	return json;
 }
 Category * Category::fromJson(const QJsonObject& obj)
@@ -33,6 +34,8 @@ Category * Category::fromJson(const QJsonObject& obj)
 	category->name_ = abs_item->getName();
 	if(const QJsonValue& unit_measure = obj["unit_measure"]; unit_measure.isString())
 		category->unit_measure_ = unit_measure.toString();
+	if(const QJsonValue& distribution_type = obj["distribution_type"]; distribution_type.isDouble())
+		category->distribution_type_ = static_cast<DistributionType>(distribution_type.toInt());
 	return category;
 }
 int Category::getDistributionType()

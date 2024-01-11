@@ -14,7 +14,7 @@ void DataGeneratorWorker::run()
 		std::vector<double> data = data_generator.generateData(minrange, maxrange,1);
 		DataGenObj obj(data.front(), QDateTime::currentDateTime());
 		newDataEvent.notify(obj);
-		QThread::msleep(500);
+		QThread::msleep(speed);
 	}
 }
 void DataGeneratorWorker::start(QThread::Priority priority)

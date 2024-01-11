@@ -87,6 +87,7 @@ set(PROJECT_SOURCES
         src/utility/datagenerator/RandomDataGenerator.cpp
         src/utility/datagenerator/RandomDataGenerator.h
         src/utility/event/EventHandler.h
+        src/utility/limitedqmap/LimitedQMap.h
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)

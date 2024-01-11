@@ -1,6 +1,8 @@
 #include <QJsonArray>
 #include "Sensor.h"
-Sensor::Sensor(QString name, Category category):AbstractItem(name), min_range_(0), max_range_(0), category_(category), seed_(QDateTime::currentDateTime().toSecsSinceEpoch()), data_(), data_generator_worker_(nullptr)
+double Sensor::maxDataGenerated = 10000;
+double Sensor::generationTimeStatic = 50;
+Sensor::Sensor(QString name, Category category):AbstractItem(name), min_range_(0), max_range_(0), category_(category), seed_(QDateTime::currentDateTime().toSecsSinceEpoch()), data_(maxDataGenerated), data_generator_worker_(nullptr), generationTime(generationTimeStatic)
 {
 
 }
@@ -34,7 +36,7 @@ void Sensor::setCategory(Category category)
 	category_ = category;
 	modelChangedEvent.notifyAsync();
 }
-Sensor::Sensor(): AbstractItem(""), min_range_(0), max_range_(0), category_(Category()), seed_(QDateTime::currentDateTime().toSecsSinceEpoch()), data_(), data_generator_worker_(nullptr)
+Sensor::Sensor(): AbstractItem(""), min_range_(0), max_range_(0), category_(Category()), seed_(QDateTime::currentDateTime().toSecsSinceEpoch()), data_(maxDataGenerated), data_generator_worker_(nullptr), generationTime(generationTimeStatic)
 {
 
 }
@@ -45,15 +47,7 @@ QJsonObject Sensor::toJson() const
 	json["max_range"] = max_range_;
 	json["category"] = category_.toJson();
 	json["seed"] = seed_;
-	QJsonArray array;
-	for(auto it = data_.begin(); it != data_.end(); ++it)
-	{
-		QJsonObject obj;
-		obj["timestamp"] = it.key().toString();
-		obj["data"] = it.value();
-		array.append(obj);
-	}
-	json["data"] = array;
+	json["generation_time"] = generationTime;
 	return json;
 }
 Sensor* Sensor::fromJson(const QJsonObject& object)
@@ -68,12 +62,17 @@ Sensor* Sensor::fromJson(const QJsonObject& object)
 		sensor->max_range_ = max_range.toDouble();
 	if(const QJsonValue& category = object["category"]; category.isObject())
 		sensor->category_ = *Category::fromJson(category.toObject());
+	if(const QJsonValue& seed = object["seed"]; seed.isDouble())
+		sensor->seed_ = seed.toDouble();
+	if(const QJsonValue& generation_time = object["generation_time"]; generation_time.isDouble())
+		sensor->generationTime = generation_time.toDouble();
 	return sensor;
 }
 void Sensor::startDataGeneration()
 {
 	if(data_generator_worker_ == nullptr){
-		data_generator_worker_ = new DataGeneratorWorker(max_range_, min_range_, seed_, 500, DistributionType::UNIFORM);
+		data_generator_worker_ = new DataGeneratorWorker(max_range_, min_range_, seed_, generationTime,
+				static_cast<DistributionType>(category_.getDistributionType()));
 		data_generator_worker_->newDataEvent.subscribe(std::bind(&Sensor::dataGenerated, this, std::placeholders::_1));
 	}
 	data_generator_worker_->start();
@@ -86,7 +85,7 @@ void Sensor::stopDataGeneration()
 }
 void Sensor::dataGenerated(DataGenObj obj)
 {
-	data_.insert(obj.getTimestamp(), obj.getData());
-	modelChangedHandler();
+	qDebug() << "Data generated" + QString::number(obj.getTimestamp().toSecsSinceEpoch()) + " " + QString::number(obj.getData());
+	data_.insertLimited(obj.getTimestamp(), obj.getData());
 	onDataGenerated.notifyAsync();
 }
