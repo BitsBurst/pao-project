@@ -12,7 +12,8 @@ enum DistributionType {
 	POISSON,
 	BINOMIAL,
 	GAMMA,
-	WEIBULL
+	WEIBULL,
+	SINUSOIDAL
 };
 
 class RandomDataGenerator {
@@ -26,7 +27,7 @@ public:
 private:
 	std::default_random_engine generator;
 	DistributionType distributionType;
-
+	void generateSinusoidalData(int rangeStart, int rangeEnd, int dataSize, std::vector<double>& data);
 	void generateUniformData(int rangeStart, int rangeEnd, int dataSize, std::vector<double>& data);
 	void generateNormalData(int rangeStart, int rangeEnd, int dataSize, std::vector<double>& data);
 	void generateExponentialData(int rangeStart, int rangeEnd, int dataSize, std::vector<double>& data);

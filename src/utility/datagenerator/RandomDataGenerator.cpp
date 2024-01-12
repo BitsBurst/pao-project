@@ -32,13 +32,25 @@ std::vector<double> RandomDataGenerator::generateData(int rangeStart, int rangeE
 	case WEIBULL:
 		generateWeibullData(rangeStart, rangeEnd, dataSize, data);
 		break;
+	case SINUSOIDAL:
+		generateWeibullData(rangeStart, rangeEnd, dataSize, data);
+		break;
 	default:
 		Logger::Log(LogLevel::ERROR, __FILE__, __LINE__, __FUNCTION__, "Invalid distribution type");
 	}
 
 	return data;
 }
+void RandomDataGenerator::generateSinusoidalData(int rangeStart, int rangeEnd, int dataSize, std::vector<double>& data) {
+	double amplitude = (rangeEnd - rangeStart) / 2.0;
+	double frequency = 0.1;
 
+	for (int i = 0; i < dataSize; ++i) {
+		double x = rangeStart + i * (rangeEnd - rangeStart) / (dataSize - 1);
+		double y = amplitude * sin(2 * M_PI * frequency * x);
+		data.push_back(y);
+	}
+}
 void RandomDataGenerator::generateUniformData(int rangeStart, int rangeEnd, int dataSize, std::vector<double>& data) {
 	std::uniform_real_distribution<double> distribution(rangeStart, rangeEnd);
 

@@ -37,13 +37,13 @@ void addSensors()
 {
 	Category* category = new Category("Category " + QString::number(1), "Unit measure " + QString::number(1));
 	Sensor* sensor = new Sensor("Sensor " + QString::number(1), *category);
-	//for (int i = 0; i < 100; i++) {
+	for (int i = 0; i < 100000; i++) {
 		LocatorController::StorageControllerInstance()->GetStorage()->addSensor(sensor);
-	//}
+	}
 }
 void TestDavide::runTestV6()
 {
-	addSensors();
-	qDebug() << "Storage size: " << LocatorController::StorageControllerInstance()->GetStorage()->getSensors()->size();
+	//addSensors();
+	//qDebug() << "Storage size: " << LocatorController::StorageControllerInstance()->GetStorage()->getSensors()->size();
 }
 #endif //SMARTSENSORS_TESTDAVIDE_H

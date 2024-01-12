@@ -1,6 +1,6 @@
 #include "Logger.h"
 /*Logger*/
-LogLevel Logger::log_level_ = LogLevel::INFO;
+LogLevel Logger::log_level_ = LogLevel::WARNING;
 QFile* Logger::log_file_ = nullptr;
 QString Logger::log_filename_ = "log.txt";
 std::map<LogLevel,std::string> Logger::ll_map = {{LogLevel::INFO,"INFO"},{LogLevel::WARNING,"WARNING"},{LogLevel::ERROR,"ERROR"}};
