@@ -1,15 +1,18 @@
 #include "MainView.h"
 #include "views/SingleViewSensor.h"
 
-MainView::MainView(QWidget* parent)
+MainView::MainView(QStackedWidget * content, QStackedWidget * sidebar, QWidget* parent)
     : QMainWindow(parent), central_widget_(new QWidget), layout_(CustomElements::getCustomLayoutPrototype(H_NO_BORDER))
 {
     // General Settings
     setMinimumSize(QSize(640, 360));
 
+    // Initialization
+    content_ = new MainContentContainer(content, this);
+    sidebar_ = new SidebarContainer(sidebar, this);
+
     // Creation Calls
     createMenu();
-    createDefaultView();
 
     // Layout Widgets
     layout_->addWidget(sidebar_);
@@ -48,46 +51,26 @@ void MainView::createMenu() {
     file->addAction(settings_view);
 
     // Connect Action
-    connect(single_view, SIGNAL(triggered()), this, SLOT(showSingleView()));
-    connect(modify_view, SIGNAL(triggered()), this, SLOT(showModifyView()));
-    connect(create_view, SIGNAL(triggered()), this, SLOT(showCreateView()));
-    connect(settings_view, SIGNAL(triggered()), this, SLOT(showSettingsView()));
+    connect(single_view, &QAction::triggered, this, &MainView::changeToSingleView);
+    connect(modify_view, &QAction::triggered, this, &MainView::changeToModifyView);
+    connect(create_view, &QAction::triggered, this, &MainView::changeToCreateView);
+    connect(settings_view, &QAction::triggered, this, &MainView::changeToSettingsView);
 
     setMenuBar(menu_bar_);
 }
 
-void MainView::createDefaultView() {
-
-    // Initialization - Views
-    single_view_ = new SingleViewSensor();
-    modify_view_ = new ModifyView();
-    create_view_ = new CreateView();
-    settings_view_ = new SettingsView();
-
-    group_list_view_ = new GroupListView();
-
-    // Initialization - Contianer
-    content_ = new MainContentContainer(single_view_, central_widget_);
-    content_->show();
-
-    sidebar_ = new SidebarContainer(group_list_view_, central_widget_);
-    sidebar_->show();
+void MainView::createDefaultView(int content_id, int sidebar_id) {
+    content_->setCurrentView(content_id);
+    sidebar_->setCurrentView(sidebar_id);
 }
 
 
-// Slots
-void MainView::showSingleView() {
-    content_->setCurrentView(single_view_);
+void MainView::setContentView(int content_id)
+{
+    content_->setCurrentView(content_id);
 }
 
-void MainView::showModifyView() {
-    content_->setCurrentView(modify_view_);
-}
-
-void MainView::showCreateView() {
-    content_->setCurrentView(create_view_);
-}
-
-void MainView::showSettingsView() {
-    content_->setCurrentView(settings_view_);
+void MainView::setSidebarView(int sidebar_id)
+{
+    sidebar_->setCurrentView(sidebar_id);
 }

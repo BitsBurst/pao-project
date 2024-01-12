@@ -6,6 +6,7 @@
 #include <QLabel>
 #include <QHBoxLayout>
 #include <QMenuBar>
+#include <QStackedWidget>
 #include "core/AbstractContainer.h"
 #include "containers/SidebarContainer.h"
 #include "containers/MainContentContainer.h"
@@ -17,6 +18,12 @@
 
 class MainView : public QMainWindow {
     Q_OBJECT
+signals:
+    void changeToSingleView();
+    void changeToModifyView();
+    void changeToCreateView();
+    void changeToSettingsView();
+
 private:
     QWidget * central_widget_;
     QLayout * layout_;
@@ -24,27 +31,18 @@ private:
     AbstractContainer * sidebar_;
     AbstractContainer * content_;
 
-    QMenuBar *menu_bar_;
-
-    // Available Views
-    AbstractSingleView * single_view_;
-    GroupListView * group_list_view_;
-    ModifyView * modify_view_;
-    CreateView * create_view_;
-    SettingsView * settings_view_;
-
+    QMenuBar * menu_bar_;
 
     void createMenu();
-    void createDefaultView();
 
 public:
-    explicit MainView(QWidget * parent = nullptr);
+    explicit MainView(QStackedWidget * content, QStackedWidget * sidebar, QWidget * parent = nullptr);
 
-public slots:
-    void showSingleView();
-    void showModifyView();
-    void showCreateView();
-    void showSettingsView();
+    void setContentView(int content_id);
+    void setSidebarView(int sidebar_id);
+
+    void createDefaultView(int content_id, int sidebar_id);
+
 };
 
 #endif //SMARTSENSORS_MAINVIEW_H

@@ -3,6 +3,7 @@
 
 #include "../core/AbstractController.h"
 #include "../../view/MainView.h"
+#include "../LocatorController.h"
 
 class WindowController: public AbstractController {
 Q_OBJECT
@@ -11,6 +12,9 @@ public:
 	bool Init();
 private:
 	MainView* main_window_;
+
+    QStackedWidget * content_stack_;
+    QStackedWidget * sidebar_stack_;
 };
 
 #endif //SMARTSENSORS_WINDOWCONTROLLER_H

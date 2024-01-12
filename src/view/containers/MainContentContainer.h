@@ -9,7 +9,7 @@ class MainContentContainer : public AbstractContainer {
 
 private:
 public:
-    explicit MainContentContainer(AbstractView * current_view = nullptr, QWidget *parent = nullptr);
+    explicit MainContentContainer(QStackedWidget * current_view = new QStackedWidget(), QWidget *parent = nullptr);
 };
 
 #endif //SMARTSENSORS_MAINCONTENTCONTAINER_H

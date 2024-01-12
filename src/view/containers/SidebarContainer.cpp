@@ -1,7 +1,7 @@
 #include "SidebarContainer.h"
 #include "../../utility/Logger.h"
 
-SidebarContainer::SidebarContainer(AbstractView * current_view, QWidget* parent)
+SidebarContainer::SidebarContainer(QStackedWidget * current_view, QWidget* parent)
     : AbstractContainer(current_view, parent)
 {
     /*

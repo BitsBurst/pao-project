@@ -1,6 +1,6 @@
 #include "MainContentContainer.h"
 
-MainContentContainer::MainContentContainer(AbstractView * current_view, QWidget* parent)
+MainContentContainer::MainContentContainer(QStackedWidget * current_view, QWidget* parent)
     : AbstractContainer(current_view, parent)
 {
     /*

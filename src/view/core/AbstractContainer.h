@@ -5,6 +5,7 @@
 
 #include <QWidget>
 #include <QVBoxLayout>
+#include <QStackedWidget>
 #include "../utility/CustomElements.h"
 #include "AbstractView.h"
 #include "AbstractGraphicalElement.h"
@@ -12,17 +13,16 @@
 class AbstractContainer : public AbstractGraphicalElement {
     Q_OBJECT
 protected:
-    AbstractView * current_view_;
+    QStackedWidget * current_view_;
 
 public:
-    explicit AbstractContainer(AbstractView * current_view = nullptr, QWidget * parent = nullptr);
+    explicit AbstractContainer(QStackedWidget * current_view = nullptr, QWidget * parent = nullptr);
 
     void show();
     void hide();
-    void update();
 
-    AbstractView* getCurrentView() const;
-    void setCurrentView(AbstractView* current_view);
+    int getCurrentView() const;
+    void setCurrentView(int id);
 };
 
 #endif //SMARTSENSORS_ABSTRACTCONTAINER_H
