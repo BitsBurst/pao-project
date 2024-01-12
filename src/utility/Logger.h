@@ -7,11 +7,11 @@
 enum class LogLevel {
 	INFO,
 	WARNING,
-	ERROR
+	L_ERROR
 };
 enum class LogMethod {
-	IN,
-	OUT,
+	M_IN,
+	M_OUT,
 };
 class Logger {
 private:

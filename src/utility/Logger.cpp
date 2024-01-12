@@ -2,8 +2,8 @@
 LogLevel Logger::log_level_ = LogLevel::INFO;
 QFile* Logger::log_file_ = nullptr;
 QString Logger::log_filename_ = "log.txt";
-std::map<LogLevel,std::string> Logger::ll_map = {{LogLevel::INFO,"INFO"},{LogLevel::WARNING,"WARNING"},{LogLevel::ERROR,"ERROR"}};
-std::map<LogMethod,std::string> Logger::lm_map = {{LogMethod::IN,"IN"},{LogMethod::OUT,"OUT"}};
+std::map<LogLevel,std::string> Logger::ll_map = {{LogLevel::INFO, "INFO"},{LogLevel::WARNING, "WARNING"},{LogLevel::L_ERROR, "L_ERROR"}};
+std::map<LogMethod,std::string> Logger::lm_map = {{LogMethod::M_IN, "M_IN"}, {LogMethod::M_OUT, "M_OUT"}};
 LogLevel Logger::GetLogLevel()
 {
 	return Logger::log_level_;
