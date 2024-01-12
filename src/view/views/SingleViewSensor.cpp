@@ -5,7 +5,7 @@ SingleViewSensor::SingleViewSensor(QWidget * parent)
     : AbstractSingleView(parent)
 {
     // Initialization
-    chart_ = new RealtimeChart(this);
+    chart_ = new ChartHandler(3, this);
 
     layout_->addWidget(chart_);
 }

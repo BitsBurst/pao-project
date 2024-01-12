@@ -8,7 +8,7 @@
 #include <QFont>
 #include <QSpacerItem>
 
-enum LayoutPrototype {H_NO_BORDER, V_CONTAINER, SINGLE_SPACING, DOUBLE_SPACING, QUAD_SPACING};
+enum LayoutPrototype {H_NO_BORDER, V_CONTAINER, SINGLE_SPACING, DOUBLE_SPACING, QUAD_SPACING, H_SINGLE_SPACING};
 enum SpacerDirection {VERTICAL, HORIZONTAL};
 
 class CustomElements : QObject {

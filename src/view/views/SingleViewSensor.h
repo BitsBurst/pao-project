@@ -5,12 +5,12 @@
 #include <QChartView>
 #include "AbstractSingleView.h"
 #include "../../../include/CustomPlot/qcustomplot.h"
-#include "../widgets/RealtimeChart.h"
+#include "../widgets/ChartHandler.h"
 
 class SingleViewSensor : public AbstractSingleView {
     Q_OBJECT
 private:
-    RealtimeChart * chart_;
+    ChartHandler * chart_;
 
 public:
     explicit SingleViewSensor(QWidget *parent = nullptr);

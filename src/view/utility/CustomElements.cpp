@@ -189,6 +189,10 @@ QLayout* CustomElements::getCustomLayoutPrototype(LayoutPrototype prototype)
             temp = CustomElements::getVerticalLayout(0);
             temp->setSpacing(8);
             break;
+        case H_SINGLE_SPACING:
+            temp = CustomElements::getHorizontalLayout(0);
+            temp->setSpacing(8);
+            break;
         case DOUBLE_SPACING:
             temp = CustomElements::getVerticalLayout(0);
             temp->setSpacing(16);
