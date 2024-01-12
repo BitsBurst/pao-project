@@ -1,4 +1,5 @@
 #include "WindowController.h"
+#include "../LocatorController.h"
 
 WindowController::WindowController()
 {

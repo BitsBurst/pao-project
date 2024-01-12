@@ -3,7 +3,6 @@
 
 #include "../core/AbstractController.h"
 #include "../../view/MainView.h"
-#include "../LocatorController.h"
 
 class WindowController: public AbstractController {
 Q_OBJECT

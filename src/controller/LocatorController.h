@@ -5,8 +5,6 @@
 #include "window/WindowController.h"
 #include "business/BusinessController.h"
 
-class WindowController;
-
 class LocatorController {
 private:
 	static StorageController* storage_controller_;
