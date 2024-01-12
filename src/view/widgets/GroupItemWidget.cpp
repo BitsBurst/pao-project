@@ -1,16 +1,13 @@
 #include "GroupItemWidget.h"
 
 GroupItemWidget::GroupItemWidget(QString id, QString title, QString description, QString icon_src, QWidget* parent)
-    : AbstractWidget(new QVBoxLayout, parent),  id_(std::move(id)), icon_src_(std::move(icon_src))
+    : AbstractWidget(CustomElements::getCustomLayoutPrototype(SINGLE_SPACING), parent),  id_(std::move(id)), icon_src_(std::move(icon_src))
 {
     // Initialization
     title_label_ = new QLabel(title);
     description_label_ = new QLabel(description);
 
     // Layout Settings
-    layout_->setContentsMargins(16, 16, 16, 0);
-    layout_->setSpacing(4);
-
     setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
 
     // Fonts

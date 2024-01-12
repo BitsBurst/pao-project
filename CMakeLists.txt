@@ -81,6 +81,8 @@ set(PROJECT_SOURCES
         resources.qrc
         src/view/views/SingleViewSensor.cpp
         src/view/views/SingleViewSensor.h
+        src/view/widgets/RealtimeChart.cpp
+        src/view/widgets/RealtimeChart.h
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
