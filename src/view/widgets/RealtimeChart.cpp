@@ -4,119 +4,105 @@
 RealtimeChart::RealtimeChart(QWidget * parent)
         : AbstractWidget(CustomElements::getCustomLayoutPrototype(H_NO_BORDER) ,parent)
 {
-    customPlot = new QCustomPlot(this);
-
+    // Initialization
+    custom_plot_ = new QCustomPlot(this);
     srand(QDateTime::currentDateTime().toSecsSinceEpoch());
 
+    // SizePolicy
     QSizePolicy sizePolicy(QSizePolicy::Expanding, QSizePolicy::MinimumExpanding);
     sizePolicy.setHorizontalStretch(0);
     sizePolicy.setVerticalStretch(0);
-    sizePolicy.setHeightForWidth(customPlot->sizePolicy().hasHeightForWidth());
-    customPlot->setSizePolicy(sizePolicy);
+    sizePolicy.setHeightForWidth(custom_plot_->sizePolicy().hasHeightForWidth());
+    custom_plot_->setSizePolicy(sizePolicy);
 
-    layout_->addWidget(customPlot);
+    layout_->addWidget(custom_plot_);
 
-    customPlot->setInteractions(QCP::iRangeDrag | QCP::iRangeZoom | QCP::iSelectAxes
+    // Custom chart settings
+    custom_plot_->setInteractions(QCP::iRangeDrag | QCP::iRangeZoom | QCP::iSelectAxes
             | QCP::iSelectLegend | QCP::iSelectPlottables);
-    customPlot->xAxis->setRange(0, 6);
-    customPlot->yAxis->setRange(-5, 5);
-    customPlot->axisRect()->setupFullAxesBox();
+    custom_plot_->xAxis->setRange(0, 6);
+    custom_plot_->yAxis->setRange(-5, 5);
+    custom_plot_->axisRect()->setupFullAxesBox();
 
-    customPlot->xAxis->setLabel("x Axis");
-    customPlot->yAxis->setLabel("y Axis");
-    customPlot->legend->setVisible(true);
+    custom_plot_->xAxis->setLabel("x Axis");
+    custom_plot_->yAxis->setLabel("y Axis");
+    custom_plot_->legend->setVisible(true);
 
-    customPlot->legend->setFont(CustomElements::getFontParagraph());
-    customPlot->legend->setSelectedFont(CustomElements::getFontParagraph());
-    customPlot->legend->setSelectableParts(QCPLegend::spItems);
+    custom_plot_->legend->setFont(CustomElements::getFontParagraph());
+    custom_plot_->legend->setSelectedFont(CustomElements::getFontParagraph());
+    custom_plot_->legend->setSelectableParts(QCPLegend::spItems);
 
     // Graphs
     addRealtimeGraph();
 
-    // mouse events callbacks
-    connect(customPlot, &QCustomPlot::mousePress, this, &RealtimeChart::mousePress);
+    // Mouse events callbacks
+    connect(custom_plot_, &QCustomPlot::mousePress, this, &RealtimeChart::mousePress);
 }
 
 void RealtimeChart::show()
 {
-    customPlot->show();
+    custom_plot_->show();
 }
 
 void RealtimeChart::mousePress()
 {
-    // if an axis is selected, only allow the direction of that axis to be dragged
-    // if no axis is selected, both directions may be dragged
-
-    if (customPlot->xAxis->selectedParts().testFlag(QCPAxis::spAxis))
-        customPlot->axisRect()->setRangeDrag(customPlot->xAxis->orientation());
-    else if (customPlot->yAxis->selectedParts().testFlag(QCPAxis::spAxis))
-        customPlot->axisRect()->setRangeDrag(customPlot->yAxis->orientation());
+    if (custom_plot_->xAxis->selectedParts().testFlag(QCPAxis::spAxis))
+        custom_plot_->axisRect()->setRangeDrag(custom_plot_->xAxis->orientation());
+    else if (custom_plot_->yAxis->selectedParts().testFlag(QCPAxis::spAxis))
+        custom_plot_->axisRect()->setRangeDrag(custom_plot_->yAxis->orientation());
     else
-        customPlot->axisRect()->setRangeDrag(Qt::Horizontal | Qt::Vertical);
+        custom_plot_->axisRect()->setRangeDrag(Qt::Horizontal | Qt::Vertical);
 }
 
 void RealtimeChart::mouseWheel()
 {
-    // if an axis is selected, only allow the direction of that axis to be zoomed
-    // if no axis is selected, both directions may be zoomed
-
-    if (customPlot->xAxis->selectedParts().testFlag(QCPAxis::spAxis))
-        customPlot->axisRect()->setRangeZoom(customPlot->xAxis->orientation());
-    else if (customPlot->yAxis->selectedParts().testFlag(QCPAxis::spAxis))
-        customPlot->axisRect()->setRangeZoom(customPlot->yAxis->orientation());
+    if (custom_plot_->xAxis->selectedParts().testFlag(QCPAxis::spAxis))
+        custom_plot_->axisRect()->setRangeZoom(custom_plot_->xAxis->orientation());
+    else if (custom_plot_->yAxis->selectedParts().testFlag(QCPAxis::spAxis))
+        custom_plot_->axisRect()->setRangeZoom(custom_plot_->yAxis->orientation());
     else
-        customPlot->axisRect()->setRangeZoom(Qt::Horizontal | Qt::Vertical);
+        custom_plot_->axisRect()->setRangeZoom(Qt::Horizontal | Qt::Vertical);
 }
 
 void RealtimeChart::addRealtimeGraph()
 {
-    customPlot->addGraph();
-    customPlot->graph()->setName(QString("Realtime"));
-    animdata.reset(new QCPDataContainer<QCPGraphData>);
-    for (int i = 0; i < nRealtimePoints; i++) {
-        QCPGraphData data(i * dt, 0);
-        animdata->add(data);
+    custom_plot_->addGraph();
+    custom_plot_->graph()->setName(QString("Realtime"));
+
+    data_.reset(new QCPDataContainer<QCPGraphData>);
+
+    // Initial data ( 0 )
+    for (int i = 0; i < max_samples_; i++) {
+        QCPGraphData data(i * delta_time_, 0);
+        data_->add(data);
     }
-    customPlot->graph()->setData(animdata);
+    custom_plot_->graph()->setData(data_);
+
+    // Pen Settings
     QPen graphPen;
     graphPen.setColor(QColor(rand() % 245 + 10, rand() % 245 + 10, rand() % 245 + 10));
     graphPen.setWidthF(2);
-    customPlot->graph()->setPen(graphPen);
-    customPlot->replot();
-    startTimer(500);
+    custom_plot_->graph()->setPen(graphPen);
+
+    custom_plot_->replot();
+    startTimer(50);
 }
 
 void RealtimeChart::addRealtimeSample(double v)
 {
     // shift the values
-    for (auto i = animdata->begin(); (i + 1) != (animdata->end()); ++i) {
+    for (auto i = data_->begin(); (i + 1) != (data_->end()); ++i) {
         i->value = (i + 1)->value;
     }
     // add a new datapoint at the start
-    (animdata->end() - 1)->value = v;
+    (data_->end() - 1)->value = v;
 }
 
 void RealtimeChart::timerEvent(QTimerEvent *)
 {
-    // demonstrates that adding a few samples before plotting speeds things up
     for (int i = 0; i < 5; i++) {
         addRealtimeSample(sin(t * 5) * (rand() % 3));
-        t = t + dt;
+        t = t + delta_time_;
     }
-    customPlot->replot();
-}
-
-
-void RealtimeChart::moveLegend()
-{
-    if (QAction *contextAction = qobject_cast<QAction *>(
-            sender())) // make sure this slot is really called by a context menu action, so it carries the data we need
-    {
-        bool ok;
-        int dataInt = contextAction->data().toInt(&ok);
-        if (ok) {
-            customPlot->axisRect()->insetLayout()->setInsetAlignment(0, (Qt::Alignment) dataInt);
-            customPlot->replot();
-        }
-    }
+    custom_plot_->replot();
 }

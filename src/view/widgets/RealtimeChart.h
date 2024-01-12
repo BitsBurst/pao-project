@@ -8,19 +8,16 @@
 class RealtimeChart : public AbstractWidget {
 Q_OBJECT
 private:
-    QCustomPlot *customPlot;
+    QCustomPlot *custom_plot_;
 
-    QSharedPointer<QCPDataContainer<QCPGraphData> > animdata;
-    const int nRealtimePoints = 300;
-    const double dt = 0.02;
+    QSharedPointer<QCPDataContainer<QCPGraphData> > data_;
+    const int max_samples_ = 300;
+    const double delta_time_ = 0.02;
     double t = 0;
-    QTimer * timer_;
 
     void mousePress();
     void mouseWheel();
     void addRealtimeGraph();
-    void moveLegend();
-    void graphClicked(QCPAbstractPlottable *plottable, int dataIndex);
 
 public:
     RealtimeChart(QWidget * parent = nullptr);
