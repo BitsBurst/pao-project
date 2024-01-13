@@ -5,13 +5,20 @@
 #include "../core/AbstractView.h"
 #include "../utility/CustomElements.h"
 
+// Model
+#include "../../model/core/AbstractItem.h"
+
 class ModifyView : public AbstractView {
 Q_OBJECT
 private:
     QLabel *label1_, *label2_;
+    AbstractItem* item_;
 public:
-    explicit ModifyView(QLayout * layout = nullptr, QWidget *parent = nullptr);
+    explicit ModifyView(AbstractItem* item, QLayout * layout = nullptr, QWidget *parent = nullptr);
     void show();
+    void update();
+
+    void setItem(AbstractItem* item);
 };
 
 #endif //SMARTSENSORS_MODIFYVIEW_H

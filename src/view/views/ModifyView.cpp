@@ -1,7 +1,7 @@
 #include "ModifyView.h"
 
-ModifyView::ModifyView(QLayout* layout, QWidget* parent)
-        :AbstractView(CustomElements::getCustomLayoutPrototype(SINGLE_SPACING), parent)
+ModifyView::ModifyView(AbstractItem* item, QLayout* layout, QWidget* parent)
+        :AbstractView(CustomElements::getCustomLayoutPrototype(SINGLE_SPACING), parent), item_(item)
 {
     /*
     QPalette pal = QPalette();
@@ -11,8 +11,8 @@ ModifyView::ModifyView(QLayout* layout, QWidget* parent)
     */
 
     // Initialization
-    label1_ = new QLabel("Modify View");
-    label2_ = new QLabel("Modify View");
+    label1_ = new QLabel("Modify View" + item_->getName());
+    label2_ = new QLabel("Modify View" + item_->getId());
 
     // Layout Widgets
     layout_->addWidget(label1_);
@@ -22,4 +22,18 @@ ModifyView::ModifyView(QLayout* layout, QWidget* parent)
 void ModifyView::show() {
     label1_->show();
     label2_->show();
+}
+
+void ModifyView::setItem(AbstractItem* item)
+{
+    item_ = item;
+    update();
+}
+
+void ModifyView::update()
+{
+    QWidget::update();
+
+    label1_->setText("Modify View" + item_->getName());
+    label2_->setText("Modify View");
 }

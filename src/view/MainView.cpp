@@ -55,7 +55,7 @@ void MainView::createMenu() {
     // Connect Action
     connect(single_sensor_view, &QAction::triggered, this, &MainView::changeToSingleSensorView);
     connect(single_group_view, &QAction::triggered, this, &MainView::changeToSingleGroupView);
-    connect(modify_view, &QAction::triggered, this, &MainView::changeToModifyView);
+    // connect(modify_view, &QAction::triggered, this, &MainView::emitChangeToModifyView);
     connect(create_view, &QAction::triggered, this, &MainView::changeToCreateView);
     connect(settings_view, &QAction::triggered, this, &MainView::changeToSettingsView);
 
@@ -76,4 +76,10 @@ void MainView::setContentView(int content_id)
 void MainView::setSidebarView(int sidebar_id)
 {
     sidebar_->setCurrentView(sidebar_id);
+}
+
+// Slots
+void MainView::emitChangeToModifyView(AbstractItem& item)
+{
+    emit changeToModifyView(item);
 }

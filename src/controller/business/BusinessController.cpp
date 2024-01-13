@@ -5,8 +5,8 @@
 BusinessController::BusinessController()
 {
     // Initialization - Views
-    single_view_ = new SingleViewSensor(AbstractItem("0", "Default Item"));
-    modify_view_ = new ModifyView();
+    single_view_ = new SingleViewSensor(new AbstractItem("0", "Default Item"));
+    modify_view_ = new ModifyView(new AbstractItem("0", "Item default"));
     create_view_ = new CreateView();
     settings_view_ = new SettingsView();
 
@@ -26,11 +26,13 @@ void BusinessController::subscribeToEvents()
     connect(main_view_, &MainView::changeToSingleSensorView, this, &BusinessController::showSingleSensorView);
     connect(main_view_, &MainView::changeToSingleGroupView, this, &BusinessController::showSingleGroupView);
     connect(main_view_, &MainView::changeToCreateView, this, &BusinessController::showCreateView);
-    connect(main_view_, &MainView::changeToModifyView, this, &BusinessController::showModifyView);
+    //connect(main_view_, &MainView::changeToModifyView, this, &BusinessController::showModifyView);
     connect(main_view_, &MainView::changeToSettingsView, this, &BusinessController::showSettingsView);
+
+    connect(single_view_, &AbstractSingleView::changeToModifyView, this, &BusinessController::showModifyView);
 }
 
-void BusinessController::setDataFiel(MainView* main_view, QStackedWidget* content_stack, QStackedWidget* sidebar_stack)
+void BusinessController::setDataField(MainView* main_view, QStackedWidget* content_stack, QStackedWidget* sidebar_stack)
 {
     main_view_ = main_view;
     content_stack_ = content_stack;
@@ -53,9 +55,12 @@ void BusinessController::loadStorageError()
 void BusinessController::showSingleSensorView()
 {
     content_stack_->removeWidget(single_view_);
+    disconnect(single_view_, &AbstractSingleView::changeToModifyView, this, &BusinessController::showModifyView);
     single_view_->deleteLater();
-    single_view_ = new SingleViewSensor(AbstractItem("0", "Single View Item"));
+
+    single_view_ = new SingleViewSensor(new AbstractItem("0", "Single View Item"));
     content_stack_->addWidget(single_view_);
+    connect(single_view_, &AbstractSingleView::changeToModifyView, this, &BusinessController::showModifyView);
 
     main_view_->setContentView(content_stack_->indexOf(single_view_));
 }
@@ -69,16 +74,19 @@ void BusinessController::showSingleGroupView()
 
     content_stack_->removeWidget(single_view_);
     single_view_->deleteLater();
+    disconnect(single_view_, &AbstractSingleView::changeToModifyView, this, &BusinessController::showModifyView);
+
     single_view_ = new SingleViewGroup(list);
     content_stack_->addWidget(single_view_);
+    connect(single_view_, &AbstractSingleView::changeToModifyView, this, &BusinessController::showModifyView);
 
     main_view_->setContentView(content_stack_->indexOf(single_view_));
 }
 
-void BusinessController::showModifyView()
+void BusinessController::showModifyView(AbstractItem* item)
 {
+    modify_view_->setItem(item);
     main_view_->setContentView(content_stack_->indexOf(modify_view_));
-
 }
 
 void BusinessController::showCreateView()

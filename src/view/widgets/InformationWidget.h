@@ -10,13 +10,18 @@
 
 class InformationWidget : public AbstractWidget {
     Q_OBJECT
+
+signals:
+    void changeToModify();
 private:
     QLabel *title_, *description_;
     QWidget * group_buttons_;
     QPushButton * delete_btn_, *modify_btn_, *add_btn_;
 
+    void buttonEvent();
+
 public:
-    explicit InformationWidget(const AbstractItem& item, bool check_add_btn = false, QWidget * parent = nullptr);
+    explicit InformationWidget(AbstractItem* item, bool check_add_btn = false, QWidget * parent = nullptr);
     void show();
 };
 

@@ -21,7 +21,7 @@ class MainView : public QMainWindow {
 signals:
     void changeToSingleSensorView();
     void changeToSingleGroupView();
-    void changeToModifyView();
+    void changeToModifyView(AbstractItem& item);
     void changeToCreateView();
     void changeToSettingsView();
 
@@ -35,6 +35,9 @@ private:
     QMenuBar * menu_bar_;
 
     void createMenu();
+
+private slots:
+    void emitChangeToModifyView(AbstractItem& item);
 
 public:
     explicit MainView(QStackedWidget * content, QStackedWidget * sidebar, QWidget * parent = nullptr);

@@ -17,7 +17,7 @@ public:
 	BusinessController();
 	bool Init();
 
-    void setDataFiel(MainView * main_view, QStackedWidget * content_stack, QStackedWidget * sidebar_stack);
+    void setDataField(MainView * main_view, QStackedWidget * content_stack, QStackedWidget * sidebar_stack);
 
 private:
     // Available Views
@@ -39,7 +39,7 @@ private:
 public slots:
     void showSingleSensorView();
     void showSingleGroupView();
-    void showModifyView();
+    void showModifyView(AbstractItem* item);
     void showCreateView();
     void showSettingsView();
 };

@@ -9,11 +9,20 @@
 
 class AbstractSingleView : public AbstractView {
     Q_OBJECT
+signals:
+    void changeToModifyView(AbstractItem* item);
+
 private:
     InformationWidget * information_widget_;
-    const AbstractItem& item_;
+    AbstractItem* item_;
+
+    void handleEvents();
+
+private slots:
+    void emitChangeToModifyView();
+
 public:
-    explicit AbstractSingleView(const AbstractItem& item, bool check_add_btn = false, QWidget *parent = nullptr);
+    explicit AbstractSingleView(AbstractItem* item, bool check_add_btn = false, QWidget *parent = nullptr);
     void show();
 };
 

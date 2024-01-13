@@ -13,7 +13,7 @@ private:
     ChartHandler * chart_;
 
 public:
-    explicit SingleViewSensor(const AbstractItem& item, QWidget *parent = nullptr);
+    explicit SingleViewSensor(AbstractItem* item, QWidget *parent = nullptr);
     void show();
 };
 

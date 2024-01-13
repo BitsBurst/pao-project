@@ -12,7 +12,7 @@ bool WindowController::Init()
 {
 	main_window_->show();
 
-    LocatorController::BusinessControllerInstance()->setDataFiel(main_window_, content_stack_, sidebar_stack_);
+    LocatorController::BusinessControllerInstance()->setDataField(main_window_, content_stack_, sidebar_stack_);
 
 	return true;
 }

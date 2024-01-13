@@ -1,11 +1,11 @@
 #include "InformationWidget.h"
 #include "../utility/CustomElements.h"
 
-InformationWidget::InformationWidget(const AbstractItem& item, bool check_add_btn, QWidget* parent)
+InformationWidget::InformationWidget(AbstractItem* item, bool check_add_btn, QWidget* parent)
     :AbstractWidget(CustomElements::getCustomLayoutPrototype(SINGLE_SPACING), parent), add_btn_(nullptr)
 {
     // Initialization
-    title_ = new QLabel(item.getName());
+    title_ = new QLabel(item->getName());
     title_->setFont(CustomElements::getFontH2());
     description_ = new QLabel("Una descrizione per il sensore, la categoria o il gruppo");
     description_->setFont(CustomElements::getFontParagraph());
@@ -31,10 +31,18 @@ InformationWidget::InformationWidget(const AbstractItem& item, bool check_add_bt
     layout_->addWidget(description_);
     layout_->addWidget(group_buttons_);
     setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+    // Events
+    buttonEvent();
 }
 
 void InformationWidget::show() {
     title_->show();
     description_->show();
     group_buttons_->show();
+}
+
+void InformationWidget::buttonEvent()
+{
+    connect(modify_btn_, &QPushButton::released, this, &InformationWidget::changeToModify);
 }
