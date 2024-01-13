@@ -5,7 +5,8 @@
 BusinessController::BusinessController()
 {
     // Initialization - Views
-    single_view_ = new SingleViewSensor(new AbstractItem("0", "Default Item"));
+    single_view_sensor_ = new SingleViewSensor(new AbstractItem("0", "Default Item"));
+    single_view_group_ = new SingleViewGroup(QVector<Sensor *>());
     modify_view_ = new ModifyView(new AbstractItem("0", "Item default"));
     create_view_ = new CreateView();
     settings_view_ = new SettingsView();
@@ -16,7 +17,7 @@ bool BusinessController::Init()
 {
 	subscribeToEvents();
 
-    main_view_->createDefaultView(content_stack_->indexOf(single_view_), sidebar_stack_->indexOf(group_list_view_));
+    main_view_->createDefaultView(content_stack_->indexOf(single_view_sensor_), sidebar_stack_->indexOf(group_list_view_));
 
 	return true;
 }
@@ -29,7 +30,9 @@ void BusinessController::subscribeToEvents()
     //connect(main_view_, &MainView::changeToModifyView, this, &BusinessController::showModifyView);
     connect(main_view_, &MainView::changeToSettingsView, this, &BusinessController::showSettingsView);
 
-    connect(single_view_, &AbstractSingleView::changeToModifyView, this, &BusinessController::showModifyView);
+    // Modify
+    connect(single_view_sensor_, &AbstractSingleView::changeToModifyView, this, &BusinessController::showModifyView);
+    connect(single_view_group_, &AbstractSingleView::changeToModifyView, this, &BusinessController::showModifyView);
 }
 
 void BusinessController::setDataField(MainView* main_view, QStackedWidget* content_stack, QStackedWidget* sidebar_stack)
@@ -39,7 +42,8 @@ void BusinessController::setDataField(MainView* main_view, QStackedWidget* conte
     sidebar_stack_ = sidebar_stack;
 
     // Create Stack
-    content_stack_->addWidget(single_view_);
+    content_stack_->addWidget(single_view_sensor_);
+    content_stack_->addWidget(single_view_group_);
     content_stack_->addWidget(modify_view_);
     content_stack_->addWidget(create_view_);
     content_stack_->addWidget(settings_view_);
@@ -54,15 +58,7 @@ void BusinessController::loadStorageError()
 
 void BusinessController::showSingleSensorView()
 {
-    content_stack_->removeWidget(single_view_);
-    disconnect(single_view_, &AbstractSingleView::changeToModifyView, this, &BusinessController::showModifyView);
-    single_view_->deleteLater();
-
-    single_view_ = new SingleViewSensor(new AbstractItem("0", "Single View Item"));
-    content_stack_->addWidget(single_view_);
-    connect(single_view_, &AbstractSingleView::changeToModifyView, this, &BusinessController::showModifyView);
-
-    main_view_->setContentView(content_stack_->indexOf(single_view_));
+    main_view_->setContentView(content_stack_->indexOf(single_view_sensor_));
 }
 
 void BusinessController::showSingleGroupView()
@@ -72,15 +68,9 @@ void BusinessController::showSingleGroupView()
         list.push_back(new Sensor(QString::fromStdString(std::to_string(i)), QString::fromStdString("Sensor " + std::to_string(i)), Category()));
     }
 
-    content_stack_->removeWidget(single_view_);
-    single_view_->deleteLater();
-    disconnect(single_view_, &AbstractSingleView::changeToModifyView, this, &BusinessController::showModifyView);
+    single_view_group_->setSensors(list);
 
-    single_view_ = new SingleViewGroup(list);
-    content_stack_->addWidget(single_view_);
-    connect(single_view_, &AbstractSingleView::changeToModifyView, this, &BusinessController::showModifyView);
-
-    main_view_->setContentView(content_stack_->indexOf(single_view_));
+    main_view_->setContentView(content_stack_->indexOf(single_view_group_));
 }
 
 void BusinessController::showModifyView(AbstractItem* item)

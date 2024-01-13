@@ -10,6 +10,7 @@
 #include "../../view/views/SettingsView.h"
 #include "../../view/views/SingleViewSensor.h"
 #include "../../view/MainView.h"
+#include "../../view/views/SingleViewGroup.h"
 
 class BusinessController: public AbstractController {
 Q_OBJECT
@@ -21,7 +22,8 @@ public:
 
 private:
     // Available Views
-    AbstractSingleView * single_view_;
+    SingleViewSensor * single_view_sensor_;
+    SingleViewGroup * single_view_group_;
     GroupListView * group_list_view_;
     ModifyView * modify_view_;
     CreateView * create_view_;
