@@ -5,7 +5,7 @@
 BusinessController::BusinessController()
 {
     // Initialization - Views
-    single_view_ = new SingleViewSensor();
+    single_view_ = new SingleViewSensor(AbstractItem("0", "Default Item"));
     modify_view_ = new ModifyView();
     create_view_ = new CreateView();
     settings_view_ = new SettingsView();
@@ -52,6 +52,11 @@ void BusinessController::loadStorageError()
 
 void BusinessController::showSingleSensorView()
 {
+    content_stack_->removeWidget(single_view_);
+    single_view_->deleteLater();
+    single_view_ = new SingleViewSensor(AbstractItem("0", "Single View Item"));
+    content_stack_->addWidget(single_view_);
+
     main_view_->setContentView(content_stack_->indexOf(single_view_));
 }
 
@@ -62,10 +67,12 @@ void BusinessController::showSingleGroupView()
         list.push_back(new Sensor(QString::fromStdString(std::to_string(i)), QString::fromStdString("Sensor " + std::to_string(i)), Category()));
     }
 
-    SingleViewGroup * temp = new SingleViewGroup(list);
-    content_stack_->addWidget(temp);
+    content_stack_->removeWidget(single_view_);
+    single_view_->deleteLater();
+    single_view_ = new SingleViewGroup(list);
+    content_stack_->addWidget(single_view_);
 
-    main_view_->setContentView(content_stack_->indexOf(temp));
+    main_view_->setContentView(content_stack_->indexOf(single_view_));
 }
 
 void BusinessController::showModifyView()

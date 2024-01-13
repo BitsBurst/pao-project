@@ -5,16 +5,15 @@
 #include <QPushButton>
 #include "../core/AbstractView.h"
 #include "../utility/CustomElements.h"
+#include "../widgets/InformationWidget.h"
 
 class AbstractSingleView : public AbstractView {
     Q_OBJECT
 private:
-    QLabel *title_, *description_;
-    QWidget * group_buttons_;
-    QPushButton * delete_btn_, *modify_btn_;
-    QVector<QPushButton*> button_list_;
+    InformationWidget * information_widget_;
+    const AbstractItem& item_;
 public:
-    explicit AbstractSingleView(QWidget *parent = nullptr);
+    explicit AbstractSingleView(const AbstractItem& item, bool check_add_btn = false, QWidget *parent = nullptr);
     void show();
 };
 

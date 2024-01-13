@@ -11,9 +11,9 @@ public:
 	 ~AbstractItem();
 	AbstractItem();
 	 AbstractItem(QString, QString, void (**)() = nullptr);
-	 QString getId();
+	 QString getId() const;
 	 void setId(QString id);
-	 QString getName();
+	 QString getName() const;
 	 void setName(QString name);
 	 void setModelChangedPointer(void (**)());
 	 static void setModelChangedPointerStatic(void (*)());

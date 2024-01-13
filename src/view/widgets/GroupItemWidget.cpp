@@ -10,12 +10,6 @@ GroupItemWidget::GroupItemWidget(QString id, QString title, QString description,
     // Layout Settings
     setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
 
-    // Fonts
-    QFont title_font;
-    title_font.setFamily("Roboto");
-    title_font.setPixelSize(18);
-    title_font.setWeight(QFont::Medium);
-
     title_label_->setFont(CustomElements::getFontH4());
     description_label_->setFont(CustomElements::getFontDetails());
 

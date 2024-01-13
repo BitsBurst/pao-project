@@ -1,11 +1,11 @@
 #include <QLineSeries>
 #include "SingleViewSensor.h"
 
-SingleViewSensor::SingleViewSensor(QWidget * parent)
-    : AbstractSingleView(parent)
+SingleViewSensor::SingleViewSensor(const AbstractItem& item, QWidget * parent)
+    : AbstractSingleView(item,false, parent)
 {
     // Initialization
-    chart_ = new ChartHandler(3, this);
+    chart_ = new ChartHandler(1, this);
 
     layout_->addWidget(chart_);
 }
@@ -13,5 +13,5 @@ SingleViewSensor::SingleViewSensor(QWidget * parent)
 void SingleViewSensor::show()
 {
     AbstractSingleView::show();
-    chart_->show();
+    //chart_->show();
 }

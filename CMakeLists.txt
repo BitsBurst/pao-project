@@ -87,6 +87,8 @@ set(PROJECT_SOURCES
         src/view/widgets/ChartHandler.h
         src/view/views/SingleViewGroup.h
         src/view/views/SingleViewGroup.cpp
+        src/view/widgets/InformationWidget.cpp
+        src/view/widgets/InformationWidget.h
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)

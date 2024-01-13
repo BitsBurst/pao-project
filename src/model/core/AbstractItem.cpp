@@ -25,7 +25,7 @@ AbstractItem::AbstractItem(QString id, QString name, void (**modelChangedHandler
 		modelChangedInstance_ = &modelChangedStatic_;
 	}*/
 }
-QString AbstractItem::getId()
+QString AbstractItem::getId() const
 {
 	return id_;
 }
@@ -34,7 +34,7 @@ void AbstractItem::setId(QString id)
 	id_ = id;
 	modelChangedHandler();
 }
-QString AbstractItem::getName()
+QString AbstractItem::getName() const
 {
 	return name_;
 }
