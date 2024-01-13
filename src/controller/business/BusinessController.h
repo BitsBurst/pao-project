@@ -38,6 +38,7 @@ private:
 
 public slots:
     void showSingleSensorView();
+    void showSingleGroupView();
     void showModifyView();
     void showCreateView();
     void showSettingsView();

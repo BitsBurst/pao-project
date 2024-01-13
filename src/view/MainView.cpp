@@ -37,11 +37,13 @@ void MainView::createMenu() {
     menu_bar_->addMenu(sensors);
 
     // Menu Sensors
-    QAction * single_view = new QAction("Visione Singola", sensors);
+    QAction * single_sensor_view = new QAction("Visione Singola", sensors);
+    QAction * single_group_view = new QAction("Visione Singola di gruppo", sensors);
     QAction * modify_view = new QAction("Modifica Sensore", sensors);
     QAction * create_view = new QAction("Crea Sensore", sensors);
 
-    sensors->addAction(single_view);
+    sensors->addAction(single_sensor_view);
+    sensors->addAction(single_group_view);
     sensors->addAction(modify_view);
     sensors->addAction(create_view);
 
@@ -51,7 +53,8 @@ void MainView::createMenu() {
     file->addAction(settings_view);
 
     // Connect Action
-    connect(single_view, &QAction::triggered, this, &MainView::changeToSingleView);
+    connect(single_sensor_view, &QAction::triggered, this, &MainView::changeToSingleSensorView);
+    connect(single_group_view, &QAction::triggered, this, &MainView::changeToSingleGroupView);
     connect(modify_view, &QAction::triggered, this, &MainView::changeToModifyView);
     connect(create_view, &QAction::triggered, this, &MainView::changeToCreateView);
     connect(settings_view, &QAction::triggered, this, &MainView::changeToSettingsView);

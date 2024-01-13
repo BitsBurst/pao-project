@@ -19,7 +19,8 @@
 class MainView : public QMainWindow {
     Q_OBJECT
 signals:
-    void changeToSingleView();
+    void changeToSingleSensorView();
+    void changeToSingleGroupView();
     void changeToModifyView();
     void changeToCreateView();
     void changeToSettingsView();

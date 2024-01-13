@@ -85,6 +85,8 @@ set(PROJECT_SOURCES
         src/view/widgets/RealtimeChart.h
         src/view/widgets/ChartHandler.cpp
         src/view/widgets/ChartHandler.h
+        src/view/views/SingleViewGroup.h
+        src/view/views/SingleViewGroup.cpp
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
