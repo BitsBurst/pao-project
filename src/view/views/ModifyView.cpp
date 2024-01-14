@@ -11,17 +11,18 @@ ModifyView::ModifyView(AbstractItem* item, QLayout* layout, QWidget* parent)
     */
 
     // Initialization
-    label1_ = new QLabel("Modify View" + item_->getName());
-    label2_ = new QLabel("Modify View" + item_->getId());
+    information_widget_ = new InformationWidget(item_);
+
+    form_ = new SensorFormWidget(this);
 
     // Layout Widgets
-    layout_->addWidget(label1_);
-    layout_->addWidget(label2_);
+    layout_->addWidget(information_widget_);
+    layout_->addWidget(form_);
 }
 
 void ModifyView::show() {
-    label1_->show();
-    label2_->show();
+    information_widget_->show();
+    form_->show();
 }
 
 void ModifyView::setItem(AbstractItem* item)
@@ -34,6 +35,6 @@ void ModifyView::update()
 {
     QWidget::update();
 
-    label1_->setText("Modify View" + item_->getName());
-    label2_->setText("Modify View");
+    information_widget_->deleteLater();
+    layout_->replaceWidget(information_widget_, new InformationWidget(item_));
 }

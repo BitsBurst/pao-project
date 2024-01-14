@@ -89,6 +89,10 @@ set(PROJECT_SOURCES
         src/view/views/SingleViewGroup.cpp
         src/view/widgets/InformationWidget.cpp
         src/view/widgets/InformationWidget.h
+        src/view/widgets/AbstractFormWidget.cpp
+        src/view/widgets/AbstractFormWidget.h
+        src/view/widgets/SensorFormWidget.cpp
+        src/view/widgets/SensorFormWidget.h
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
