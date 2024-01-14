@@ -1,25 +1,19 @@
+#include <QFormLayout>
 #include "AbstractFormWidget.h"
 #include "../utility/CustomElements.h"
 
 AbstractFormWidget::AbstractFormWidget(QWidget* parent)
-    : AbstractWidget( CustomElements::getCustomLayoutPrototype(SINGLE_SPACING), parent)
+    : AbstractWidget( new QFormLayout, parent)
 {
-    name_ = new QLabel("Name");
-    name_->setFont(CustomElements::getFontParagraph());
-    description_ = new QLabel("Description");
-    description_->setFont(CustomElements::getFontParagraph());
-
     name_edit_ = new QLineEdit();
     description_edit_ = new QLineEdit();
 
     ok_btn_ = new QPushButton("Ok");
-    ok_btn_->setFont(CustomElements::getFontParagraph());
-
     cancel_btn_ = new QPushButton("Cancella");
-    cancel_btn_->setFont(CustomElements::getFontParagraph());
 
-    layout_->addWidget(createRow(name_, name_edit_));
-    layout_->addWidget(createRow(description_, description_edit_));
+    static_cast<QFormLayout*>(layout_)->addRow(tr("&Nome"), name_edit_);
+    static_cast<QFormLayout*>(layout_)->addRow(tr("&Descrizione"), description_edit_);
+    static_cast<QFormLayout*>(layout_)->addRow(getRowBtn());
 }
 
 void AbstractFormWidget::show()

@@ -1,3 +1,4 @@
+#include <QFormLayout>
 #include "SensorFormWidget.h"
 
 SensorFormWidget::SensorFormWidget(QWidget* parent)
@@ -17,7 +18,7 @@ SensorFormWidget::SensorFormWidget(QWidget* parent)
     min_range_edit_->setMaximum(100);
     min_range_edit_->setSingleStep(1);
 
-    layout_->addWidget(createRow(min_range_, min_range_edit_));
-    layout_->addWidget(createRow(max_range_, max_range_edit_));
-    layout_->addWidget(getRowBtn());
+    static_cast<QFormLayout*>(layout_)->addRow(tr("&Min Range"), min_range_edit_);
+    static_cast<QFormLayout*>(layout_)->addRow(tr("&Max Range"), max_range_edit_);
+    static_cast<QFormLayout*>(layout_)->addRow(getRowBtn());
 }
