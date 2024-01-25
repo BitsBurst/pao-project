@@ -7,11 +7,3 @@ AbstractView::AbstractView(QLayout* layout, QWidget* parent)
     setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding );
     layout_->setAlignment(Qt::AlignHCenter | Qt::AlignTop);
 }
-
-// TODO[Luca]: Review function logic!
-void AbstractView::toggle() {
-    setVisible(!isVisible());
-}
-void AbstractView::show() {
-    setVisible(true);
-}

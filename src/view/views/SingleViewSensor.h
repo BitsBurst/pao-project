@@ -14,7 +14,6 @@ private:
 
 public:
     explicit SingleViewSensor(AbstractItem* item, QWidget *parent = nullptr);
-    void show();
 };
 
 #endif //SMARTSENSORS_SINGLEVIEWSENSOR_H

@@ -32,11 +32,3 @@ GroupListView::GroupListView(QWidget* parent)
 
     layout_->addWidget(scroll_area_);
 }
-
-void GroupListView::show() {
-    for (auto item : item_lists_) {
-        item->show();
-    }
-
-    scroll_area_->show();
-}

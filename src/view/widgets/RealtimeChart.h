@@ -22,8 +22,6 @@ private:
 public:
     RealtimeChart(QWidget * parent = nullptr);
 
-    void show();
-
     void timerEvent(QTimerEvent *);
     void addRealtimeSample(double v);
 };

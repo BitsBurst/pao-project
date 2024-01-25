@@ -11,7 +11,6 @@ private:
     QLabel * label1_, *label2_;
 public:
     explicit SettingsView(QWidget *parent = nullptr);
-    void show();
 };
 
 

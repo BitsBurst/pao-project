@@ -36,12 +36,6 @@ InformationWidget::InformationWidget(AbstractItem* item, bool check_add_btn, QWi
     buttonEvent();
 }
 
-void InformationWidget::show() {
-    title_->show();
-    description_->show();
-    group_buttons_->show();
-}
-
 void InformationWidget::buttonEvent()
 {
     connect(modify_btn_, &QPushButton::released, this, &InformationWidget::changeToModify);

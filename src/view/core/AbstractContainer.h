@@ -18,9 +18,6 @@ protected:
 public:
     explicit AbstractContainer(QStackedWidget * current_view = nullptr, QWidget * parent = nullptr);
 
-    void show();
-    void hide();
-
     int getCurrentView() const;
     void setCurrentView(int id);
 };

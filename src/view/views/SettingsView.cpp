@@ -18,8 +18,3 @@ SettingsView::SettingsView(QWidget* parent)
     layout_->addWidget(label1_);
     layout_->addWidget(label2_);
 }
-
-void SettingsView::show() {
-    label1_->show();
-    label2_->show();
-}

@@ -18,7 +18,6 @@ private:
     AbstractItem* item_;
 public:
     explicit ModifyView(AbstractItem* item, QLayout * layout = nullptr, QWidget *parent = nullptr);
-    void show();
     void update();
 
     void setItem(AbstractItem* item);

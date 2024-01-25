@@ -16,7 +16,6 @@ private:
     QLabel * description_label_;
 public:
     explicit GroupItemWidget(QString id, QString title = "", QString description = "", QString icon_src = "", QWidget *parent = nullptr);
-    void show();
 };
 
 #endif //SMARTSENSORS_GROUPITEMWIDGET_H

@@ -20,11 +20,6 @@ ModifyView::ModifyView(AbstractItem* item, QLayout* layout, QWidget* parent)
     layout_->addWidget(form_);
 }
 
-void ModifyView::show() {
-    information_widget_->show();
-    form_->show();
-}
-
 void ModifyView::setItem(AbstractItem* item)
 {
     item_ = item;

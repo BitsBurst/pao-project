@@ -52,9 +52,3 @@ ChartHandler::ChartHandler(QVector<Sensor *> sensor_list, QWidget* parent)
         }
     }
 }
-
-void ChartHandler::show()
-{
-    for (auto chart : chart_list_)
-        chart->show();
-}

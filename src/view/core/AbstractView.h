@@ -10,9 +10,6 @@ class AbstractView : public AbstractGraphicalElement {
 protected:
 public:
     explicit AbstractView(QLayout * layout, QWidget *parent = nullptr);
-
-    void toggle();
-    void show();
 };
 
 #endif //SMARTSENSORS_ABSTRACTVIEW_H

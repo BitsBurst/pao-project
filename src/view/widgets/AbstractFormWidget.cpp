@@ -16,14 +16,6 @@ AbstractFormWidget::AbstractFormWidget(QWidget* parent)
     static_cast<QFormLayout*>(layout_)->addRow(getRowBtn());
 }
 
-void AbstractFormWidget::show()
-{
-    int items = layout_->count();
-    for (int i = 0; i < items; ++i) {
-        layout_->itemAt(i)->widget()->show();
-    }
-}
-
 QWidget* AbstractFormWidget::createRow(QWidget* label, QWidget* editable_field)
 {
     QWidget * row = new QWidget(this);

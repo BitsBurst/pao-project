@@ -19,7 +19,6 @@ protected:
 
 public:
     AbstractFormWidget(QWidget * parent = nullptr);
-    void show();
 };
 
 #endif //SMARTSENSORS_ABSTRACTFORMWIDGET_H

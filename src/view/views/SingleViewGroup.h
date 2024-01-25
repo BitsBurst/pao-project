@@ -19,7 +19,6 @@ private:
 public:
     explicit SingleViewGroup(QVector<Sensor *> sensor_list, QWidget *parent = nullptr);
     explicit SingleViewGroup(AbstractItem* item, QWidget *parent = nullptr);
-    void show();
     void update();
 
     void setSensors(QVector<Sensor *> sensor_list);

@@ -21,12 +21,6 @@ SingleViewGroup::SingleViewGroup(AbstractItem* item, QWidget * parent)
     layout_->addWidget(chart_);
 }
 
-void SingleViewGroup::show()
-{
-    AbstractSingleView::show();
-    chart_->show();
-}
-
 void SingleViewGroup::setSensors(QVector<Sensor*> sensor_list)
 {
     sensor_list_ = sensor_list;

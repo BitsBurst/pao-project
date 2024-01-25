@@ -14,7 +14,6 @@ private:
     QVector<GroupItemWidget *> item_lists_;
 public:
     explicit GroupListView(QWidget *parent = nullptr);
-    void show();
 };
 
 #endif //SMARTSENSORS_GROUPLISTVIEW_H

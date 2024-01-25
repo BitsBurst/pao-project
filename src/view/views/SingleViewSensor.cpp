@@ -9,9 +9,3 @@ SingleViewSensor::SingleViewSensor(AbstractItem* item, QWidget * parent)
 
     layout_->addWidget(chart_);
 }
-
-void SingleViewSensor::show()
-{
-    AbstractSingleView::show();
-    chart_->show();
-}

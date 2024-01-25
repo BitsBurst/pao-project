@@ -17,8 +17,3 @@ GroupItemWidget::GroupItemWidget(QString id, QString title, QString description,
     layout_->addWidget(description_label_);
     layout_->addWidget(title_label_);
 }
-
-void GroupItemWidget::show() {
-    title_label_->show();
-    description_label_->show();
-}

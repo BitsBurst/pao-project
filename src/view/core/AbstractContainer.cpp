@@ -17,12 +17,3 @@ void AbstractContainer::setCurrentView(int id)
 {
     current_view_->setCurrentIndex(id);
 }
-
-void AbstractContainer::show() {
-    if (current_view_ !=nullptr)
-        current_view_->show();
-}
-void AbstractContainer::hide() {
-    if (current_view_ !=nullptr)
-        current_view_->hide();
-}

@@ -18,8 +18,3 @@ CreateView::CreateView(QLayout* layout, QWidget* parent)
     layout_->addWidget(label1_);
     layout_->addWidget(label2_);
 }
-
-void CreateView::show() {
-    label1_->show();
-    label2_->show();
-}

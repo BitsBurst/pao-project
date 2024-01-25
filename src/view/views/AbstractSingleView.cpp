@@ -19,10 +19,6 @@ AbstractSingleView::AbstractSingleView(AbstractItem* item, bool check_add_btn, Q
     handleEvents();
 }
 
-void AbstractSingleView::show() {
-    information_widget_->show();
-}
-
 void AbstractSingleView::handleEvents()
 {
     connect(information_widget_, &InformationWidget::changeToModify, this, &AbstractSingleView::emitChangeToModifyView);

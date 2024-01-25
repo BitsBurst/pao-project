@@ -39,11 +39,6 @@ RealtimeChart::RealtimeChart(QWidget * parent)
     connect(custom_plot_, &QCustomPlot::mousePress, this, &RealtimeChart::mousePress);
 }
 
-void RealtimeChart::show()
-{
-    custom_plot_->show();
-}
-
 void RealtimeChart::mousePress()
 {
     if (custom_plot_->xAxis->selectedParts().testFlag(QCPAxis::spAxis))
