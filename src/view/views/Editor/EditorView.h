@@ -5,7 +5,6 @@
 #include <QStackedLayout>
 #include "../../core/AbstractView.h"
 #include "../../utility/CustomElements.h"
-#include "../../widgets/InformationWidget.h"
 
 // Model
 #include "../../../model/core/AbstractItem.h"
@@ -14,11 +13,13 @@
 class EditorView : public AbstractView {
 Q_OBJECT
 private:
-    InformationWidget * information_widget_;
+    QLabel * title_;
     QWidget * form_;
     QStackedLayout* form_stack_;
     AbstractItem* item_;
     QVector<AbstractFormWidget*> editors_;
+    QPushButton * ok_button_, * cancel_button_;
+
 public:
     explicit EditorView(AbstractItem* item, QLayout * layout = nullptr, QWidget *parent = nullptr);
     void update();

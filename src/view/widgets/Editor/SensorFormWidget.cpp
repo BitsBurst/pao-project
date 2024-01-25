@@ -20,5 +20,4 @@ SensorFormWidget::SensorFormWidget(QWidget* parent)
 
     static_cast<QFormLayout*>(layout_)->addRow(tr("&Min Range"), min_range_edit_);
     static_cast<QFormLayout*>(layout_)->addRow(tr("&Max Range"), max_range_edit_);
-    static_cast<QFormLayout*>(layout_)->addRow(getRowBtn());
 }

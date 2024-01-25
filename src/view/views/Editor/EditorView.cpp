@@ -7,8 +7,20 @@ EditorView::EditorView(AbstractItem* item, QLayout* layout, QWidget* parent)
         :AbstractView(CustomElements::getCustomLayoutPrototype(SINGLE_SPACING), parent), item_(item)
 {
     // Initialization
-    information_widget_ = new InformationWidget(item_);
+    title_ = new QLabel("Editor");
+    title_->setFont(CustomElements::getFontH1());
 
+    ok_button_ = new QPushButton("Ok");
+    cancel_button_ = new QPushButton("Annulla");
+
+    QWidget * btn_row = new QWidget(this);
+    QHBoxLayout * btn_row_layout = new QHBoxLayout(btn_row);
+
+    btn_row_layout->setAlignment(Qt::AlignRight | Qt::AlignCenter);
+    btn_row->setLayout(btn_row_layout);
+
+    btn_row_layout->addWidget(ok_button_);
+    btn_row_layout->addWidget(cancel_button_);
 
     // Form
     form_ = new QWidget(this);
@@ -26,8 +38,10 @@ EditorView::EditorView(AbstractItem* item, QLayout* layout, QWidget* parent)
     editors_.push_back(category_form);
 
     // Layout Widgets
-    layout_->addWidget(information_widget_);
+    layout_->addWidget(title_);
     layout_->addWidget(form_);
+    static_cast<QVBoxLayout*>(layout_)->addStretch();
+    layout_->addWidget(btn_row);
 
     setActiveForm(0);
 }
@@ -41,9 +55,6 @@ void EditorView::setItem(AbstractItem* item)
 void EditorView::update()
 {
     QWidget::update();
-
-    information_widget_->deleteLater();
-    layout_->replaceWidget(information_widget_, new InformationWidget(item_));
 }
 
 void EditorView::setActiveForm(int index)
