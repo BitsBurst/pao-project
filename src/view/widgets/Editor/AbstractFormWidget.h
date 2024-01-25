@@ -4,7 +4,7 @@
 #include <QLabel>
 #include <QLineEdit>
 #include <QPushButton>
-#include "../core/AbstractWidget.h"
+#include "../../core/AbstractWidget.h"
 
 class AbstractFormWidget : public AbstractWidget {
     Q_OBJECT

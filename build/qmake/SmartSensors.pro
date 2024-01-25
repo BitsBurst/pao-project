@@ -21,7 +21,7 @@ SOURCES += ../../main.cpp \
 ../../src/view/containers/MainContentContainer.cpp \ 
 ../../src/view/views/GroupListView.cpp \ 
 ../../src/view/views/AbstractSingleView.cpp \
-../../src/view/views/ModifyView.cpp \ 
+../../src/view/views/EditorView.cpp \
 ../../src/model/datagen/AbstractDataGen.cpp \ 
 ../../src/model/core/AbstractItem.cpp \ 
 ../../src/model/core/Category.cpp \ 
@@ -45,7 +45,7 @@ HEADERS += ../../src/view/MainView.h \
 ../../src/view/containers/MainContentContainer.h \ 
 ../../src/view/views/GroupListView.h \ 
 ../../src/view/views/AbstractSingleView.h \
-../../src/view/views/ModifyView.h \ 
+../../src/view/views/EditorView.h \
 ../../src/model/datagen/AbstractDataGen.h \ 
 ../../src/model/core/AbstractItem.h \ 
 ../../src/model/core/Category.h \ 

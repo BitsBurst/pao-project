@@ -5,7 +5,7 @@
 #include "../storage/StorageController.h"
 #include "../../view/views/AbstractSingleView.h"
 #include "../../view/views/GroupListView.h"
-#include "../../view/views/ModifyView.h"
+#include "../../view/views/Editor/EditorView.h"
 #include "../../view/views/CreateView.h"
 #include "../../view/views/SettingsView.h"
 #include "../../view/views/SingleViewSensor.h"
@@ -25,7 +25,7 @@ private:
     SingleViewSensor * single_view_sensor_;
     SingleViewGroup * single_view_group_;
     GroupListView * group_list_view_;
-    ModifyView * modify_view_;
+    EditorView * modify_view_;
     CreateView * create_view_;
     SettingsView * settings_view_;
 

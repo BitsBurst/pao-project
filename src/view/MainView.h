@@ -12,7 +12,7 @@
 #include "containers/MainContentContainer.h"
 #include "views/GroupListView.h"
 #include "views/AbstractSingleView.h"
-#include "views/ModifyView.h"
+#include "views/Editor/EditorView.h"
 #include "views/SettingsView.h"
 #include "views/CreateView.h"
 

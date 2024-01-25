@@ -1,6 +1,6 @@
 #include <QFormLayout>
 #include "AbstractFormWidget.h"
-#include "../utility/CustomElements.h"
+#include "../../utility/CustomElements.h"
 
 AbstractFormWidget::AbstractFormWidget(QWidget* parent)
     : AbstractWidget( new QFormLayout, parent)

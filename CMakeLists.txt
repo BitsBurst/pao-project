@@ -30,8 +30,8 @@ set(PROJECT_SOURCES
         src/view/views/GroupListView.h
         src/view/views/AbstractSingleView.cpp
         src/view/views/AbstractSingleView.h
-        src/view/views/ModifyView.cpp
-        src/view/views/ModifyView.h
+        src/view/views/Editor/EditorView.cpp
+        src/view/views/Editor/EditorView.h
         src/model/datagen/AbstractDataGen.cpp
         src/model/datagen/AbstractDataGen.h
         src/model/core/AbstractItem.cpp
@@ -89,10 +89,12 @@ set(PROJECT_SOURCES
         src/view/views/SingleViewGroup.cpp
         src/view/widgets/InformationWidget.cpp
         src/view/widgets/InformationWidget.h
-        src/view/widgets/AbstractFormWidget.cpp
-        src/view/widgets/AbstractFormWidget.h
-        src/view/widgets/SensorFormWidget.cpp
-        src/view/widgets/SensorFormWidget.h
+        src/view/widgets/Editor/AbstractFormWidget.cpp
+        src/view/widgets/Editor/AbstractFormWidget.h
+        src/view/widgets/Editor/SensorFormWidget.cpp
+        src/view/widgets/Editor/SensorFormWidget.h
+        src/view/widgets/Editor/CategoryFormWidget.cpp
+        src/view/widgets/Editor/CategoryFormWidget.h
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
