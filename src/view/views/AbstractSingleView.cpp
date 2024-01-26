@@ -1,4 +1,5 @@
 #include "AbstractSingleView.h"
+#include "../../controller/LocatorController.h"
 
 AbstractSingleView::AbstractSingleView(AbstractItem* item, bool check_add_btn, QWidget* parent)
         : AbstractView(CustomElements::getCustomLayoutPrototype(SINGLE_SPACING), parent), item_(item)
@@ -21,11 +22,5 @@ AbstractSingleView::AbstractSingleView(AbstractItem* item, bool check_add_btn, Q
 
 void AbstractSingleView::handleEvents()
 {
-    connect(information_widget_, &InformationWidget::changeToModify, this, &AbstractSingleView::emitChangeToModifyView);
-}
-
-// Slots
-void AbstractSingleView::emitChangeToModifyView()
-{
-    emit changeToModifyView(item_);
+    connect(information_widget_, &InformationWidget::changeToModify, std::bind(&AbstractSingleView::changeToModifyView, this, item_));
 }

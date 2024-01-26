@@ -9,6 +9,7 @@
 
 class AbstractSingleView : public AbstractView {
     Q_OBJECT
+
 signals:
     void changeToModifyView(AbstractItem* item);
 
@@ -17,9 +18,6 @@ private:
     AbstractItem* item_;
 
     void handleEvents();
-
-private slots:
-    void emitChangeToModifyView();
 
 public:
     explicit AbstractSingleView(AbstractItem* item, bool check_add_btn = false, QWidget *parent = nullptr);
