@@ -8,7 +8,7 @@
 #include "../../utility/event/EventHandler.h"
 class AbstractItem {
 public:
-	 ~AbstractItem();
+	 virtual ~AbstractItem();
 	 AbstractItem();
 	 AbstractItem(QString);
 	 AbstractItem(AbstractItem const &abstract_item);
