@@ -13,8 +13,8 @@ enum class LogLevel {
 	ERROR
 };
 enum class LogMethod {
-	IN,
-	OUT,
+	_IN_,
+	_OUT_,
 };
 /*
  * This class is used to store the log message in a queue

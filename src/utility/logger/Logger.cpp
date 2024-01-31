@@ -4,7 +4,7 @@ LogLevel Logger::log_level_ = LogLevel::WARNING;
 QFile* Logger::log_file_ = nullptr;
 QString Logger::log_filename_ = "log.txt";
 std::map<LogLevel,std::string> Logger::ll_map = {{LogLevel::INFO,"INFO"},{LogLevel::WARNING,"WARNING"},{LogLevel::ERROR,"ERROR"}};
-std::map<LogMethod,std::string> Logger::lm_map = {{LogMethod::IN,"IN"},{LogMethod::OUT,"OUT"}};
+std::map<LogMethod,std::string> Logger::lm_map = {{ LogMethod::_IN_, "_IN_"}, { LogMethod::_OUT_, "_OUT_"}};
 const bool Logger::qdeubg_ = false; //IMPORTANT: this should be done by the preprocessor, not a runtime check
 LoggerWorker* Logger::worker_ = new LoggerWorker();
 LogLevel Logger::GetLogLevel()

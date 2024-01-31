@@ -55,7 +55,7 @@ void StorageWorker::isStorageInitialized()
 }
 void StorageWorker::Store()
 {
-	Logger::Log(LogLevel::INFO, __FILE__, __LINE__, __FUNCTION__, LogMethod::IN);
+	Logger::Log(LogLevel::INFO, __FILE__, __LINE__, __FUNCTION__, LogMethod::_IN_);
 	try {
 		StorageObject storage = **storagePointer;
 		StorageUtility::StoreJSON(storage.toJson(), filename_);
@@ -64,16 +64,16 @@ void StorageWorker::Store()
 		qDebug() << "Couldn't store storage";
 		Logger::Log(LogLevel::ERROR, __FILE__, __LINE__, __FUNCTION__, QString("Couldn't store storage: %1").arg(e.what()));
 	}
-	Logger::Log(LogLevel::INFO, __FILE__, __LINE__, __FUNCTION__, LogMethod::OUT);
+	Logger::Log(LogLevel::INFO, __FILE__, __LINE__, __FUNCTION__, LogMethod::_OUT_);
 }
 void StorageWorker::Load()
 {
-	Logger::Log(LogLevel::INFO, __FILE__, __LINE__, __FUNCTION__, LogMethod::IN);
+	Logger::Log(LogLevel::INFO, __FILE__, __LINE__, __FUNCTION__, LogMethod::_IN_);
 	try {
 		QJsonObject obj = StorageUtility::LoadJSON(filename_);
 		*storagePointer = StorageObject::fromJson(obj);
 	} catch (std::exception& e) {
 		Logger::Log(LogLevel::ERROR, __FILE__, __LINE__, __FUNCTION__, QString("Couldn't load storage: %1").arg(e.what()));
 	}
-	Logger::Log(LogLevel::INFO, __FILE__, __LINE__, __FUNCTION__, LogMethod::OUT);
+	Logger::Log(LogLevel::INFO, __FILE__, __LINE__, __FUNCTION__, LogMethod::_OUT_);
 }
