@@ -15,7 +15,7 @@ Category::Category(QString name, QString unit_measure, DistributionType distribu
 {
 
 }
-Category::Category():AbstractItem(""), unit_measure_(""), distribution_type_(UNIFORM)
+Category::Category():AbstractItem(""), unit_measure_(""), distribution_type_(DistributionType::UNIFORM)
 {
 
 }
@@ -38,7 +38,7 @@ Category * Category::fromJson(const QJsonObject& obj)
 		category->distribution_type_ = static_cast<DistributionType>(distribution_type.toInt());
 	return category;
 }
-int Category::getDistributionType() const
+DistributionType Category::getDistributionType() const
 {
 	return distribution_type_;
 }

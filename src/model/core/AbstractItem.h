@@ -6,7 +6,7 @@
 #include <QUuid>
 #include <QJsonObject>
 #include "../../utility/event/EventHandler.h"
-class AbstractItem {
+class AbstractItem{
 public:
 	 virtual ~AbstractItem();
 	 AbstractItem();

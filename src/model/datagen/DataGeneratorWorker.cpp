@@ -6,13 +6,12 @@ DataGeneratorWorker::DataGeneratorWorker(int maxrange, int minrange, int seed, u
 }
 void DataGeneratorWorker::run()
 {
-	RandomDataGenerator data_generator(seed);
+	CombinedDataGenerator data_generator;
 	data_generator.setDistributionType(distributionType);
 	while (true)
 	{
 		counter++;
-		std::vector<double> data = data_generator.generateData(minrange, maxrange,1);
-		DataGenObj obj(data.front(), QDateTime::currentDateTime());
+		DataGenObj obj(data_generator.generateData(), QDateTime::currentDateTime());
 		newDataEvent.notify(obj);
 		QThread::msleep(speed);
 	}

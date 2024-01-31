@@ -1,6 +1,4 @@
 #include "SingleViewGroup.h"
-#include "../../utility/Logger.h"
-
 #include <utility>
 
 SingleViewGroup::SingleViewGroup(QVector<Sensor *> sensor_list, QWidget * parent)

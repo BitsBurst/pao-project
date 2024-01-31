@@ -5,7 +5,8 @@
 #include "Category.h"
 #include "../datagen/DataGeneratorWorker.h"
 #include "../../utility/limitedqmap/LimitedQMap.h"
-class Sensor: public AbstractItem {
+class Sensor: public AbstractItem{
+
 public:
 	Sensor(QString, Category);
 	Sensor();
@@ -20,7 +21,7 @@ public:
 	static Sensor * fromJson(QJsonObject const &);
 	void startDataGeneration();
 	void stopDataGeneration();
-	EventHandlerVoid onDataGenerated;
+	EventHandler<DataGenObj> onDataGenerated;
 
 	LimitedQMap<QDateTime, double> data_;
 

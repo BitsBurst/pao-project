@@ -71,8 +71,7 @@ Sensor* Sensor::fromJson(const QJsonObject& object)
 void Sensor::startDataGeneration()
 {
 	if(data_generator_worker_ == nullptr){
-		data_generator_worker_ = new DataGeneratorWorker(max_range_, min_range_, seed_, generationTime,
-				static_cast<DistributionType>(category_.getDistributionType()));
+		data_generator_worker_ = new DataGeneratorWorker(max_range_, min_range_, seed_, generationTime, category_.getDistributionType());
 		data_generator_worker_->newDataEvent.subscribe(std::bind(&Sensor::dataGenerated, this, std::placeholders::_1));
 	}
 	data_generator_worker_->start();
@@ -87,5 +86,5 @@ void Sensor::dataGenerated(DataGenObj obj)
 {
 	//qDebug() << "Data generated" + QString::number(obj.getTimestamp().toSecsSinceEpoch()) + " " + QString::number(obj.getData());
 	data_.insertLimited(obj.getTimestamp(), obj.getData());
-	onDataGenerated.notifyAsync();
+	onDataGenerated.notify(obj);
 }

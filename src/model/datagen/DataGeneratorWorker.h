@@ -10,7 +10,7 @@
 class DataGeneratorWorker: public QThread{
 	Q_OBJECT
 public:
-	DataGeneratorWorker(int maxrange, int minrange, int seed, unsigned long time = 500, DistributionType distribution_type = UNIFORM,
+	DataGeneratorWorker(int maxrange, int minrange, int seed, unsigned long time = 500, DistributionType distribution_type = DistributionType::UNIFORM,
 			QObject* parent= nullptr);
 	~DataGeneratorWorker();
 	void start(Priority = InheritPriority);

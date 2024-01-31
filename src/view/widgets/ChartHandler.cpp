@@ -1,5 +1,4 @@
 #include "ChartHandler.h"
-#include "../../utility/Logger.h"
 
 ChartHandler::ChartHandler(int number_charts, QWidget* parent)
     : AbstractWidget(CustomElements::getCustomLayoutPrototype(SINGLE_SPACING), parent)
