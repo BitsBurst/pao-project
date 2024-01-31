@@ -109,7 +109,7 @@ HEADERS += ../../src/view/MainView.h \
 ../../include/CustomPlot/qcustomplot.h \ 
 
 
-RESOURCES+=../../src/resources.qrc
+RESOURCES+=../../resources.qrc
 
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
