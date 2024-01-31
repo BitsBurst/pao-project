@@ -1705,7 +1705,7 @@ protected:
   
   // introduced virtual methods:
   virtual void drawLabelMaybeCached(QCPPainter *painter, const QFont &font, const QColor &color, const QPointF &pos, AnchorSide side, double rotation, const QString &text);
-  virtual QByteArray generateLabelParameterHash() const; // TODO: get rid of this in favor of invalidation flag upon setters?
+  virtual QByteArray generateLabelParameterHash() const; //  get rid of this in favor of invalidation flag upon setters?
 
   // non-virtual methods:
   QPointF getAnchorPos(const QPointF &tickPos);
@@ -7705,7 +7705,7 @@ public:
   
   // introduced virtual methods:
   virtual double selectTest(const QPointF &pos, bool onlySelectable, QVariant *details=0) const; // actually introduced in QCPLayerable as non-pure, but we want to force reimplementation for plottables
-  virtual QCPPlottableInterface1D *interface1D() { return 0; } // TODO: return this later, when QCPAbstractPolarPlottable is created
+  virtual QCPPlottableInterface1D *interface1D() { return 0; } //  return this later, when QCPAbstractPolarPlottable is created
   virtual QCPRange getKeyRange(bool &foundRange, QCP::SignDomain inSignDomain=QCP::sdBoth) const;
   virtual QCPRange getValueRange(bool &foundRange, QCP::SignDomain inSignDomain=QCP::sdBoth, const QCPRange &inKeyRange=QCPRange()) const;
   
