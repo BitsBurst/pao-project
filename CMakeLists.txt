@@ -12,6 +12,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 # CMAKE_PREFIX_PATH the path where Qt is installed
 set(CMAKE_PREFIX_PATH "$ENV{QT_PATH}/6.6.1/gcc_64/lib/cmake")
 
+
 find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Widgets Charts Core PrintSupport)
 find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets Charts Core PrintSupport)
 string(TOLOWER ${CMAKE_BUILD_TYPE} build_type)
@@ -127,7 +128,10 @@ else()
     endif()
 endif()
 
-add_library(qcustomplot include/CustomPlot/qcustomplot.h include/CustomPlot/qcustomplot.cpp)
+add_library(qcustomplot
+        include/CustomPlot/qcustomplot.h
+        include/CustomPlot/qcustomplot.cpp
+)
 target_link_libraries(qcustomplot PUBLIC Qt${QT_VERSION_MAJOR}::Core Qt${QT_VERSION_MAJOR}::PrintSupport)
 
 target_link_libraries(SmartSensors PRIVATE Qt${QT_VERSION_MAJOR}::Widgets Qt${QT_VERSION_MAJOR}::Charts qcustomplot)
@@ -153,10 +157,12 @@ install(TARGETS SmartSensors
 if(QT_VERSION_MAJOR EQUAL 6)
     qt_finalize_executable(SmartSensors)
 endif()
-#if (build_type STREQUAL release)
-#target_compile_definitions(${PROJECT_NAME} PUBLIC
-#        QT_NO_DEBUG_OUTPUT
-#        QT_NO_INFO_OUTPUT
-#        QT_NO_WARNING_OUTPUT
-#)
-#endif()
+if (build_type STREQUAL release)
+    #target_compile_definitions(${PROJECT_NAME} PUBLIC
+    #        QT_NO_DEBUG_OUTPUT
+    #        QT_NO_INFO_OUTPUT
+    #        QT_NO_WARNING_OUTPUT
+    #)
+else ()
+    #add_compile_definitions(DEBUG)
+endif ()

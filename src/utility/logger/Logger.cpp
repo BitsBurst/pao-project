@@ -4,7 +4,6 @@ QFile* Logger::log_file_ = nullptr; //log file pointer
 QString Logger::log_filename_ = "log.txt"; //log file name
 std::map<LogLevel,std::string> Logger::ll_map = {{ LogLevel::_INFO_, "_INFO_"}, { LogLevel::_WARNING_, "_WARNING_"}, { LogLevel::_ERROR_, "_ERROR_"}}; //log level map
 std::map<LogMethod,std::string> Logger::lm_map = {{ LogMethod::_IN_, "_IN_"}, { LogMethod::_OUT_, "_OUT_"}}; //log method map
-const bool Logger::qdeubg_ = false; //IMPORTANT: this should be done by the preprocessor, not a runtime check
 LoggerWorker* Logger::worker_ = new LoggerWorker(); //logger worker
 /*
  * @brief Logger::GetLogLevel
@@ -177,8 +176,9 @@ void LoggerWorker::run() {
 		try {
 			Logger::CheckMaxLogSize();
 			if (Logger::log_level_<=logString.log_level_) {
-				if (Logger::qdeubg_) //IMPORTANT: this should be done by the preprocessor, not a runtime check
+				#ifdef DEBUG
 					qDebug() << logString.getLogString();
+				#endif
 				Logger::log_file_->write(logString.getLogString().toUtf8());
 				Logger::log_file_->flush();
 				Logger::log_file_->waitForBytesWritten(10000);
