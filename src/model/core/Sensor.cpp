@@ -85,7 +85,7 @@ void Sensor::stopDataGeneration()
 }
 void Sensor::dataGenerated(DataGenObj obj)
 {
-	qDebug() << "Data generated" + QString::number(obj.getTimestamp().toSecsSinceEpoch()) + " " + QString::number(obj.getData());
+	//qDebug() << "Data generated" + QString::number(obj.getTimestamp().toSecsSinceEpoch()) + " " + QString::number(obj.getData());
 	data_.insertLimited(obj.getTimestamp(), obj.getData());
 	onDataGenerated.notifyAsync();
 }

@@ -13,7 +13,7 @@ private:
 	QVector<Sensor*> sensors_;
 public:
 	StorageObject();
-	~StorageObject();
+	virtual ~StorageObject();
 	StorageObject(const StorageObject &);
 	const QList<Category*>* getCategories() const;
 	const QList<Sensor*>* getSensors() const;

@@ -12,7 +12,7 @@ void StorageObject::addSensor(Sensor* sensor)
 {
 	sensors_.append(sensor);
 	sensor->modelChangedEvent.subscribe(std::bind(&StorageObject::modelChangedEvent, this));
-	sensor->startDataGeneration();
+	//sensor->startDataGeneration();
 	modelChangedEvent();
 }
 void StorageObject::removeCategory(Category* category)
@@ -122,7 +122,7 @@ StorageObject *StorageObject::fromJson(const QJsonObject& obj)
 			Sensor* sensor = Sensor::fromJson(i.toObject());
 			sensor->modelChangedEvent.subscribe(std::bind(&StorageObject::modelChangedEvent, storage));
 			storage->sensors_.push_front(sensor);
-			sensor->startDataGeneration();
+			//sensor->startDataGeneration();
 		}
 	}
 	return storage;
