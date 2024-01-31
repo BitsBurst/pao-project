@@ -5,7 +5,7 @@ AbstractItem::AbstractItem(QString name):id_(QUuid::createUuid().toString()), na
 {
 }
 QString AbstractItem::getId()
-{
+const {
 	return id_;
 }
 void AbstractItem::setId(QString id)
@@ -14,7 +14,7 @@ void AbstractItem::setId(QString id)
 	modelChangedHandler();
 }
 QString AbstractItem::getName()
-{
+const {
 	return name_;
 }
 void AbstractItem::setName(QString name)

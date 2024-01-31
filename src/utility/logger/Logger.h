@@ -64,7 +64,7 @@ private:
 	static QFile* log_file_;
 	static QString log_filename_;
 	static LoggerWorker* worker_;
-	static bool qdeubg_; //IMPORTANT: this should be done by the preprocessor, not a runtime check
+	static const bool qdeubg_; //IMPORTANT: this should be done by the preprocessor, not a runtime check
 	static void CheckMaxLogSize();
 	static std::map<LogLevel,std::string> ll_map;
 	static std::map<LogMethod,std::string> lm_map;

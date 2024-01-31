@@ -1,5 +1,5 @@
 #include "Category.h"
-QString Category::getUnitMeasure()
+QString Category::getUnitMeasure() const
 {
 	return unit_measure_;
 }
@@ -38,7 +38,7 @@ Category * Category::fromJson(const QJsonObject& obj)
 		category->distribution_type_ = static_cast<DistributionType>(distribution_type.toInt());
 	return category;
 }
-int Category::getDistributionType()
+int Category::getDistributionType() const
 {
 	return distribution_type_;
 }

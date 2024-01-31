@@ -33,7 +33,7 @@ void StorageObject::removeSensor(Sensor* sensor)
 	}
 	modelChangedEvent();
 }
-Sensor* StorageObject::findSensor(Sensor sensor)
+const Sensor* StorageObject::findSensor(Sensor sensor) const
 {
 	for (auto& i : sensors_) {
 		if (i->getId() == sensor.getId())
@@ -41,7 +41,7 @@ Sensor* StorageObject::findSensor(Sensor sensor)
 	}
 	return nullptr;
 }
-Category* StorageObject::findCategory(Category category)
+const Category* StorageObject::findCategory(Category category) const
 {
 	for (auto& i : categories_) {
 		if (i->getId() == category.getId())
@@ -56,7 +56,7 @@ void StorageObject::modelChangedEvent()
 {
 	onModelChangedEvent.notifyAsync();
 }
-QList<Sensor*> StorageObject::filterSensorsByCategory(Category category)
+const QList<Sensor*> StorageObject::filterSensorsByCategory(Category category) const
 {
 	QList<Sensor*> list;
 	for (auto& i : sensors_) {
@@ -65,7 +65,7 @@ QList<Sensor*> StorageObject::filterSensorsByCategory(Category category)
 	}
 	return list;
 }
-QList<Sensor*> StorageObject::filterSensorsByName(QString name)
+const QList<Sensor*> StorageObject::filterSensorsByName(QString name) const
 {
 	QList<Sensor*> list;
 	for (auto& i : sensors_) {
@@ -74,7 +74,7 @@ QList<Sensor*> StorageObject::filterSensorsByName(QString name)
 	}
 	return list;
 }
-QList<Category*> StorageObject::filterCategoriesByName(QString name)
+const QList<Category*> StorageObject::filterCategoriesByName(QString name) const
 {
 	QList<Category*> list;
 	for (auto& i : categories_) {
@@ -83,24 +83,24 @@ QList<Category*> StorageObject::filterCategoriesByName(QString name)
 	}
 	return list;
 }
-QVector<Category*>* StorageObject::getCategories()
+const QVector<Category*>* StorageObject::getCategories() const
 {
 	checkCategories();
 	return &categories_;
 }
-QVector<Sensor*>* StorageObject::getSensors()
+const QVector<Sensor*>* StorageObject::getSensors() const
 {
 	checkSensors();
 	return &sensors_;
 }
-void StorageObject::checkCategories()
+void StorageObject::checkCategories() const
 {
 	if (categories_.size() == 0)
 	{
 		throw std::invalid_argument("Categories list is empty");
 	}
 }
-void StorageObject::checkSensors()
+void StorageObject::checkSensors() const
 {
 	if (sensors_.size() == 0)
 	{

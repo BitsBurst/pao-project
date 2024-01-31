@@ -9,11 +9,11 @@ public:
 	Category();
 	Category(QString, QString, DistributionType = UNIFORM);
 	~Category();
-	QString getUnitMeasure();
+	QString getUnitMeasure() const;
 	void setUnitMeasure(QString unit_measure);
 	QJsonObject toJson() const;
 	static Category* fromJson(QJsonObject const &);
-	int getDistributionType();
+	int getDistributionType() const;
 	Category& operator=(Category const &category);
 private:
 	QString unit_measure_;

@@ -15,7 +15,7 @@ public:
 	static void runTestV3();
 	static void runTestV4();
 	static void runTestV5();
-	static  void runTestV6();
+	static void runTestV6();
 };
 void TestDavide::runTest()
 {

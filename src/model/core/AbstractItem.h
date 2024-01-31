@@ -12,9 +12,9 @@ public:
 	 AbstractItem();
 	 AbstractItem(QString);
 	 AbstractItem(AbstractItem const &abstract_item);
-	 QString getId();
+	 QString getId() const;
 	 void setId(QString id);
-	 QString getName();
+	 QString getName() const;
 	 void setName(QString name);
 	 QJsonObject toJson() const;
 	 static AbstractItem * fromJson(QJsonObject const &);

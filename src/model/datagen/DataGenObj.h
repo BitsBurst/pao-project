@@ -5,8 +5,8 @@
 class DataGenObj {
 public:
 	DataGenObj(double, QDateTime);
-	double getData();
-	QDateTime getTimestamp();
+	double getData() const;
+	QDateTime getTimestamp() const;
 private:
 	double data_;
 	QDateTime timestamp_;

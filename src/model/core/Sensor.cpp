@@ -9,7 +9,7 @@ Sensor::Sensor(QString name, Category category):AbstractItem(name), min_range_(0
 Sensor::~Sensor()
 {
 }
-double Sensor::getMinRange()
+double Sensor::getMinRange() const
 {
 	return min_range_;
 }
@@ -18,7 +18,7 @@ void Sensor::setMinRange(double min_range)
 	min_range_ = min_range;
 	modelChangedEvent.notifyAsync();
 }
-double Sensor::getMaxRange()
+double Sensor::getMaxRange() const
 {
 	return max_range_;
 }
@@ -27,7 +27,7 @@ void Sensor::setMaxRange(double max_range)
 	max_range_ = max_range;
 	modelChangedEvent.notifyAsync();
 }
-Category Sensor::getCategory()
+Category Sensor::getCategory() const
 {
 	return category_;
 }
