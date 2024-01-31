@@ -31990,7 +31990,7 @@ void QCPPolarAxisRadial::scaleRange(double factor, double center)
 void QCPPolarAxisRadial::rescale(bool onlyVisiblePlottables)
 {
   Q_UNUSED(onlyVisiblePlottables)
-  /* TODO
+  /* 
   QList<QCPAbstractPlottable*> p = plottables();
   QCPRange newRange;
   bool haveRange = false;
@@ -32109,7 +32109,7 @@ double QCPPolarAxisRadial::radiusToCoord(double radius) const
 */
 QCPPolarAxisRadial::SelectablePart QCPPolarAxisRadial::getPartAt(const QPointF &pos) const
 {
-  Q_UNUSED(pos) // TODO remove later
+  Q_UNUSED(pos) //  remove later
   if (!mVisible)
     return spNone;
   
@@ -32214,11 +32214,11 @@ void QCPPolarAxisRadial::mousePressEvent(QMouseEvent *event, const QVariant &det
 */
 void QCPPolarAxisRadial::mouseMoveEvent(QMouseEvent *event, const QPointF &startPos)
 {
-  Q_UNUSED(event) // TODO remove later
-  Q_UNUSED(startPos) // TODO remove later
+  Q_UNUSED(event) //  remove later
+  Q_UNUSED(startPos) //  remove later
   if (mDragging)
   {
-    /* TODO
+    /* 
     const double startPixel = orientation() == Qt::Horizontal ? startPos.x() : startPos.y();
     const double currentPixel = orientation() == Qt::Horizontal ? event->pos().x() : event->pos().y();
     if (mScaleType == QCPPolarAxisRadial::stLinear)
@@ -32928,7 +32928,7 @@ QPointF QCPPolarAxisAngular::coordToPixel(double angleCoord, double radiusCoord)
 */
 QCPPolarAxisAngular::SelectablePart QCPPolarAxisAngular::getPartAt(const QPointF &pos) const
 {
-  Q_UNUSED(pos) // TODO remove later
+  Q_UNUSED(pos) //  remove later
   
   if (!mVisible)
     return spNone;
@@ -34436,7 +34436,7 @@ QFont QCPPolarLegendItem::getFont() const
 
 /* start of documentation of inline functions */
 
-// TODO
+// 
 
 /* end of documentation of inline functions */
 
@@ -34465,14 +34465,14 @@ QCPPolarGraph::QCPPolarGraph(QCPPolarAxisAngular *keyAxis, QCPPolarAxisRadial *v
   mKeyAxis(keyAxis),
   mValueAxis(valueAxis),
   mSelectable(QCP::stWhole)
-  //mSelectionDecorator(0) // TODO
+  //mSelectionDecorator(0) // 
 {
   if (keyAxis->parentPlot() != valueAxis->parentPlot())
     qDebug() << Q_FUNC_INFO << "Parent plot of keyAxis is not the same as that of valueAxis.";
   
   mKeyAxis->registerPolarGraph(this);
   
-  //setSelectionDecorator(new QCPSelectionDecorator); // TODO
+  //setSelectionDecorator(new QCPSelectionDecorator); // 
   
   setPen(QPen(Qt::blue, 0));
   setBrush(Qt::NoBrush);
@@ -34481,7 +34481,7 @@ QCPPolarGraph::QCPPolarGraph(QCPPolarAxisAngular *keyAxis, QCPPolarAxisRadial *v
 
 QCPPolarGraph::~QCPPolarGraph()
 {
-  /* TODO
+  /* 
   if (mSelectionDecorator)
   {
     delete mSelectionDecorator;
@@ -34871,7 +34871,7 @@ bool QCPPolarGraph::addToLegend(QCPLegend *legend)
     return false;
   }
   
-  //if (!legend->hasItemWithPlottable(this)) // TODO
+  //if (!legend->hasItemWithPlottable(this)) // 
   //{
     legend->addItem(new QCPPolarLegendItem(legend, this));
     return true;

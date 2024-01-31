@@ -1594,7 +1594,7 @@ class QCPLabelPainterPrivate
   Q_GADGET
 public:
   /*!
-    TODO
+    
   */
   enum AnchorMode { amRectangular    ///< 
                     ,amSkewedUpright ///<
@@ -1603,7 +1603,7 @@ public:
   Q_ENUMS(AnchorMode)
   
   /*!
-    TODO
+    
   */
   enum AnchorReferenceType { artNormal    ///< 
                              ,artTangent ///<
@@ -1611,7 +1611,7 @@ public:
   Q_ENUMS(AnchorReferenceType)
   
   /*!
-    TODO
+    
   */
   enum AnchorSide { asLeft      ///< 
                     ,asRight    ///< 
@@ -7276,7 +7276,7 @@ public:
   Q_DECLARE_FLAGS(SelectableParts, SelectablePart)
   
   /*!
-    TODO
+    
   */
   enum LabelMode { lmUpright   ///< 
                    ,lmRotated ///< 
@@ -7536,7 +7536,7 @@ class QCP_LIB_DECL QCPPolarGrid :public QCPLayerable
   /// \endcond
 public:
   /*!
-    TODO
+    
   */
   enum GridType { gtAngular = 0x01 ///< 
                   ,gtRadial = 0x02 ///< 
@@ -7730,7 +7730,7 @@ protected:
   QCPDataSelection mSelection;
   //QCPSelectionDecorator *mSelectionDecorator;
   
-  // introduced virtual methods (later reimplemented TODO from QCPAbstractPolarPlottable):
+  // introduced virtual methods (later reimplemented  from QCPAbstractPolarPlottable):
   virtual QRect clipRect() const;
   virtual void draw(QCPPainter *painter);
   virtual QCP::Interaction selectionCategory() const;
