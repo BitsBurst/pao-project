@@ -3,9 +3,9 @@
 const QString StorageController::directory_name_ = "data";
 StorageController::StorageController():storage_(nullptr), worker_(new StorageWorker(&storage_, QString("%1/data.json").arg(directory_name_)))
 {
-	Logger::Log(LogLevel::INFO, __FILE__, __LINE__, __FUNCTION__, LogMethod::_IN_);
+	Logger::Log(LogLevel::_INFO_, __FILE__, __LINE__, __FUNCTION__, LogMethod::_IN_);
 	worker_->onStorageReadyEvent.subscribe(std::bind(&StorageController::storageReadyEvent, this));
-	Logger::Log(LogLevel::INFO, __FILE__, __LINE__, __FUNCTION__, LogMethod::_OUT_);
+	Logger::Log(LogLevel::_INFO_, __FILE__, __LINE__, __FUNCTION__, LogMethod::_OUT_);
 }
 bool StorageController::Init()
 {
@@ -13,9 +13,9 @@ bool StorageController::Init()
 }
 void StorageController::StoreStorage()
 {
-	Logger::Log(LogLevel::INFO, __FILE__, __LINE__, __FUNCTION__, LogMethod::_IN_);
+	Logger::Log(LogLevel::_INFO_, __FILE__, __LINE__, __FUNCTION__, LogMethod::_IN_);
 	worker_->SaveStorage();
-	Logger::Log(LogLevel::INFO, __FILE__, __LINE__, __FUNCTION__, LogMethod::_OUT_);
+	Logger::Log(LogLevel::_INFO_, __FILE__, __LINE__, __FUNCTION__, LogMethod::_OUT_);
 }
 void StorageController::modelChanged()
 {
@@ -40,8 +40,8 @@ void StorageController::isStorageReady()
 }
 void StorageController::storageReadyEvent()
 {
-	Logger::Log(LogLevel::INFO, __FILE__, __LINE__, __FUNCTION__, LogMethod::_IN_);
+	Logger::Log(LogLevel::_INFO_, __FILE__, __LINE__, __FUNCTION__, LogMethod::_IN_);
 	storage_->onModelChangedEvent.subscribe(std::bind(&StorageController::modelChanged, this));
 	emit StorageReady();
-	Logger::Log(LogLevel::INFO, __FILE__, __LINE__, __FUNCTION__, LogMethod::_OUT_);
+	Logger::Log(LogLevel::_INFO_, __FILE__, __LINE__, __FUNCTION__, LogMethod::_OUT_);
 }

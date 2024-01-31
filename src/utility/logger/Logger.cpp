@@ -1,9 +1,9 @@
 #include "Logger.h"
 /*Logger*/
-LogLevel Logger::log_level_ = LogLevel::WARNING;
+LogLevel Logger::log_level_ = LogLevel::_WARNING_;
 QFile* Logger::log_file_ = nullptr;
 QString Logger::log_filename_ = "log.txt";
-std::map<LogLevel,std::string> Logger::ll_map = {{LogLevel::INFO,"INFO"},{LogLevel::WARNING,"WARNING"},{LogLevel::ERROR,"ERROR"}};
+std::map<LogLevel,std::string> Logger::ll_map = {{ LogLevel::_INFO_, "_INFO_"}, { LogLevel::_WARNING_, "_WARNING_"}, { LogLevel::_ERROR_, "_ERROR_"}};
 std::map<LogMethod,std::string> Logger::lm_map = {{ LogMethod::_IN_, "_IN_"}, { LogMethod::_OUT_, "_OUT_"}};
 const bool Logger::qdeubg_ = false; //IMPORTANT: this should be done by the preprocessor, not a runtime check
 LoggerWorker* Logger::worker_ = new LoggerWorker();

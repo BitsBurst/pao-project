@@ -8,9 +8,9 @@
 #include <QSemaphore>
 #include <QThread>
 enum class LogLevel {
-	INFO,
-	WARNING,
-	ERROR
+	_INFO_,
+	_WARNING_,
+	_ERROR_
 };
 enum class LogMethod {
 	_IN_,

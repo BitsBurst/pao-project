@@ -36,7 +36,7 @@ std::vector<double> RandomDataGenerator::generateData(int rangeStart, int rangeE
 		generateWeibullData(rangeStart, rangeEnd, dataSize, data);
 		break;
 	default:
-		Logger::Log(LogLevel::ERROR, __FILE__, __LINE__, __FUNCTION__, "Invalid distribution type");
+		Logger::Log(LogLevel::_ERROR_, __FILE__, __LINE__, __FUNCTION__, "Invalid distribution type");
 	}
 
 	return data;

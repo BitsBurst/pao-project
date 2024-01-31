@@ -17,12 +17,12 @@ MyApp::MyApp(int i, char** p_string): QApplication(i, p_string) {
 		LocatorController::ErrorControllerInstance()->manageException(e);
 	}
 	catch (std::runtime_error& e) {
-		Logger::Log(LogLevel::ERROR, __FILE__, __LINE__, __FUNCTION__, QString("Runtime error: %1").arg(e.what()));
+		Logger::Log(LogLevel::_ERROR_, __FILE__, __LINE__, __FUNCTION__, QString("Runtime error: %1").arg(e.what()));
 	}
 	catch (std::exception& e) {
-		Logger::Log(LogLevel::ERROR, __FILE__, __LINE__, __FUNCTION__, QString("Exception: %1").arg(e.what()));
+		Logger::Log(LogLevel::_ERROR_, __FILE__, __LINE__, __FUNCTION__, QString("Exception: %1").arg(e.what()));
 	}
 	catch (...) {
-		Logger::Log(LogLevel::ERROR, __FILE__, __LINE__, __FUNCTION__, "Unexpected error");
+		Logger::Log(LogLevel::_ERROR_, __FILE__, __LINE__, __FUNCTION__, "Unexpected error");
 	}
 }

@@ -8,10 +8,10 @@ int main(int argc, char *argv[])
 	{
 		if (strcmp(argv[i], "-d") == 0)
 		{
-			Logger::SetLogLevel(LogLevel::INFO);
+			Logger::SetLogLevel(LogLevel::_INFO_);
 		}
 	}
-	Logger::Log(LogLevel::INFO, __FILE__, __LINE__, __FUNCTION__, "Application Start");
+	Logger::Log(LogLevel::_INFO_, __FILE__, __LINE__, __FUNCTION__, "Application Start");
 	MyApp a(argc, argv);
     return a.exec();
 }

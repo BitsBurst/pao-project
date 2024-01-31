@@ -40,13 +40,13 @@ ErrorController* LocatorController::ErrorControllerInstance() {
 
 bool LocatorController::Init()
 {
-	Logger::Log(LogLevel::INFO, __FILE__, __LINE__, __FUNCTION__, "Locator Started");
+	Logger::Log(LogLevel::_INFO_, __FILE__, __LINE__, __FUNCTION__, "Locator Started");
 	bool result = true;
 	result &= StorageControllerInstance()->Init();
 	result &= WindowControllerInstance()->Init();
 	result &= BusinessControllerInstance()->Init();
 	result &= ErrorControllerInstance()->Init();
-	Logger::Log(LogLevel::INFO, __FILE__, __LINE__, __FUNCTION__, "Locator Finished" + QString(result ? "successfully" : "with errors"));
+	Logger::Log(LogLevel::_INFO_, __FILE__, __LINE__, __FUNCTION__, "Locator Finished" + QString(result ? "successfully" : "with errors"));
 	return result;
 }
 void LocatorController::Destroy()

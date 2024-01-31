@@ -4,7 +4,7 @@ bool StorageUtility::StoreJSON(QJsonObject obj, QString filename)
 	QFileInfo fi(filename);
 	QDir dir(fi.absoluteDir().absoluteFilePath("."));
 	if (!dir.exists()){
-		Logger::Log(LogLevel::INFO,__FILE__,__LINE__,__FUNCTION__,QString("Creating directory %1").arg(dir.absolutePath()));
+		Logger::Log(LogLevel::_INFO_,__FILE__,__LINE__,__FUNCTION__,QString("Creating directory %1").arg(dir.absolutePath()));
 		dir.mkpath(".");
 	}
 	QFile file(fi.absoluteFilePath());
@@ -16,7 +16,7 @@ bool StorageUtility::StoreJSON(QJsonObject obj, QString filename)
 		return true;
 	}
 	else {
-		Logger::Log(LogLevel::ERROR,__FILE__,__LINE__,__FUNCTION__,QString("Couldn't open save file."));
+		Logger::Log(LogLevel::_ERROR_,__FILE__,__LINE__,__FUNCTION__,QString("Couldn't open save file."));
 		return false;
 	}
 }
@@ -24,7 +24,7 @@ QJsonObject StorageUtility::LoadJSON(QString filename)
 {
 	QFile file(filename);
 	if (!file.open(QIODevice::ReadOnly)) {
-		Logger::Log(LogLevel::ERROR,__FILE__,__LINE__,__FUNCTION__,QString("Couldn't open saved file."));
+		Logger::Log(LogLevel::_ERROR_,__FILE__,__LINE__,__FUNCTION__,QString("Couldn't open saved file."));
 		throw std::runtime_error("Couldn't open saved file.");
 	}
 	QJsonDocument doc = QJsonDocument::fromJson(file.readAll());
