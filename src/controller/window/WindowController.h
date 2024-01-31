@@ -13,6 +13,9 @@ public:
 	void setDisabled(bool);
 private:
 	MainView* main_window_;
+
+    QStackedWidget * content_stack_;
+    QStackedWidget * sidebar_stack_;
 };
 
 #endif //SMARTSENSORS_WINDOWCONTROLLER_H

@@ -5,6 +5,7 @@
 #include <QScrollArea>
 #include "../core/AbstractView.h"
 #include "../widgets/GroupItemWidget.h"
+#include "../utility/CustomElements.h"
 
 class GroupListView : public AbstractView {
     Q_OBJECT
@@ -13,7 +14,6 @@ private:
     QVector<GroupItemWidget *> item_lists_;
 public:
     explicit GroupListView(QWidget *parent = nullptr);
-    void show();
 };
 
 #endif //SMARTSENSORS_GROUPLISTVIEW_H

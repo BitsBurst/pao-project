@@ -10,7 +10,7 @@ class SidebarContainer : public AbstractContainer {
 private:
     SidebarLowControlWidget * low_control_widget_;
 public:
-    explicit SidebarContainer(AbstractView * current_view = nullptr,QWidget * parent = nullptr);
+    explicit SidebarContainer(QStackedWidget * current_view = new QStackedWidget,QWidget * parent = nullptr);
 };
 
 #endif //SMARTSENSORS_SIDEBARCONTAINER_H

@@ -1,44 +1,19 @@
 #include "AbstractContainer.h"
 #include "../../utility/logger/Logger.h"
 
-AbstractContainer::AbstractContainer(AbstractView* current_view, QWidget* parent)
-    : AbstractGraphicalElement(new QVBoxLayout, parent), current_view_(current_view) {
+AbstractContainer::AbstractContainer(QStackedWidget* current_view, QWidget* parent)
+    : AbstractGraphicalElement(CustomElements::getCustomLayoutPrototype(V_CONTAINER), parent), current_view_(current_view) {
 
     // General settings for containers
-    layout_->setAlignment(Qt::AlignHCenter | Qt::AlignCenter);
     setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
 }
 
-AbstractView* AbstractContainer::getCurrentView() const
+int AbstractContainer::getCurrentView() const
 {
-    return current_view_;
+    return current_view_->currentIndex();
 }
 
-void AbstractContainer::setCurrentView(AbstractView* current_view)
+void AbstractContainer::setCurrentView(int id)
 {
-
-    // TODO[Luca]: Review this function logic!
-    hide();
-
-    if (current_view_ !=nullptr) {
-        layout_->removeWidget(current_view_);
-        current_view_ = current_view;
-        current_view_->setParent(this);
-        layout_->addWidget(current_view_);
-    }
-
-    show();
-}
-
-void AbstractContainer::show() {
-    if (current_view_ !=nullptr)
-        current_view_->show();
-}
-void AbstractContainer::update() {
-    if (current_view_ !=nullptr)
-        current_view_->toggle();
-}
-void AbstractContainer::hide() {
-    if (current_view_ !=nullptr)
-        current_view_->hide();
+    current_view_->setCurrentIndex(id);
 }

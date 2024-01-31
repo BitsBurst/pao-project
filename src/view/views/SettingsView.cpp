@@ -1,7 +1,7 @@
 #include "SettingsView.h"
 
 SettingsView::SettingsView(QWidget* parent)
-        : AbstractView(new QVBoxLayout, parent)
+        : AbstractView(CustomElements::getCustomLayoutPrototype(SINGLE_SPACING), parent)
 {
     /*
     QPalette pal = QPalette();
@@ -17,9 +17,4 @@ SettingsView::SettingsView(QWidget* parent)
     // Layout Widgets
     layout_->addWidget(label1_);
     layout_->addWidget(label2_);
-}
-
-void SettingsView::show() {
-    label1_->show();
-    label2_->show();
 }
