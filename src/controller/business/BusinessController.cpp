@@ -37,6 +37,7 @@ void BusinessController::subscribeToEvents()
 
     // Create
     connect(main_view_, &MainView::changeToCreateCategory, this, &BusinessController::showCreateCategory);
+    connect(main_view_, &MainView::changeToCreateSensor, this, &BusinessController::showCreateSensor);
 
 }
 
@@ -104,5 +105,12 @@ void BusinessController::showCreateCategory()
 {
     editor_view_->setItem(nullptr);
     editor_view_->setActiveForm(1);
+    main_view_->setContentView(content_stack_->indexOf(editor_view_));
+}
+
+void BusinessController::showCreateSensor()
+{
+    editor_view_->setItem(nullptr);
+    editor_view_->setActiveForm(0);
     main_view_->setContentView(content_stack_->indexOf(editor_view_));
 }

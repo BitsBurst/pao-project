@@ -46,6 +46,7 @@ public slots:
     void showModifyView(AbstractItem* item);
     void showCreateView();
     void showCreateCategory();
+    void showCreateSensor();
     void showSettingsView();
 };
 

@@ -25,6 +25,7 @@ signals:
     void changeToCreateView();
     void changeToSettingsView();
     void changeToCreateCategory();
+    void changeToCreateSensor();
 
 private:
     QWidget * central_widget_;
