@@ -10,7 +10,7 @@ public:
 	Category(void (**)() = nullptr);
 	Category(QString, QString, QString, AbstractDataGen* = nullptr, void (**)() = nullptr);
 	~Category();
-	QString getUnitMeasure();
+	QString getUnitMeasure() const;
 	void setUnitMeasure(QString unit_measure);
 private:
 	QString unit_measure_;

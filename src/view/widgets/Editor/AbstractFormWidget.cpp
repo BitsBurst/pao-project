@@ -11,3 +11,9 @@ AbstractFormWidget::AbstractFormWidget(QWidget* parent)
     static_cast<QFormLayout*>(layout_)->addRow(tr("&Nome"), name_edit_);
     static_cast<QFormLayout*>(layout_)->addRow(tr("&Descrizione"), description_edit_);
 }
+
+void AbstractFormWidget::setValues(const AbstractItem& item)
+{
+    name_edit_->setText(item.getName());
+    description_edit_->setText("Description");
+}

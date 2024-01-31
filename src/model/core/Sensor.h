@@ -11,11 +11,11 @@ public:
 	Sensor(QString, QString, Category,  void (**)() = nullptr);
 	Sensor(void (**)() = nullptr);
 	~Sensor();
-	double getMinRange();
+	double getMinRange() const;
 	void setMinRange(double min_range);
-	double getMaxRange();
+	double getMaxRange() const;
 	void setMaxRange(double max_range);
-	Category getCategory();
+	Category getCategory() const;
 	void setCategory(Category category);
 private:
 	double min_range_;

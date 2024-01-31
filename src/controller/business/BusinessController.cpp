@@ -7,7 +7,7 @@ BusinessController::BusinessController()
     // Initialization - Views
     single_view_sensor_ = new SingleViewSensor(new AbstractItem("0", "Default Item"));
     single_view_group_ = new SingleViewGroup(QVector<Sensor *>());
-    modify_view_ = new EditorView(new AbstractItem("0", "Item default"));
+    modify_view_ = new EditorView(new AbstractItem());
     create_view_ = new CreateView();
     settings_view_ = new SettingsView();
 

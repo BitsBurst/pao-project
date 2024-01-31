@@ -2,15 +2,19 @@
 #define SMARTSENSORS_CATEGORYFORMWIDGET_H
 
 #include <QSpinBox>
+#include <QComboBox>
 #include "AbstractFormWidget.h"
+#include "../../../model/core/Category.h"
 
 class CategoryFormWidget : public AbstractFormWidget {
     Q_OBJECT
 private:
-    QLabel *max_range_, * min_range_;
-    QSpinBox *max_range_edit_, * min_range_edit_;
+    QStringList units_, data_gens_;
+    QComboBox * unit_measure_, * data_gen_;
 public:
     explicit CategoryFormWidget(QWidget * parent = nullptr);
+
+    void setValues(const Category& item);
 };
 
 #endif //SMARTSENSORS_CATEGORYFORMWIDGET_H

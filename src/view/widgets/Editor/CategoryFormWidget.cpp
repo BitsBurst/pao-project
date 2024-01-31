@@ -4,20 +4,29 @@
 CategoryFormWidget::CategoryFormWidget(QWidget* parent)
     : AbstractFormWidget(parent)
 {
-    min_range_ = new QLabel("Min Range:");
-    max_range_ = new QLabel("Max Range:");
+    unit_measure_ = new QComboBox();
+    data_gen_ = new QComboBox();
 
-    min_range_edit_ = new QSpinBox();
-    max_range_edit_ = new QSpinBox();
+    units_.push_back("C°");
+    units_.push_back("F°");
+    units_.push_back("Pa");
+    units_.push_back("kW");
 
-    min_range_edit_->setMinimum(-100);
-    min_range_edit_->setMaximum(100);
-    min_range_edit_->setSingleStep(1);
+    data_gens_.push_back("Lineare");
+    data_gens_.push_back("Casuale");
+    data_gens_.push_back("Distribuzione");
 
-    min_range_edit_->setMinimum(-100);
-    min_range_edit_->setMaximum(100);
-    min_range_edit_->setSingleStep(1);
+    unit_measure_->addItems(units_);
+    data_gen_->addItems(data_gens_);
 
-    static_cast<QFormLayout*>(layout_)->addRow(tr("&Min Range"), min_range_edit_);
-    static_cast<QFormLayout*>(layout_)->addRow(tr("&Max Range"), max_range_edit_);
+    static_cast<QFormLayout*>(layout_)->addRow(tr("&Unità di misura:"), unit_measure_);
+    static_cast<QFormLayout*>(layout_)->addRow(tr("&Generatore dati:"), data_gen_);
+}
+
+void CategoryFormWidget::setValues(const Category& item)
+{
+    AbstractFormWidget::setValues(item);
+
+    if (units_.contains(item.getUnitMeasure()))
+        unit_measure_->setCurrentText(item.getUnitMeasure());
 }

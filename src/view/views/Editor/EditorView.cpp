@@ -49,7 +49,8 @@ EditorView::EditorView(AbstractItem* item, QLayout* layout, QWidget* parent)
 void EditorView::setItem(AbstractItem* item)
 {
     item_ = item;
-    update();
+    // Funzionalità visitor di selezione del form
+    static_cast<AbstractFormWidget*>(form_stack_->currentWidget())->setValues(*item);
 }
 
 void EditorView::update()

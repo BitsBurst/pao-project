@@ -1,5 +1,5 @@
 #include "Category.h"
-QString Category::getUnitMeasure()
+QString Category::getUnitMeasure() const
 {
 	return unit_measure_;
 }

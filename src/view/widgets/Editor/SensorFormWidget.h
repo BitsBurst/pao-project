@@ -3,14 +3,17 @@
 
 #include <QSpinBox>
 #include "AbstractFormWidget.h"
+#include "../../../model/core/Sensor.h"
 
 class SensorFormWidget : public AbstractFormWidget {
     Q_OBJECT
 private:
-    QLabel *max_range_, * min_range_;
-    QSpinBox *max_range_edit_, * min_range_edit_;
+    QDoubleSpinBox *max_range_edit_,
+                   *min_range_edit_;
 public:
     explicit SensorFormWidget(QWidget * parent = nullptr);
+
+    void setValues(const Sensor & item);
 };
 
 #endif //SMARTSENSORS_SENSORFORMWIDGET_H

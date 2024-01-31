@@ -5,6 +5,7 @@
 #include <QLineEdit>
 #include <QPushButton>
 #include "../../core/AbstractWidget.h"
+#include "../../../model/core/AbstractItem.h"
 
 class AbstractFormWidget : public AbstractWidget {
     Q_OBJECT
@@ -14,6 +15,8 @@ protected:
 
 public:
     AbstractFormWidget(QWidget * parent = nullptr);
+
+    virtual void setValues(const AbstractItem& item);
 };
 
 #endif //SMARTSENSORS_ABSTRACTFORMWIDGET_H
