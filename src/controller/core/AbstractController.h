@@ -2,6 +2,11 @@
 #define SMARTSENSORS_ABSTRACTCONTROLLER_H
 
 #include <QObject>
+/**
+ * @brief The AbstractController class
+ * @details This class is the base class for all controllers.
+ * It provides the basic functionality for all controllers.
+ */
 class AbstractController : public QObject{
 	Q_OBJECT
 public:

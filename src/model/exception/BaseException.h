@@ -3,6 +3,9 @@
 
 #include <exception>
 #include <QString>
+/**
+ * @brief BaseException is the base class for all the exceptions in the project.
+ */
 class BaseException: public std::exception {
 public:
 	BaseException();

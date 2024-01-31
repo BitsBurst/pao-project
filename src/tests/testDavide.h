@@ -8,6 +8,10 @@
 #include "../utility/storage/StorageUtility.h"
 #include "../model/storage/StorageObject.h"
 #include "../controller/LocatorController.h"
+/*
+ * TestDavide
+ * This class is used to test the application features.
+ */
 class TestDavide {
 public:
 	static void runTest();

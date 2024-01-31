@@ -4,6 +4,10 @@
 #include "../datagen/DataGenObj.h"
 #include "../../utility/datagenerator/RandomDataGenerator.h"
 #include <QString>
+/**
+ * @brief The Category class
+ * @details This class represents a category of items.
+ */
 class Category: public AbstractItem {
 public:
 	Category();

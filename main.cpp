@@ -1,6 +1,5 @@
 #include "src/utility/logger/Logger.h"
 #include "src/MyApp.h"
-
 int main(int argc, char *argv[])
 {
 	Logger::Init();

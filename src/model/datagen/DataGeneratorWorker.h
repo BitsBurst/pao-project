@@ -7,6 +7,10 @@
 #include "../../utility/datagenerator/RandomDataGenerator.h"
 #include "../../utility/event/EventHandler.h"
 
+/**
+ * @brief The DataGeneratorWorker class
+ * This class is used to generate data in a separate thread
+ */
 class DataGeneratorWorker: public QThread{
 	Q_OBJECT
 public:

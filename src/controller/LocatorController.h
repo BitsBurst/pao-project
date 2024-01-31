@@ -6,6 +6,10 @@
 #include "business/BusinessController.h"
 #include "error/ErrorController.h"
 
+/**
+ * @brief This class is used to locate the controllers.
+ * @details This class is used to locate the controllers. It is a singleton class.
+ */
 class LocatorController {
 private:
 	static StorageController* storage_controller_;

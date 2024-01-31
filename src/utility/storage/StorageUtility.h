@@ -6,6 +6,10 @@
 #include <QJsonDocument>
 #include "../../model/core/Sensor.h"
 #include "../logger/Logger.h"
+/*
+ * @brief StorageUtility
+ * This class is used to store and load JSON files
+ */
 class StorageUtility {
 public:
 	static bool StoreJSON(QJsonObject, QString);

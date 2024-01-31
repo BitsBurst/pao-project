@@ -2,6 +2,10 @@
 #define PAO_PROJECT_DATAGEN_H
 #include <QString>
 #include <QDateTime>
+/**
+ * @brief The DataGenObj class
+ * This class is used to store the data generated
+ */
 class DataGenObj {
 public:
 	DataGenObj(double, QDateTime);

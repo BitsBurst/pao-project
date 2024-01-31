@@ -5,6 +5,10 @@
 #include "Category.h"
 #include "../datagen/DataGeneratorWorker.h"
 #include "../../utility/limitedqmap/LimitedQMap.h"
+/*
+ * @brief Sensor class
+ * @details This class represents a sensor. It has a category, a min and max range and a data generator worker.
+ */
 class Sensor: public AbstractItem{
 
 public:

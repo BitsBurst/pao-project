@@ -1,45 +1,94 @@
 #include <QJsonArray>
 #include "Sensor.h"
-double Sensor::maxDataGenerated = 10000;
-double Sensor::generationTimeStatic = 50;
+double Sensor::maxDataGenerated = 10000; // max data generated stored in the sensor
+double Sensor::generationTimeStatic = 50; // generation time in ms
+/*
+ * @brief Sensor::Sensor
+ * @details Sensor constructor
+ * @param name sensor name
+ * @param category sensor category
+ */
 Sensor::Sensor(QString name, Category category):AbstractItem(name), min_range_(0), max_range_(0), category_(category), seed_(QDateTime::currentDateTime().toSecsSinceEpoch()), data_(maxDataGenerated), data_generator_worker_(nullptr), generationTime(generationTimeStatic)
 {
 
 }
+/*
+ * @brief Sensor::~Sensor
+ * @details Sensor destructor
+ */
 Sensor::~Sensor()
 {
 }
+/*
+ * @brief Sensor::getMinRange
+ * @details get sensor min range
+ * @return sensor min range
+ */
 double Sensor::getMinRange() const
 {
 	return min_range_;
 }
+/*
+ * @brief Sensor::setMinRange
+ * @details set sensor min range
+ * @param min_range sensor min range
+ */
 void Sensor::setMinRange(double min_range)
 {
 	min_range_ = min_range;
 	modelChangedEvent.notifyAsync();
 }
+/*
+ * @brief Sensor::getMaxRange
+ * @details get sensor max range
+ * @return sensor max range
+ */
 double Sensor::getMaxRange() const
 {
 	return max_range_;
 }
+/*
+ * @brief Sensor::setMaxRange
+ * @details set sensor max range
+ * @param max_range sensor max range
+ */
 void Sensor::setMaxRange(double max_range)
 {
 	max_range_ = max_range;
 	modelChangedEvent.notifyAsync();
 }
+/*
+ * @brief Sensor::getCategory
+ * @details get sensor category
+ * @return sensor category
+ */
 Category Sensor::getCategory() const
 {
 	return category_;
 }
+/*
+ * @brief Sensor::setCategory
+ * @details set sensor category
+ * @param category sensor category
+ */
 void Sensor::setCategory(Category category)
 {
 	category_ = category;
 	modelChangedEvent.notifyAsync();
 }
+/*
+ * @brief Sensor::Sensor
+ * @details Sensor constructor
+ */
 Sensor::Sensor(): AbstractItem(""), min_range_(0), max_range_(0), category_(Category()), seed_(QDateTime::currentDateTime().toSecsSinceEpoch()), data_(maxDataGenerated), data_generator_worker_(nullptr), generationTime(generationTimeStatic)
 {
 
 }
+/*
+ * @brief Sensor::toJson
+ * @details convert sensor to json
+ * @return sensor json
+ */
 QJsonObject Sensor::toJson() const
 {
 	QJsonObject json = AbstractItem::toJson();
@@ -50,6 +99,12 @@ QJsonObject Sensor::toJson() const
 	json["generation_time"] = generationTime;
 	return json;
 }
+/*
+ * @brief Sensor::fromJson
+ * @details convert json to sensor
+ * @param object json object
+ * @return sensor object
+ */
 Sensor* Sensor::fromJson(const QJsonObject& object)
 {
 	AbstractItem * abs_item = AbstractItem::fromJson(object);
@@ -68,6 +123,10 @@ Sensor* Sensor::fromJson(const QJsonObject& object)
 		sensor->generationTime = generation_time.toDouble();
 	return sensor;
 }
+/*
+ * @brief Sensor::startDataGeneration
+ * @details start data generation
+ */
 void Sensor::startDataGeneration()
 {
 	if(data_generator_worker_ == nullptr){
@@ -77,11 +136,20 @@ void Sensor::startDataGeneration()
 	data_generator_worker_->start();
 
 }
+/*
+ * @brief Sensor::stopDataGeneration
+ * @details stop data generation
+ */
 void Sensor::stopDataGeneration()
 {
 	data_generator_worker_->exit();
 	delete data_generator_worker_;
 }
+/*
+ * @brief Sensor::dataGenerated
+ * @details data generated
+ * @param obj data generated object
+ */
 void Sensor::dataGenerated(DataGenObj obj)
 {
 	//qDebug() << "Data generated" + QString::number(obj.getTimestamp().toSecsSinceEpoch()) + " " + QString::number(obj.getData());

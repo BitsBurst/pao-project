@@ -9,6 +9,7 @@ set(CMAKE_AUTORCC ON)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
+# CMAKE_PREFIX_PATH the path where Qt is installed
 set(CMAKE_PREFIX_PATH "$ENV{QT_PATH}/6.6.1/gcc_64/lib/cmake")
 
 find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Widgets Charts Core PrintSupport)
@@ -33,7 +34,7 @@ set(PROJECT_SOURCES
         src/view/views/AbstractSingleView.h
         src/view/views/Editor/EditorView.cpp
         src/view/views/Editor/EditorView.h
-        src/model/datagen/DataGen.cpp
+        src/model/datagen/DataGenObj.cpp
         src/model/datagen/DataGenObj.h
         src/model/core/AbstractItem.cpp
         src/model/core/AbstractItem.h

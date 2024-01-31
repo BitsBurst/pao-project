@@ -17,7 +17,8 @@ enum class LogMethod {
 	_OUT_,
 };
 /*
- * This class is used to store the log message in a queue
+ * @brief LoggerObject
+ * This class is used to store the log messages in a file
  */
 class LoggerObject {
 	friend class LoggerWorker;
@@ -37,7 +38,8 @@ public:
 	QString getLogString();
 };
 /*
- * This class creates a thread that is used to store the log messages in a file
+ * @brief LoggerWorker
+ * This class is used to store the log messages in a file
  */
 class LoggerWorker: public QThread {
 Q_OBJECT
@@ -54,6 +56,7 @@ protected:
 	void run() override;
 };
 /*
+ * @brief Logger
  * This class is used to store the log messages in a file
  */
 class Logger {

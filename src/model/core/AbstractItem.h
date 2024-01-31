@@ -6,6 +6,11 @@
 #include <QUuid>
 #include <QJsonObject>
 #include "../../utility/event/EventHandler.h"
+/**
+ * @brief The AbstractItem class
+ * @details This class is the base class for all the items in the application.
+ * It provides the basic functionalities for the items.
+ */
 class AbstractItem{
 public:
 	 virtual ~AbstractItem();

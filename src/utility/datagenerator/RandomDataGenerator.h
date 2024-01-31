@@ -9,7 +9,10 @@
 
 enum DistributionType { SINUSOIDAL, GAUSSIAN, UNIFORM };
 
-
+/**
+ * @brief Class that generates random data
+ * @details This class generates random data based on the distribution type set
+ */
 class CombinedDataGenerator {
 private:
 	int size;
