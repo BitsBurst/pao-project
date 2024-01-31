@@ -89,3 +89,8 @@ void Sensor::dataGenerated(DataGenObj obj)
 	data_.insertLimited(obj.getTimestamp(), obj.getData());
 	onDataGenerated.notifyAsync();
 }
+
+void Sensor::accept(IConstVisitor& visitor) const
+{
+    visitor.visit(*this);
+}

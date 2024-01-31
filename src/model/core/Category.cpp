@@ -50,3 +50,8 @@ Category& Category::operator=(const Category& category)
 	distribution_type_ = category.distribution_type_;
 	return *this;
 }
+
+void Category::accept(IConstVisitor& visitor) const
+{
+    visitor.visit(*this);
+}

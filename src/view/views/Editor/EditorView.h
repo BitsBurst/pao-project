@@ -9,6 +9,8 @@
 // Model
 #include "../../../model/core/AbstractItem.h"
 #include "../../widgets/Editor/AbstractFormWidget.h"
+#include "../../widgets/Editor/SensorFormWidget.h"
+#include "../../widgets/Editor/CategoryFormWidget.h"
 
 class EditorView : public AbstractView {
 Q_OBJECT
@@ -19,6 +21,9 @@ private:
     AbstractItem* item_;
     QVector<AbstractFormWidget*> editors_;
     QPushButton * ok_button_, * cancel_button_;
+
+    SensorFormWidget * sensor_form_;
+    CategoryFormWidget * category_form_;
 
 public:
     explicit EditorView(AbstractItem* item, QLayout * layout = nullptr, QWidget *parent = nullptr);

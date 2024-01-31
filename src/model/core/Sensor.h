@@ -24,6 +24,8 @@ public:
 
 	LimitedQMap<QDateTime, double> data_;
 
+    void accept(IConstVisitor& visitor) const override;
+
 private:
 	double min_range_;
 	double max_range_;

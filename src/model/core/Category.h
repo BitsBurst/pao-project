@@ -15,6 +15,8 @@ public:
 	static Category* fromJson(QJsonObject const &);
 	int getDistributionType() const;
 	Category& operator=(Category const &category);
+
+    virtual void accept(IConstVisitor& visitor) const;
 private:
 	QString unit_measure_;
 	DistributionType distribution_type_;

@@ -5,9 +5,10 @@
 BusinessController::BusinessController()
 {
     // Initialization - Views
-    single_view_sensor_ = new SingleViewSensor(new AbstractItem("Default Item"));
+    Category temp;
+    single_view_sensor_ = new SingleViewSensor(new Sensor("Default Item", temp));
     single_view_group_ = new SingleViewGroup(QVector<Sensor *>());
-    modify_view_ = new EditorView(new AbstractItem());
+    editor_view_ = new EditorView(new Sensor("Editor", temp));
     create_view_ = new CreateView();
     settings_view_ = new SettingsView();
 
@@ -44,7 +45,7 @@ void BusinessController::setDataField(MainView* main_view, QStackedWidget* conte
     // Create Stack
     content_stack_->addWidget(single_view_sensor_);
     content_stack_->addWidget(single_view_group_);
-    content_stack_->addWidget(modify_view_);
+    content_stack_->addWidget(editor_view_);
     content_stack_->addWidget(create_view_);
     content_stack_->addWidget(settings_view_);
 
@@ -81,8 +82,8 @@ void BusinessController::showSingleGroupView()
 
 void BusinessController::showModifyView(AbstractItem* item)
 {
-    modify_view_->setItem(item);
-    main_view_->setContentView(content_stack_->indexOf(modify_view_));
+    editor_view_->setItem(item);
+    main_view_->setContentView(content_stack_->indexOf(editor_view_));
 }
 
 void BusinessController::showCreateView()

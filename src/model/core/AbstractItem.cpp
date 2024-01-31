@@ -1,4 +1,6 @@
 #include "AbstractItem.h"
+#include "../exception/NormalException.h"
+
 AbstractItem::~AbstractItem()
 = default;
 AbstractItem::AbstractItem(QString name):id_(QUuid::createUuid().toString()), name_(name)
@@ -50,4 +52,8 @@ AbstractItem::AbstractItem(const AbstractItem& abstract_item)
 {
 	id_ = abstract_item.id_;
 	name_ = abstract_item.name_;
+}
+
+void AbstractItem::accept(IConstVisitor& visitor) const {
+    throw NormalException("Unable to set editor data.");
 }

@@ -1,7 +1,6 @@
 #include <QComboBox>
 #include "EditorView.h"
-#include "../../widgets/Editor/SensorFormWidget.h"
-#include "../../widgets/Editor/CategoryFormWidget.h"
+#include "../../widgets/Editor/ItemEditor.h"
 
 EditorView::EditorView(AbstractItem* item, QLayout* layout, QWidget* parent)
         :AbstractView(CustomElements::getCustomLayoutPrototype(SINGLE_SPACING), parent), item_(item)
@@ -28,14 +27,19 @@ EditorView::EditorView(AbstractItem* item, QLayout* layout, QWidget* parent)
 
     form_->setLayout(form_stack_);
 
-    SensorFormWidget* sensor_form = new SensorFormWidget(form_);
-    CategoryFormWidget* category_form = new CategoryFormWidget(form_);
+    sensor_form_ = new SensorFormWidget(form_);
+    category_form_ = new CategoryFormWidget(form_);
 
-    form_stack_->addWidget(sensor_form);
-    form_stack_->addWidget(category_form);
+    form_stack_->addWidget(sensor_form_);
+    form_stack_->addWidget(category_form_);
 
-    editors_.push_back(sensor_form);
-    editors_.push_back(category_form);
+    editors_.push_back(sensor_form_);
+    editors_.push_back(category_form_);
+
+    if (item_ != nullptr) {
+        ItemEditor editor_visitor(this, sensor_form_, category_form_);
+        item_->accept(editor_visitor);
+    }
 
     // Layout Widgets
     layout_->addWidget(title_);
@@ -49,8 +53,11 @@ EditorView::EditorView(AbstractItem* item, QLayout* layout, QWidget* parent)
 void EditorView::setItem(AbstractItem* item)
 {
     item_ = item;
-    // Funzionalità visitor di selezione del form
-    static_cast<AbstractFormWidget*>(form_stack_->currentWidget())->setValues(*item);
+
+    if (item_ != nullptr) {
+        ItemEditor editor_visitor(this, sensor_form_, category_form_);
+        item_->accept(editor_visitor);
+    }
 }
 
 void EditorView::update()

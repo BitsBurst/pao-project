@@ -6,6 +6,8 @@
 #include <QUuid>
 #include <QJsonObject>
 #include "../../utility/event/EventHandler.h"
+#include "../visitor/IConstVisitor.h"
+
 class AbstractItem {
 public:
 	 virtual ~AbstractItem();
@@ -19,6 +21,8 @@ public:
 	 QJsonObject toJson() const;
 	 static AbstractItem * fromJson(QJsonObject const &);
 	 EventHandlerVoid modelChangedEvent;
+
+    virtual void accept(IConstVisitor& visitor) const;
 
 protected:
 	QString id_;

@@ -107,6 +107,9 @@ set(PROJECT_SOURCES
         src/view/widgets/Editor/SensorFormWidget.h
         src/view/widgets/Editor/CategoryFormWidget.cpp
         src/view/widgets/Editor/CategoryFormWidget.h
+        src/view/widgets/Editor/ItemEditor.cpp
+        src/view/widgets/Editor/ItemEditor.h
+        src/model/visitor/IConstVisitor.h
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)

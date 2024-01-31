@@ -26,7 +26,7 @@ private:
     SingleViewSensor * single_view_sensor_;
     SingleViewGroup * single_view_group_;
     GroupListView * group_list_view_;
-    EditorView * modify_view_;
+    EditorView * editor_view_;
     CreateView * create_view_;
     SettingsView * settings_view_;
 
