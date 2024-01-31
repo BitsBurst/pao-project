@@ -6,7 +6,7 @@ BusinessController::BusinessController()
 {
     // Initialization - Views
     Category temp;
-    single_view_sensor_ = new SingleViewSensor(new Sensor("Default Item", temp));
+    single_view_sensor_ = new SingleViewSensor(new Category("Default Item", "KM"));
     single_view_group_ = new SingleViewGroup(QVector<Sensor *>());
     editor_view_ = new EditorView(new Sensor("Editor", temp));
     create_view_ = new CreateView();
@@ -34,6 +34,10 @@ void BusinessController::subscribeToEvents()
     // Modify
     connect(single_view_sensor_, &AbstractSingleView::changeToModifyView, this, &BusinessController::showModifyView);
     connect(single_view_group_, &AbstractSingleView::changeToModifyView, this, &BusinessController::showModifyView);
+
+    // Create
+    connect(main_view_, &MainView::changeToCreateCategory, this, &BusinessController::showCreateCategory);
+
 }
 
 void BusinessController::setDataField(MainView* main_view, QStackedWidget* content_stack, QStackedWidget* sidebar_stack)
@@ -94,4 +98,11 @@ void BusinessController::showCreateView()
 void BusinessController::showSettingsView()
 {
     main_view_->setContentView(content_stack_->indexOf(settings_view_));
+}
+
+void BusinessController::showCreateCategory()
+{
+    editor_view_->setItem(nullptr);
+    editor_view_->setActiveForm(1);
+    main_view_->setContentView(content_stack_->indexOf(editor_view_));
 }

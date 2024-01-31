@@ -30,3 +30,11 @@ void CategoryFormWidget::setValues(const Category& item)
     if (units_.contains(item.getUnitMeasure()))
         unit_measure_->setCurrentText(item.getUnitMeasure());
 }
+
+void CategoryFormWidget::reset()
+{
+    AbstractFormWidget::reset();
+
+    unit_measure_->setCurrentIndex(0);
+    data_gen_->setCurrentIndex(0);
+}

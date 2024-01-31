@@ -17,6 +17,7 @@ public:
     AbstractFormWidget(QWidget * parent = nullptr);
 
     virtual void setValues(const AbstractItem& item);
+    virtual void reset();
 };
 
 #endif //SMARTSENSORS_ABSTRACTFORMWIDGET_H

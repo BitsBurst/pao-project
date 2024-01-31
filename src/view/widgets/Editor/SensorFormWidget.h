@@ -14,6 +14,7 @@ public:
     explicit SensorFormWidget(QWidget * parent = nullptr);
 
     void setValues(const Sensor & item);
+    void reset() override;
 };
 
 #endif //SMARTSENSORS_SENSORFORMWIDGET_H

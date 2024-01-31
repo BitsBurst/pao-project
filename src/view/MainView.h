@@ -24,6 +24,7 @@ signals:
     void changeToModifyView(AbstractItem& item);
     void changeToCreateView();
     void changeToSettingsView();
+    void changeToCreateCategory();
 
 private:
     QWidget * central_widget_;

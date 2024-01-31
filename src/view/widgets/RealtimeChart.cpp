@@ -22,15 +22,17 @@ RealtimeChart::RealtimeChart(QWidget * parent)
             | QCP::iSelectLegend | QCP::iSelectPlottables);
     custom_plot_->xAxis->setRange(0, 6);
     custom_plot_->yAxis->setRange(-5, 5);
-    custom_plot_->axisRect()->setupFullAxesBox();
 
     custom_plot_->xAxis->setLabel("x Axis");
     custom_plot_->yAxis->setLabel("y Axis");
-    custom_plot_->legend->setVisible(true);
+
+    /*
+    custom_plot_->legend->setVisible();
 
     custom_plot_->legend->setFont(CustomElements::getFontParagraph());
     custom_plot_->legend->setSelectedFont(CustomElements::getFontParagraph());
     custom_plot_->legend->setSelectableParts(QCPLegend::spItems);
+    */
 
     // Graphs
     addRealtimeGraph();

@@ -7,7 +7,7 @@ EditorView::EditorView(AbstractItem* item, QLayout* layout, QWidget* parent)
 {
     // Initialization
     title_ = new QLabel("Editor");
-    title_->setFont(CustomElements::getFontH1());
+    title_->setFont(CustomElements::getFontH2());
 
     ok_button_ = new QPushButton("Ok");
     cancel_button_ = new QPushButton("Annulla");
@@ -68,4 +68,8 @@ void EditorView::update()
 void EditorView::setActiveForm(int index)
 {
     form_stack_->setCurrentIndex(index);
+
+    if (item_ == nullptr) {
+        static_cast<AbstractFormWidget*>(form_stack_->currentWidget())->reset();
+    }
 }

@@ -45,6 +45,7 @@ public slots:
     void showSingleGroupView();
     void showModifyView(AbstractItem* item);
     void showCreateView();
+    void showCreateCategory();
     void showSettingsView();
 };
 

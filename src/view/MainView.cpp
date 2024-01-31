@@ -33,31 +33,34 @@ void MainView::createMenu() {
     // Menu Bar
     QMenu * file = new QMenu("File", menu_bar_);
     QMenu * sensors = new QMenu("Sensori", menu_bar_);
+    QMenu * categories = new QMenu("Categorie", menu_bar_);
     menu_bar_->addMenu(file);
     menu_bar_->addMenu(sensors);
+    menu_bar_->addMenu(categories);
 
     // Menu Sensors
     QAction * single_sensor_view = new QAction("Visione Singola", sensors);
     QAction * single_group_view = new QAction("Visione Singola di gruppo", sensors);
-    QAction * modify_view = new QAction("Modifica Sensore", sensors);
-    QAction * create_view = new QAction("Crea Sensore", sensors);
 
     sensors->addAction(single_sensor_view);
     sensors->addAction(single_group_view);
-    sensors->addAction(modify_view);
-    sensors->addAction(create_view);
 
     // Menu File
     QAction * settings_view = new QAction("Impostazioni App", file);
 
     file->addAction(settings_view);
 
+    // Menu Categories
+    QAction * create_category = new QAction("Crea", categories);
+
+    categories->addAction(create_category);
+
     // Connect Action
     connect(single_sensor_view, &QAction::triggered, this, &MainView::changeToSingleSensorView);
     connect(single_group_view, &QAction::triggered, this, &MainView::changeToSingleGroupView);
-    // connect(modify_view, &QAction::triggered, this, &MainView::emitChangeToModifyView);
-    connect(create_view, &QAction::triggered, this, &MainView::changeToCreateView);
+
     connect(settings_view, &QAction::triggered, this, &MainView::changeToSettingsView);
+    connect(create_category, &QAction::triggered, this, &MainView::changeToCreateCategory);
 
     setMenuBar(menu_bar_);
 }

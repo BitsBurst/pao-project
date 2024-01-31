@@ -16,7 +16,7 @@ QFont& CustomElements::getFontH1()
     {
         font_h1_instance_ = new QFont();
         font_h1_instance_->setFamily("roboto");
-        font_h1_instance_->setPointSize(60);
+        font_h1_instance_->setPixelSize(60);
         font_h1_instance_->setHintingPreference(QFont::HintingPreference::PreferNoHinting);
         font_h1_instance_->setWeight(QFont::Normal);
     }
@@ -30,7 +30,7 @@ QFont& CustomElements::getFontH2()
     {
         font_h2_instance_ = new QFont();
         font_h2_instance_->setFamily("roboto");
-        font_h2_instance_->setPointSize(32);
+        font_h2_instance_->setPixelSize(32);
         font_h2_instance_->setHintingPreference(QFont::HintingPreference::PreferNoHinting);
         font_h2_instance_->setWeight(QFont::Normal);
     }
@@ -44,7 +44,7 @@ QFont& CustomElements::getFontH3()
     {
         font_h3_instance_ = new QFont();
         font_h3_instance_->setFamily("roboto");
-        font_h3_instance_->setPointSize(24);
+        font_h3_instance_->setPixelSize(24);
         font_h3_instance_->setHintingPreference(QFont::HintingPreference::PreferNoHinting);
         font_h3_instance_->setWeight(QFont::Normal);
     }
@@ -58,7 +58,7 @@ QFont& CustomElements::getFontH4()
     {
         font_h4_instance_ = new QFont();
         font_h4_instance_->setFamily("roboto");
-        font_h4_instance_->setPointSize(18);
+        font_h4_instance_->setPixelSize(18);
         font_h4_instance_->setHintingPreference(QFont::HintingPreference::PreferNoHinting);
         font_h4_instance_->setWeight(QFont::Normal);
     }
@@ -72,7 +72,7 @@ QFont& CustomElements::getFontParagraph()
     {
         font_paragraph_instance_ = new QFont();
         font_paragraph_instance_->setFamily("roboto");
-        font_paragraph_instance_->setPointSize(16);
+        font_paragraph_instance_->setPixelSize(16);
         font_paragraph_instance_->setHintingPreference(QFont::HintingPreference::PreferNoHinting);
         font_paragraph_instance_->setWeight(QFont::Light);
     }
@@ -86,7 +86,7 @@ QFont& CustomElements::getFontDetails()
     {
         font_details_instance_ = new QFont();
         font_details_instance_->setFamily("roboto");
-        font_details_instance_->setPointSize(8);
+        font_details_instance_->setPixelSize(8);
         font_details_instance_->setWeight(QFont::Medium);
         font_details_instance_->setHintingPreference(QFont::HintingPreference::PreferNoHinting);
         font_details_instance_->setLetterSpacing(QFont::AbsoluteSpacing, 1);

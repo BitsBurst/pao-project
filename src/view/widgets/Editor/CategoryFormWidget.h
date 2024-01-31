@@ -15,6 +15,7 @@ public:
     explicit CategoryFormWidget(QWidget * parent = nullptr);
 
     void setValues(const Category& item);
+    void reset() override;
 };
 
 #endif //SMARTSENSORS_CATEGORYFORMWIDGET_H

@@ -17,3 +17,9 @@ void AbstractFormWidget::setValues(const AbstractItem& item)
     name_edit_->setText(item.getName());
     description_edit_->setText("Description");
 }
+
+void AbstractFormWidget::reset()
+{
+    name_edit_->clear();
+    description_edit_->clear();
+}
