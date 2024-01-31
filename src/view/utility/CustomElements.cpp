@@ -86,8 +86,8 @@ QFont& CustomElements::getFontDetails()
     {
         font_details_instance_ = new QFont();
         font_details_instance_->setFamily("roboto");
-        font_details_instance_->setPixelSize(8);
-        font_details_instance_->setWeight(QFont::Medium);
+        font_details_instance_->setPixelSize(12);
+        font_details_instance_->setWeight(QFont::Normal);
         font_details_instance_->setHintingPreference(QFont::HintingPreference::PreferNoHinting);
         font_details_instance_->setLetterSpacing(QFont::AbsoluteSpacing, 1);
         font_details_instance_->setCapitalization(QFont::AllUppercase);

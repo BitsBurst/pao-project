@@ -12,7 +12,13 @@ BusinessController::BusinessController()
     create_view_ = new CreateView();
     settings_view_ = new SettingsView();
 
-    group_list_view_ = new GroupListView();
+    QVector<AbstractItem *> list;
+    for (int i = 0; i < 2; ++i) {
+        list.push_back(new Sensor(QString::fromStdString("Sensor " + std::to_string(i)), Category(QString::fromStdString("Cat " + std::to_string(i)), "KM")));
+        list.push_back(new Category(QString::fromStdString("Cat " + std::to_string(i)), "KM"));
+    }
+
+    group_list_view_ = new GroupListView(list);
 }
 bool BusinessController::Init()
 {
@@ -34,6 +40,7 @@ void BusinessController::subscribeToEvents()
     // Modify
     connect(single_view_sensor_, &AbstractSingleView::changeToModifyView, this, &BusinessController::showModifyView);
     connect(single_view_group_, &AbstractSingleView::changeToModifyView, this, &BusinessController::showModifyView);
+    connect(group_list_view_, &GroupListView::changeToModifyView, this, &BusinessController::showModifyView);
 
     // Create
     connect(main_view_, &MainView::changeToCreateCategory, this, &BusinessController::showCreateCategory);

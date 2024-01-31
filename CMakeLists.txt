@@ -11,8 +11,8 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 set(CMAKE_PREFIX_PATH "$ENV{QT_PATH}/6.6.1/gcc_64/lib/cmake")
 
-find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Widgets Charts Core PrintSupport)
-find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets Charts Core PrintSupport)
+find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Widgets Charts Core PrintSupport Gui)
+find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets Charts Core PrintSupport Gui)
 string(TOLOWER ${CMAKE_BUILD_TYPE} build_type)
 
 set(PROJECT_SOURCES
@@ -60,8 +60,8 @@ set(PROJECT_SOURCES
         src/view/views/CreateView.h
         src/view/views/SettingsView.cpp
         src/view/views/SettingsView.h
-        src/view/widgets/GroupItemWidget.cpp
-        src/view/widgets/GroupItemWidget.h
+        src/view/widgets/GroupItem/GroupItemWidget.cpp
+        src/view/widgets/GroupItem/GroupItemWidget.h
         src/view/core/AbstractWidget.cpp
         src/view/core/AbstractWidget.h
         src/view/widgets/SidebarLowControlWidget.cpp
@@ -110,6 +110,8 @@ set(PROJECT_SOURCES
         src/view/widgets/Editor/ItemEditor.cpp
         src/view/widgets/Editor/ItemEditor.h
         src/model/visitor/IConstVisitor.h
+        src/view/widgets/GroupItem/GroupItemRender.cpp
+        src/view/widgets/GroupItem/GroupItemRender.h
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
@@ -132,7 +134,10 @@ endif()
 add_library(qcustomplot include/CustomPlot/qcustomplot.h include/CustomPlot/qcustomplot.cpp)
 target_link_libraries(qcustomplot PUBLIC Qt${QT_VERSION_MAJOR}::Core Qt${QT_VERSION_MAJOR}::PrintSupport)
 
-target_link_libraries(SmartSensors PRIVATE Qt${QT_VERSION_MAJOR}::Widgets Qt${QT_VERSION_MAJOR}::Charts qcustomplot)
+add_library(QtAwsome include/QtAwesome/QtAwesome.h include/QtAwesome/QtAwesome.cpp include/QtAwesome/QtAwesomeAnim.cpp include/QtAwesome/QtAwesomeAnim.h include/QtAwesome/QtAwesomeEnumGenerated.h include/QtAwesome/QtAwesomeStringGenerated.h include/QtAwesome/QtAwesomeFree.qrc )
+target_link_libraries(QtAwsome PUBLIC Qt${QT_VERSION_MAJOR}::Core Qt${QT_VERSION_MAJOR}::Gui Qt${QT_VERSION_MAJOR}::Widgets)
+
+target_link_libraries(SmartSensors PRIVATE Qt${QT_VERSION_MAJOR}::Widgets Qt${QT_VERSION_MAJOR}::Charts qcustomplot QtAwsome)
 
 if(${QT_VERSION} VERSION_LESS 6.1.0)
   set(BUNDLE_ID_OPTION MACOSX_BUNDLE_GUI_IDENTIFIER com.example.SmartSensors)
