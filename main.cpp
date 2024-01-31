@@ -5,6 +5,8 @@ int main(int argc, char *argv[])
 	Logger::Init();
 	for (int i = 0; i < argc; i++)
 	{
+		// if -d is passed as argument, set log level to debug
+		// this is useful to debug the application
 		if (strcmp(argv[i], "-d") == 0)
 		{
 			Logger::SetLogLevel(LogLevel::_INFO_);
