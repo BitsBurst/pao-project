@@ -9,8 +9,6 @@ MyApp::~MyApp()
 }
 MyApp::MyApp(int i, char** p_string): QApplication(i, p_string) {
 	try {
-        awesome->initFontAwesome();
-
 		Q_INIT_RESOURCE(resources);
 		CustomElements::Init();
 		LocatorController::Init();

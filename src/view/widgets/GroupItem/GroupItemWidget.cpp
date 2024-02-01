@@ -26,8 +26,8 @@ GroupItemWidget::GroupItemWidget(AbstractItem* item, QWidget* parent)
         : AbstractWidget(CustomElements::getCustomLayoutPrototype(SINGLE_SPACING), parent), title_label_(new QLabel), detail_label_(new QLabel), item_(item)
 {
     // Initialization
-    modify_btn_ = new QPushButton(MyApp::getAwesome()->icon(fa::fa_solid, fa::fa_pencil), "");
-    delete_btn_ = new QPushButton(MyApp::getAwesome()->icon(fa::fa_solid, fa::fa_trash), "");
+    modify_btn_ = new QPushButton(CustomElements::getAwsome()->icon(fa::fa_solid, fa::fa_pencil), "");
+    delete_btn_ = new QPushButton(CustomElements::getAwsome()->icon(fa::fa_solid, fa::fa_trash), "");
 
     if (item_ != nullptr) {
         GroupItemRender item_render(this);

@@ -8,11 +8,9 @@
 
 class MyApp: public QApplication {
 private:
-    static fa::QtAwesome* awesome;
+
 public:
 	MyApp(int i, char** p_string);
 	~MyApp();
-
-    static fa::QtAwesome* getAwesome();
 };
 #endif //SMARTSENSORS_MYAPP_H

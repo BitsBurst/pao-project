@@ -9,6 +9,7 @@ QFont *CustomElements::font_h3_instance_ = nullptr;
 QFont *CustomElements::font_h4_instance_ = nullptr;
 QFont *CustomElements::font_paragraph_instance_ = nullptr;
 QFont *CustomElements::font_details_instance_ = nullptr;
+fa::QtAwesome *CustomElements::awesome = new fa::QtAwesome();
 
 QFont& CustomElements::getFontH1()
 {
@@ -120,6 +121,9 @@ void CustomElements::Init()
     QFontDatabase::addApplicationFont(":/roboto-medium.ttf");
     QFontDatabase::addApplicationFont(":/roboto-regular.ttf");
     QFontDatabase::addApplicationFont(":/roboto-thin.ttf");
+
+    // Init QtAwesome
+    awesome->initFontAwesome();
 }
 
 QVBoxLayout* CustomElements::getVerticalLayout(int margin)
@@ -204,4 +208,9 @@ QLayout* CustomElements::getCustomLayoutPrototype(LayoutPrototype prototype)
     }
 
     return temp;
+}
+
+fa::QtAwesome* CustomElements::getAwsome()
+{
+    return awesome;
 }
