@@ -30,11 +30,11 @@ set(PROJECT_SOURCES
         src/view/containers/MainContentContainer.h
         src/view/views/GroupListView.cpp
         src/view/views/GroupListView.h
-        src/view/views/AbstractSingleView.cpp
-        src/view/views/AbstractSingleView.h
+        src/view/views/SingleView/SingleView.cpp
+        src/view/views/SingleView/SingleView.h
         src/view/views/Editor/EditorView.cpp
         src/view/views/Editor/EditorView.h
-        src/model/datagen/DataGen.cpp
+        src/model/datagen/DataGenObj.cpp
         src/model/datagen/DataGenObj.h
         src/model/core/AbstractItem.cpp
         src/model/core/AbstractItem.h
@@ -61,8 +61,8 @@ set(PROJECT_SOURCES
         src/view/views/CreateView.h
         src/view/views/SettingsView.cpp
         src/view/views/SettingsView.h
-        src/view/widgets/GroupItemWidget.cpp
-        src/view/widgets/GroupItemWidget.h
+        src/view/widgets/GroupItem/GroupItemWidget.cpp
+        src/view/widgets/GroupItem/GroupItemWidget.h
         src/view/core/AbstractWidget.cpp
         src/view/core/AbstractWidget.h
         src/view/widgets/SidebarLowControlWidget.cpp
@@ -92,14 +92,14 @@ set(PROJECT_SOURCES
         src/view/utility/CustomElements.h
         src/view/utility/CustomElements.cpp
         resources.qrc
-        src/view/views/SingleViewSensor.cpp
-        src/view/views/SingleViewSensor.h
+        src/view/widgets/SingleWidget/SingleSensorWidget.cpp
+        src/view/widgets/SingleWidget/SingleSensorWidget.h
         src/view/widgets/RealtimeChart.cpp
         src/view/widgets/RealtimeChart.h
         src/view/widgets/ChartHandler.cpp
         src/view/widgets/ChartHandler.h
-        src/view/views/SingleViewGroup.h
-        src/view/views/SingleViewGroup.cpp
+        src/view/widgets/SingleWidget/SingleViewGroup.h
+        src/view/widgets/SingleWidget/SingleViewGroup.cpp
         src/view/widgets/InformationWidget.cpp
         src/view/widgets/InformationWidget.h
         src/view/widgets/Editor/AbstractFormWidget.cpp
