@@ -36,3 +36,11 @@ void SensorFormWidget::reset()
     min_range_edit_->clear();
     max_range_edit_->clear();
 }
+
+void SensorFormWidget::updateItem(AbstractItem& item)
+{
+	AbstractFormWidget::updateItem(item);
+
+	static_cast<Sensor&>(item).setMinRange(min_range_edit_->value());
+	static_cast<Sensor&>(item).setMaxRange(max_range_edit_->value());
+}

@@ -38,8 +38,10 @@ void StorageObject::removeCategory(Category* category)
 {
 	QMutableListIterator<Category*> i(categories_);
 	while (i.hasNext()) {
-		if (i.next()->getId() == category->getId())
+		if (i.next()->getId() == category->getId()){
+			delete i.value();
 			i.remove();
+		}
 	}
 	modelChangedEvent();
 }
@@ -52,10 +54,12 @@ void StorageObject::removeSensor(Sensor* sensor)
 {
 	QMutableListIterator<Sensor*> i(sensors_);
 	while (i.hasNext()) {
-		if (i.next()->getId() == sensor->getId())
+		if (i.next()->getId()==sensor->getId()) {
+			delete i.value();
 			i.remove();
+		}
+		modelChangedEvent();
 	}
-	modelChangedEvent();
 }
 /*
  * @brief findSensor
@@ -167,26 +171,43 @@ const QVector<Sensor*>* StorageObject::getSensors() const
 	return &sensors_;
 }
 /*
+ * @brief getSensors
+ * @return
+ * Returns the sensors list as a QVector<AbstractItem*>
+ */
+const QVector<AbstractItem*>& StorageObject::getSensors(int) const
+{
+	checkSensors();
+	return reinterpret_cast<const QVector<AbstractItem*>&>(sensors_);
+}
+
+/*
+ * @brief getCategories
+ * @return
+ * Returns the categories list as a QVector<AbstractItem*>
+ */
+const QVector<AbstractItem*>& StorageObject::getCategories(int) const
+{
+	checkCategories();
+	return reinterpret_cast<const QVector<AbstractItem*>&>(categories_);
+}
+/*
  * @brief checkCategories
  * Checks if the categories list is empty
+ * @return true if the categories list is empty, false otherwise
  */
-void StorageObject::checkCategories() const
+bool StorageObject::checkCategories() const
 {
-	if (categories_.size() == 0)
-	{
-		throw std::invalid_argument("Categories list is empty");
-	}
+	return categories_.size() != 0;
 }
 /*
  * @brief checkSensors
  * Checks if the sensors list is empty
+ * @return true if the sensors list is empty, false otherwise
  */
-void StorageObject::checkSensors() const
+bool StorageObject::checkSensors() const
 {
-	if (sensors_.size() == 0)
-	{
-		throw std::invalid_argument("Sensors list is empty");
-	}
+	return sensors_.size() != 0;
 }
 /*
  * @brief fromJson

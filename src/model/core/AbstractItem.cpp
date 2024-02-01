@@ -12,7 +12,7 @@ AbstractItem::~AbstractItem()
  * @param name
  * @details Constructor for the AbstractItem class.
  */
-AbstractItem::AbstractItem(QString name):id_(QUuid::createUuid().toString()), name_(name)
+AbstractItem::AbstractItem(QString name):id_(QUuid::createUuid().toString()), name_(name), description_("")
 {
 }
 /**
@@ -54,6 +54,26 @@ void AbstractItem::setName(QString name)
 	modelChangedHandler();
 }
 /**
+ * @brief AbstractItem::getDescription
+ * @return
+ * @details Getter for the description_ attribute.
+ */
+QString AbstractItem::getDescription() const
+{
+	return description_;
+}
+/**
+ * @brief AbstractItem::setDescription
+ * @param description
+ * @details Setter for the description_ attribute.
+ */
+void AbstractItem::setDescription(QString description)
+{
+	description_ = description;
+	modelChangedHandler();
+}
+
+/**
  * @brief AbstractItem::modelChangedHandler
  * @details Handler for the modelChangedEvent.
  */
@@ -66,7 +86,7 @@ void AbstractItem::modelChangedHandler()
  * @return
  * @details This method returns a QJsonObject containing the attributes of the AbstractItem.
  */
-AbstractItem::AbstractItem():id_(QUuid::createUuid().toString()), name_("")
+AbstractItem::AbstractItem():id_(QUuid::createUuid().toString()), name_(""), description_("")
 {
 
 }
@@ -81,6 +101,7 @@ QJsonObject AbstractItem::toJson() const
 	QJsonObject json;
 	json["id"] = id_;
 	json["name"] = name_;
+	json["description"] = description_;
 	return json;
 }
 /**
@@ -96,6 +117,8 @@ AbstractItem * AbstractItem::fromJson(const QJsonObject& object)
 		abstract_item->id_ = object["id"].toString();
 	if (const QJsonValue v = object["name"]; v.isString())
 		abstract_item->name_ = object["name"].toString();
+	if (const QJsonValue v = object["description"]; v.isString())
+		abstract_item->description_ = object["description"].toString();
 	return abstract_item;
 }
 /**
@@ -107,8 +130,10 @@ AbstractItem::AbstractItem(const AbstractItem& abstract_item)
 {
 	id_ = abstract_item.id_;
 	name_ = abstract_item.name_;
+	description_ = abstract_item.description_;
 }
 
 void AbstractItem::accept(IConstVisitor& visitor) const {
     throw NormalException("Unable to set editor data.");
 }
+

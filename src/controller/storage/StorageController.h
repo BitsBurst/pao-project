@@ -22,6 +22,7 @@ public:
 	StorageObject* GetStorage();
 	QString getDirectory() const;
 	void isStorageReady();
+    bool isStorageReadyCheck();
 private:
 	static const QString directory_name_;
 	StorageObject* storage_;

@@ -81,6 +81,14 @@ void StorageWorker::isStorageInitialized()
 {
 	while (!storageInitialized);
 }
+/*
+ * @brief StorageWorker::iSstorageReady
+ * @return true if the storage is ready, false otherwise
+ */
+bool StorageWorker::isStorageReady()
+{
+	return storageInitialized;
+}
 /**
  * @brief StorageWorker::Store
  * @details This method saves the storage.

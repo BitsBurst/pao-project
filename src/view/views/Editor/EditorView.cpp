@@ -1,6 +1,7 @@
 #include <QComboBox>
 #include "EditorView.h"
 #include "../../widgets/Editor/ItemEditor.h"
+#include "../../../controller/LocatorController.h"
 
 EditorView::EditorView(AbstractItem* item, QLayout* layout, QWidget* parent)
         :AbstractView(CustomElements::getCustomLayoutPrototype(SINGLE_SPACING), parent), item_(item)
@@ -48,6 +49,7 @@ EditorView::EditorView(AbstractItem* item, QLayout* layout, QWidget* parent)
     layout_->addWidget(btn_row);
 
     setActiveForm(0);
+	handleEvents();
 }
 
 void EditorView::setItem(AbstractItem* item)
@@ -72,4 +74,12 @@ void EditorView::setActiveForm(int index)
     if (item_ == nullptr) {
         static_cast<AbstractFormWidget*>(form_stack_->currentWidget())->reset();
     }
+}
+
+void EditorView::handleEvents() {
+	connect(ok_button_, &QPushButton::released, this, &EditorView::applyChanges );
+}
+
+void EditorView::applyChanges() {
+	static_cast<AbstractFormWidget*>(form_stack_->currentWidget())->updateItem(*item_);
 }

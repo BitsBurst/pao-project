@@ -71,6 +71,14 @@ void StorageController::isStorageReady()
 	worker_->isStorageInitialized();
 }
 /**
+ * @brief StorageController::isStorageReady
+ * @return true if the storage is ready, false otherwise
+ */
+bool StorageController::isStorageReadyCheck()
+{
+	return worker_->isStorageReady();
+}
+/**
  * @brief StorageController::storageReadyEvent
  * When the storage is ready, emit the signal
  */

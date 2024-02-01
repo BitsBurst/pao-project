@@ -23,3 +23,7 @@ void AbstractFormWidget::reset()
     name_edit_->clear();
     description_edit_->clear();
 }
+
+void AbstractFormWidget::updateItem(AbstractItem& item) {
+	item.setName(name_edit_->text());
+}

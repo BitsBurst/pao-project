@@ -1,7 +1,6 @@
 #include <QPushButton>
 #include "GroupItemWidget.h"
 #include "GroupItemRender.h"
-#include "../../../../include/QtAwesome/QtAwesome.h"
 #include "../../../MyApp.h"
 
 GroupItemWidget::GroupItemWidget(QString id, QString title, QString description, QString icon_src, QWidget* parent)
@@ -71,5 +70,10 @@ void GroupItemWidget::setDetail(const QString& detail)
 void GroupItemWidget::handleEvents()
 {
     connect(modify_btn_, &QPushButton::released, [this] { emit changeToModifyView(item_); });
+	connect(delete_btn_, &QPushButton::released, [this] { emit deleteItem(item_); });
+}
+void GroupItemWidget::deleteItem(AbstractItem* p_item)
+{
+	LocatorController::StorageControllerInstance()->GetStorage()->removeSensor(dynamic_cast<Sensor*>(p_item));
 }
 

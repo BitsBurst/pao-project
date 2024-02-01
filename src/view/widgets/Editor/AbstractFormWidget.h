@@ -18,6 +18,8 @@ public:
 
     virtual void setValues(const AbstractItem& item);
     virtual void reset();
+
+	virtual void updateItem(AbstractItem& item);
 };
 
 #endif //SMARTSENSORS_ABSTRACTFORMWIDGET_H

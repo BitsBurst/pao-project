@@ -19,6 +19,7 @@ public:
 	void isWatingSomethingToStore();
 	void SaveStorage();
 	void isStorageInitialized();
+	bool isStorageReady();
 	EventHandlerVoid onStorageReadyEvent;
 private:
 	StorageObject** storagePointer;

@@ -14,6 +14,9 @@
 
 class EditorView : public AbstractView {
 Q_OBJECT
+private slots:
+	void applyChanges();
+
 private:
     QLabel * title_;
     QWidget * form_;
@@ -25,6 +28,8 @@ private:
 
     SensorFormWidget * sensor_form_;
     CategoryFormWidget * category_form_;
+
+	void handleEvents();
 
 public:
     explicit EditorView(AbstractItem* item, QLayout * layout = nullptr, QWidget *parent = nullptr);

@@ -18,6 +18,7 @@ public:
 	QJsonObject toJson() const;
 	static Category* fromJson(QJsonObject const &);
 	DistributionType getDistributionType() const;
+	void setDistributionType(DistributionType distribution_type);
 	Category& operator=(Category const &category);
 
     virtual void accept(IConstVisitor& visitor) const;

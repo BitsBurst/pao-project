@@ -11,6 +11,7 @@ WindowController::WindowController()
 	sidebar_stack_ = new QStackedWidget;
 
 	main_window_ = new MainView(content_stack_, sidebar_stack_);
+	setDisabled(true);
 }
 /**
  * @brief WindowController::setDisabled

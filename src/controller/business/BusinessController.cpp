@@ -1,6 +1,5 @@
 #include "BusinessController.h"
 #include "../LocatorController.h"
-#include "../../view/widgets/SingleWidget/SingleViewGroup.h"
 
 BusinessController::BusinessController()
 {
@@ -9,21 +8,26 @@ BusinessController::BusinessController()
     single_view_ = new SingleView(new Category("Default Item", "KM"));
     // single_view_group_ = new SingleViewGroup(QVector<Sensor *>());
     editor_view_ = new EditorView(new Sensor("Editor", temp));
+
+
     create_view_ = new CreateView();
     settings_view_ = new SettingsView();
 
-    QVector<AbstractItem *> list;
+    /*QVector<AbstractItem *> list;
     for (int i = 0; i < 2; ++i) {
         list.push_back(new Sensor(QString::fromStdString("Sensor " + std::to_string(i)), Category(QString::fromStdString("Cat " + std::to_string(i)), "KM")));
         list.push_back(new Category(QString::fromStdString("Cat " + std::to_string(i)), "KM"));
     }
-
-    group_list_view_ = new GroupListView(list);
+*/
+	group_list_view_ = new GroupListView(LocatorController::StorageControllerInstance()->GetStorage()->getSensors(0));
 }
+
 bool BusinessController::Init()
 {
 	subscribeToEvents();
-
+	if(LocatorController::StorageControllerInstance()->isStorageReadyCheck()) {
+		storageReady();
+	}
     main_view_->createDefaultView(content_stack_->indexOf(single_view_), sidebar_stack_->indexOf(group_list_view_));
 
 	return true;
@@ -45,6 +49,8 @@ void BusinessController::subscribeToEvents()
     // Create
     connect(main_view_, &MainView::changeToCreateCategory, this, &BusinessController::showCreateCategory);
     connect(main_view_, &MainView::changeToCreateSensor, this, &BusinessController::showCreateSensor);
+
+	//connect(editor_view_, &EditorView::applyChanges, this, &BusinessController::editItem);
 
 }
 
@@ -71,7 +77,6 @@ void BusinessController::Destroy()
 void BusinessController::storageReady()
 {
 	LocatorController::WindowControllerInstance()->setDisabled(false);
-	//TestDavide::runTestV6();
 }
 
 
@@ -98,6 +103,11 @@ void BusinessController::showModifyView(AbstractItem* item)
     main_view_->setContentView(content_stack_->indexOf(editor_view_));
 }
 
+void BusinessController::editItem(AbstractItem* item)
+{
+
+}
+
 void BusinessController::showCreateView()
 {
     main_view_->setContentView(content_stack_->indexOf(create_view_));
@@ -110,14 +120,18 @@ void BusinessController::showSettingsView()
 
 void BusinessController::showCreateCategory()
 {
-    editor_view_->setItem(nullptr);
+	Category* temp = new Category();
+    editor_view_->setItem(temp);
     editor_view_->setActiveForm(1);
     main_view_->setContentView(content_stack_->indexOf(editor_view_));
+	LocatorController::StorageControllerInstance()->GetStorage()->addCategory(temp);
 }
 
 void BusinessController::showCreateSensor()
 {
+	Sensor* temp = new Sensor();
     editor_view_->setItem(nullptr);
     editor_view_->setActiveForm(0);
     main_view_->setContentView(content_stack_->indexOf(editor_view_));
+	LocatorController::StorageControllerInstance()->GetStorage()->addSensor(temp);
 }

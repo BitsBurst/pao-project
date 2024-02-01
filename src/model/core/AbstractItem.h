@@ -23,6 +23,8 @@ public:
 	 void setId(QString id);
 	 QString getName() const;
 	 void setName(QString name);
+	 QString getDescription() const;
+	 void setDescription(QString description);
 	 QJsonObject toJson() const;
 	 static AbstractItem * fromJson(QJsonObject const &);
 	 EventHandlerVoid modelChangedEvent;
@@ -32,6 +34,7 @@ public:
 protected:
 	QString id_;
 	QString name_;
+	QString description_;
 
 protected:
 	void modelChangedHandler();

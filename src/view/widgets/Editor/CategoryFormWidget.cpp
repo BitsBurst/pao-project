@@ -38,3 +38,11 @@ void CategoryFormWidget::reset()
     unit_measure_->setCurrentIndex(0);
     data_gen_->setCurrentIndex(0);
 }
+
+void CategoryFormWidget::updateItem(AbstractItem& item)
+{
+	AbstractFormWidget::updateItem(item);
+
+	static_cast<Category&>(item).setUnitMeasure(unit_measure_->currentText());
+	static_cast<Category&>(item).setDistributionType(static_cast<DistributionType>(data_gen_->currentIndex() + 1));
+}

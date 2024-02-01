@@ -31,6 +31,7 @@ public:
     void setDetail(const QString& detail);
 
     void handleEvents();
+	void deleteItem(AbstractItem* p_item);
 };
 
 #endif //SMARTSENSORS_GROUPITEMWIDGET_H
