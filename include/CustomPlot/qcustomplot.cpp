@@ -410,11 +410,11 @@ void QCPPainter::setModes(QCPPainter::PainterModes modes)
 /*!
   Sets the QPainter::NonCosmeticDefaultPen in Qt versions before Qt5 after beginning painting on \a
   device. This is necessary to get cosmetic pen consistency across Qt versions, because since Qt5,
-  all pens are non-cosmetic by default, and in Qt4 this render hint must be set to get that
+  all pens are non-cosmetic by default, and in Qt4 this refresh hint must be set to get that
   behaviour.
   
   The Constructor \ref QCPPainter(QPaintDevice *device) which directly starts painting also sets
-  the render hint as appropriate.
+  the refresh hint as appropriate.
   
   \note this function hides the non-virtual base class implementation.
 */
@@ -627,7 +627,7 @@ void QCPAbstractPaintBuffer::setInvalidated(bool invalidated)
 }
 
 /*!
-  Sets the device pixel ratio to \a ratio. This is useful to render on high-DPI output devices.
+  Sets the device pixel ratio to \a ratio. This is useful to refresh on high-DPI output devices.
   The ratio is automatically set to the device pixel ratio used by the parent QCustomPlot instance.
 
   The buffer is reallocated (by calling \ref reallocateBuffer), so any painters that were obtained

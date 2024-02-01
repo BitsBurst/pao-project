@@ -25,6 +25,7 @@ private:
 
     QPushButton *modify_btn_, *delete_btn_;
     AbstractItem* item_;
+	void refresh();
 
 protected:
     void mousePressEvent(QMouseEvent *event) override;

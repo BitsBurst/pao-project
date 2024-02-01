@@ -1,26 +1,11 @@
 #include <QPushButton>
 #include "GroupItemWidget.h"
 #include "GroupItemRender.h"
-#include "../../../MyApp.h"
 
-GroupItemWidget::GroupItemWidget(QString id, QString title, QString description, QString icon_src, QWidget* parent)
-    : AbstractWidget(CustomElements::getCustomLayoutPrototype(SINGLE_SPACING), parent),  id_(std::move(id)), icon_src_(std::move(icon_src))
-{
-    // Initialization
-    title_label_ = new QLabel(title);
-    detail_label_ = new QLabel(description);
-
-    // Layout Settings
-    setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
-
-    title_label_->setFont(CustomElements::getFontH4());
-    detail_label_->setFont(CustomElements::getFontDetails());
-
-    // Layout Widgets
-    layout_->addWidget(detail_label_);
-    layout_->addWidget(title_label_);
+void GroupItemWidget::refresh(){
+	GroupItemRender item_render(this);
+	item_->accept(item_render);
 }
-
 GroupItemWidget::GroupItemWidget(AbstractItem* item, QWidget* parent)
         : AbstractWidget(CustomElements::getCustomLayoutPrototype(SINGLE_SPACING), parent), title_label_(new QLabel), detail_label_(new QLabel), item_(item)
 {
@@ -31,6 +16,7 @@ GroupItemWidget::GroupItemWidget(AbstractItem* item, QWidget* parent)
     if (item_ != nullptr) {
         GroupItemRender item_render(this);
         item_->accept(item_render);
+		item_->modelChangedEvent.subscribe(std::bind(&GroupItemWidget::refresh, this));
     }
 
     QWidget* row_btn = new QWidget(this);
@@ -52,7 +38,6 @@ GroupItemWidget::GroupItemWidget(AbstractItem* item, QWidget* parent)
     layout_->addWidget(detail_label_);
     layout_->addWidget(title_label_);
     layout_->addWidget(row_btn);
-
     // Events
     handleEvents();
 }
