@@ -24,6 +24,10 @@ public:
 	 * @param callback the callback to call when the event is triggered
 	 */
 	void subscribe(Callback callback) {
+		auto it = std::find_if(callbacks.begin(), callbacks.end(), [&callback](const Callback& cb) {
+		  return cb.target_type() == callback.target_type();
+		});
+		if (it == callbacks.end())
 		callbacks.push_back(callback);
 	}
 	/*
@@ -32,7 +36,9 @@ public:
 	 * @param callback the callback to unsubscribe
 	 */
 	void unsubscribe(Callback callback) {
-		auto it = std::find(callbacks.begin(), callbacks.end(), callback);
+		auto it = std::find_if(callbacks.begin(), callbacks.end(), [&callback](const Callback& cb) {
+		  return cb.target_type() == callback.target_type();
+		});
 		if (it != callbacks.end()) {
 			callbacks.erase(it);
 		}
@@ -78,12 +84,10 @@ public:
 	 */
 	void subscribe(Callback callback) {
 		auto it = std::find_if(callbacks.begin(), callbacks.end(), [&callback](const Callback& cb) {
-		  return cb.target<void()>() == callback.target<void()>();
+		  return cb.target_type() == callback.target_type();
 		});
-
-		if (it == callbacks.end()) {
-			callbacks.push_back(callback);
-		}
+		if (it == callbacks.end())
+		callbacks.push_back(callback);
 	}
 	/*
 	 * @brief unsubscribe
@@ -92,7 +96,7 @@ public:
 	 */
 	void unsubscribe(Callback callback) {
 		auto it = std::find_if(callbacks.begin(), callbacks.end(), [&callback](const Callback& cb) {
-		  return cb.target<void()>() == callback.target<void()>();
+		  return cb.target_type() == callback.target_type();
 		});
 
 		if (it != callbacks.end()) {
@@ -121,5 +125,4 @@ public:
 private:
 	std::vector<Callback> callbacks;
 };
-
 #endif //SMARTSENSORS_EVENTHANDLER_H
