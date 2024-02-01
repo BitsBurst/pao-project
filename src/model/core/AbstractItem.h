@@ -7,6 +7,7 @@
 #include <QJsonObject>
 #include "../../utility/event/EventHandler.h"
 #include "../visitor/IConstVisitor.h"
+#include "../visitor/IVisitor.h"
 
 /**
  * @brief The AbstractItem class
@@ -30,6 +31,7 @@ public:
 	 EventHandlerVoid modelChangedEvent;
 
     virtual void accept(IConstVisitor& visitor) const;
+    virtual void accept(IVisitor& visitor);
 
 protected:
 	QString id_;

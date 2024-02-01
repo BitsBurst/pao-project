@@ -1,5 +1,6 @@
 #include "BusinessController.h"
 #include "../LocatorController.h"
+#include "../../model/visitor/DeleteItem.h"
 
 BusinessController::BusinessController()
 {
@@ -35,6 +36,7 @@ bool BusinessController::Init()
 void BusinessController::subscribeToEvents()
 {
 	connect(LocatorController::StorageControllerInstance(), &StorageController::StorageReady, this, &BusinessController::storageReady);
+
     connect(main_view_, &MainView::changeToSingleSensorView, this, &BusinessController::showSingleSensorView);
     connect(main_view_, &MainView::changeToSingleGroupView, this, &BusinessController::showSingleGroupView);
     connect(main_view_, &MainView::changeToCreateView, this, &BusinessController::showCreateView);
@@ -50,8 +52,11 @@ void BusinessController::subscribeToEvents()
     connect(main_view_, &MainView::changeToCreateCategory, this, &BusinessController::showCreateCategory);
     connect(main_view_, &MainView::changeToCreateSensor, this, &BusinessController::showCreateSensor);
 
-	//connect(editor_view_, &EditorView::applyChanges, this, &BusinessController::editItem);
+    // Delete
+    connect(group_list_view_, &GroupListView::deleteItem, this, &BusinessController::deleteItem);
 
+    // Update Model
+    connect(editor_view_, &EditorView::modelChanged, this, &BusinessController::updateInterface);
 }
 
 void BusinessController::setDataField(MainView* main_view, QStackedWidget* content_stack, QStackedWidget* sidebar_stack)
@@ -103,11 +108,6 @@ void BusinessController::showModifyView(AbstractItem* item)
     main_view_->setContentView(content_stack_->indexOf(editor_view_));
 }
 
-void BusinessController::editItem(AbstractItem* item)
-{
-
-}
-
 void BusinessController::showCreateView()
 {
     main_view_->setContentView(content_stack_->indexOf(create_view_));
@@ -134,4 +134,17 @@ void BusinessController::showCreateSensor()
     editor_view_->setActiveForm(0);
     main_view_->setContentView(content_stack_->indexOf(editor_view_));
 	LocatorController::StorageControllerInstance()->GetStorage()->addSensor(temp);
+}
+
+void BusinessController::updateInterface()
+{
+    group_list_view_->setItems(LocatorController::StorageControllerInstance()->GetStorage()->getSensors(0));
+}
+
+void BusinessController::deleteItem(AbstractItem* item)
+{
+    DeleteItem delete_item;
+    item->accept(delete_item);
+
+    updateInterface();
 }

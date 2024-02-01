@@ -137,3 +137,6 @@ void AbstractItem::accept(IConstVisitor& visitor) const {
     throw NormalException("Unable to set editor data.");
 }
 
+void AbstractItem::accept(IVisitor& visitor) {
+    throw NormalException("Unable to set editor data.");
+}

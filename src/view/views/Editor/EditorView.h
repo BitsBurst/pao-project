@@ -13,7 +13,11 @@
 #include "../../widgets/Editor/CategoryFormWidget.h"
 
 class EditorView : public AbstractView {
-Q_OBJECT
+    Q_OBJECT
+
+signals:
+    void modelChanged();
+
 private slots:
 	void applyChanges();
 

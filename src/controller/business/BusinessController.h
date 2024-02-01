@@ -44,11 +44,13 @@ public slots:
     void showSingleSensorView();
     void showSingleGroupView();
     void showModifyView(AbstractItem* item);
-	void editItem(AbstractItem* item);
     void showCreateView();
     void showCreateCategory();
     void showCreateSensor();
     void showSettingsView();
+
+    void updateInterface();
+    void deleteItem(AbstractItem* item);
 };
 
 #endif //SMARTSENSORS_BUSINESSCONTROLLER_H

@@ -117,6 +117,9 @@ set(PROJECT_SOURCES
         src/view/widgets/SingleWidget/SingleCategoryWidget.h
         src/view/widgets/SingleWidget/SingleWidgetRender.cpp
         src/view/widgets/SingleWidget/SingleWidgetRender.h
+        src/model/visitor/deleteItem.cpp
+        src/model/visitor/DeleteItem.h
+        src/model/visitor/IVisitor.h
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)

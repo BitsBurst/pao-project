@@ -161,3 +161,7 @@ void Sensor::accept(IConstVisitor& visitor) const
 {
     visitor.visit(*this);
 }
+void Sensor::accept(IVisitor& visitor)
+{
+    visitor.visit(*this);
+}

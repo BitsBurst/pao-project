@@ -22,6 +22,7 @@ public:
 	Category& operator=(Category const &category);
 
     virtual void accept(IConstVisitor& visitor) const;
+    virtual void accept(IVisitor& visitor);
 private:
 	QString unit_measure_;
 	DistributionType distribution_type_;

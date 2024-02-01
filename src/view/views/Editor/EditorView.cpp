@@ -82,4 +82,6 @@ void EditorView::handleEvents() {
 
 void EditorView::applyChanges() {
 	static_cast<AbstractFormWidget*>(form_stack_->currentWidget())->updateItem(item_);
+
+    emit modelChanged();
 }

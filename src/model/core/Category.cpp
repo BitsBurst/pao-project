@@ -96,6 +96,11 @@ void Category::accept(IConstVisitor& visitor) const
 {
     visitor.visit(*this);
 }
+void Category::accept(IVisitor& visitor)
+{
+    visitor.visit(*this);
+}
+
 void Category::setDistributionType(DistributionType distribution_type)
 {
 	distribution_type_ = distribution_type;
