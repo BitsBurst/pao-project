@@ -24,7 +24,7 @@ private:
 
     QPushButton *modify_btn_, *delete_btn_;
     AbstractItem* item_;
-	void render();
+	void refresh();
 public:
     explicit GroupItemWidget(QString id, QString title = "", QString description = "", QString icon_src = "", QWidget *parent = nullptr);
     explicit GroupItemWidget(AbstractItem* item, QWidget *parent = nullptr);

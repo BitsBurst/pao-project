@@ -2,8 +2,7 @@
 #include "GroupItemWidget.h"
 #include "GroupItemRender.h"
 
-void GroupItemWidget::render(){
-	qDebug() << "render";
+void GroupItemWidget::refresh(){
 	GroupItemRender item_render(this);
 	item_->accept(item_render);
 }
@@ -17,6 +16,7 @@ GroupItemWidget::GroupItemWidget(AbstractItem* item, QWidget* parent)
     if (item_ != nullptr) {
         GroupItemRender item_render(this);
         item_->accept(item_render);
+		item_->modelChangedEvent.subscribe(std::bind(&GroupItemWidget::refresh, this));
     }
 
     QWidget* row_btn = new QWidget(this);
@@ -38,7 +38,6 @@ GroupItemWidget::GroupItemWidget(AbstractItem* item, QWidget* parent)
     layout_->addWidget(detail_label_);
     layout_->addWidget(title_label_);
     layout_->addWidget(row_btn);
-	item_->modelChangedEvent.subscribe(std::bind(&GroupItemWidget::render, this));
     // Events
     handleEvents();
 }
