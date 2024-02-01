@@ -1,7 +1,5 @@
 #include "MyApp.h"
 
-fa::QtAwesome* MyApp::awesome = new fa::QtAwesome();
-
 MyApp::~MyApp()
 {
 	LocatorController::Destroy();
@@ -28,9 +26,4 @@ MyApp::MyApp(int i, char** p_string): QApplication(i, p_string) {
 	catch (...) {
 		Logger::Log(LogLevel::_ERROR_, __FILE__, __LINE__, __FUNCTION__, "Unexpected error");
 	}
-}
-
-fa::QtAwesome* MyApp::getAwesome()
-{
-    return awesome;
 }
