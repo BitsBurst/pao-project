@@ -1,10 +1,8 @@
 #include "SingleViewGroup.h"
-#include "../../../utility/Logger.h"
-
 #include <utility>
 
 SingleViewGroup::SingleViewGroup(QVector<Sensor *> sensor_list, QWidget * parent)
-    :   AbstractWidget(CustomElements::getCustomLayoutPrototype(SINGLE_SPACING), parent), sensor_list_(std::move(sensor_list))
+    : AbstractSingleView(new AbstractItem("Gruppo"), true, parent), sensor_list_(std::move(sensor_list))
 {
     // Initialization
     chart_ = new ChartHandler(sensor_list_, this);
@@ -13,7 +11,7 @@ SingleViewGroup::SingleViewGroup(QVector<Sensor *> sensor_list, QWidget * parent
 }
 
 SingleViewGroup::SingleViewGroup(AbstractItem* item, QWidget * parent)
-    :   AbstractWidget(CustomElements::getCustomLayoutPrototype(SINGLE_SPACING), parent)
+        : AbstractSingleView(item, true, parent)
 {
     // Initialization
     chart_ = new ChartHandler(sensor_list_, this);

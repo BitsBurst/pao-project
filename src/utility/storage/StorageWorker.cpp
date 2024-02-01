@@ -2,6 +2,11 @@
 #include "StorageUtility.h"
 #include "../../controller/storage/StorageController.h"
 #include "../../controller/LocatorController.h"
+/**
+ * @brief StorageWorker::SaveStorage
+ * @details This method is called when the storage is changed and it's time to save it.
+ * @note This method is called by the StorageController.
+ */
 void StorageWorker::SaveStorage()
 {
 	if(closing)
@@ -9,13 +14,28 @@ void StorageWorker::SaveStorage()
 	lastUpdate = QDateTime::currentDateTime();
 	changed = true;
 }
+/**
+ * @brief StorageWorker::StorageWorker
+ * @details This is the constructor of the StorageWorker. It initializes the storagePointer and the filename.
+ * @param pp pointer to the storage
+ * @param filename filename of the storage
+ * @param parent parent of the StorageWorker
+ */
 StorageWorker::StorageWorker(StorageObject** pp, QString filename, QObject *parent) :QThread(parent), storagePointer(pp), changed(false), lastUpdate(QDateTime::currentDateTime()), filename_(filename), writingMutex(), storageInitialized(false), closing(false) {
 	start();
 }
+/**
+ * @brief StorageWorker::~StorageWorker
+ * @details This is the destructor of the StorageWorker. It waits for the storage to be saved and then it destroys the StorageWorker.
+ */
 StorageWorker::~StorageWorker()
 {
 	wait();
 }
+/**
+ * @brief StorageWorker::run
+ * @details This method is the main method of the StorageWorker. It waits for the storage to be changed and then it saves it.
+ */
 void StorageWorker::run() {
 	Load();
 	if(*storagePointer == nullptr){
@@ -42,6 +62,10 @@ void StorageWorker::run() {
 		writingMutex.unlock();
 	}
 }
+/**
+ * @brief StorageWorker::isWatingSomethingToStore
+ * @details This method is called when the application is closing. It waits for the storage to be saved.
+ */
 void StorageWorker::isWatingSomethingToStore()
 {
 	closing = true;
@@ -49,10 +73,18 @@ void StorageWorker::isWatingSomethingToStore()
 	writingMutex.lock();
 	writingMutex.unlock();
 }
+/**
+ * @brief StorageWorker::isStorageInitialized
+ * @details This method is called when the application is starting. It waits for the storage to be loaded.
+ */
 void StorageWorker::isStorageInitialized()
 {
 	while (!storageInitialized);
 }
+/**
+ * @brief StorageWorker::Store
+ * @details This method saves the storage.
+ */
 void StorageWorker::Store()
 {
 	Logger::Log(LogLevel::_INFO_, __FILE__, __LINE__, __FUNCTION__, LogMethod::_IN_);
@@ -66,6 +98,10 @@ void StorageWorker::Store()
 	}
 	Logger::Log(LogLevel::_INFO_, __FILE__, __LINE__, __FUNCTION__, LogMethod::_OUT_);
 }
+/**
+ * @brief StorageWorker::Load
+ * @details This method loads the storage.
+ */
 void StorageWorker::Load()
 {
 	Logger::Log(LogLevel::_INFO_, __FILE__, __LINE__, __FUNCTION__, LogMethod::_IN_);

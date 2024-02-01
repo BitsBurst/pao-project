@@ -1,4 +1,10 @@
 #include "StorageUtility.h"
+/**
+ * @brief StorageUtility::StoreJSON
+ * @param obj the json object to save
+ * @param filename the filename to save the json object to
+ * @return true if the file was saved successfully, false otherwise
+ */
 bool StorageUtility::StoreJSON(QJsonObject obj, QString filename)
 {
 	QFileInfo fi(filename);
@@ -20,6 +26,11 @@ bool StorageUtility::StoreJSON(QJsonObject obj, QString filename)
 		return false;
 	}
 }
+/**
+ * @brief StorageUtility::LoadJSON
+ * @param filename the filename to load the json object from
+ * @return the json object loaded from the file
+ */
 QJsonObject StorageUtility::LoadJSON(QString filename)
 {
 	QFile file(filename);

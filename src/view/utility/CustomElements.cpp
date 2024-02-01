@@ -1,6 +1,5 @@
 #include <QFontDatabase>
 #include "CustomElements.h"
-#include "../../utility/Logger.h"
 
 // Initialization
 QFont *CustomElements::font_h1_instance_ = nullptr;

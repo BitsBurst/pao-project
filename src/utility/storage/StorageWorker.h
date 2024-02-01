@@ -7,6 +7,10 @@
 #include <QMutex>
 #include <QFile>
 #include "../../model/storage/StorageObject.h"
+/*
+ * @brief StorageWorker
+ * This class is used to store the storage in a file
+ */
 class StorageWorker: public QThread {
 Q_OBJECT
 public:

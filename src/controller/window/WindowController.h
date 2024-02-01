@@ -3,7 +3,11 @@
 
 #include "../core/AbstractController.h"
 #include "../../view/MainView.h"
-
+/**
+ * @brief The WindowController class
+ * @details This class is responsible for the main window of the application.
+ * It is responsible for the initialization of the main window
+ */
 class WindowController: public AbstractController {
 Q_OBJECT
 public:

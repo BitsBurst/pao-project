@@ -9,6 +9,7 @@ set(CMAKE_AUTORCC ON)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
+# CMAKE_PREFIX_PATH the path where Qt is installed
 set(CMAKE_PREFIX_PATH "$ENV{QT_PATH}/6.6.1/gcc_64/lib/cmake")
 
 find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Widgets Charts Core PrintSupport Gui)
@@ -29,8 +30,8 @@ set(PROJECT_SOURCES
         src/view/containers/MainContentContainer.h
         src/view/views/GroupListView.cpp
         src/view/views/GroupListView.h
-        src/view/views/SingleView/SingleView.cpp
-        src/view/views/SingleView/SingleView.h
+        src/view/views/AbstractSingleView.cpp
+        src/view/views/AbstractSingleView.h
         src/view/views/Editor/EditorView.cpp
         src/view/views/Editor/EditorView.h
         src/model/datagen/DataGen.cpp
@@ -60,8 +61,8 @@ set(PROJECT_SOURCES
         src/view/views/CreateView.h
         src/view/views/SettingsView.cpp
         src/view/views/SettingsView.h
-        src/view/widgets/GroupItem/GroupItemWidget.cpp
-        src/view/widgets/GroupItem/GroupItemWidget.h
+        src/view/widgets/GroupItemWidget.cpp
+        src/view/widgets/GroupItemWidget.h
         src/view/core/AbstractWidget.cpp
         src/view/core/AbstractWidget.h
         src/view/widgets/SidebarLowControlWidget.cpp
@@ -91,14 +92,14 @@ set(PROJECT_SOURCES
         src/view/utility/CustomElements.h
         src/view/utility/CustomElements.cpp
         resources.qrc
-        src/view/widgets/SingleWidget/SingleSensorWidget.cpp
-        src/view/widgets/SingleWidget/SingleSensorWidget.h
+        src/view/views/SingleViewSensor.cpp
+        src/view/views/SingleViewSensor.h
         src/view/widgets/RealtimeChart.cpp
         src/view/widgets/RealtimeChart.h
         src/view/widgets/ChartHandler.cpp
         src/view/widgets/ChartHandler.h
-        src/view/widgets/SingleWidget/SingleViewGroup.h
-        src/view/widgets/SingleWidget/SingleViewGroup.cpp
+        src/view/views/SingleViewGroup.h
+        src/view/views/SingleViewGroup.cpp
         src/view/widgets/InformationWidget.cpp
         src/view/widgets/InformationWidget.h
         src/view/widgets/Editor/AbstractFormWidget.cpp
@@ -135,10 +136,21 @@ else()
     endif()
 endif()
 
-add_library(qcustomplot include/CustomPlot/qcustomplot.h include/CustomPlot/qcustomplot.cpp)
+add_library(qcustomplot
+        include/CustomPlot/qcustomplot.h
+        include/CustomPlot/qcustomplot.cpp
+)
 target_link_libraries(qcustomplot PUBLIC Qt${QT_VERSION_MAJOR}::Core Qt${QT_VERSION_MAJOR}::PrintSupport)
 
-add_library(QtAwsome include/QtAwesome/QtAwesome.h include/QtAwesome/QtAwesome.cpp include/QtAwesome/QtAwesomeAnim.cpp include/QtAwesome/QtAwesomeAnim.h include/QtAwesome/QtAwesomeEnumGenerated.h include/QtAwesome/QtAwesomeStringGenerated.h include/QtAwesome/QtAwesomeFree.qrc )
+add_library(QtAwsome
+        include/QtAwesome/QtAwesome.h
+        include/QtAwesome/QtAwesome.cpp
+        include/QtAwesome/QtAwesomeAnim.cpp
+        include/QtAwesome/QtAwesomeAnim.h
+        include/QtAwesome/QtAwesomeEnumGenerated.h
+        include/QtAwesome/QtAwesomeStringGenerated.h
+        include/QtAwesome/QtAwesomeFree.qrc
+)
 target_link_libraries(QtAwsome PUBLIC Qt${QT_VERSION_MAJOR}::Core Qt${QT_VERSION_MAJOR}::Gui Qt${QT_VERSION_MAJOR}::Widgets)
 
 target_link_libraries(SmartSensors PRIVATE Qt${QT_VERSION_MAJOR}::Widgets Qt${QT_VERSION_MAJOR}::Charts qcustomplot QtAwsome)
@@ -164,10 +176,12 @@ install(TARGETS SmartSensors
 if(QT_VERSION_MAJOR EQUAL 6)
     qt_finalize_executable(SmartSensors)
 endif()
-#if (build_type STREQUAL release)
-#target_compile_definitions(${PROJECT_NAME} PUBLIC
-#        QT_NO_DEBUG_OUTPUT
-#        QT_NO_INFO_OUTPUT
-#        QT_NO_WARNING_OUTPUT
-#)
-#endif()
+if (build_type STREQUAL release)
+    #target_compile_definitions(${PROJECT_NAME} PUBLIC
+    #        QT_NO_DEBUG_OUTPUT
+    #        QT_NO_INFO_OUTPUT
+    #        QT_NO_WARNING_OUTPUT
+    #)
+else ()
+    #add_compile_definitions(DEBUG)
+endif ()

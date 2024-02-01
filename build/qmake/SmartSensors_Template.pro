@@ -9,13 +9,15 @@
 
 QT       += core gui
 
-greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
-
+greaterThan(QT_MAJOR_VERSION, 4):
+QT += widgets charts printsupport
 CONFIG += c++17
 
 SOURCES += {SOURCES}
 
 HEADERS += {HEADERS}
+
+RESOURCES+=../../resources.qrc
 
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin

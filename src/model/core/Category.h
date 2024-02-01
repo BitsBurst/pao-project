@@ -4,16 +4,20 @@
 #include "../datagen/DataGenObj.h"
 #include "../../utility/datagenerator/RandomDataGenerator.h"
 #include <QString>
+/**
+ * @brief The Category class
+ * @details This class represents a category of items.
+ */
 class Category: public AbstractItem {
 public:
 	Category();
-	Category(QString, QString, DistributionType = UNIFORM);
+	Category(QString, QString, DistributionType = DistributionType::UNIFORM);
 	~Category();
 	QString getUnitMeasure() const;
 	void setUnitMeasure(QString unit_measure);
 	QJsonObject toJson() const;
 	static Category* fromJson(QJsonObject const &);
-	int getDistributionType() const;
+	DistributionType getDistributionType() const;
 	Category& operator=(Category const &category);
 
     virtual void accept(IConstVisitor& visitor) const;

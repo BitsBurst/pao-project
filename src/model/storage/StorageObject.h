@@ -5,6 +5,10 @@
 #include "../core/Sensor.h"
 #include <QVector>
 #include <QJsonArray>
+/*
+ * StorageObject
+ * This class is used to store all the sensors and categories.
+ */
 class StorageObject: public QObject {
 	Q_OBJECT
 private:

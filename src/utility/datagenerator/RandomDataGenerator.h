@@ -1,40 +1,48 @@
 #ifndef SMARTSENSORS_RANDOMDATAGENERATOR_H
 #define SMARTSENSORS_RANDOMDATAGENERATOR_H
-
 #include <iostream>
 #include <vector>
 #include <random>
+#include <random>
+#include <cmath>
+#include <ctime>
 
-enum DistributionType {
-	UNIFORM,
-	NORMAL,
-	EXPONENTIAL,
-	POISSON,
-	BINOMIAL,
-	GAMMA,
-	WEIBULL,
-	SINUSOIDAL
-};
+enum DistributionType { SINUSOIDAL, GAUSSIAN, UNIFORM };
 
-class RandomDataGenerator {
+/**
+ * @brief Class that generates random data
+ * @details This class generates random data based on the distribution type set
+ */
+class CombinedDataGenerator {
+private:
+	int size;
+	double amplitude;
+	double frequency;
+	double mean;
+	double stddev;
+	double min;
+	double max;
+	int index;
+	DistributionType distributionType;
+
+	std::mt19937 generator;
+	std::normal_distribution<double> gaussianDistribution;
+	std::uniform_real_distribution<double> uniformDistribution;
+
 public:
-	RandomDataGenerator(int seed);
+	CombinedDataGenerator();
 
 	void setDistributionType(DistributionType type);
 
-	std::vector<double> generateData(int rangeStart, int rangeEnd, int dataSize);
+	void setSinusoidalParams(double amplitude, double frequency);
 
-private:
-	std::default_random_engine generator;
-	DistributionType distributionType;
-	void generateSinusoidalData(int rangeStart, int rangeEnd, int dataSize, std::vector<double>& data);
-	void generateUniformData(int rangeStart, int rangeEnd, int dataSize, std::vector<double>& data);
-	void generateNormalData(int rangeStart, int rangeEnd, int dataSize, std::vector<double>& data);
-	void generateExponentialData(int rangeStart, int rangeEnd, int dataSize, std::vector<double>& data);
-	void generatePoissonData(int rangeStart, int rangeEnd, int dataSize, std::vector<double>& data);
-	void generateBinomialData(int rangeStart, int rangeEnd, int dataSize, std::vector<double>& data);
-	void generateGammaData(int rangeStart, int rangeEnd, int dataSize, std::vector<double>& data);
-	void generateWeibullData(int rangeStart, int rangeEnd, int dataSize, std::vector<double>& data);
+	void setGaussianParams(double mean, double stddev);
+
+	void setUniformParams(double min, double max);
+
+	void setSize(int size);
+
+	double generateData();
 };
 
 #endif //SMARTSENSORS_RANDOMDATAGENERATOR_H

@@ -4,7 +4,11 @@ StorageController* LocatorController::storage_controller_ = nullptr;
 WindowController* LocatorController::window_controller_ = nullptr;
 BusinessController* LocatorController::business_controller_ = nullptr;
 ErrorController* LocatorController::error_controller_ = nullptr;
-
+/*
+ * @brief This function returns the instance of the StorageController.
+ * @details If the instance is not created yet, it will be created.
+ * @return The instance of the StorageController.
+ */
 StorageController* LocatorController::StorageControllerInstance()
 {
 	if (storage_controller_ == nullptr)
@@ -13,7 +17,11 @@ StorageController* LocatorController::StorageControllerInstance()
 	}
 	return storage_controller_;
 }
-
+/*
+ * @brief This function returns the instance of the WindowController.
+ * @details If the instance is not created yet, it will be created.
+ * @return The instance of the WindowController.
+ */
 WindowController* LocatorController::WindowControllerInstance() {
 	if (window_controller_ == nullptr)
 	{
@@ -21,7 +29,11 @@ WindowController* LocatorController::WindowControllerInstance() {
 	}
 	return window_controller_;
 }
-
+/*
+ * @brief This function returns the instance of the BusinessController.
+ * @details If the instance is not created yet, it will be created.
+ * @return The instance of the BusinessController.
+ */
 BusinessController* LocatorController::BusinessControllerInstance() {
 	if (business_controller_ == nullptr)
 	{
@@ -29,7 +41,11 @@ BusinessController* LocatorController::BusinessControllerInstance() {
 	}
 	return business_controller_;
 }
-
+/*
+ * @brief This function returns the instance of the ErrorController.
+ * @details If the instance is not created yet, it will be created.
+ * @return The instance of the ErrorController.
+ */
 ErrorController* LocatorController::ErrorControllerInstance() {
 	if (error_controller_ == nullptr)
 	{
@@ -37,7 +53,11 @@ ErrorController* LocatorController::ErrorControllerInstance() {
 	}
 	return error_controller_;
 }
-
+/*
+ * @brief This function initializes all controllers.
+ * @details This function initializes all controllers.
+ * @return True if all controllers were initialized successfully, false otherwise.
+ */
 bool LocatorController::Init()
 {
 	Logger::Log(LogLevel::_INFO_, __FILE__, __LINE__, __FUNCTION__, "Locator Started");
@@ -49,6 +69,10 @@ bool LocatorController::Init()
 	Logger::Log(LogLevel::_INFO_, __FILE__, __LINE__, __FUNCTION__, "Locator Finished" + QString(result ? "successfully" : "with errors"));
 	return result;
 }
+/*
+ * @brief This function destroys all controllers.
+ * @details This function destroys all controllers.
+ */
 void LocatorController::Destroy()
 {
 	StorageControllerInstance()->Destroy();

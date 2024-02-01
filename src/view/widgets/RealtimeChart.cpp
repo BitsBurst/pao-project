@@ -1,5 +1,6 @@
 #include "RealtimeChart.h"
-
+#include "../../model/core/Category.h"
+#include "../../model/core/Sensor.h"
 
 RealtimeChart::RealtimeChart(QWidget * parent)
         : AbstractWidget(CustomElements::getCustomLayoutPrototype(H_NO_BORDER) ,parent)
@@ -39,6 +40,7 @@ RealtimeChart::RealtimeChart(QWidget * parent)
 
     // Mouse events callbacks
     connect(custom_plot_, &QCustomPlot::mousePress, this, &RealtimeChart::mousePress);
+	connect(this, &RealtimeChart::dataGeneratedSignal, this, &RealtimeChart::dataGenerated);
 }
 
 void RealtimeChart::mousePress()
@@ -63,26 +65,29 @@ void RealtimeChart::mouseWheel()
 
 void RealtimeChart::addRealtimeGraph()
 {
-    custom_plot_->addGraph();
-    custom_plot_->graph()->setName(QString("Realtime"));
+	custom_plot_->addGraph();
+	custom_plot_->graph()->setName(QString("Realtime"));
 
-    data_.reset(new QCPDataContainer<QCPGraphData>);
+	data_.reset(new QCPDataContainer<QCPGraphData>);
 
-    // Initial data ( 0 )
-    for (int i = 0; i < max_samples_; i++) {
-        QCPGraphData data(i * delta_time_, 0);
-        data_->add(data);
-    }
-    custom_plot_->graph()->setData(data_);
+	// Initial data ( 0 )
+	for (int i = 0; i<max_samples_; i++) {
+		QCPGraphData data(i*delta_time_, 0);
+		data_->add(data);
+	}
+	custom_plot_->graph()->setData(data_);
 
-    // Pen Settings
-    QPen graphPen;
-    graphPen.setColor(QColor(rand() % 245 + 10, rand() % 245 + 10, rand() % 245 + 10));
-    graphPen.setWidthF(2);
-    custom_plot_->graph()->setPen(graphPen);
+	// Pen Settings
+	QPen graphPen;
+	graphPen.setColor(QColor(rand()%245+10, rand()%245+10, rand()%245+10));
+	graphPen.setWidthF(2);
+	custom_plot_->graph()->setPen(graphPen);
 
-    custom_plot_->replot();
-    startTimer(50);
+	custom_plot_->replot();
+	Category* category = new Category("Category "+QString::number(1), "Unit measure "+QString::number(1), DistributionType::UNIFORM);
+	Sensor* sensor = new Sensor("Sensor "+QString::number(1), *category);
+	sensor->onDataGenerated.subscribe(std::bind(&RealtimeChart::timerEvent, this, std::placeholders::_1));
+	sensor->startDataGeneration();
 }
 
 void RealtimeChart::addRealtimeSample(double v)
@@ -95,11 +100,12 @@ void RealtimeChart::addRealtimeSample(double v)
     (data_->end() - 1)->value = v;
 }
 
-void RealtimeChart::timerEvent(QTimerEvent *)
+void RealtimeChart::timerEvent(DataGenObj obj)
 {
-    for (int i = 0; i < 5; i++) {
-        addRealtimeSample(sin(t * 5) * (rand() % 3));
-        t = t + delta_time_;
-    }
-    custom_plot_->replot();
+	emit dataGeneratedSignal(obj);
+}
+void RealtimeChart::dataGenerated(DataGenObj obj)
+{
+	addRealtimeSample(obj.getData());
+	custom_plot_->replot(QCustomPlot::rpImmediateRefresh);
 }

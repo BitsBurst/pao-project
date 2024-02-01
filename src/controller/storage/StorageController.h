@@ -8,7 +8,10 @@
 #include "../../utility/storage/StorageUtility.h"
 #include "../../model/storage/StorageObject.h"
 #include "../../utility/storage/StorageWorker.h"
-
+/**
+ * @brief StorageController
+ * @details This class is responsible for the storage of the application.
+ */
 class StorageController: public AbstractController {
 	Q_OBJECT
 	friend class StorageWorker;
