@@ -1,13 +1,13 @@
 #include "BusinessController.h"
 #include "../LocatorController.h"
-#include "../../view/views/SingleViewGroup.h"
+#include "../../view/widgets/SingleWidget/SingleViewGroup.h"
 
 BusinessController::BusinessController()
 {
     // Initialization - Views
     Category temp;
-    single_view_sensor_ = new SingleViewSensor(new Category("Default Item", "KM"));
-    single_view_group_ = new SingleViewGroup(QVector<Sensor *>());
+    single_view_ = new SingleView(new Category("Default Item", "KM"));
+    // single_view_group_ = new SingleViewGroup(QVector<Sensor *>());
     editor_view_ = new EditorView(new Sensor("Editor", temp));
     create_view_ = new CreateView();
     settings_view_ = new SettingsView();
@@ -24,7 +24,7 @@ bool BusinessController::Init()
 {
 	subscribeToEvents();
 
-    main_view_->createDefaultView(content_stack_->indexOf(single_view_sensor_), sidebar_stack_->indexOf(group_list_view_));
+    main_view_->createDefaultView(content_stack_->indexOf(single_view_), sidebar_stack_->indexOf(group_list_view_));
 
 	return true;
 }
@@ -38,8 +38,8 @@ void BusinessController::subscribeToEvents()
     connect(main_view_, &MainView::changeToSettingsView, this, &BusinessController::showSettingsView);
 
     // Modify
-    connect(single_view_sensor_, &AbstractSingleView::changeToModifyView, this, &BusinessController::showModifyView);
-    connect(single_view_group_, &AbstractSingleView::changeToModifyView, this, &BusinessController::showModifyView);
+    connect(single_view_, &SingleView::changeToModifyView, this, &BusinessController::showModifyView);
+    // connect(single_view_group_, &SingleView::changeToModifyView, this, &BusinessController::showModifyView);
     connect(group_list_view_, &GroupListView::changeToModifyView, this, &BusinessController::showModifyView);
 
     // Create
@@ -55,8 +55,8 @@ void BusinessController::setDataField(MainView* main_view, QStackedWidget* conte
     sidebar_stack_ = sidebar_stack;
 
     // Create Stack
-    content_stack_->addWidget(single_view_sensor_);
-    content_stack_->addWidget(single_view_group_);
+    content_stack_->addWidget(single_view_);
+    // content_stack_->addWidget(single_view_group_);
     content_stack_->addWidget(editor_view_);
     content_stack_->addWidget(create_view_);
     content_stack_->addWidget(settings_view_);
@@ -77,7 +77,7 @@ void BusinessController::storageReady()
 
 void BusinessController::showSingleSensorView()
 {
-    main_view_->setContentView(content_stack_->indexOf(single_view_sensor_));
+    main_view_->setContentView(content_stack_->indexOf(single_view_));
 }
 
 void BusinessController::showSingleGroupView()
@@ -87,9 +87,9 @@ void BusinessController::showSingleGroupView()
         list.push_back(new Sensor(QString::fromStdString("Sensor " + std::to_string(i)), Category()));
     }
 
-    single_view_group_->setSensors(list);
+    // single_view_group_->setSensors(list);
 
-    main_view_->setContentView(content_stack_->indexOf(single_view_group_));
+    // main_view_->setContentView(content_stack_->indexOf(single_view_group_));
 }
 
 void BusinessController::showModifyView(AbstractItem* item)

@@ -3,14 +3,13 @@
 
 #include <QChart>
 #include <QChartView>
-#include "AbstractSingleView.h"
-#include "../../../include/CustomPlot/qcustomplot.h"
-#include "../widgets/ChartHandler.h"
+#include "../../../../include/CustomPlot/qcustomplot.h"
+#include "../ChartHandler.h"
 
 // Model Include
-#include "../../model/core/Sensor.h"
+#include "../../../model/core/Sensor.h"
 
-class SingleViewGroup : public AbstractSingleView {
+class SingleViewGroup : public AbstractWidget {
     Q_OBJECT
 private:
     QVector<Sensor *> sensor_list_;

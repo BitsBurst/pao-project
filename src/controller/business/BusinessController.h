@@ -3,14 +3,14 @@
 
 #include "../core/AbstractController.h"
 #include "../storage/StorageController.h"
-#include "../../view/views/AbstractSingleView.h"
+#include "../../view/views/SingleView/SingleView.h"
 #include "../../view/views/GroupListView.h"
 #include "../../view/views/Editor/EditorView.h"
 #include "../../view/views/CreateView.h"
 #include "../../view/views/SettingsView.h"
-#include "../../view/views/SingleViewSensor.h"
+#include "../../view/widgets/SingleWidget/SingleSensorWidget.h"
 #include "../../view/MainView.h"
-#include "../../view/views/SingleViewGroup.h"
+#include "../../view/widgets/SingleWidget/SingleViewGroup.h"
 
 class BusinessController: public AbstractController {
 Q_OBJECT
@@ -23,7 +23,7 @@ public:
 
 private:
     // Available Views
-    SingleViewSensor * single_view_sensor_;
+    SingleView * single_view_;
     SingleViewGroup * single_view_group_;
     GroupListView * group_list_view_;
     EditorView * editor_view_;

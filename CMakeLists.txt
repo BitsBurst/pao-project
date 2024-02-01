@@ -29,8 +29,8 @@ set(PROJECT_SOURCES
         src/view/containers/MainContentContainer.h
         src/view/views/GroupListView.cpp
         src/view/views/GroupListView.h
-        src/view/views/AbstractSingleView.cpp
-        src/view/views/AbstractSingleView.h
+        src/view/views/SingleView/SingleView.cpp
+        src/view/views/SingleView/SingleView.h
         src/view/views/Editor/EditorView.cpp
         src/view/views/Editor/EditorView.h
         src/model/datagen/DataGen.cpp
@@ -91,14 +91,14 @@ set(PROJECT_SOURCES
         src/view/utility/CustomElements.h
         src/view/utility/CustomElements.cpp
         resources.qrc
-        src/view/views/SingleViewSensor.cpp
-        src/view/views/SingleViewSensor.h
+        src/view/widgets/SingleWidget/SingleSensorWidget.cpp
+        src/view/widgets/SingleWidget/SingleSensorWidget.h
         src/view/widgets/RealtimeChart.cpp
         src/view/widgets/RealtimeChart.h
         src/view/widgets/ChartHandler.cpp
         src/view/widgets/ChartHandler.h
-        src/view/views/SingleViewGroup.h
-        src/view/views/SingleViewGroup.cpp
+        src/view/widgets/SingleWidget/SingleViewGroup.h
+        src/view/widgets/SingleWidget/SingleViewGroup.cpp
         src/view/widgets/InformationWidget.cpp
         src/view/widgets/InformationWidget.h
         src/view/widgets/Editor/AbstractFormWidget.cpp
@@ -112,6 +112,10 @@ set(PROJECT_SOURCES
         src/model/visitor/IConstVisitor.h
         src/view/widgets/GroupItem/GroupItemRender.cpp
         src/view/widgets/GroupItem/GroupItemRender.h
+        src/view/widgets/SingleWidget/SingleCategoryWidget.cpp
+        src/view/widgets/SingleWidget/SingleCategoryWidget.h
+        src/view/widgets/SingleWidget/SingleWidgetRender.cpp
+        src/view/widgets/SingleWidget/SingleWidgetRender.h
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)

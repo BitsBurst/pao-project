@@ -11,7 +11,7 @@
 #include "containers/SidebarContainer.h"
 #include "containers/MainContentContainer.h"
 #include "views/GroupListView.h"
-#include "views/AbstractSingleView.h"
+#include "views/SingleView/SingleView.h"
 #include "views/Editor/EditorView.h"
 #include "views/SettingsView.h"
 #include "views/CreateView.h"

@@ -1,5 +1,5 @@
 #include "MainView.h"
-#include "views/SingleViewSensor.h"
+#include "widgets/SingleWidget/SingleSensorWidget.h"
 
 MainView::MainView(QStackedWidget * content, QStackedWidget * sidebar, QWidget* parent)
     : QMainWindow(parent), central_widget_(new QWidget), layout_(CustomElements::getCustomLayoutPrototype(H_NO_BORDER))
