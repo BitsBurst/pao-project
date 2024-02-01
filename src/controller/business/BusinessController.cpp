@@ -130,7 +130,7 @@ void BusinessController::showCreateCategory()
 void BusinessController::showCreateSensor()
 {
 	Sensor* temp = new Sensor();
-    editor_view_->setItem(nullptr);
+    editor_view_->setItem(temp);
     editor_view_->setActiveForm(0);
     main_view_->setContentView(content_stack_->indexOf(editor_view_));
 	LocatorController::StorageControllerInstance()->GetStorage()->addSensor(temp);

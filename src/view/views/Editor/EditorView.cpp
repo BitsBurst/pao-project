@@ -77,9 +77,9 @@ void EditorView::setActiveForm(int index)
 }
 
 void EditorView::handleEvents() {
-	connect(ok_button_, &QPushButton::released, this, &EditorView::applyChanges );
+	connect(ok_button_, &QPushButton::released, this, &EditorView::applyChanges);
 }
 
 void EditorView::applyChanges() {
-	static_cast<AbstractFormWidget*>(form_stack_->currentWidget())->updateItem(*item_);
+	static_cast<AbstractFormWidget*>(form_stack_->currentWidget())->updateItem(item_);
 }

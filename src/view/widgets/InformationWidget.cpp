@@ -7,7 +7,7 @@ InformationWidget::InformationWidget(AbstractItem* item, bool check_add_btn, QWi
     // Initialization
     title_ = new QLabel(item->getName());
     title_->setFont(CustomElements::getFontH2());
-    description_ = new QLabel("Una descrizione per il sensore, la categoria o il gruppo");
+    description_ = new QLabel(item->getDescription());
     description_->setFont(CustomElements::getFontParagraph());
 
     group_buttons_ = new QWidget(this);

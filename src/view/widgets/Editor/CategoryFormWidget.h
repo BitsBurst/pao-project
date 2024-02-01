@@ -17,7 +17,7 @@ public:
     void setValues(const Category& item);
     void reset() override;
 
-	void updateItem(AbstractItem& item);
+	void updateItem(AbstractItem* item);
 };
 
 #endif //SMARTSENSORS_CATEGORYFORMWIDGET_H

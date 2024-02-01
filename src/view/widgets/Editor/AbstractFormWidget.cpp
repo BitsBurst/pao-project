@@ -24,6 +24,7 @@ void AbstractFormWidget::reset()
     description_edit_->clear();
 }
 
-void AbstractFormWidget::updateItem(AbstractItem& item) {
-	item.setName(name_edit_->text());
+void AbstractFormWidget::updateItem(AbstractItem* item) {
+	item->setName(name_edit_->text());
+    item->setDescription(description_edit_->text());
 }
