@@ -13,6 +13,7 @@ class GroupListView : public AbstractView {
 signals:
     void changeToModifyView(AbstractItem* item);
     void deleteItem(AbstractItem* item);
+    void showSingleItem(AbstractItem* item);
 
 private:
     QScrollArea * scroll_area_;
@@ -21,15 +22,13 @@ private:
     QVBoxLayout * scroll_area_layout;
 
     QVector<AbstractItem*> items_;
-public:
-    void setItems(const QVector<AbstractItem*>& items);
+
+    void handleEvents();
 
 public:
     explicit GroupListView(const QVector<AbstractItem*>& items,QWidget *parent = nullptr);
+    void setItems(const QVector<AbstractItem*>& items);
 
-
-
-    void handleEvents();
 };
 
 #endif //SMARTSENSORS_GROUPLISTVIEW_H

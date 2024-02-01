@@ -33,6 +33,7 @@ public:
     explicit SingleView(AbstractItem* item, bool check_add_btn = false, QWidget *parent = nullptr);
 
     void setActiveView(int index);
+    void setItem(AbstractItem* item);
 };
 
 #endif //SMARTSENSORS_SINGLEVIEW_H

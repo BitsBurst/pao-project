@@ -42,6 +42,7 @@ private:
 
 public slots:
     void showSingleSensorView();
+    void showSingleView(AbstractItem* item);
     void showSingleGroupView();
     void showModifyView(AbstractItem* item);
     void showCreateView();
@@ -50,6 +51,7 @@ public slots:
     void showSettingsView();
 
     void updateInterface();
+    void showFilteredList(QString query);
     void deleteItem(AbstractItem* item);
 };
 

@@ -5,6 +5,7 @@
 #include "GroupItemWidget.h"
 
 class GroupItemRender : public IConstVisitor {
+
 private:
     GroupItemWidget * item_widget_;
 

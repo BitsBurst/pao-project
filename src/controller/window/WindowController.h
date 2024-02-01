@@ -3,6 +3,7 @@
 
 #include "../core/AbstractController.h"
 #include "../../view/MainView.h"
+
 /**
  * @brief The WindowController class
  * @details This class is responsible for the main window of the application.

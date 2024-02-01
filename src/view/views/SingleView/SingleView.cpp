@@ -48,3 +48,12 @@ void SingleView::setActiveView(int index)
 {
     single_stack_->setCurrentIndex(index);
 }
+
+void SingleView::setItem(AbstractItem* item) {
+    item_ = item;
+
+    if (item_ != nullptr) {
+        SingleWidgetRender widget_render(this, sensor_widget_, category_widget_);
+        item_->accept(widget_render);
+    }
+}

@@ -13,11 +13,13 @@ SidebarContainer::SidebarContainer(QStackedWidget * current_view, QWidget* paren
 
     // Initialization
     low_control_widget_ = new SidebarLowControlWidget(this);
+    search_bar_ = new SearchBar(this);
 
     // Layout Settings
     setMaximumWidth(300);
 
     // Layout Widgets
+    layout_->addWidget(search_bar_);
     layout_->addWidget(current_view_);
     layout_->addWidget(low_control_widget_);
 }

@@ -14,6 +14,7 @@ class GroupItemWidget : public AbstractWidget {
 signals:
     void changeToModifyView(AbstractItem* item);
     void deleteItem(AbstractItem* item);
+    void showSingleItem(AbstractItem* item);
 
 private:
     QString icon_src_;
@@ -24,6 +25,10 @@ private:
 
     QPushButton *modify_btn_, *delete_btn_;
     AbstractItem* item_;
+
+protected:
+    void mousePressEvent(QMouseEvent *event) override;
+
 public:
     explicit GroupItemWidget(QString id, QString title = "", QString description = "", QString icon_src = "", QWidget *parent = nullptr);
     explicit GroupItemWidget(AbstractItem* item, QWidget *parent = nullptr);

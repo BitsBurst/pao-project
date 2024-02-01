@@ -73,3 +73,9 @@ void GroupItemWidget::handleEvents()
 	connect(delete_btn_, &QPushButton::released, [this] { emit deleteItem(item_); });
 }
 
+void GroupItemWidget::mousePressEvent(QMouseEvent* event)
+{
+    QWidget::mousePressEvent(event);
+    emit showSingleItem(item_);
+}
+

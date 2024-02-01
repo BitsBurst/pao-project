@@ -29,6 +29,7 @@ bool BusinessController::Init()
 	if(LocatorController::StorageControllerInstance()->isStorageReadyCheck()) {
 		storageReady();
 	}
+
     main_view_->createDefaultView(content_stack_->indexOf(single_view_), sidebar_stack_->indexOf(group_list_view_));
 
 	return true;
@@ -42,6 +43,8 @@ void BusinessController::subscribeToEvents()
     connect(main_view_, &MainView::changeToCreateView, this, &BusinessController::showCreateView);
     //connect(main_view_, &MainView::changeToModifyView, this, &BusinessController::showModifyView);
     connect(main_view_, &MainView::changeToSettingsView, this, &BusinessController::showSettingsView);
+    connect(group_list_view_, &GroupListView::showSingleItem, this, &BusinessController::showSingleView);
+
 
     // Modify
     connect(single_view_, &SingleView::changeToModifyView, this, &BusinessController::showModifyView);
@@ -148,3 +151,16 @@ void BusinessController::deleteItem(AbstractItem* item)
 
     updateInterface();
 }
+
+void BusinessController::showFilteredList(QString query)
+{
+    Logger::Log(LogLevel::_ERROR_, __FILE__, __LINE__, __FUNCTION__, query);
+    group_list_view_->setItems(LocatorController::StorageControllerInstance()->GetStorage()->filterSensorsByName(query, 0));
+}
+
+void BusinessController::showSingleView(AbstractItem* item)
+{
+    single_view_->setItem(item);
+    main_view_->setContentView(content_stack_->indexOf(single_view_));
+}
+

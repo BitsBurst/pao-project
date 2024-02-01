@@ -1,4 +1,6 @@
 #include "StorageObject.h"
+#include "../../utility/logger/Logger.h"
+
 /*
  * @brief StorageObject
  * Constructor
@@ -135,6 +137,18 @@ const QList<Sensor*> StorageObject::filterSensorsByName(QString name) const
 	}
 	return list;
 }
+QVector<AbstractItem*> StorageObject::filterSensorsByName(const QString& name, int) const
+{
+    Logger::Log(LogLevel::_ERROR_, __FILE__, __LINE__, __FUNCTION__, name);
+    QVector<AbstractItem*> list;
+    for (auto i : sensors_) {
+
+        if (i->getName().contains(name))
+            list.push_back(i);
+    }
+    return reinterpret_cast<QVector<AbstractItem*>&>(list);
+}
+
 /*
  * @brief filterCategoriesByName
  * @param name

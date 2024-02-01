@@ -33,6 +33,7 @@ public:
 	const Sensor* findSensor(Sensor) const;
 	const QVector<Sensor*> filterSensorsByCategory(Category) const;
 	const QVector<Sensor*> filterSensorsByName(QString name) const;
+    QVector<AbstractItem*> filterSensorsByName(const QString& name, int) const;
 	const QVector<Category*> filterCategoriesByName(QString name) const;
 	QJsonObject toJson() const;
 	static StorageObject *fromJson(QJsonObject const &);

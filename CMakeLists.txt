@@ -120,6 +120,8 @@ set(PROJECT_SOURCES
         src/model/visitor/deleteItem.cpp
         src/model/visitor/DeleteItem.h
         src/model/visitor/IVisitor.h
+        src/view/widgets/SearchBar.cpp
+        src/view/widgets/SearchBar.h
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
