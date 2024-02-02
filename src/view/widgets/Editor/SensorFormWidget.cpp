@@ -55,7 +55,16 @@ void SensorFormWidget::updateItem(AbstractItem* item)
 
 	static_cast<Sensor*>(item)->setMinRange(min_range_edit_->value());
 	static_cast<Sensor*>(item)->setMaxRange(max_range_edit_->value());
-	static_cast<Sensor*>(item)->setCategory(*LocatorController::StorageControllerInstance()->GetStorage()->getCategory(categories_->currentIndex()));
+
+    // Todo[Luca] Check nullptr
+
+    Category* cat = LocatorController::StorageControllerInstance()->GetStorage()->getCategory(categories_->currentIndex());
+    if (cat == nullptr) {
+        cat = new Category("Default", "C°");
+        LocatorController::StorageControllerInstance()->GetStorage()->addCategory(cat);
+    }
+
+	static_cast<Sensor*>(item)->setCategory(*cat);
 }
 
 void SensorFormWidget::updateCategories()
@@ -71,5 +80,4 @@ void SensorFormWidget::updateCategories()
 	for (auto cat : *categories) {
 		categories_->addItem(cat->getName());
 	}
-    static_cast<Sensor*>(item)->setCategory(*LocatorController::StorageControllerInstance()->GetStorage()->getCategory(categories_->currentIndex()));
 }

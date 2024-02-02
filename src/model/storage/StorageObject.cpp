@@ -280,6 +280,8 @@ QJsonObject StorageObject::toJson() const
 }
 Category* StorageObject::getCategory(int index) const
 {
+    if (categories_.isEmpty())
+        return nullptr;
 	return categories_.value(index);
 }
 
