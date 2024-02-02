@@ -24,3 +24,8 @@ SidebarContainer::SidebarContainer(QStackedWidget * current_view, QWidget* paren
     layout_->addWidget(low_control_widget_);
 }
 
+SearchBar* SidebarContainer::getSearch() const
+{
+    return search_bar_;
+}
+

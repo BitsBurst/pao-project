@@ -18,12 +18,13 @@ private:
     QButtonGroup * btn_group_;
     SearchType type_;
 
-    void searchItem();
     void switchButton(int id);
 
 public:
     SearchBar(QWidget * parent = nullptr);
 	~SearchBar();
+
+    void searchItem();
 };
 
 #endif //SMARTSENSORS_SEARCHBAR_H

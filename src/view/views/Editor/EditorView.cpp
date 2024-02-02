@@ -4,7 +4,7 @@
 #include "../../../controller/LocatorController.h"
 
 EditorView::EditorView(AbstractItem* item, QLayout* layout, QWidget* parent)
-        :AbstractView(CustomElements::getCustomLayoutPrototype(SINGLE_SPACING), parent), item_(item)
+        :AbstractView(CustomElements::getCustomLayoutPrototype(SINGLE_SPACING), parent), item_(item), newObject_(false)
 {
     // Initialization
     title_ = new QLabel("Editor");
@@ -82,7 +82,22 @@ void EditorView::handleEvents() {
 }
 
 void EditorView::applyChanges() {
+
+    if (newObject_) {
+        emit addNewItem(item_);
+    }
+
 	static_cast<AbstractFormWidget*>(form_stack_->currentWidget())->updateItem(item_);
 
    // emit modelChanged();
+}
+
+bool EditorView::isNewObject() const
+{
+    return newObject_;
+}
+
+void EditorView::setNewObject(bool newObject)
+{
+    newObject_ = newObject;
 }

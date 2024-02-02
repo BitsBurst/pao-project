@@ -49,6 +49,7 @@ public:
 
     void createDefaultView(int content_id, int sidebar_id);
 
+    SearchBar* getSearch() const;
 };
 
 #endif //SMARTSENSORS_MAINVIEW_H

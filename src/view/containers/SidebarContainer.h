@@ -14,6 +14,8 @@ private:
 
 public:
     explicit SidebarContainer(QStackedWidget * current_view = new QStackedWidget,QWidget * parent = nullptr);
+
+    SearchBar* getSearch() const;
 };
 
 #endif //SMARTSENSORS_SIDEBARCONTAINER_H

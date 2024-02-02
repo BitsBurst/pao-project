@@ -65,6 +65,7 @@ void BusinessController::subscribeToEvents()
 
     // Update Model
     connect(editor_view_, &EditorView::modelChanged, this, &BusinessController::updateSidebar);
+    connect(editor_view_, &EditorView::addNewItem, [this] { main_view_->getSearch()->searchItem(); });
 }
 
 void BusinessController::setDataField(MainView* main_view, QStackedWidget* content_stack, QStackedWidget* sidebar_stack)
@@ -118,6 +119,7 @@ void BusinessController::showSingleGroupView()
 void BusinessController::showModifyView(AbstractItem* item)
 {
     editor_view_->setItem(item);
+    editor_view_->setNewObject(false);
     main_view_->setContentView(content_stack_->indexOf(editor_view_));
 }
 
@@ -135,7 +137,7 @@ void BusinessController::showCreateCategory()
 {
 	Category* temp = new Category();
     editor_view_->setItem(temp);
-    editor_view_->setActiveForm(1);
+    editor_view_->setNewObject(true);
     main_view_->setContentView(content_stack_->indexOf(editor_view_));
 	LocatorController::StorageControllerInstance()->GetStorage()->addCategory(temp);
 }
@@ -144,7 +146,7 @@ void BusinessController::showCreateSensor()
 {
 	Sensor* temp = new Sensor();
     editor_view_->setItem(temp);
-    editor_view_->setActiveForm(0);
+    editor_view_->setNewObject(true);
     main_view_->setContentView(content_stack_->indexOf(editor_view_));
 	LocatorController::StorageControllerInstance()->GetStorage()->addSensor(temp);
 }
@@ -183,7 +185,6 @@ void BusinessController::deleteItem(AbstractItem* item)
 
 void BusinessController::showFilteredList(QString query, SearchType type)
 {
-    // Logger::Log(LogLevel::_ERROR_, __FILE__, __LINE__, __FUNCTION__, type == ALL);
     switch (type) {
     case SENSOR:
         group_list_view_->setItems(LocatorController::StorageControllerInstance()->GetStorage()->filterSensorsByName(query, 0));
@@ -195,7 +196,6 @@ void BusinessController::showFilteredList(QString query, SearchType type)
         group_list_view_->setItems(LocatorController::StorageControllerInstance()->GetStorage()->filterSensorsByName(query, 0));
         break;
     }
-
 }
 
 void BusinessController::showSingleView(AbstractItem* item)

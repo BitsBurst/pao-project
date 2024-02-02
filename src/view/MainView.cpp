@@ -92,3 +92,9 @@ void MainView::emitChangeToModifyView(AbstractItem& item)
 {
     emit changeToModifyView(item);
 }
+
+SearchBar* MainView::getSearch() const
+{
+    if (dynamic_cast<SidebarContainer*>(sidebar_) != nullptr)
+        return static_cast<SidebarContainer*>(sidebar_)->getSearch();
+}

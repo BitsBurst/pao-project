@@ -18,6 +18,7 @@ class EditorView : public AbstractView {
 signals:
     void modelChanged();
     void cancelOperation();
+    void addNewItem(AbstractItem * item);
 
 private slots:
 	void applyChanges();
@@ -34,7 +35,11 @@ private:
     SensorFormWidget * sensor_form_;
     CategoryFormWidget * category_form_;
 
-	void handleEvents();
+    bool newObject_;
+
+private:
+
+    void handleEvents();
 
 public:
     explicit EditorView(AbstractItem* item, QLayout * layout = nullptr, QWidget *parent = nullptr);
@@ -42,6 +47,9 @@ public:
 
     void setItem(AbstractItem* item);
     void setActiveForm(int index);
+
+    bool isNewObject() const;
+    void setNewObject(bool newObject);
 };
 
 #endif //SMARTSENSORS_EDITORVIEW_H
