@@ -55,7 +55,7 @@ void GroupItemWidget::setDetail(const QString& detail)
 void GroupItemWidget::handleEvents()
 {
     connect(modify_btn_, &QPushButton::released, [this] { emit changeToModifyView(item_); });
-	connect(delete_btn_, &QPushButton::released, [this] { emit deleteItem(item_); });
+	connect(delete_btn_, &QPushButton::released, [this] { emit deleteItem(this); });
 }
 
 void GroupItemWidget::mousePressEvent(QMouseEvent* event)
@@ -68,5 +68,9 @@ GroupItemWidget::~GroupItemWidget()
 	if (item_ != nullptr) {
 		item_->modelChangedEvent.unsubscribe(std::bind(&GroupItemWidget::refresh, this));
 	}
+}
+AbstractItem* GroupItemWidget::getItem()
+{
+	return item_;
 }
 

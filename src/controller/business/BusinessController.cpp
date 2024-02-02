@@ -62,7 +62,7 @@ void BusinessController::subscribeToEvents()
 
     // Delete
     connect(group_list_view_, &GroupListView::deleteItem, this, &BusinessController::deleteItem);
-	connect(single_view_, &SingleView::deleteItem, this, &BusinessController::deleteItem);
+	//connect(single_view_, &SingleView::deleteItem, this, &BusinessController::deleteItem);
 
     // Update Model
     connect(editor_view_, &EditorView::modelChanged, this, &BusinessController::updateSidebar);
@@ -91,7 +91,7 @@ void BusinessController::Destroy()
 }
 void BusinessController::storageReady()
 {
-	BusinessController::updateInterface();
+	BusinessController::updateSidebar();
 	LocatorController::WindowControllerInstance()->setDisabled(false);
 }
 
@@ -156,7 +156,7 @@ void BusinessController::updateSidebar()
     group_list_view_->setItems(LocatorController::StorageControllerInstance()->GetStorage()->getSensors(0));
 }
 
-void BusinessController::deleteItem(AbstractItem* item)
+void BusinessController::deleteItem(GroupItemWidget* item)
 {
 	if (item == nullptr) return;
 
@@ -168,11 +168,12 @@ void BusinessController::deleteItem(AbstractItem* item)
 	int res = deleteConfirm.exec();
 
 	DeleteItem delete_item;
-
+	AbstractItem* item_ = item->getItem();
 	switch (res) {
 	case QMessageBox::Ok:
-		item->accept(delete_item);
-        updateSidebar();
+		group_list_view_->deleteItemElement(item);
+		item_->accept(delete_item);
+        //updateSidebar();
 		break;
 	case QMessageBox::Cancel:
 		// Cancel was clicked
