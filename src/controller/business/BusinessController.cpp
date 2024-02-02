@@ -173,9 +173,8 @@ void BusinessController::deleteItem(GroupItemWidget* item)
 	AbstractItem* item_ = item->getItem();
 	switch (res) {
 	case QMessageBox::Ok:
-		group_list_view_->deleteItemElement(item);
+        group_list_view_->deleteListItem(item);
 		item_->accept(delete_item);
-        //updateSidebar();
 		break;
 	case QMessageBox::Cancel:
 		// Cancel was clicked
