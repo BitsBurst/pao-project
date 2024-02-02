@@ -44,6 +44,7 @@ void BusinessController::subscribeToEvents()
     //connect(main_view_, &MainView::changeToModifyView, this, &BusinessController::showModifyView);
     connect(main_view_, &MainView::changeToSettingsView, this, &BusinessController::showSettingsView);
     connect(group_list_view_, &GroupListView::showSingleItem, this, &BusinessController::showSingleView);
+	connect(main_view_, &MainView::openSimulation, this, &BusinessController::openSimulation);
 
 
     // Modify
@@ -57,6 +58,7 @@ void BusinessController::subscribeToEvents()
 
     // Delete
     connect(group_list_view_, &GroupListView::deleteItem, this, &BusinessController::deleteItem);
+	connect(single_view_, &SingleView::deleteItem, this, &BusinessController::deleteItem);
 
     // Update Model
     connect(editor_view_, &EditorView::modelChanged, this, &BusinessController::updateInterface);
@@ -146,10 +148,30 @@ void BusinessController::updateInterface()
 
 void BusinessController::deleteItem(AbstractItem* item)
 {
-    DeleteItem delete_item;
-    item->accept(delete_item);
 
-    updateInterface();
+	if (item == nullptr) return;
+
+	QMessageBox deleteConfirm;
+	deleteConfirm.setText("Eliminazione.");
+	deleteConfirm.setInformativeText("Sei sicuro di voler procedere con l'eliminazione?");
+	deleteConfirm.setStandardButtons(QMessageBox::Ok | QMessageBox::Cancel);
+	deleteConfirm.setDefaultButton(QMessageBox::Ok);
+	int res = deleteConfirm.exec();
+
+	DeleteItem delete_item;
+
+	switch (res) {
+	case QMessageBox::Ok:
+		item->accept(delete_item);
+		updateInterface();
+		break;
+	case QMessageBox::Cancel:
+		// Cancel was clicked
+		break;
+	default:
+		// should never be reached
+		break;
+	}
 }
 
 void BusinessController::showFilteredList(QString query, SearchType type)
@@ -175,3 +197,41 @@ void BusinessController::showSingleView(AbstractItem* item)
     main_view_->setContentView(content_stack_->indexOf(single_view_));
 }
 
+
+void BusinessController::openSimulation()
+{
+	LocatorController::WindowControllerInstance()->setDisabled(true);
+	QString selfilter = tr("JSON (*.json)");
+	QString fileName = QFileDialog::getOpenFileName(
+			main_view_,
+			"Seleziona un file di una simulazione",
+			QDir::homePath(),
+			tr("JSON (*.json );; All files (*.*)" ),
+			&selfilter
+	);
+	if (!fileName.isEmpty()) {
+		LocatorController::StorageControllerInstance()->changeStorageFile(fileName);
+	} else {
+		Logger::Log(LogLevel::_WARNING_, __FILE__, __LINE__, __FUNCTION__, "No file selected");
+	}
+	LocatorController::WindowControllerInstance()->setDisabled(false);
+}
+
+void BusinessController::saveSimulationByName()
+{
+	LocatorController::WindowControllerInstance()->setDisabled(true);
+	QString selfilter = tr("JSON (*.json)");
+	QString fileName = QFileDialog::getSaveFileName(
+			main_view_,
+			"Salva un file di una simulazione con nome",
+			QDir::homePath()+QString("/simulazione_%1.json").arg(QDateTime::currentDateTime().toString("yyyy-MM-dd_hh-mm-ss")),
+			tr("JSON (*.json )" ),
+			&selfilter
+	);
+	if (!fileName.isEmpty()) {
+		qDebug() << "Selected directory";
+	} else {
+		Logger::Log(LogLevel::_WARNING_, __FILE__, __LINE__, __FUNCTION__, "No file name selected");
+	}
+	LocatorController::WindowControllerInstance()->setDisabled(false);
+}

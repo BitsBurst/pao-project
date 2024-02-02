@@ -21,8 +21,7 @@ void StorageWorker::SaveStorage()
  * @param filename filename of the storage
  * @param parent parent of the StorageWorker
  */
-StorageWorker::StorageWorker(StorageObject** pp, QString filename, QObject *parent) :QThread(parent), storagePointer(pp), changed(false), lastUpdate(QDateTime::currentDateTime()), filename_(filename), writingMutex(), storageInitialized(false), closing(false) {
-	start();
+StorageWorker::StorageWorker(StorageObject** pp, QString filename, QObject *parent) :QThread(parent), storagePointer(pp), changed(false), destroy(false), lastUpdate(QDateTime::currentDateTime()), filename_(filename), writingMutex(), storageInitialized(false), closing(false) {
 }
 /**
  * @brief StorageWorker::~StorageWorker
@@ -30,6 +29,7 @@ StorageWorker::StorageWorker(StorageObject** pp, QString filename, QObject *pare
  */
 StorageWorker::~StorageWorker()
 {
+	destroy = true;
 	wait();
 }
 /**
@@ -44,8 +44,8 @@ void StorageWorker::run() {
 	}
 	onStorageReadyEvent.notifyAsync();
 	storageInitialized = true;
-	while(true) {
-		while (!changed);
+	while(!destroy) {
+		while (!changed && !destroy);
 		writingMutex.lock();
 		changed = false;
 		QDateTime currentDateTime = lastUpdate;

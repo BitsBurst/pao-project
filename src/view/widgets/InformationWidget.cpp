@@ -39,7 +39,9 @@ InformationWidget::InformationWidget(AbstractItem* item, bool check_add_btn, QWi
 void InformationWidget::buttonEvent()
 {
     connect(modify_btn_, &QPushButton::released, this, &InformationWidget::changeToModify);
+	connect(delete_btn_, &QPushButton::released, this, &InformationWidget::deleteItem);
 }
+
 InformationWidget::~InformationWidget()
 {
 

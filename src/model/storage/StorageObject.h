@@ -23,6 +23,7 @@ public:
 	const QVector<Sensor*>* getSensors() const;
 	const QVector<AbstractItem*>& getCategories(int) const;
 	const QVector<AbstractItem*>& getSensors(int) const;
+	Category* getCategory(int index) const;
 	bool checkCategories() const;
 	bool checkSensors() const;
 	void addCategory(Category*);

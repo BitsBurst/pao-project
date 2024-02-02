@@ -13,6 +13,8 @@ class InformationWidget : public AbstractWidget {
 
 signals:
     void changeToModify();
+	void deleteItem();
+
 private:
     QLabel *title_, *description_;
     QWidget * group_buttons_;
