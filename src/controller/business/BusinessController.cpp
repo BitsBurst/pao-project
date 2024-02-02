@@ -22,24 +22,28 @@ bool BusinessController::Init()
 }
 void BusinessController::subscribeToViewEvents() {
 	connect(editor_view_, &EditorView::cancelOperation, this, &BusinessController::cancelOperation);
+	connect(group_list_view_, &GroupListView::deleteItem, this, &BusinessController::deleteGraphicalItem);
+	// connect(single_view_, &SingleView::deleteItem, this, &BusinessController::deleteGraphicalItem);
 
-	// Modify
+	connect(editor_view_, &EditorView::modelChanged, this, &BusinessController::updateSidebar);
+	connect(editor_view_, &EditorView::addNewItem, this, &BusinessController::addNewItem);
 	connect(single_view_, &SingleView::changeToModifyView, this, &BusinessController::showModifyView);
 	// connect(single_view_group_, &SingleView::changeToModifyView, this, &BusinessController::showModifyView);
 	connect(group_list_view_, &GroupListView::showSingleItem, this, &BusinessController::showSingleView);
 	connect(group_list_view_, &GroupListView::changeToModifyView, this, &BusinessController::showModifyView);
-	connect(group_list_view_, &GroupListView::deleteItem, this, &BusinessController::deleteItem);
 	//connect(single_view_, &SingleView::deleteItem, this, &BusinessController::deleteItem);
 }
 void BusinessController::unsubscribeToViewEvents() {
 	disconnect(editor_view_, &EditorView::cancelOperation, this, &BusinessController::cancelOperation);
+	disconnect(group_list_view_, &GroupListView::deleteItem, this, &BusinessController::deleteGraphicalItem);
+	// disconnect(single_view_, &SingleView::deleteItem, this, &BusinessController::deleteGraphicalItem);
 
-	// Modify
+	disconnect(editor_view_, &EditorView::modelChanged, this, &BusinessController::updateSidebar);
+	disconnect(editor_view_, &EditorView::addNewItem, this, &BusinessController::addNewItem);
 	disconnect(single_view_, &SingleView::changeToModifyView, this, &BusinessController::showModifyView);
 	// disconnect(single_view_group_, &SingleView::changeToModifyView, this, &BusinessController::showModifyView);
 	disconnect(group_list_view_, &GroupListView::showSingleItem, this, &BusinessController::showSingleView);
 	disconnect(group_list_view_, &GroupListView::changeToModifyView, this, &BusinessController::showModifyView);
-	disconnect(group_list_view_, &GroupListView::deleteItem, this, &BusinessController::deleteItem);
 	//disconnect(single_view_, &SingleView::deleteItem, this, &BusinessController::deleteItem);
 }
 void BusinessController::subscribeToEvents()
@@ -47,7 +51,6 @@ void BusinessController::subscribeToEvents()
     LocatorController::StorageControllerInstance()->beforeDestroy.subscribe(std::bind(&BusinessController::deleteInterface, this));
 
     // Signals
-	disconnect(LocatorController::StorageControllerInstance(), &StorageController::StorageReady, this, &BusinessController::storageReady);
 	connect(LocatorController::StorageControllerInstance(), &StorageController::StorageReady, this, &BusinessController::storageReady);
 
     connect(main_view_, &MainView::changeToSingleSensorView, this, &BusinessController::showSingleSensorView);
@@ -62,10 +65,6 @@ void BusinessController::subscribeToEvents()
 
     connect(main_view_, &MainView::changeToCreateCategory, this, &BusinessController::showCreateCategory);
     connect(main_view_, &MainView::changeToCreateSensor, this, &BusinessController::showCreateSensor);
-
-
-    connect(editor_view_, &EditorView::modelChanged, this, &BusinessController::updateSidebar);
-    connect(editor_view_, &EditorView::addNewItem, [this] { main_view_->getSearch()->searchItem(); });
 }
 
 void BusinessController::setDataField(MainView* main_view, QStackedWidget* content_stack, QStackedWidget* sidebar_stack)
@@ -106,6 +105,7 @@ void BusinessController::storageReady()
 	main_view_->createDefaultView(
 			content_stack_->indexOf(default_view_),
 			sidebar_stack_->indexOf(group_list_view_));
+
 	showDefaultView();
 	BusinessController::updateSidebar();
 	LocatorController::WindowControllerInstance()->setDisabled(false);
@@ -156,7 +156,6 @@ void BusinessController::showCreateCategory()
     editor_view_->setItem(temp);
     editor_view_->setNewObject(true);
     main_view_->setContentView(content_stack_->indexOf(editor_view_));
-	LocatorController::StorageControllerInstance()->GetStorage()->addCategory(temp);
 }
 
 void BusinessController::showCreateSensor()
@@ -165,7 +164,6 @@ void BusinessController::showCreateSensor()
     editor_view_->setItem(temp);
     editor_view_->setNewObject(true);
     main_view_->setContentView(content_stack_->indexOf(editor_view_));
-	LocatorController::StorageControllerInstance()->GetStorage()->addSensor(temp);
 }
 
 void BusinessController::updateSidebar()
@@ -173,7 +171,7 @@ void BusinessController::updateSidebar()
     group_list_view_->setItems(LocatorController::StorageControllerInstance()->GetStorage()->getSensors(0));
 }
 
-void BusinessController::deleteItem(GroupItemWidget* item)
+void BusinessController::deleteGraphicalItem(GroupItemWidget* item)
 {
 	if (item == nullptr) return;
 
@@ -270,8 +268,6 @@ void BusinessController::cancelOperation()
     cancelConfirm.setDefaultButton(QMessageBox::Ok);
     int res = cancelConfirm.exec();
 
-    DeleteItem delete_item;
-
     switch (res) {
     case QMessageBox::Ok:
         showDefaultView();
@@ -301,4 +297,14 @@ void BusinessController::deleteInterface()
 	editor_view_ = nullptr;
     delete group_list_view_;
 	group_list_view_ = nullptr;
+}
+
+
+
+void BusinessController::addNewItem(AbstractItem* item)
+{
+    AddItem add_item;
+    item->accept(add_item);
+
+    main_view_->getSearch()->searchItem();
 }

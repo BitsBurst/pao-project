@@ -10,10 +10,11 @@ class SingleWidgetRender : public IVisitor {
 private:
     SingleSensorWidget * sensor_widget_;
     SingleCategoryWidget * category_widget_;
+    InformationWidget * information_widget_;
     SingleView* view_;
 
 public:
-    explicit SingleWidgetRender(SingleView* view, SingleSensorWidget * sensor_widget, SingleCategoryWidget * category_widget);
+    explicit SingleWidgetRender(SingleView* view, SingleSensorWidget * sensor_widget, SingleCategoryWidget * category_widget, InformationWidget* information_widget);
     void visit(Sensor& sensor) override;
     void visit(Category& category) override;
 };

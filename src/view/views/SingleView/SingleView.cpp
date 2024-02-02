@@ -23,7 +23,7 @@ SingleView::SingleView(AbstractItem* item, bool check_add_btn, QWidget* parent)
     // single_stack_->addWidget(group_view_);
 
     if (item_ != nullptr) {
-        SingleWidgetRender widget_render(this, sensor_widget_, category_widget_);
+        SingleWidgetRender widget_render(this, sensor_widget_, category_widget_, information_widget_);
         item_->accept(widget_render);
     }
 
@@ -43,7 +43,6 @@ void SingleView::handleEvents()
 {
     connect(information_widget_, &InformationWidget::changeToModify, std::bind(&SingleView::changeToModifyView, this, item_));
 	connect(information_widget_, &InformationWidget::deleteItem, std::bind(&SingleView::deleteItem, this, item_));
-
 }
 
 void SingleView::setActiveView(int index)
@@ -55,9 +54,11 @@ void SingleView::setItem(AbstractItem* item) {
     item_ = item;
 
     if (item_ != nullptr) {
-        SingleWidgetRender widget_render(this, sensor_widget_, category_widget_);
+        SingleWidgetRender widget_render(this, sensor_widget_, category_widget_, information_widget_);
         item_->accept(widget_render);
     }
+
+    handleEvents();
 }
 
 AbstractItem* SingleView::getItem() const
