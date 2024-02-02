@@ -242,7 +242,7 @@ void BusinessController::saveSimulationByName()
 			&selfilter
 	);
 	if (!fileName.isEmpty()) {
-		qDebug() << "Selected directory";
+		LocatorController::StorageControllerInstance()->saveStorageByName(fileName);
 	} else {
 		Logger::Log(LogLevel::_WARNING_, __FILE__, __LINE__, __FUNCTION__, "No file name selected");
 	}

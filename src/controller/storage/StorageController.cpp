@@ -112,3 +112,13 @@ void StorageController::changeStorageFile(QString filename)
 		Logger::Log(LogLevel::_ERROR_, __FILE__, __LINE__, __FUNCTION__, "Couldn't change storage file");
 	}
 }
+
+void StorageController::saveStorageByName(QString filename)
+{
+	try {
+		StorageObject storage = *storage_;
+		StorageUtility::StoreJSON(storage.toJson(), filename);
+	} catch (std::exception& e) {
+		Logger::Log(LogLevel::_ERROR_, __FILE__, __LINE__, __FUNCTION__, QString("Couldn't store storage: %1").arg(e.what()));
+	}
+}
