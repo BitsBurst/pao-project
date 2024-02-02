@@ -2,8 +2,8 @@
 #include "../../model/core/Category.h"
 #include "../../model/core/Sensor.h"
 
-RealtimeChart::RealtimeChart(QWidget * parent)
-        : AbstractWidget(CustomElements::getCustomLayoutPrototype(H_NO_BORDER) ,parent)
+RealtimeChart::RealtimeChart(QWidget * parent, Sensor* sensor)
+        : AbstractWidget(CustomElements::getCustomLayoutPrototype(H_NO_BORDER) ,parent), sensor_(sensor)
 {
     // Initialization
     custom_plot_ = new QCustomPlot(this);
@@ -84,10 +84,11 @@ void RealtimeChart::addRealtimeGraph()
 	custom_plot_->graph()->setPen(graphPen);
 
 	custom_plot_->replot();
-	Category* category = new Category("Category "+QString::number(1), "Unit measure "+QString::number(1), DistributionType::UNIFORM);
-	Sensor* sensor = new Sensor("Sensor "+QString::number(1), *category);
-	sensor->onDataGenerated.subscribe(std::bind(&RealtimeChart::timerEvent, this, std::placeholders::_1));
-	sensor->startDataGeneration();
+	if(sensor_ != nullptr)
+	{
+		sensor_->onDataGenerated.subscribe(std::bind(&RealtimeChart::timerEvent, this, std::placeholders::_1));
+		sensor_->startDataGeneration();
+	}
 }
 
 void RealtimeChart::addRealtimeSample(double v)
@@ -111,5 +112,8 @@ void RealtimeChart::dataGenerated(DataGenObj obj)
 }
 RealtimeChart::~RealtimeChart()
 {
-
+	if(sensor_ != nullptr){
+		sensor_->stopDataGeneration();
+		sensor_->onDataGenerated.subscribe(std::bind(&RealtimeChart::timerEvent, this, std::placeholders::_1));
+	}
 }
