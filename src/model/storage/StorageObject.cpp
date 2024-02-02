@@ -151,7 +151,7 @@ QVector<AbstractItem*> StorageObject::filterSensorsByName(const QString& name, i
     QVector<AbstractItem*> list;
     for (auto i : sensors_) {
 
-        if (i->getName().contains(name))
+        if (i->getName().toLower().contains(name.toLower()))
             list.push_back(i);
     }
     return reinterpret_cast<QVector<AbstractItem*>&>(list);
@@ -176,7 +176,7 @@ QVector<AbstractItem*> StorageObject::filterCategoriesByName(QString name, int)
 {
     QVector<Category*> list;
     for (auto& i : categories_) {
-        if (i->getName().contains(name))
+        if (i->getName().toLower().contains(name.toLower()))
             list.append(i);
     }
     return reinterpret_cast<QVector<AbstractItem*>&>(list);
