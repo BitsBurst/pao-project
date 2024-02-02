@@ -294,7 +294,7 @@ void BusinessController::deleteInterface()
     content_stack_->removeWidget(editor_view_);
 
     sidebar_stack_->removeWidget(group_list_view_);
-	subscribeToViewEvents();
+	unsubscribeToViewEvents();
     delete single_view_;
 	single_view_ = nullptr;
     delete editor_view_;
