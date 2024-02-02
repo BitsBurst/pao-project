@@ -43,9 +43,9 @@ GroupListView::GroupListView(const QVector<AbstractItem*>& items, QWidget* paren
 void GroupListView::handleEvents()
 {
     for (auto element : item_lists_) {
-        connect(element, &GroupItemWidget::changeToModifyView, this, &::GroupListView::changeToModifyView);
-        connect(element, &GroupItemWidget::deleteItem, this, &::GroupListView::deleteItem);
-        connect(element, &GroupItemWidget::showSingleItem, this, &::GroupListView::showSingleItem);
+        connect(element, &GroupItemWidget::changeToModifyView, this, &GroupListView::changeToModifyView);
+        connect(element, &GroupItemWidget::deleteItem, this, &GroupListView::deleteItem);
+        connect(element, &GroupItemWidget::showSingleItem, this, &GroupListView::showSingleItem);
     }
 }
 

@@ -52,5 +52,7 @@ ChartHandler::ChartHandler(QVector<Sensor *> sensor_list, QWidget* parent)
 }
 ChartHandler::~ChartHandler()
 {
-
+	for (auto & chart : chart_list_) {
+		delete chart;
+	}
 }

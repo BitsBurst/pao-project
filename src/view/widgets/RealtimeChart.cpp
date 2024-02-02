@@ -86,9 +86,13 @@ void RealtimeChart::addRealtimeGraph()
 	custom_plot_->replot();
 	if(sensor_ != nullptr)
 	{
+		for (auto it = sensor_->data_.begin(); it != sensor_->data_.end() ; ++it) {
+			addRealtimeSample(*it);
+		}
 		sensor_->onDataGenerated.subscribe(std::bind(&RealtimeChart::timerEvent, this, std::placeholders::_1));
 		sensor_->startDataGeneration();
 	}
+
 }
 
 void RealtimeChart::addRealtimeSample(double v)
@@ -114,6 +118,6 @@ RealtimeChart::~RealtimeChart()
 {
 	if(sensor_ != nullptr){
 		sensor_->stopDataGeneration();
-		sensor_->onDataGenerated.subscribe(std::bind(&RealtimeChart::timerEvent, this, std::placeholders::_1));
+		sensor_->onDataGenerated.unsubscribe(std::bind(&RealtimeChart::timerEvent, this, std::placeholders::_1));
 	}
 }
