@@ -48,8 +48,8 @@ void BusinessController::subscribeToEvents()
     connect(main_view_, &MainView::changeToCreateSensor, this, &BusinessController::showCreateSensor);
 
     // Delete
-    connect(group_list_view_, &GroupListView::deleteItem, this, &BusinessController::deleteItem);
-	//connect(single_view_, &SingleView::deleteItem, this, &BusinessController::deleteItem);
+    connect(group_list_view_, &GroupListView::deleteItem, this, &BusinessController::deleteGraphicalItem);
+	// connect(single_view_, &SingleView::deleteItem, this, &BusinessController::deleteGraphicalItem);
 
     // Update Model
     connect(editor_view_, &EditorView::modelChanged, this, &BusinessController::updateSidebar);
@@ -161,7 +161,7 @@ void BusinessController::updateSidebar()
     group_list_view_->setItems(LocatorController::StorageControllerInstance()->GetStorage()->getSensors(0));
 }
 
-void BusinessController::deleteItem(GroupItemWidget* item)
+void BusinessController::deleteGraphicalItem(GroupItemWidget* item)
 {
 	if (item == nullptr) return;
 
@@ -288,6 +288,8 @@ void BusinessController::deleteInterface()
     delete group_list_view_;
 	group_list_view_ = nullptr;
 }
+
+
 
 void BusinessController::addNewItem(AbstractItem* item)
 {

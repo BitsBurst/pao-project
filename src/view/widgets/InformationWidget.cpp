@@ -43,6 +43,10 @@ void InformationWidget::buttonEvent()
 }
 
 InformationWidget::~InformationWidget()
-{
+{}
 
+void InformationWidget::setItem(AbstractItem* item)
+{
+    title_->setText(item->getName());
+    description_->setText(item->getDescription());
 }
