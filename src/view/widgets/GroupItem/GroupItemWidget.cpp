@@ -63,4 +63,10 @@ void GroupItemWidget::mousePressEvent(QMouseEvent* event)
     QWidget::mousePressEvent(event);
     emit showSingleItem(item_);
 }
+GroupItemWidget::~GroupItemWidget()
+{
+	if (item_ != nullptr) {
+		item_->modelChangedEvent.unsubscribe(std::bind(&GroupItemWidget::refresh, this));
+	}
+}
 

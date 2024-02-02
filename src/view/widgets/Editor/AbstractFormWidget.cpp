@@ -28,3 +28,7 @@ void AbstractFormWidget::updateItem(AbstractItem* item) {
 	item->setName(name_edit_->text());
     item->setDescription(description_edit_->text());
 }
+AbstractFormWidget::~AbstractFormWidget()
+{
+
+}

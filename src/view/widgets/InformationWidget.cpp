@@ -40,3 +40,7 @@ void InformationWidget::buttonEvent()
 {
     connect(modify_btn_, &QPushButton::released, this, &InformationWidget::changeToModify);
 }
+InformationWidget::~InformationWidget()
+{
+
+}

@@ -2,3 +2,6 @@
 
 AbstractWidget::AbstractWidget(QLayout* layout, QWidget* parent)
     :AbstractGraphicalElement(layout, parent) {}
+AbstractWidget::~AbstractWidget() {
+
+}

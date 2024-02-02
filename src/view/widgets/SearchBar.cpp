@@ -22,3 +22,7 @@ void SearchBar::searchItem()
 {
     LocatorController::BusinessControllerInstance()->showFilteredList(searchbar_->text());
 }
+SearchBar::~SearchBar()
+{
+
+}

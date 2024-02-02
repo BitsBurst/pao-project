@@ -22,7 +22,7 @@ private:
 
 public:
     RealtimeChart(QWidget * parent = nullptr);
-
+	~RealtimeChart() override;
     void timerEvent(DataGenObj);
     void addRealtimeSample(double v);
 	void dataGenerated(DataGenObj);

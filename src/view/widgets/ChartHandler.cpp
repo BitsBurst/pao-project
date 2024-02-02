@@ -51,3 +51,7 @@ ChartHandler::ChartHandler(QVector<Sensor *> sensor_list, QWidget* parent)
         }
     }
 }
+ChartHandler::~ChartHandler()
+{
+
+}

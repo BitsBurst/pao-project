@@ -15,6 +15,7 @@ protected:
 
 public:
     AbstractFormWidget(QWidget * parent = nullptr);
+	~AbstractFormWidget() override;
 
     virtual void setValues(const AbstractItem& item);
     virtual void reset();

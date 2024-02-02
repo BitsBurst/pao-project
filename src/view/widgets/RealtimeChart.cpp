@@ -109,3 +109,7 @@ void RealtimeChart::dataGenerated(DataGenObj obj)
 	addRealtimeSample(obj.getData());
 	custom_plot_->replot(QCustomPlot::rpImmediateRefresh);
 }
+RealtimeChart::~RealtimeChart()
+{
+
+}

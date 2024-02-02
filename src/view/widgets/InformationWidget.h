@@ -22,6 +22,7 @@ private:
 
 public:
     explicit InformationWidget(AbstractItem* item, bool check_add_btn = false, QWidget * parent = nullptr);
+	~InformationWidget() override;
 };
 
 #endif //SMARTSENSORS_INFORMATIONWIDGET_H

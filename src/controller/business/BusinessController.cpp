@@ -154,7 +154,7 @@ void BusinessController::deleteItem(AbstractItem* item)
 
 void BusinessController::showFilteredList(QString query)
 {
-    Logger::Log(LogLevel::_ERROR_, __FILE__, __LINE__, __FUNCTION__, query);
+    Logger::Log(LogLevel::_INFO_, __FILE__, __LINE__, __FUNCTION__, query);
     group_list_view_->setItems(LocatorController::StorageControllerInstance()->GetStorage()->filterSensorsByName(query, 0));
 }
 

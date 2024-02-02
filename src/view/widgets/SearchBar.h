@@ -18,6 +18,7 @@ private:
 
 public:
     SearchBar(QWidget * parent = nullptr);
+	~SearchBar();
 };
 
 #endif //SMARTSENSORS_SEARCHBAR_H

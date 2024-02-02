@@ -8,3 +8,7 @@ SingleCategoryWidget::SingleCategoryWidget(const QVector<AbstractItem*>& items, 
 
     layout_->addWidget(group_list_view_);
 }
+SingleCategoryWidget::~SingleCategoryWidget()
+{
+
+}

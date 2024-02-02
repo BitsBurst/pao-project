@@ -9,3 +9,7 @@ SingleSensorWidget::SingleSensorWidget(AbstractItem* item, QWidget * parent)
 
     layout_->addWidget(chart_);
 }
+SingleSensorWidget::~SingleSensorWidget()
+{
+
+}

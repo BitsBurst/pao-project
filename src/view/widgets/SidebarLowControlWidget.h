@@ -11,6 +11,7 @@ private:
 
 public:
     explicit SidebarLowControlWidget(QWidget *parent = nullptr);
+	~SidebarLowControlWidget();
 };
 
 #endif //SMARTSENSORS_SIDEBARLOWCONTROLWIDGET_H

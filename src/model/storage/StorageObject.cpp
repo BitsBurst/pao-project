@@ -139,7 +139,7 @@ const QList<Sensor*> StorageObject::filterSensorsByName(QString name) const
 }
 QVector<AbstractItem*> StorageObject::filterSensorsByName(const QString& name, int) const
 {
-    Logger::Log(LogLevel::_ERROR_, __FILE__, __LINE__, __FUNCTION__, name);
+    Logger::Log(LogLevel::_INFO_, __FILE__, __LINE__, __FUNCTION__, name);
     QVector<AbstractItem*> list;
     for (auto i : sensors_) {
 
