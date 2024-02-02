@@ -42,6 +42,8 @@ SingleView::SingleView(AbstractItem* item, bool check_add_btn, QWidget* parent)
 void SingleView::handleEvents()
 {
     connect(information_widget_, &InformationWidget::changeToModify, std::bind(&SingleView::changeToModifyView, this, item_));
+	connect(information_widget_, &InformationWidget::deleteItem, std::bind(&SingleView::deleteItem, this, item_));
+
 }
 
 void SingleView::setActiveView(int index)

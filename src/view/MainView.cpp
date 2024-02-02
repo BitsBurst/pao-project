@@ -48,9 +48,11 @@ void MainView::createMenu() {
     sensors->addAction(single_group_view);
 
     // Menu File
-    QAction * settings_view = new QAction("Impostazioni App", file);
+    QAction * opensimulation = new QAction("Apri file simulazione", file);
+	QAction * exportsimulation = new QAction("Esporta file simulazione", file);
 
-    file->addAction(settings_view);
+    file->addAction(opensimulation);
+	file->addAction(exportsimulation);
 
     // Menu Categories
     QAction * create_category = new QAction("Crea", categories);
@@ -61,8 +63,8 @@ void MainView::createMenu() {
     connect(single_sensor_view, &QAction::triggered, this, &MainView::changeToSingleSensorView);
     connect(single_group_view, &QAction::triggered, this, &MainView::changeToSingleGroupView);
 
-    connect(settings_view, &QAction::triggered, this, &MainView::changeToSettingsView);
-
+    //connect(settings_view, &QAction::triggered, this, &MainView::changeToSettingsView);
+	connect(opensimulation, &QAction::triggered, this, &MainView::openSimulation);
     connect(create_sensor, &QAction::triggered, this, &MainView::changeToCreateSensor);
     connect(create_category, &QAction::triggered, this, &MainView::changeToCreateCategory);
 

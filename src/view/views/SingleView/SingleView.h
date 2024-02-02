@@ -16,6 +16,8 @@ class SingleView : public AbstractView {
 
 signals:
     void changeToModifyView(AbstractItem* item);
+	void deleteItem(AbstractItem* item);
+
 
 private:
     InformationWidget * information_widget_;

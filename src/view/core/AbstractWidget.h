@@ -9,6 +9,7 @@ class AbstractWidget : public AbstractGraphicalElement {
 private:
 public:
     explicit AbstractWidget(QLayout * layout = new QVBoxLayout(), QWidget * parent = nullptr);
+	virtual ~AbstractWidget();
 };
 
 #endif //SMARTSENSORS_ABSTRACTWIDGET_H

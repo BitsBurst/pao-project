@@ -3,6 +3,7 @@
 
 #include <QSpinBox>
 #include <QComboBox>
+#include <QFormLayout>
 #include "AbstractFormWidget.h"
 #include "../../../model/core/Sensor.h"
 

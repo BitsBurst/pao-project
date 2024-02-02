@@ -31,9 +31,8 @@ ChartHandler::ChartHandler(QVector<Sensor *> sensor_list, QWidget* parent)
 {
     QLayout * curr_row;
     for (int i = 1; i <= sensor_list_.size() ; ++i) {
-        RealtimeChart * temp = new RealtimeChart(this);
+        RealtimeChart * temp = new RealtimeChart(this, sensor_list_[i-1]);
         chart_list_.push_back(temp);
-
         if (i % 2 != 0) {
             // Initialization
             curr_row = CustomElements::getCustomLayoutPrototype(H_SINGLE_SPACING);
@@ -50,4 +49,10 @@ ChartHandler::ChartHandler(QVector<Sensor *> sensor_list, QWidget* parent)
             curr_row->addWidget(temp);
         }
     }
+}
+ChartHandler::~ChartHandler()
+{
+	for (auto & chart : chart_list_) {
+		delete chart;
+	}
 }

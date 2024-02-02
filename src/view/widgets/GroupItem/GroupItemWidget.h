@@ -33,6 +33,7 @@ protected:
 public:
     explicit GroupItemWidget(QString id, QString title = "", QString description = "", QString icon_src = "", QWidget *parent = nullptr);
     explicit GroupItemWidget(AbstractItem* item, QWidget *parent = nullptr);
+	~GroupItemWidget();
 
     void setTitle(const QString& title);
     void setDetail(const QString& detail);

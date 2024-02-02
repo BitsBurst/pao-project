@@ -142,8 +142,10 @@ void Sensor::startDataGeneration()
  */
 void Sensor::stopDataGeneration()
 {
-	data_generator_worker_->exit();
+	data_generator_worker_->terminate();
+	data_generator_worker_->wait();
 	delete data_generator_worker_;
+	data_generator_worker_ = nullptr;
 }
 /*
  * @brief Sensor::dataGenerated

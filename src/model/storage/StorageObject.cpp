@@ -139,7 +139,7 @@ const QList<Sensor*> StorageObject::filterSensorsByName(QString name) const
 }
 QVector<AbstractItem*> StorageObject::filterSensorsByName(const QString& name, int) const
 {
-    Logger::Log(LogLevel::_ERROR_, __FILE__, __LINE__, __FUNCTION__, name);
+    Logger::Log(LogLevel::_INFO_, __FILE__, __LINE__, __FUNCTION__, name);
     QVector<AbstractItem*> list;
     for (auto i : sensors_) {
 
@@ -278,10 +278,9 @@ QJsonObject StorageObject::toJson() const
 	json["sensors"] = sensors;
 	return json;
 }
-
 Category* StorageObject::getCategory(int index) const
 {
-    return categories_.value(index);
+	return categories_.value(index);
 }
 
 /*

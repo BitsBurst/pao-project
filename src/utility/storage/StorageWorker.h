@@ -27,6 +27,7 @@ private:
 	QString filename_;
 	bool changed;
 	bool closing;
+	bool destroy;
 	void Store();
 	void Load();
 protected:

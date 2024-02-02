@@ -12,6 +12,7 @@ private:
 
 public:
     explicit SingleCategoryWidget(const QVector<AbstractItem*>& items, QWidget* parent = nullptr);
+	~SingleCategoryWidget() override;
 };
 
 #endif //SMARTSENSORS_SINGLECATEGORYWIDGET_H

@@ -13,6 +13,8 @@ class InformationWidget : public AbstractWidget {
 
 signals:
     void changeToModify();
+	void deleteItem();
+
 private:
     QLabel *title_, *description_;
     QWidget * group_buttons_;
@@ -22,6 +24,7 @@ private:
 
 public:
     explicit InformationWidget(AbstractItem* item, bool check_add_btn = false, QWidget * parent = nullptr);
+	~InformationWidget() override;
 };
 
 #endif //SMARTSENSORS_INFORMATIONWIDGET_H

@@ -13,6 +13,9 @@ private:
 
 public:
     explicit SingleSensorWidget(AbstractItem* item, QWidget *parent = nullptr);
+	~SingleSensorWidget();
+
+	void setItem(Sensor* item);
 };
 
 #endif //SMARTSENSORS_SINGLESENSORWIDGET_H

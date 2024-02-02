@@ -52,6 +52,8 @@ public slots:
     void showCreateCategory();
     void showCreateSensor();
     void showSettingsView();
+	void openSimulation();
+	void saveSimulationByName();
 
     void updateInterface();
     void showFilteredList(QString query, SearchType type);

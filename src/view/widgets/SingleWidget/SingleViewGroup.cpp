@@ -34,3 +34,7 @@ void SingleViewGroup::update()
     chart_ = new ChartHandler(sensor_list_, this);
     layout_->addWidget(chart_);
 }
+SingleViewGroup::~SingleViewGroup()
+{
+
+}

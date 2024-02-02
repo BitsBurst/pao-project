@@ -9,3 +9,7 @@ SidebarLowControlWidget::SidebarLowControlWidget(QWidget* parent)
     // Layout Widgets
     layout_->addWidget(title_label_);
 }
+SidebarLowControlWidget::~SidebarLowControlWidget()
+{
+
+}

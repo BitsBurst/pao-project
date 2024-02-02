@@ -42,3 +42,7 @@ void SearchBar::switchButton(int id)
     type_ = static_cast<SearchType>(id);
     searchItem();
 }
+SearchBar::~SearchBar()
+{
+
+}
