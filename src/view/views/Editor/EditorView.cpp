@@ -101,3 +101,8 @@ void EditorView::setNewObject(bool newObject)
 {
     newObject_ = newObject;
 }
+
+AbstractItem* EditorView::getItem() const
+{
+    return item_;
+}

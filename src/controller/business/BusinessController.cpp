@@ -38,6 +38,9 @@ content_stack_->indexOf(default_view_),
 }
 void BusinessController::subscribeToEvents()
 {
+    LocatorController::StorageControllerInstance()->beforeDestroy.subscribe(std::bind(&BusinessController::deleteInterface, this));
+
+    // Signals
 	connect(LocatorController::StorageControllerInstance(), &StorageController::StorageReady, this, &BusinessController::storageReady);
 
     connect(main_view_, &MainView::changeToSingleSensorView, this, &BusinessController::showSingleSensorView);
@@ -268,4 +271,30 @@ void BusinessController::cancelOperation()
         // should never be reached
         break;
     }
+}
+
+void BusinessController::deleteInterface()
+{
+    main_view_->setContentView(content_stack_->indexOf(default_view_));
+    main_view_->setSidebarView(content_stack_->indexOf(default_view_));
+
+    content_stack_->removeWidget(single_view_);
+    content_stack_->removeWidget(editor_view_);
+
+    sidebar_stack_->removeWidget(group_list_view_);
+
+    delete single_view_;
+    delete editor_view_;
+    delete group_list_view_;
+
+    single_view_ = new SingleView(new Category());
+    editor_view_ = new EditorView(new Category());
+    group_list_view_ = new GroupListView(QVector<AbstractItem*>());
+
+    content_stack_->addWidget(single_view_);
+    content_stack_->addWidget(editor_view_);
+
+    sidebar_stack_->addWidget(group_list_view_);
+
+    showDefaultView();
 }

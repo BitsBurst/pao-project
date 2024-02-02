@@ -37,8 +37,6 @@ private:
 
     bool newObject_;
 
-private:
-
     void handleEvents();
 
 public:
@@ -46,6 +44,7 @@ public:
     void update();
 
     void setItem(AbstractItem* item);
+    AbstractItem* getItem() const;
     void setActiveForm(int index);
 
     bool isNewObject() const;

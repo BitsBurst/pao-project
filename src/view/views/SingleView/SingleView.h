@@ -36,6 +36,7 @@ public:
 
     void setActiveView(int index);
     void setItem(AbstractItem* item);
+    AbstractItem* getItem() const;
 };
 
 #endif //SMARTSENSORS_SINGLEVIEW_H

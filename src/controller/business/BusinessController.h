@@ -42,6 +42,8 @@ private:
 	void loadStorageError();
 	void storageReady();
 
+    void deleteInterface();
+
 public slots:
     void showDefaultView();
     void showSingleSensorView();

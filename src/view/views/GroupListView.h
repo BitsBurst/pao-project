@@ -27,8 +27,11 @@ private:
 
 public:
     explicit GroupListView(const QVector<AbstractItem*>& items,QWidget *parent = nullptr);
+    ~GroupListView();
     void setItems(const QVector<AbstractItem*>& items);
 	void deleteListItem(GroupItemWidget* item);
+
+    QVector<AbstractItem*>& getItems();
 
 };
 

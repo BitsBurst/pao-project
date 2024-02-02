@@ -59,3 +59,8 @@ void SingleView::setItem(AbstractItem* item) {
         item_->accept(widget_render);
     }
 }
+
+AbstractItem* SingleView::getItem() const
+{
+    return item_;
+}

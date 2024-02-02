@@ -90,3 +90,15 @@ void GroupListView::deleteListItem(GroupItemWidget* item)
 
     scroll_area_layout->addStretch();
 }
+
+QVector<AbstractItem*>& GroupListView::getItems()
+{
+    return items_;
+}
+
+GroupListView::~GroupListView()
+{
+    for (auto item : item_lists_) {
+        delete item;
+    }
+}
