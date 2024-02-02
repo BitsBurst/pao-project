@@ -11,6 +11,7 @@
 #include "../../view/widgets/SingleWidget/SingleSensorWidget.h"
 #include "../../view/MainView.h"
 #include "../../view/widgets/SingleWidget/SingleViewGroup.h"
+#include "../../view/views/DefaultView.h"
 
 class BusinessController: public AbstractController {
 Q_OBJECT
@@ -24,6 +25,7 @@ public:
 private:
     // Available Views
     SingleView * single_view_;
+    DefaultView * default_view_;
     SingleViewGroup * single_view_group_;
     GroupListView * group_list_view_;
     EditorView * editor_view_;
@@ -41,6 +43,7 @@ private:
 	void storageReady();
 
 public slots:
+    void showDefaultView();
     void showSingleSensorView();
     void showSingleView(AbstractItem* item);
     void showSingleGroupView();
@@ -52,9 +55,11 @@ public slots:
 	void openSimulation();
 	void saveSimulationByName();
 
-    void updateInterface();
+    void updateSidebar();
     void showFilteredList(QString query, SearchType type);
     void deleteItem(AbstractItem* item);
+
+    void cancelOperation();
 };
 
 #endif //SMARTSENSORS_BUSINESSCONTROLLER_H

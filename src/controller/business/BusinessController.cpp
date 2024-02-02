@@ -9,7 +9,7 @@ BusinessController::BusinessController()
     single_view_ = new SingleView(new Category("Default Item", "KM"));
     // single_view_group_ = new SingleViewGroup(QVector<Sensor *>());
     editor_view_ = new EditorView(new Sensor("Editor", temp));
-
+    default_view_ = new DefaultView();
 
     create_view_ = new CreateView();
     settings_view_ = new SettingsView();
@@ -30,7 +30,9 @@ bool BusinessController::Init()
 		storageReady();
 	}
 
-    main_view_->createDefaultView(content_stack_->indexOf(single_view_), sidebar_stack_->indexOf(group_list_view_));
+    main_view_->createDefaultView(
+content_stack_->indexOf(default_view_),
+            sidebar_stack_->indexOf(group_list_view_));
 
 	return true;
 }
@@ -47,6 +49,7 @@ void BusinessController::subscribeToEvents()
 	connect(main_view_, &MainView::openSimulation, this, &BusinessController::openSimulation);
 	connect(main_view_, &MainView::saveWithName, this, &BusinessController::saveSimulationByName);
 
+    connect(editor_view_, &EditorView::cancelOperation, this, &BusinessController::cancelOperation);
 
     // Modify
     connect(single_view_, &SingleView::changeToModifyView, this, &BusinessController::showModifyView);
@@ -62,7 +65,7 @@ void BusinessController::subscribeToEvents()
 	connect(single_view_, &SingleView::deleteItem, this, &BusinessController::deleteItem);
 
     // Update Model
-    connect(editor_view_, &EditorView::modelChanged, this, &BusinessController::updateInterface);
+    connect(editor_view_, &EditorView::modelChanged, this, &BusinessController::updateSidebar);
 }
 
 void BusinessController::setDataField(MainView* main_view, QStackedWidget* content_stack, QStackedWidget* sidebar_stack)
@@ -77,6 +80,7 @@ void BusinessController::setDataField(MainView* main_view, QStackedWidget* conte
     content_stack_->addWidget(editor_view_);
     content_stack_->addWidget(create_view_);
     content_stack_->addWidget(settings_view_);
+    content_stack_->addWidget(default_view_);
 
     sidebar_stack_->addWidget(group_list_view_);
 }
@@ -91,6 +95,10 @@ void BusinessController::storageReady()
 	LocatorController::WindowControllerInstance()->setDisabled(false);
 }
 
+void BusinessController::showDefaultView()
+{
+    main_view_->setContentView(content_stack_->indexOf(default_view_));
+}
 
 void BusinessController::showSingleSensorView()
 {
@@ -143,14 +151,13 @@ void BusinessController::showCreateSensor()
 	LocatorController::StorageControllerInstance()->GetStorage()->addSensor(temp);
 }
 
-void BusinessController::updateInterface()
+void BusinessController::updateSidebar()
 {
     group_list_view_->setItems(LocatorController::StorageControllerInstance()->GetStorage()->getSensors(0));
 }
 
 void BusinessController::deleteItem(AbstractItem* item)
 {
-
 	if (item == nullptr) return;
 
 	QMessageBox deleteConfirm;
@@ -165,7 +172,7 @@ void BusinessController::deleteItem(AbstractItem* item)
 	switch (res) {
 	case QMessageBox::Ok:
 		item->accept(delete_item);
-		updateInterface();
+        updateSidebar();
 		break;
 	case QMessageBox::Cancel:
 		// Cancel was clicked
@@ -237,4 +244,28 @@ void BusinessController::saveSimulationByName()
 		Logger::Log(LogLevel::_WARNING_, __FILE__, __LINE__, __FUNCTION__, "No file name selected");
 	}
 	LocatorController::WindowControllerInstance()->setDisabled(false);
+}
+
+void BusinessController::cancelOperation()
+{
+    QMessageBox cancelConfirm;
+    cancelConfirm.setText("Annulla Operazioni");
+    cancelConfirm.setInformativeText("Sei sicuro di voler procedere? Non sarà possibile recuperare le modifiche attuate.");
+    cancelConfirm.setStandardButtons(QMessageBox::Ok | QMessageBox::Cancel);
+    cancelConfirm.setDefaultButton(QMessageBox::Ok);
+    int res = cancelConfirm.exec();
+
+    DeleteItem delete_item;
+
+    switch (res) {
+    case QMessageBox::Ok:
+        showDefaultView();
+        break;
+    case QMessageBox::Cancel:
+        // Cancel was clicked
+        break;
+    default:
+        // should never be reached
+        break;
+    }
 }

@@ -12,9 +12,9 @@ class SensorFormWidget : public AbstractFormWidget {
 private:
     QDoubleSpinBox *max_range_edit_,
                    *min_range_edit_;
-	QComboBox * categories_;
+    QComboBox * categories_;
 
-	void updateCategories();
+    void updateCategories();
 
 public:
     explicit SensorFormWidget(QWidget * parent = nullptr);

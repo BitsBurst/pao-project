@@ -122,6 +122,8 @@ set(PROJECT_SOURCES
         src/model/visitor/IVisitor.h
         src/view/widgets/SearchBar.cpp
         src/view/widgets/SearchBar.h
+        src/view/views/DefaultView.cpp
+        src/view/views/DefaultView.h
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)

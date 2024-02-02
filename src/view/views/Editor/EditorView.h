@@ -17,6 +17,7 @@ class EditorView : public AbstractView {
 
 signals:
     void modelChanged();
+    void cancelOperation();
 
 private slots:
 	void applyChanges();
