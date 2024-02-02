@@ -164,6 +164,15 @@ const QList<Category*> StorageObject::filterCategoriesByName(QString name) const
 	}
 	return list;
 }
+QVector<AbstractItem*> StorageObject::filterCategoriesByName(QString name, int)
+{
+    QVector<Category*> list;
+    for (auto& i : categories_) {
+        if (i->getName().contains(name))
+            list.append(i);
+    }
+    return reinterpret_cast<QVector<AbstractItem*>&>(list);
+}
 /*
  * @brief getCategories
  * @return

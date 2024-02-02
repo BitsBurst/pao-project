@@ -152,10 +152,21 @@ void BusinessController::deleteItem(AbstractItem* item)
     updateInterface();
 }
 
-void BusinessController::showFilteredList(QString query)
+void BusinessController::showFilteredList(QString query, SearchType type)
 {
-    Logger::Log(LogLevel::_ERROR_, __FILE__, __LINE__, __FUNCTION__, query);
-    group_list_view_->setItems(LocatorController::StorageControllerInstance()->GetStorage()->filterSensorsByName(query, 0));
+    // Logger::Log(LogLevel::_ERROR_, __FILE__, __LINE__, __FUNCTION__, type == ALL);
+    switch (type) {
+    case SENSOR:
+        group_list_view_->setItems(LocatorController::StorageControllerInstance()->GetStorage()->filterSensorsByName(query, 0));
+        break;
+    case CATEGORY:
+        group_list_view_->setItems(LocatorController::StorageControllerInstance()->GetStorage()->filterCategoriesByName(query, 0));
+        break;
+    case ALL:
+        group_list_view_->setItems(LocatorController::StorageControllerInstance()->GetStorage()->filterSensorsByName(query, 0));
+        break;
+    }
+
 }
 
 void BusinessController::showSingleView(AbstractItem* item)

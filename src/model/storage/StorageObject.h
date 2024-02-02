@@ -35,6 +35,7 @@ public:
 	const QVector<Sensor*> filterSensorsByName(QString name) const;
     QVector<AbstractItem*> filterSensorsByName(const QString& name, int) const;
 	const QVector<Category*> filterCategoriesByName(QString name) const;
+    QVector<AbstractItem*> filterCategoriesByName(QString name, int);
 	QJsonObject toJson() const;
 	static StorageObject *fromJson(QJsonObject const &);
 	EventHandlerVoid onModelChangedEvent;

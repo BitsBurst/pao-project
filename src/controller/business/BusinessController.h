@@ -51,7 +51,7 @@ public slots:
     void showSettingsView();
 
     void updateInterface();
-    void showFilteredList(QString query);
+    void showFilteredList(QString query, SearchType type);
     void deleteItem(AbstractItem* item);
 };
 
