@@ -4,36 +4,19 @@
 
 BusinessController::BusinessController()
 {
-    // Initialization - Views
-    Category temp;
-    single_view_ = new SingleView(new Category("Default Item", "KM"));
-    // single_view_group_ = new SingleViewGroup(QVector<Sensor *>());
-    editor_view_ = new EditorView(new Sensor("Editor", temp));
+    single_view_ = new SingleView(new Category());
+    editor_view_ = new EditorView(new Sensor());
     default_view_ = new DefaultView();
-
     create_view_ = new CreateView();
     settings_view_ = new SettingsView();
-
-    /*QVector<AbstractItem *> list;
-    for (int i = 0; i < 2; ++i) {
-        list.push_back(new Sensor(QString::fromStdString("Sensor " + std::to_string(i)), Category(QString::fromStdString("Cat " + std::to_string(i)), "KM")));
-        list.push_back(new Category(QString::fromStdString("Cat " + std::to_string(i)), "KM"));
-    }
-*/
 	group_list_view_ = new GroupListView(LocatorController::StorageControllerInstance()->GetStorage()->getSensors(0));
 }
 
 bool BusinessController::Init()
 {
-	subscribeToEvents();
 	if(LocatorController::StorageControllerInstance()->isStorageReadyCheck()) {
 		storageReady();
 	}
-
-    main_view_->createDefaultView(
-content_stack_->indexOf(default_view_),
-            sidebar_stack_->indexOf(group_list_view_));
-
 	return true;
 }
 void BusinessController::subscribeToEvents()
@@ -95,6 +78,23 @@ void BusinessController::Destroy()
 }
 void BusinessController::storageReady()
 {
+	if(!single_view_)
+	single_view_ = new SingleView(new Category());
+	if(!editor_view_)
+	editor_view_ = new EditorView(new Category());
+	if(!group_list_view_)
+	group_list_view_ = new GroupListView(QVector<AbstractItem*>());
+
+	content_stack_->addWidget(single_view_);
+	content_stack_->addWidget(editor_view_);
+
+	sidebar_stack_->addWidget(group_list_view_);
+	subscribeToEvents();
+
+	main_view_->createDefaultView(
+			content_stack_->indexOf(default_view_),
+			sidebar_stack_->indexOf(group_list_view_));
+	showDefaultView();
 	BusinessController::updateSidebar();
 	LocatorController::WindowControllerInstance()->setDisabled(false);
 }
@@ -284,17 +284,9 @@ void BusinessController::deleteInterface()
     sidebar_stack_->removeWidget(group_list_view_);
 
     delete single_view_;
+	single_view_ = nullptr;
     delete editor_view_;
+	editor_view_ = nullptr;
     delete group_list_view_;
-
-    single_view_ = new SingleView(new Category());
-    editor_view_ = new EditorView(new Category());
-    group_list_view_ = new GroupListView(QVector<AbstractItem*>());
-
-    content_stack_->addWidget(single_view_);
-    content_stack_->addWidget(editor_view_);
-
-    sidebar_stack_->addWidget(group_list_view_);
-
-    showDefaultView();
+	group_list_view_ = nullptr;
 }

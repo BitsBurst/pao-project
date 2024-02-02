@@ -69,6 +69,7 @@ QString StorageController::getDirectory() const
  */
 void StorageController::isStorageReady()
 {
+	while(!worker_);
 	worker_->isStorageInitialized();
 }
 /**
