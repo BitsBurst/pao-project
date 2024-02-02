@@ -53,9 +53,11 @@ void GroupListView::setItems(const QVector<AbstractItem*>& items)
 {
     scroll_area_layout->deleteLater();
     scroll_area_list->deleteLater();
+
 	for (auto item : item_lists_) {
 		delete item;
 	}
+
 	item_lists_.clear();
     scroll_area_list = new QWidget(scroll_area_);
     scroll_area_layout = new QVBoxLayout(scroll_area_list);

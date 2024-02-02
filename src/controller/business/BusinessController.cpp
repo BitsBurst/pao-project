@@ -48,6 +48,8 @@ void BusinessController::subscribeToEvents()
     connect(group_list_view_, &GroupListView::showSingleItem, this, &BusinessController::showSingleView);
 	connect(main_view_, &MainView::openSimulation, this, &BusinessController::openSimulation);
 
+    connect(editor_view_, &EditorView::cancelOperation, this, &BusinessController::cancelOperation);
+
     // Modify
     connect(single_view_, &SingleView::changeToModifyView, this, &BusinessController::showModifyView);
     // connect(single_view_group_, &SingleView::changeToModifyView, this, &BusinessController::showModifyView);
@@ -62,7 +64,7 @@ void BusinessController::subscribeToEvents()
 	connect(single_view_, &SingleView::deleteItem, this, &BusinessController::deleteItem);
 
     // Update Model
-    connect(editor_view_, &EditorView::modelChanged, this, &BusinessController::updateInterface);
+    connect(editor_view_, &EditorView::modelChanged, this, &BusinessController::updateSidebar);
 }
 
 void BusinessController::setDataField(MainView* main_view, QStackedWidget* content_stack, QStackedWidget* sidebar_stack)
@@ -147,14 +149,13 @@ void BusinessController::showCreateSensor()
 	LocatorController::StorageControllerInstance()->GetStorage()->addSensor(temp);
 }
 
-void BusinessController::updateInterface()
+void BusinessController::updateSidebar()
 {
     group_list_view_->setItems(LocatorController::StorageControllerInstance()->GetStorage()->getSensors(0));
 }
 
 void BusinessController::deleteItem(AbstractItem* item)
 {
-
 	if (item == nullptr) return;
 
 	QMessageBox deleteConfirm;
@@ -169,7 +170,7 @@ void BusinessController::deleteItem(AbstractItem* item)
 	switch (res) {
 	case QMessageBox::Ok:
 		item->accept(delete_item);
-		updateInterface();
+        updateSidebar();
 		break;
 	case QMessageBox::Cancel:
 		// Cancel was clicked
@@ -240,4 +241,28 @@ void BusinessController::saveSimulationByName()
 		Logger::Log(LogLevel::_WARNING_, __FILE__, __LINE__, __FUNCTION__, "No file name selected");
 	}
 	LocatorController::WindowControllerInstance()->setDisabled(false);
+}
+
+void BusinessController::cancelOperation()
+{
+    QMessageBox cancelConfirm;
+    cancelConfirm.setText("Annulla Operazioni");
+    cancelConfirm.setInformativeText("Sei sicuro di voler procedere? Non sarà possibile recuperare le modifiche attuate.");
+    cancelConfirm.setStandardButtons(QMessageBox::Ok | QMessageBox::Cancel);
+    cancelConfirm.setDefaultButton(QMessageBox::Ok);
+    int res = cancelConfirm.exec();
+
+    DeleteItem delete_item;
+
+    switch (res) {
+    case QMessageBox::Ok:
+        showDefaultView();
+        break;
+    case QMessageBox::Cancel:
+        // Cancel was clicked
+        break;
+    default:
+        // should never be reached
+        break;
+    }
 }

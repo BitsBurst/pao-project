@@ -55,9 +55,11 @@ public slots:
 	void openSimulation();
 	void saveSimulationByName();
 
-    void updateInterface();
+    void updateSidebar();
     void showFilteredList(QString query, SearchType type);
     void deleteItem(AbstractItem* item);
+
+    void cancelOperation();
 };
 
 #endif //SMARTSENSORS_BUSINESSCONTROLLER_H

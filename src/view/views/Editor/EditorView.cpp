@@ -78,6 +78,7 @@ void EditorView::setActiveForm(int index)
 
 void EditorView::handleEvents() {
 	connect(ok_button_, &QPushButton::released, this, &EditorView::applyChanges);
+    connect(cancel_button_, &QPushButton::released, this, &EditorView::cancelOperation);
 }
 
 void EditorView::applyChanges() {

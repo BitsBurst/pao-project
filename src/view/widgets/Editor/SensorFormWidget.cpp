@@ -56,8 +56,6 @@ void SensorFormWidget::updateItem(AbstractItem* item)
 	static_cast<Sensor*>(item)->setMinRange(min_range_edit_->value());
 	static_cast<Sensor*>(item)->setMaxRange(max_range_edit_->value());
 
-    // Todo[Luca] Check nullptr
-
     Category* cat = LocatorController::StorageControllerInstance()->GetStorage()->getCategory(categories_->currentIndex());
     if (cat == nullptr) {
         cat = new Category("Default", "C°");
