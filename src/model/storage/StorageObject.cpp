@@ -278,6 +278,12 @@ QJsonObject StorageObject::toJson() const
 	json["sensors"] = sensors;
 	return json;
 }
+
+Category* StorageObject::getCategory(int index) const
+{
+    return categories_.value(index);
+}
+
 /*
  * @brief ~StorageObject
  * Destructor

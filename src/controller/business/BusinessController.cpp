@@ -9,7 +9,7 @@ BusinessController::BusinessController()
     single_view_ = new SingleView(new Category("Default Item", "KM"));
     // single_view_group_ = new SingleViewGroup(QVector<Sensor *>());
     editor_view_ = new EditorView(new Sensor("Editor", temp));
-
+    default_view_ = new DefaultView();
 
     create_view_ = new CreateView();
     settings_view_ = new SettingsView();
@@ -30,7 +30,9 @@ bool BusinessController::Init()
 		storageReady();
 	}
 
-    main_view_->createDefaultView(content_stack_->indexOf(single_view_), sidebar_stack_->indexOf(group_list_view_));
+    main_view_->createDefaultView(
+content_stack_->indexOf(default_view_),
+            sidebar_stack_->indexOf(group_list_view_));
 
 	return true;
 }
@@ -44,7 +46,6 @@ void BusinessController::subscribeToEvents()
     //connect(main_view_, &MainView::changeToModifyView, this, &BusinessController::showModifyView);
     connect(main_view_, &MainView::changeToSettingsView, this, &BusinessController::showSettingsView);
     connect(group_list_view_, &GroupListView::showSingleItem, this, &BusinessController::showSingleView);
-
 
     // Modify
     connect(single_view_, &SingleView::changeToModifyView, this, &BusinessController::showModifyView);
@@ -74,6 +75,7 @@ void BusinessController::setDataField(MainView* main_view, QStackedWidget* conte
     content_stack_->addWidget(editor_view_);
     content_stack_->addWidget(create_view_);
     content_stack_->addWidget(settings_view_);
+    content_stack_->addWidget(default_view_);
 
     sidebar_stack_->addWidget(group_list_view_);
 }
@@ -87,6 +89,10 @@ void BusinessController::storageReady()
 	LocatorController::WindowControllerInstance()->setDisabled(false);
 }
 
+void BusinessController::showDefaultView()
+{
+    main_view_->setContentView(content_stack_->indexOf(default_view_));
+}
 
 void BusinessController::showSingleSensorView()
 {
@@ -146,15 +152,33 @@ void BusinessController::updateInterface()
 
 void BusinessController::deleteItem(AbstractItem* item)
 {
-    DeleteItem delete_item;
-    item->accept(delete_item);
+    if (item == nullptr) return;
 
-    updateInterface();
+    QMessageBox deleteConfirm;
+    deleteConfirm.setText("Eliminazione.");
+    deleteConfirm.setInformativeText("Sei sicuro di voler procedere con l'eliminazione?");
+    deleteConfirm.setStandardButtons(QMessageBox::Ok | QMessageBox::Cancel);
+    deleteConfirm.setDefaultButton(QMessageBox::Ok);
+    int res = deleteConfirm.exec();
+
+    DeleteItem delete_item;
+
+    switch (res) {
+    case QMessageBox::Ok:
+        item->accept(delete_item);
+        updateInterface();
+        break;
+    case QMessageBox::Cancel:
+        // Cancel was clicked
+        break;
+    default:
+        // should never be reached
+        break;
+    }
 }
 
 void BusinessController::showFilteredList(QString query, SearchType type)
 {
-    // Logger::Log(LogLevel::_ERROR_, __FILE__, __LINE__, __FUNCTION__, type == ALL);
     switch (type) {
     case SENSOR:
         group_list_view_->setItems(LocatorController::StorageControllerInstance()->GetStorage()->filterSensorsByName(query, 0));

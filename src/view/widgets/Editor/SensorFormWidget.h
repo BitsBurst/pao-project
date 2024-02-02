@@ -2,6 +2,7 @@
 #define SMARTSENSORS_SENSORFORMWIDGET_H
 
 #include <QSpinBox>
+#include <QComboBox>
 #include "AbstractFormWidget.h"
 #include "../../../model/core/Sensor.h"
 
@@ -10,6 +11,10 @@ class SensorFormWidget : public AbstractFormWidget {
 private:
     QDoubleSpinBox *max_range_edit_,
                    *min_range_edit_;
+    QComboBox * categories_;
+
+    void updateCategories();
+
 public:
     explicit SensorFormWidget(QWidget * parent = nullptr);
 

@@ -1,5 +1,6 @@
 #include <QFormLayout>
 #include "SensorFormWidget.h"
+#include "../../../controller/LocatorController.h"
 
 SensorFormWidget::SensorFormWidget(QWidget* parent)
     : AbstractFormWidget(parent)
@@ -17,8 +18,13 @@ SensorFormWidget::SensorFormWidget(QWidget* parent)
     max_range_edit_->setValue(50);
     max_range_edit_->setDecimals(2);
 
+    categories_ = new QComboBox();
+
+    updateCategories();
+
     static_cast<QFormLayout*>(layout_)->addRow(tr("&Min Range"), min_range_edit_);
     static_cast<QFormLayout*>(layout_)->addRow(tr("&Max Range"), max_range_edit_);
+    static_cast<QFormLayout*>(layout_)->addRow(tr("&Categorie"), categories_);
 }
 
 void SensorFormWidget::setValues(const Sensor& item)
@@ -27,6 +33,10 @@ void SensorFormWidget::setValues(const Sensor& item)
 
     min_range_edit_->setValue(item.getMinRange());
     max_range_edit_->setValue(item.getMaxRange());
+
+    updateCategories();
+
+    categories_->setCurrentText(item.getCategory().getName());
 }
 
 void SensorFormWidget::reset()
@@ -35,6 +45,8 @@ void SensorFormWidget::reset()
 
     min_range_edit_->clear();
     max_range_edit_->clear();
+
+    updateCategories();
 }
 
 void SensorFormWidget::updateItem(AbstractItem* item)
@@ -43,4 +55,20 @@ void SensorFormWidget::updateItem(AbstractItem* item)
 
 	static_cast<Sensor*>(item)->setMinRange(min_range_edit_->value());
 	static_cast<Sensor*>(item)->setMaxRange(max_range_edit_->value());
+    static_cast<Sensor*>(item)->setCategory(*LocatorController::StorageControllerInstance()->GetStorage()->getCategory(categories_->currentIndex()));
+}
+
+void SensorFormWidget::updateCategories()
+{
+    categories_->clear();
+
+    auto categories = LocatorController::StorageControllerInstance()->GetStorage()->getCategories();
+
+    if (categories->isEmpty()) {
+        categories_->addItem("Default");
+    }
+
+    for (auto cat : *categories) {
+        categories_->addItem(cat->getName());
+    }
 }
