@@ -106,3 +106,6 @@ void Category::setDistributionType(DistributionType distribution_type)
 	distribution_type_ = distribution_type;
 	modelChangedEvent.notifyAsync();
 }
+Category::Category(const Category& obj):AbstractItem(obj), unit_measure_(obj.unit_measure_), distribution_type_(obj.distribution_type_)
+{
+}

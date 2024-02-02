@@ -65,6 +65,7 @@ void MainView::createMenu() {
 
     //connect(settings_view, &QAction::triggered, this, &MainView::changeToSettingsView);
 	connect(opensimulation, &QAction::triggered, this, &MainView::openSimulation);
+	connect(exportsimulation, &QAction::triggered, this, &MainView::saveWithName);
     connect(create_sensor, &QAction::triggered, this, &MainView::changeToCreateSensor);
     connect(create_category, &QAction::triggered, this, &MainView::changeToCreateCategory);
 

@@ -45,6 +45,7 @@ void BusinessController::subscribeToEvents()
     connect(main_view_, &MainView::changeToSettingsView, this, &BusinessController::showSettingsView);
     connect(group_list_view_, &GroupListView::showSingleItem, this, &BusinessController::showSingleView);
 	connect(main_view_, &MainView::openSimulation, this, &BusinessController::openSimulation);
+	connect(main_view_, &MainView::saveWithName, this, &BusinessController::saveSimulationByName);
 
 
     // Modify
@@ -86,6 +87,7 @@ void BusinessController::Destroy()
 }
 void BusinessController::storageReady()
 {
+	BusinessController::updateInterface();
 	LocatorController::WindowControllerInstance()->setDisabled(false);
 }
 
@@ -211,6 +213,7 @@ void BusinessController::openSimulation()
 	);
 	if (!fileName.isEmpty()) {
 		LocatorController::StorageControllerInstance()->changeStorageFile(fileName);
+		LocatorController::WindowControllerInstance()->setTitle("SmartSensors - " + fileName);
 	} else {
 		Logger::Log(LogLevel::_WARNING_, __FILE__, __LINE__, __FUNCTION__, "No file selected");
 	}
