@@ -39,7 +39,8 @@ private:
     QStackedWidget * sidebar_stack_;
 
 	void subscribeToEvents();
-	void loadStorageError();
+	void subscribeToViewEvents();
+	void unsubscribeToViewEvents();
 	void storageReady();
 
     void deleteInterface();

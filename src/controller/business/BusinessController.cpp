@@ -17,13 +17,37 @@ bool BusinessController::Init()
 	if(LocatorController::StorageControllerInstance()->isStorageReadyCheck()) {
 		storageReady();
 	}
+	subscribeToEvents();
 	return true;
+}
+void BusinessController::subscribeToViewEvents() {
+	connect(editor_view_, &EditorView::cancelOperation, this, &BusinessController::cancelOperation);
+
+	// Modify
+	connect(single_view_, &SingleView::changeToModifyView, this, &BusinessController::showModifyView);
+	// connect(single_view_group_, &SingleView::changeToModifyView, this, &BusinessController::showModifyView);
+	connect(group_list_view_, &GroupListView::showSingleItem, this, &BusinessController::showSingleView);
+	connect(group_list_view_, &GroupListView::changeToModifyView, this, &BusinessController::showModifyView);
+	connect(group_list_view_, &GroupListView::deleteItem, this, &BusinessController::deleteItem);
+	//connect(single_view_, &SingleView::deleteItem, this, &BusinessController::deleteItem);
+}
+void BusinessController::unsubscribeToViewEvents() {
+	disconnect(editor_view_, &EditorView::cancelOperation, this, &BusinessController::cancelOperation);
+
+	// Modify
+	disconnect(single_view_, &SingleView::changeToModifyView, this, &BusinessController::showModifyView);
+	// disconnect(single_view_group_, &SingleView::changeToModifyView, this, &BusinessController::showModifyView);
+	disconnect(group_list_view_, &GroupListView::showSingleItem, this, &BusinessController::showSingleView);
+	disconnect(group_list_view_, &GroupListView::changeToModifyView, this, &BusinessController::showModifyView);
+	disconnect(group_list_view_, &GroupListView::deleteItem, this, &BusinessController::deleteItem);
+	//disconnect(single_view_, &SingleView::deleteItem, this, &BusinessController::deleteItem);
 }
 void BusinessController::subscribeToEvents()
 {
     LocatorController::StorageControllerInstance()->beforeDestroy.subscribe(std::bind(&BusinessController::deleteInterface, this));
 
     // Signals
+	disconnect(LocatorController::StorageControllerInstance(), &StorageController::StorageReady, this, &BusinessController::storageReady);
 	connect(LocatorController::StorageControllerInstance(), &StorageController::StorageReady, this, &BusinessController::storageReady);
 
     connect(main_view_, &MainView::changeToSingleSensorView, this, &BusinessController::showSingleSensorView);
@@ -31,26 +55,15 @@ void BusinessController::subscribeToEvents()
     connect(main_view_, &MainView::changeToCreateView, this, &BusinessController::showCreateView);
     //connect(main_view_, &MainView::changeToModifyView, this, &BusinessController::showModifyView);
     connect(main_view_, &MainView::changeToSettingsView, this, &BusinessController::showSettingsView);
-    connect(group_list_view_, &GroupListView::showSingleItem, this, &BusinessController::showSingleView);
 	connect(main_view_, &MainView::openSimulation, this, &BusinessController::openSimulation);
 	connect(main_view_, &MainView::saveWithName, this, &BusinessController::saveSimulationByName);
 
-    connect(editor_view_, &EditorView::cancelOperation, this, &BusinessController::cancelOperation);
+	subscribeToViewEvents();
 
-    // Modify
-    connect(single_view_, &SingleView::changeToModifyView, this, &BusinessController::showModifyView);
-    // connect(single_view_group_, &SingleView::changeToModifyView, this, &BusinessController::showModifyView);
-    connect(group_list_view_, &GroupListView::changeToModifyView, this, &BusinessController::showModifyView);
-
-    // Create
     connect(main_view_, &MainView::changeToCreateCategory, this, &BusinessController::showCreateCategory);
     connect(main_view_, &MainView::changeToCreateSensor, this, &BusinessController::showCreateSensor);
 
-    // Delete
-    connect(group_list_view_, &GroupListView::deleteItem, this, &BusinessController::deleteItem);
-	//connect(single_view_, &SingleView::deleteItem, this, &BusinessController::deleteItem);
 
-    // Update Model
     connect(editor_view_, &EditorView::modelChanged, this, &BusinessController::updateSidebar);
     connect(editor_view_, &EditorView::addNewItem, [this] { main_view_->getSearch()->searchItem(); });
 }
@@ -84,12 +97,11 @@ void BusinessController::storageReady()
 	editor_view_ = new EditorView(new Category());
 	if(!group_list_view_)
 	group_list_view_ = new GroupListView(QVector<AbstractItem*>());
-
+	subscribeToViewEvents();
 	content_stack_->addWidget(single_view_);
 	content_stack_->addWidget(editor_view_);
 
 	sidebar_stack_->addWidget(group_list_view_);
-	subscribeToEvents();
 
 	main_view_->createDefaultView(
 			content_stack_->indexOf(default_view_),
@@ -282,7 +294,7 @@ void BusinessController::deleteInterface()
     content_stack_->removeWidget(editor_view_);
 
     sidebar_stack_->removeWidget(group_list_view_);
-
+	subscribeToViewEvents();
     delete single_view_;
 	single_view_ = nullptr;
     delete editor_view_;
