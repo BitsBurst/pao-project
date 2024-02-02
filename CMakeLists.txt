@@ -117,13 +117,15 @@ set(PROJECT_SOURCES
         src/view/widgets/SingleWidget/SingleCategoryWidget.h
         src/view/widgets/SingleWidget/SingleWidgetRender.cpp
         src/view/widgets/SingleWidget/SingleWidgetRender.h
-        src/model/visitor/deleteItem.cpp
+        src/model/visitor/DeleteItem.cpp
         src/model/visitor/DeleteItem.h
         src/model/visitor/IVisitor.h
         src/view/widgets/SearchBar.cpp
         src/view/widgets/SearchBar.h
         src/view/views/DefaultView.cpp
         src/view/views/DefaultView.h
+        src/model/visitor/AddItem.cpp
+        src/model/visitor/AddItem.h
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)

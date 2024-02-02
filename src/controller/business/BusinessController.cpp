@@ -1,6 +1,7 @@
 #include "BusinessController.h"
 #include "../LocatorController.h"
 #include "../../model/visitor/DeleteItem.h"
+#include "../../model/visitor/AddItem.h"
 
 BusinessController::BusinessController()
 {
@@ -52,7 +53,7 @@ void BusinessController::subscribeToEvents()
 
     // Update Model
     connect(editor_view_, &EditorView::modelChanged, this, &BusinessController::updateSidebar);
-    connect(editor_view_, &EditorView::addNewItem, [this] { main_view_->getSearch()->searchItem(); });
+    connect(editor_view_, &EditorView::addNewItem, this, &BusinessController::addNewItem);
 }
 
 void BusinessController::setDataField(MainView* main_view, QStackedWidget* content_stack, QStackedWidget* sidebar_stack)
@@ -94,6 +95,7 @@ void BusinessController::storageReady()
 	main_view_->createDefaultView(
 			content_stack_->indexOf(default_view_),
 			sidebar_stack_->indexOf(group_list_view_));
+
 	showDefaultView();
 	BusinessController::updateSidebar();
 	LocatorController::WindowControllerInstance()->setDisabled(false);
@@ -144,7 +146,6 @@ void BusinessController::showCreateCategory()
     editor_view_->setItem(temp);
     editor_view_->setNewObject(true);
     main_view_->setContentView(content_stack_->indexOf(editor_view_));
-	LocatorController::StorageControllerInstance()->GetStorage()->addCategory(temp);
 }
 
 void BusinessController::showCreateSensor()
@@ -153,7 +154,6 @@ void BusinessController::showCreateSensor()
     editor_view_->setItem(temp);
     editor_view_->setNewObject(true);
     main_view_->setContentView(content_stack_->indexOf(editor_view_));
-	LocatorController::StorageControllerInstance()->GetStorage()->addSensor(temp);
 }
 
 void BusinessController::updateSidebar()
@@ -258,8 +258,6 @@ void BusinessController::cancelOperation()
     cancelConfirm.setDefaultButton(QMessageBox::Ok);
     int res = cancelConfirm.exec();
 
-    DeleteItem delete_item;
-
     switch (res) {
     case QMessageBox::Ok:
         showDefaultView();
@@ -289,4 +287,12 @@ void BusinessController::deleteInterface()
 	editor_view_ = nullptr;
     delete group_list_view_;
 	group_list_view_ = nullptr;
+}
+
+void BusinessController::addNewItem(AbstractItem* item)
+{
+    AddItem add_item;
+    item->accept(add_item);
+
+    main_view_->getSearch()->searchItem();
 }
