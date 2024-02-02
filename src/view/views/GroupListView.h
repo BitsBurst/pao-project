@@ -12,7 +12,7 @@ class GroupListView : public AbstractView {
     Q_OBJECT
 signals:
     void changeToModifyView(AbstractItem* item);
-    void deleteItem(AbstractItem* item);
+    void deleteItem(GroupItemWidget* item);
     void showSingleItem(AbstractItem* item);
 
 private:
@@ -28,6 +28,7 @@ private:
 public:
     explicit GroupListView(const QVector<AbstractItem*>& items,QWidget *parent = nullptr);
     void setItems(const QVector<AbstractItem*>& items);
+	void deleteItemElement(GroupItemWidget* item);
 
 };
 

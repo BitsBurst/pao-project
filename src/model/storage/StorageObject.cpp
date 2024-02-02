@@ -96,8 +96,16 @@ const Category* StorageObject::findCategory(Category category) const
  * @param obj
  * Copy constructor
  */
-StorageObject::StorageObject(const StorageObject& obj): categories_(obj.categories_), sensors_(obj.sensors_)
+StorageObject::StorageObject(const StorageObject& obj): categories_(), sensors_()
 {
+	for (auto& i : obj.categories_) {
+		Category* category = new Category(*i);
+		categories_.append(category);
+	}
+	for (auto& i : obj.sensors_) {
+		Sensor* sensor = new Sensor(*i);
+		sensors_.append(sensor);
+	}
 }
 /*
  * @brief modelChangedEvent
@@ -290,4 +298,11 @@ Category* StorageObject::getCategory(int index) const
  * Destructor
  */
 StorageObject::~StorageObject()
-= default;
+{
+	for (auto& i : categories_) {
+		delete i;
+	}
+	for (auto& i : sensors_) {
+		delete i;
+	}
+}

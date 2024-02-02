@@ -27,6 +27,7 @@ signals:
     void changeToCreateCategory();
     void changeToCreateSensor();
 	void openSimulation();
+	void saveWithName();
 private:
     QWidget * central_widget_;
     QLayout * layout_;

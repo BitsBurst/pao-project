@@ -13,7 +13,7 @@ class GroupItemWidget : public AbstractWidget {
 
 signals:
     void changeToModifyView(AbstractItem* item);
-    void deleteItem(AbstractItem* item);
+    void deleteItem(GroupItemWidget* item);
     void showSingleItem(AbstractItem* item);
 
 private:
@@ -39,6 +39,7 @@ public:
     void setDetail(const QString& detail);
 
     void handleEvents();
+	AbstractItem* getItem();
 };
 
 #endif //SMARTSENSORS_GROUPITEMWIDGET_H

@@ -53,11 +53,9 @@ void GroupListView::setItems(const QVector<AbstractItem*>& items)
 {
     scroll_area_layout->deleteLater();
     scroll_area_list->deleteLater();
-
 	for (auto item : item_lists_) {
 		delete item;
 	}
-
 	item_lists_.clear();
     scroll_area_list = new QWidget(scroll_area_);
     scroll_area_layout = new QVBoxLayout(scroll_area_list);
@@ -82,4 +80,11 @@ void GroupListView::setItems(const QVector<AbstractItem*>& items)
     scroll_area_->setWidget(scroll_area_list);
 
     handleEvents();
+}
+
+void GroupListView::deleteItemElement(GroupItemWidget* item)
+{
+	scroll_area_layout->removeWidget(item);
+	item_lists_.erase(std::remove(item_lists_.begin(), item_lists_.end(), item), item_lists_.end());
+	delete item;
 }

@@ -47,6 +47,7 @@ void BusinessController::subscribeToEvents()
     connect(main_view_, &MainView::changeToSettingsView, this, &BusinessController::showSettingsView);
     connect(group_list_view_, &GroupListView::showSingleItem, this, &BusinessController::showSingleView);
 	connect(main_view_, &MainView::openSimulation, this, &BusinessController::openSimulation);
+	connect(main_view_, &MainView::saveWithName, this, &BusinessController::saveSimulationByName);
 
     connect(editor_view_, &EditorView::cancelOperation, this, &BusinessController::cancelOperation);
 
@@ -61,7 +62,7 @@ void BusinessController::subscribeToEvents()
 
     // Delete
     connect(group_list_view_, &GroupListView::deleteItem, this, &BusinessController::deleteItem);
-	connect(single_view_, &SingleView::deleteItem, this, &BusinessController::deleteItem);
+	//connect(single_view_, &SingleView::deleteItem, this, &BusinessController::deleteItem);
 
     // Update Model
     connect(editor_view_, &EditorView::modelChanged, this, &BusinessController::updateSidebar);
@@ -91,6 +92,7 @@ void BusinessController::Destroy()
 }
 void BusinessController::storageReady()
 {
+	BusinessController::updateSidebar();
 	LocatorController::WindowControllerInstance()->setDisabled(false);
 }
 
@@ -156,7 +158,7 @@ void BusinessController::updateSidebar()
     group_list_view_->setItems(LocatorController::StorageControllerInstance()->GetStorage()->getSensors(0));
 }
 
-void BusinessController::deleteItem(AbstractItem* item)
+void BusinessController::deleteItem(GroupItemWidget* item)
 {
 	if (item == nullptr) return;
 
@@ -168,11 +170,12 @@ void BusinessController::deleteItem(AbstractItem* item)
 	int res = deleteConfirm.exec();
 
 	DeleteItem delete_item;
-
+	AbstractItem* item_ = item->getItem();
 	switch (res) {
 	case QMessageBox::Ok:
-		item->accept(delete_item);
-        updateSidebar();
+		group_list_view_->deleteItemElement(item);
+		item_->accept(delete_item);
+        //updateSidebar();
 		break;
 	case QMessageBox::Cancel:
 		// Cancel was clicked
@@ -218,6 +221,7 @@ void BusinessController::openSimulation()
 	);
 	if (!fileName.isEmpty()) {
 		LocatorController::StorageControllerInstance()->changeStorageFile(fileName);
+		LocatorController::WindowControllerInstance()->setTitle("SmartSensors - " + fileName);
 	} else {
 		Logger::Log(LogLevel::_WARNING_, __FILE__, __LINE__, __FUNCTION__, "No file selected");
 	}

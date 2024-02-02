@@ -102,6 +102,7 @@ void StorageController::changeStorageFile(QString filename)
 		storage_->onModelChangedEvent.unsubscribe(std::bind(&StorageController::modelChanged, this));
 		delete worker_;
 		worker_ = nullptr;
+		beforeDestroy.notify();
 		delete storage_;
 		storage_ = nullptr;
 		worker_ = new StorageWorker(&storage_, QString(filename));

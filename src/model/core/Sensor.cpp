@@ -18,6 +18,7 @@ Sensor::Sensor(QString name, Category category):AbstractItem(name), min_range_(0
  */
 Sensor::~Sensor()
 {
+	stopDataGeneration();
 }
 /*
  * @brief Sensor::getMinRange
@@ -142,6 +143,8 @@ void Sensor::startDataGeneration()
  */
 void Sensor::stopDataGeneration()
 {
+	if(data_generator_worker_ == nullptr)
+		return;
 	data_generator_worker_->terminate();
 	data_generator_worker_->wait();
 	delete data_generator_worker_;
@@ -166,4 +169,7 @@ void Sensor::accept(IConstVisitor& visitor) const
 void Sensor::accept(IVisitor& visitor)
 {
     visitor.visit(*this);
+}
+Sensor::Sensor(const Sensor& obj):AbstractItem(obj), min_range_(obj.min_range_), max_range_(obj.max_range_), category_(obj.category_), seed_(obj.seed_), data_(maxDataGenerated), data_generator_worker_(nullptr), generationTime(obj.generationTime)
+{
 }

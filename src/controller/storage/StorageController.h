@@ -24,6 +24,7 @@ public:
 	void isStorageReady();
     bool isStorageReadyCheck();
 	void changeStorageFile(QString);
+	EventHandlerVoid beforeDestroy;
 private:
 	static const QString directory_name_;
 	StorageObject* storage_;

@@ -12,6 +12,7 @@ class Category: public AbstractItem {
 public:
 	Category();
 	Category(QString, QString, DistributionType = DistributionType::UNIFORM);
+	Category(const Category &);
 	~Category();
 	QString getUnitMeasure() const;
 	void setUnitMeasure(QString unit_measure);

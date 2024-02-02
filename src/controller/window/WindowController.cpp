@@ -45,3 +45,7 @@ void WindowController::Destroy()
 {
 
 }
+void WindowController::setTitle(QString title)
+{
+	main_window_->setWindowTitle(title);
+}

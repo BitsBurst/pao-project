@@ -14,6 +14,7 @@ class Sensor: public AbstractItem{
 public:
 	Sensor(QString, Category);
 	Sensor();
+	Sensor(const Sensor &);
 	~Sensor();
 	double getMinRange() const;
 	void setMinRange(double min_range);
