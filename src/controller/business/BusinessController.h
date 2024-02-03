@@ -53,7 +53,6 @@ public slots:
     void showCreateView();
     void showCreateCategory();
     void showCreateSensor();
-    void showSettingsView();
 	void openSimulation();
 	void saveSimulationByName();
 
