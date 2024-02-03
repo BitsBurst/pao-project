@@ -6,14 +6,11 @@ SearchBar::SearchBar(QWidget * parent)
     : AbstractWidget(new QFormLayout, parent), type_(ALL), searchbar_(nullptr), search_btn_(nullptr), btn_group_(nullptr)
 {
     searchbar_ = new QLineEdit("", this);
-    search_btn_ = new QPushButton(Icons::getIcon(Icons::IconType::SEARCH), "");
-    sensor_filter = new QPushButton(Icons::getIcon(Icons::IconType::SENSOR), "");
-    category_filter = new QPushButton(Icons::getIcon(Icons::IconType::CATEGORY), "");
+    search_btn_ = new QPushButton(Icons::getIcon(Icons::IconType::SEARCH), "", this);
+    sensor_filter = new QPushButton(Icons::getIcon(Icons::IconType::SENSOR), "", this);
+    category_filter = new QPushButton(Icons::getIcon(Icons::IconType::CATEGORY), "", this);
 	sensor_filter->setCheckable(true);
 	category_filter->setCheckable(true);
-	//sensor_filter->setStyleSheet("QPushButton:checked {fill: blue; background-color: yellow}");
-	//category_filter->setStyleSheet("QPushButton:checked {fill: blue; background-color: yellow}");
-
     QLayout* row = CustomElements::getCustomLayoutPrototype(H_SINGLE_SPACING);
     row->addWidget(searchbar_);
     row->addWidget(search_btn_);

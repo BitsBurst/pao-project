@@ -1,4 +1,6 @@
 #include <QFontDatabase>
+#include <QFile>
+#include <QApplication>
 #include "CustomElements.h"
 
 // Initialization
@@ -119,7 +121,9 @@ void CustomElements::Init()
     QFontDatabase::addApplicationFont(":/roboto-medium.ttf");
     QFontDatabase::addApplicationFont(":/roboto-regular.ttf");
     QFontDatabase::addApplicationFont(":/roboto-thin.ttf");
-
+	QFile styleFile( ":/styles/styles.qss" );
+	styleFile.open(QFile::ReadOnly);
+	qApp->setStyleSheet(styleFile.readAll());
 }
 
 QVBoxLayout* CustomElements::getVerticalLayout(int margin)
