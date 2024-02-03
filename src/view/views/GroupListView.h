@@ -12,7 +12,7 @@ class GroupListView : public AbstractView {
     Q_OBJECT
 signals:
     void changeToModifyView(AbstractItem* item);
-    void deleteItem(GroupItemWidget* item);
+    void deleteItem(AbstractItem* item);
     void showSingleItem(AbstractItem* item);
 
 private:

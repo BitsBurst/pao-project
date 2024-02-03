@@ -29,6 +29,10 @@ private:
     SingleCategoryWidget* category_widget_;
 
     void handleEvents();
+	void unsubscribeEvents();
+
+	void onChangeToModifyView();
+	void onDeleteItem();
 
 public:
     explicit SingleView(AbstractItem* item, bool check_add_btn = false, QWidget *parent = nullptr);

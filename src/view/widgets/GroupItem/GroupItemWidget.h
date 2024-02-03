@@ -13,7 +13,7 @@ class GroupItemWidget : public AbstractWidget {
 
 signals:
     void changeToModifyView(AbstractItem* item);
-    void deleteItem(GroupItemWidget* item);
+    void deleteItem(AbstractItem* item);
     void showSingleItem(AbstractItem* item);
 
 private:

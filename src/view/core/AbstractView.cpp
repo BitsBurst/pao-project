@@ -12,3 +12,7 @@ AbstractItem* AbstractView::getItem() const
 {
     return nullptr;
 }
+AbstractView::~AbstractView()
+{
+
+}

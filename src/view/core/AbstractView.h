@@ -10,6 +10,7 @@ class AbstractView : public AbstractGraphicalElement {
     Q_OBJECT
 protected:
 public:
+	virtual ~AbstractView();
     explicit AbstractView(QLayout * layout, QWidget *parent = nullptr);
 
     virtual AbstractItem* getItem() const;

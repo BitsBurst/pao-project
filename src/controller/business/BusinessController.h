@@ -38,9 +38,10 @@ private:
     QStackedWidget * content_stack_;
     QStackedWidget * sidebar_stack_;
 
+	void unsubscribeToEvents();
 	void subscribeToEvents();
-	void subscribeToViewEvents();
-	void unsubscribeToViewEvents();
+	void subscribeToViewEvents(AbstractView*);
+	void unsubscribeToViewEvents(AbstractView*);
 	void storageReady();
 
     void deleteInterface();
@@ -60,11 +61,11 @@ public slots:
 
     void updateSidebar();
     void showFilteredList(QString query, SearchType type);
-    void deleteFromGraphicalElement(GroupItemWidget* item);
-    void deleteFromStorageElement(AbstractItem* item);
+    void deleteFromGraphicalElement(AbstractItem* item);
     void addNewItem(AbstractItem* item);
 
     void cancelOperation();
+	void deleteElement(AbstractItem* item);
 };
 
 #endif //SMARTSENSORS_BUSINESSCONTROLLER_H
