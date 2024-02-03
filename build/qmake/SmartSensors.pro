@@ -8,11 +8,10 @@
 # THIS FILE IS NOT AUTOMATICALLY GENERATED, AND SHOULD BE MANUALLY UPDATED
 
 QT       += core gui
-
 greaterThan(QT_MAJOR_VERSION, 4):
-QT += widgets charts printsupport opengl
+QT += widgets charts printsupport opengl openglwidgets
 CONFIG += c++17
-CONFIG += QCUSTOMPLOT_USE_OPENGL
+DEFINES += QCUSTOMPLOT_USE_OPENGL
 
 SOURCES += ../../main.cpp \ 
 ../../src/view/MainView.cpp \ 
@@ -21,7 +20,7 @@ SOURCES += ../../main.cpp \
 ../../src/view/containers/SidebarContainer.cpp \ 
 ../../src/view/containers/MainContentContainer.cpp \ 
 ../../src/view/views/GroupListView.cpp \ 
-../../src/view/views/AbstractSingleView.cpp \ 
+../../src/view/views/SingleView/SingleView.cpp \ 
 ../../src/view/views/Editor/EditorView.cpp \ 
 ../../src/model/datagen/DataGenObj.cpp \ 
 ../../src/model/core/AbstractItem.cpp \ 
@@ -36,7 +35,7 @@ SOURCES += ../../main.cpp \
 ../../src/utility/logger/Logger.cpp \ 
 ../../src/view/views/CreateView.cpp \ 
 ../../src/view/views/SettingsView.cpp \ 
-../../src/view/widgets/GroupItemWidget.cpp \ 
+../../src/view/widgets/GroupItem/GroupItemWidget.cpp \ 
 ../../src/view/core/AbstractWidget.cpp \ 
 ../../src/view/widgets/SidebarLowControlWidget.cpp \ 
 ../../src/view/core/AbstractGraphicalElement.cpp \ 
@@ -50,14 +49,24 @@ SOURCES += ../../main.cpp \
 ../../src/utility/storage/StorageUtility.cpp \ 
 ../../src/utility/datagenerator/RandomDataGenerator.cpp \ 
 ../../src/view/utility/CustomElements.cpp \ 
-../../src/view/views/SingleViewSensor.cpp \ 
+../../src/view/widgets/SingleWidget/SingleSensorWidget.cpp \ 
 ../../src/view/widgets/RealtimeChart.cpp \ 
 ../../src/view/widgets/ChartHandler.cpp \ 
-../../src/view/views/SingleViewGroup.cpp \ 
+../../src/view/widgets/SingleWidget/SingleViewGroup.cpp \ 
 ../../src/view/widgets/InformationWidget.cpp \ 
 ../../src/view/widgets/Editor/AbstractFormWidget.cpp \ 
 ../../src/view/widgets/Editor/SensorFormWidget.cpp \ 
 ../../src/view/widgets/Editor/CategoryFormWidget.cpp \ 
+../../src/view/widgets/Editor/ItemEditor.cpp \ 
+../../src/view/widgets/GroupItem/GroupItemRender.cpp \ 
+../../src/view/widgets/SingleWidget/SingleCategoryWidget.cpp \ 
+../../src/view/widgets/SingleWidget/SingleWidgetRender.cpp \ 
+../../src/model/visitor/DeleteItem.cpp \ 
+../../src/view/widgets/SearchBar.cpp \ 
+../../src/view/views/DefaultView.cpp \ 
+../../src/model/visitor/AddItem.cpp \ 
+../../src/utility/icons/Icons.cpp \ 
+../../src/utility/distributionType/DistributionUtility.cpp \ 
 ../../include/CustomPlot/qcustomplot.cpp \ 
 
 
@@ -67,14 +76,13 @@ HEADERS += ../../src/view/MainView.h \
 ../../src/view/containers/SidebarContainer.h \ 
 ../../src/view/containers/MainContentContainer.h \ 
 ../../src/view/views/GroupListView.h \ 
-../../src/view/views/AbstractSingleView.h \ 
+../../src/view/views/SingleView/SingleView.h \ 
 ../../src/view/views/Editor/EditorView.h \ 
 ../../src/model/datagen/DataGenObj.h \ 
 ../../src/model/core/AbstractItem.h \ 
 ../../src/model/core/Category.h \ 
 ../../src/model/core/Sensor.h \ 
 ../../src/model/datagen/DataGeneratorWorker.h \ 
-../../src/tests/testDavide.h \ 
 ../../src/controller/storage/StorageController.h \ 
 ../../src/controller/core/AbstractController.h \ 
 ../../src/controller/LocatorController.h \ 
@@ -83,7 +91,7 @@ HEADERS += ../../src/view/MainView.h \
 ../../src/utility/logger/Logger.h \ 
 ../../src/view/views/CreateView.h \ 
 ../../src/view/views/SettingsView.h \ 
-../../src/view/widgets/GroupItemWidget.h \ 
+../../src/view/widgets/GroupItem/GroupItemWidget.h \ 
 ../../src/view/core/AbstractWidget.h \ 
 ../../src/view/widgets/SidebarLowControlWidget.h \ 
 ../../src/view/core/AbstractGraphicalElement.h \ 
@@ -99,14 +107,26 @@ HEADERS += ../../src/view/MainView.h \
 ../../src/utility/event/EventHandler.h \ 
 ../../src/utility/limitedqmap/LimitedQMap.h \ 
 ../../src/view/utility/CustomElements.h \ 
-../../src/view/views/SingleViewSensor.h \ 
+../../src/view/widgets/SingleWidget/SingleSensorWidget.h \ 
 ../../src/view/widgets/RealtimeChart.h \ 
 ../../src/view/widgets/ChartHandler.h \ 
-../../src/view/views/SingleViewGroup.h \ 
+../../src/view/widgets/SingleWidget/SingleViewGroup.h \ 
 ../../src/view/widgets/InformationWidget.h \ 
 ../../src/view/widgets/Editor/AbstractFormWidget.h \ 
 ../../src/view/widgets/Editor/SensorFormWidget.h \ 
 ../../src/view/widgets/Editor/CategoryFormWidget.h \ 
+../../src/view/widgets/Editor/ItemEditor.h \ 
+../../src/model/visitor/IConstVisitor.h \ 
+../../src/view/widgets/GroupItem/GroupItemRender.h \ 
+../../src/view/widgets/SingleWidget/SingleCategoryWidget.h \ 
+../../src/view/widgets/SingleWidget/SingleWidgetRender.h \ 
+../../src/model/visitor/DeleteItem.h \ 
+../../src/model/visitor/IVisitor.h \ 
+../../src/view/widgets/SearchBar.h \ 
+../../src/view/views/DefaultView.h \ 
+../../src/model/visitor/AddItem.h \ 
+../../src/utility/icons/Icons.h \ 
+../../src/utility/distributionType/DistributionUtility.h \ 
 ../../include/CustomPlot/qcustomplot.h \ 
 
 

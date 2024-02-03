@@ -22,7 +22,7 @@ bool StorageUtility::StoreJSON(QJsonObject obj, QString filename)
 		return true;
 	}
 	else {
-		Logger::Log(LogLevel::_ERROR_,__FILE__,__LINE__,__FUNCTION__,QString("Couldn't open save file."));
+		Logger::Log(LogLevel::_ERROR_,__FILE__,__LINE__,__FUNCTION__,QString("Couldn't open save file, %1").arg(filename));
 		return false;
 	}
 }
@@ -35,7 +35,7 @@ QJsonObject StorageUtility::LoadJSON(QString filename)
 {
 	QFile file(filename);
 	if (!file.open(QIODevice::ReadOnly)) {
-		Logger::Log(LogLevel::_ERROR_,__FILE__,__LINE__,__FUNCTION__,QString("Couldn't open saved file."));
+		Logger::Log(LogLevel::_ERROR_,__FILE__,__LINE__,__FUNCTION__,QString("Couldn't open save file, %1").arg(filename));
 		throw std::runtime_error("Couldn't open saved file.");
 	}
 	QJsonDocument doc = QJsonDocument::fromJson(file.readAll());

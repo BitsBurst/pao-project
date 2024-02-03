@@ -45,7 +45,6 @@ set(PROJECT_SOURCES
         src/model/core/Sensor.h
         src/model/datagen/DataGeneratorWorker.cpp
         src/model/datagen/DataGeneratorWorker.h
-        src/tests/testDavide.h
         src/controller/storage/StorageController.cpp
         src/controller/storage/StorageController.h
         src/controller/core/AbstractController.cpp
