@@ -10,6 +10,7 @@ MainView::MainView(QStackedWidget * content, QStackedWidget * sidebar, QWidget* 
     // Initialization
     content_ = new MainContentContainer(content, this);
     sidebar_ = new SidebarContainer(sidebar, this);
+    searchbar_ = static_cast<SidebarContainer*>(sidebar_)->getSearch();
 
     // Creation Calls
     createMenu();
@@ -96,6 +97,5 @@ void MainView::emitChangeToModifyView(AbstractItem& item)
 
 SearchBar* MainView::getSearch() const
 {
-    if (dynamic_cast<SidebarContainer*>(sidebar_) != nullptr)
-        return static_cast<SidebarContainer*>(sidebar_)->getSearch();
+    return searchbar_;
 }

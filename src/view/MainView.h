@@ -36,6 +36,7 @@ private:
     AbstractContainer * content_;
 
     QMenuBar * menu_bar_;
+    SearchBar * searchbar_;
 
     void createMenu();
 
