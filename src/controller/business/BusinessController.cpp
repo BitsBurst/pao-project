@@ -1,6 +1,7 @@
 #include "BusinessController.h"
 #include "../LocatorController.h"
 #include "../../model/visitor/DeleteItem.h"
+#include "../../model/visitor/AddItem.h"
 
 BusinessController::BusinessController()
 {
