@@ -15,6 +15,8 @@ GroupListView::GroupListView(const QVector<AbstractItem*>& items, QWidget* paren
     scroll_area_list = new QWidget(scroll_area_);
     scroll_area_layout = new QVBoxLayout(scroll_area_list);
     scroll_area_layout->setSpacing(16);
+    scroll_area_layout->setContentsMargins(8,8,8,8);
+    scroll_area_list->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
 
     if (items.empty()) {
         scroll_area_layout->addWidget(new QLabel("Nessun Elemento"));
@@ -29,10 +31,13 @@ GroupListView::GroupListView(const QVector<AbstractItem*>& items, QWidget* paren
         }
     }
 
+    scroll_area_layout->addStretch();
+
     scroll_area_list->setLayout(scroll_area_layout);
 
     // Scroll Area
     scroll_area_->setWidget(scroll_area_list);
+    scroll_area_->setWidgetResizable(true);
 
     layout_->addWidget(scroll_area_);
 
@@ -77,7 +82,7 @@ void GroupListView::setItems(const QVector<AbstractItem*>& items)
             scroll_area_layout->addWidget(item);
         }
     }
-
+    scroll_area_layout->addStretch();
     scroll_area_list->setLayout(scroll_area_layout);
 
     // Scroll Area
@@ -93,8 +98,6 @@ void GroupListView::deleteListItem(GroupItemWidget* item)
 	scroll_area_layout->removeWidget(item);
 	item_lists_.erase(std::remove(item_lists_.begin(), item_lists_.end(), item), item_lists_.end());
 	delete item;
-
-    scroll_area_layout->addStretch();
 }
 
 GroupItemWidget * GroupListView::getGroupItem(AbstractItem * item)
