@@ -1,14 +1,16 @@
-#include <QList>
+#include <QMap>
 #include "DistributionUtility.h"
 
-QVector<QString> DistributionUtility::type_ = QVector<QString>({"Sinusoidale", "Gaussiana", "Uniforme"});
+QMap<DistributionType,QString> DistributionUtility::type_ = QMap<DistributionType,QString>({
+	{ DistributionType::WAVE_1, "WAVE_1"},
+	{ DistributionType::WAVE_2, "WAVE_2"},
+	{ DistributionType::WAVE_3, "WAVE_3"},
+	{ DistributionType::WAVE_4, "WAVE_4"},
+	{ DistributionType::WAVE_5, "WAVE_5"},
+	{ DistributionType::SINUSOIDAL, "SINUSOIDAL"},
+	{ DistributionType::UNIFORM, "UNIFORM"}
+});
 
 QString DistributionUtility::ToString(DistributionType v) {
-    switch (v)
-    {
-    case SINUSOIDAL:   return "Sinusoidale";
-    case GAUSSIAN:   return "Gaussiana";
-    case UNIFORM: return "Uniforme";
-    default:      return "[Unknown]";
-    }
+	return type_[v];
 }

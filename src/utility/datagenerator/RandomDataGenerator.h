@@ -22,11 +22,12 @@ private:
 	double stddev;
 	double min;
 	double max;
+	double minRange;
+	double maxRange;
 	int index;
 	DistributionType distributionType;
 
 	std::mt19937 generator;
-	std::normal_distribution<double> gaussianDistribution;
 	std::uniform_real_distribution<double> uniformDistribution;
 
 public:
@@ -34,11 +35,7 @@ public:
 
 	void setDistributionType(DistributionType type);
 
-	void setSinusoidalParams(double amplitude, double frequency);
-
-	void setGaussianParams(double mean, double stddev);
-
-	void setUniformParams(double min, double max);
+	void setMinMaxValue(double min, double max);
 
 	void setSize(int size);
 

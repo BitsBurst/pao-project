@@ -13,46 +13,25 @@
 CombinedDataGenerator::CombinedDataGenerator()
 		: size(300), amplitude(10), frequency(10), mean(0.1), stddev(1.0),
 		  min(0.0), max(10.0), index(0), distributionType(DistributionType::UNIFORM),
-		  generator(std::random_device{}()), gaussianDistribution(mean, stddev),
+		  generator(std::random_device{}()),
 		  uniformDistribution(min, max) {
 	srand(time(nullptr));
 }
 /**
+ * @brief RandomDataGenerator::setMinMaxValue
+ * @param min minimum value of the data
+ * @param max maximum value of the data
+ */
+void CombinedDataGenerator::setMinMaxValue(double min, double max) {
+	this->minRange = min;
+	this->maxRange = max;
+}
+/**
  * @brief RandomDataGenerator::setDistributionType
- * @param type type of the distribution
+ * @param type distribution type
  */
 void CombinedDataGenerator::setDistributionType(DistributionType type) {
 	distributionType = type;
-}
-/**
- * @brief RandomDataGenerator::setSinusoidalParams
- * @param amplitude amplitude of the sinusoidal function
- * @param frequency frequency of the sinusoidal function
- */
-void CombinedDataGenerator::setSinusoidalParams(double amplitude, double frequency) {
-	distributionType = DistributionType::SINUSOIDAL;
-	this->amplitude = amplitude;
-	this->frequency = frequency;
-}
-/**
- * @brief RandomDataGenerator::setGaussianParams
- * @param mean mean of the gaussian distribution
- * @param stddev standard deviation of the gaussian distribution
- */
-void CombinedDataGenerator::setGaussianParams(double mean, double stddev) {
-	distributionType = DistributionType::GAUSSIAN;
-	this->mean = mean;
-	this->stddev = stddev;
-}
-/**
- * @brief RandomDataGenerator::setUniformParams
- * @param min minimum value of the uniform distribution
- * @param max maximum value of the uniform distribution
- */
-void CombinedDataGenerator::setUniformParams(double min, double max) {
-	distributionType = DistributionType::UNIFORM;
-	this->min = min;
-	this->max = max;
 }
 /**
  * @brief RandomDataGenerator::setSize
@@ -75,12 +54,31 @@ double CombinedDataGenerator::generateData() {
 	switch (distributionType) {
 	case DistributionType::SINUSOIDAL:
 		dataPoint = amplitude * sin(2 * M_PI * frequency * index / size) + (rand() % 100) / 100.0;
+		dataPoint = (dataPoint + 10) / 20 * (maxRange- minRange) + minRange;
 		break;
-	case DistributionType::GAUSSIAN:
-		dataPoint = gaussianDistribution(generator);
+	case DistributionType::WAVE_1:
+		dataPoint = amplitude * sin(2 * M_PI * frequency * index / size) * cos(M_PI * frequency * index / size) + (rand() % 100) / 100.0;
+		dataPoint = (dataPoint + 10) / 20 * (maxRange- minRange) + minRange;
+		break;
+	case DistributionType::WAVE_2:
+		dataPoint = amplitude * sin(4 * M_PI * frequency * index / size) * cos(M_PI * frequency * index / size) + (rand() % 100) / 100.0;
+		dataPoint = (dataPoint + 10) / 20 * (maxRange- minRange) + minRange;
+		break;
+	case DistributionType::WAVE_3:
+		dataPoint = amplitude * sin(2 * M_PI * frequency * index / size) * cos(10 * M_PI * frequency * index / size) + (rand() % 100) / 100.0;
+		dataPoint = (dataPoint + 10) / 20 * (maxRange- minRange) + minRange;
+		break;
+	case DistributionType::WAVE_4:
+		dataPoint = amplitude * sin(2 * M_PI * frequency * index / size) * cos(20 * M_PI * frequency * index / size) + (rand() % 100) / 100.0;
+		dataPoint = (dataPoint + 10) / 20 * (maxRange- minRange) + minRange;
+		break;
+	case DistributionType::WAVE_5:
+		dataPoint = amplitude * sin(5 * M_PI * frequency * index / size) * cos(20 * M_PI * frequency * index / size) + (rand() % 100) / 100.0;
+		dataPoint = (dataPoint + 10) / 20 * (maxRange- minRange) + minRange;
 		break;
 	case DistributionType::UNIFORM:
 		dataPoint = uniformDistribution(generator);
+		dataPoint = (dataPoint) / 10 * (maxRange- minRange) + minRange;
 		break;
 	default:
 		dataPoint = 0.0;

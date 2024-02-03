@@ -22,6 +22,7 @@ void DataGeneratorWorker::run()
 {
 	CombinedDataGenerator data_generator;
 	data_generator.setDistributionType(distributionType);
+	data_generator.setMinMaxValue(minrange, maxrange);
 	while (true)
 	{
 		counter++;
