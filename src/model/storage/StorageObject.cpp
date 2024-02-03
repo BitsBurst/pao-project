@@ -116,36 +116,12 @@ void StorageObject::modelChangedEvent()
 	onModelChangedEvent.notifyAsync();
 }
 /*
- * @brief filterSensorsByCategory
- * @param category
- * @return
- * Returns a list of sensors filtered by category
- */
-const QList<Sensor*> StorageObject::filterSensorsByCategory(Category category) const
-{
-	QList<Sensor*> list;
-	for (auto& i : sensors_) {
-		if (i->getCategory().getId() == category.getId())
-			list.append(i);
-	}
-	return list;
-}
-/*
  * @brief filterSensorsByName
  * @param name
  * @return
  * Returns a list of sensors filtered by name
  */
-const QList<Sensor*> StorageObject::filterSensorsByName(QString name) const
-{
-	QList<Sensor*> list;
-	for (auto& i : sensors_) {
-		if (i->getName().contains(name))
-			list.append(i);
-	}
-	return list;
-}
-QVector<AbstractItem*> StorageObject::filterSensorsByName(const QString& name, int) const
+QVector<AbstractItem*> StorageObject::filterSensorsByName(const QString& name) const
 {
     Logger::Log(LogLevel::_INFO_, __FILE__, __LINE__, __FUNCTION__, name);
     QVector<AbstractItem*> list;
@@ -163,16 +139,7 @@ QVector<AbstractItem*> StorageObject::filterSensorsByName(const QString& name, i
  * @return
  * Returns a list of categories filtered by name
  */
-const QList<Category*> StorageObject::filterCategoriesByName(QString name) const
-{
-	QList<Category*> list;
-	for (auto& i : categories_) {
-		if (i->getName().contains(name))
-			list.append(i);
-	}
-	return list;
-}
-QVector<AbstractItem*> StorageObject::filterCategoriesByName(QString name, int)
+QVector<AbstractItem*> StorageObject::filterCategoriesByName(QString name)
 {
     QVector<Category*> list;
     for (auto& i : categories_) {

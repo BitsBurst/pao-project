@@ -1,7 +1,7 @@
 #include <QJsonArray>
 #include "Sensor.h"
 double Sensor::maxDataGenerated = 10000; // max data generated stored in the sensor
-double Sensor::generationTimeStatic = 50; // generation time in ms
+double Sensor::generationTimeStatic = 100; // generation time in ms
 /*
  * @brief Sensor::Sensor
  * @details Sensor constructor
