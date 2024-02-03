@@ -81,7 +81,7 @@ void Sensor::setCategory(Category category)
  * @brief Sensor::Sensor
  * @details Sensor constructor
  */
-Sensor::Sensor(): AbstractItem(""), min_range_(0), max_range_(0), category_(Category()), seed_(QDateTime::currentDateTime().toSecsSinceEpoch()), data_(maxDataGenerated), data_generator_worker_(nullptr), generationTime(generationTimeStatic)
+Sensor::Sensor(): AbstractItem(""), min_range_(-5), max_range_(5), category_(Category()), seed_(QDateTime::currentDateTime().toSecsSinceEpoch()), data_(maxDataGenerated), data_generator_worker_(nullptr), generationTime(generationTimeStatic)
 {
 
 }
@@ -145,6 +145,7 @@ void Sensor::stopDataGeneration()
 {
 	if(data_generator_worker_ == nullptr)
 		return;
+	data_generator_worker_->newDataEvent.unsubscribe(std::bind(&Sensor::dataGenerated, this, std::placeholders::_1));
 	data_generator_worker_->terminate();
 	data_generator_worker_->wait();
 	delete data_generator_worker_;

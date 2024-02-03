@@ -48,9 +48,8 @@ GroupListView::GroupListView(const QVector<AbstractItem*>& items, QWidget* paren
 void GroupListView::handleEvents()
 {
     for (auto element : item_lists_) {
-        connect(element, &GroupItemWidget::changeToModifyView, this, &GroupListView::changeToModifyView);
-        connect(element, &GroupItemWidget::deleteItem, this, &GroupListView::deleteItem);
-        connect(element, &GroupItemWidget::showSingleItem, this, &GroupListView::handleShowSingleItem);
+		unsubscribeToGroupItemsEvents(element);
+		subscribeToGroupItemsEvents(element);
     }
 }
 
@@ -118,7 +117,11 @@ QVector<AbstractItem*>& GroupListView::getItems()
 
 GroupListView::~GroupListView()
 {
-    for (auto item : item_lists_) {
+	resetCurrentItem();
+	for (auto element : item_lists_) {
+		unsubscribeToGroupItemsEvents(element);
+	}
+	for (auto item : item_lists_) {
         delete item;
     }
 }
@@ -137,4 +140,16 @@ void GroupListView::handleShowSingleItem(GroupItemWidget* graphical_item, Abstra
 void GroupListView::resetCurrentItem()
 {
     current_selected_ = nullptr;
+}
+void GroupListView::subscribeToGroupItemsEvents(GroupItemWidget * element)
+{
+	connect(element, &GroupItemWidget::changeToModifyView, this, &GroupListView::changeToModifyView);
+	connect(element, &GroupItemWidget::deleteItem, this, &GroupListView::deleteItem);
+	connect(element, &GroupItemWidget::showSingleItem, this, &GroupListView::handleShowSingleItem);
+}
+void GroupListView::unsubscribeToGroupItemsEvents(GroupItemWidget * element)
+{
+	disconnect(element, &GroupItemWidget::changeToModifyView, this, &GroupListView::changeToModifyView);
+	disconnect(element, &GroupItemWidget::deleteItem, this, &GroupListView::deleteItem);
+	disconnect(element, &GroupItemWidget::showSingleItem, this, &GroupListView::handleShowSingleItem);
 }

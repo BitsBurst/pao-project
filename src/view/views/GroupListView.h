@@ -27,6 +27,8 @@ private:
     QVector<AbstractItem*> items_;
 
     void handleEvents();
+	void subscribeToGroupItemsEvents(GroupItemWidget *);
+	void unsubscribeToGroupItemsEvents(GroupItemWidget *);
     void handleShowSingleItem(GroupItemWidget* graphical_item, AbstractItem* item);
 
 public:

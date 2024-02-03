@@ -51,6 +51,7 @@ void SensorFormWidget::reset()
 
 void SensorFormWidget::updateItem(AbstractItem* item)
 {
+	static_cast<Sensor*>(item)->stopDataGeneration();
 	AbstractFormWidget::updateItem(item);
 
 	static_cast<Sensor*>(item)->setMinRange(min_range_edit_->value());
@@ -63,6 +64,7 @@ void SensorFormWidget::updateItem(AbstractItem* item)
     }
 
 	static_cast<Sensor*>(item)->setCategory(*cat);
+	static_cast<Sensor*>(item)->startDataGeneration();
 }
 
 void SensorFormWidget::updateCategories()
