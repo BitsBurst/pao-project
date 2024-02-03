@@ -4,17 +4,14 @@
 #include "../../model/visitor/AddItem.h"
 
 BusinessController::BusinessController():
-	main_view_(nullptr),
-	content_stack_(nullptr),
-	sidebar_stack_(nullptr),
 	single_view_(nullptr),
 	editor_view_(nullptr),
 	group_list_view_(nullptr),
-	create_view_(new CreateView()),
-	settings_view_(new SettingsView()),
-	default_view_(new DefaultView())
-{
-}
+	default_view_(new DefaultView()),
+	main_view_(nullptr),
+	content_stack_(nullptr),
+	sidebar_stack_(nullptr)
+{}
 
 bool BusinessController::Init()
 {
@@ -67,7 +64,6 @@ void BusinessController::subscribeToEvents()
     LocatorController::StorageControllerInstance()->beforeDestroy.subscribe(std::bind(&BusinessController::deleteInterface, this));
     // Signals
 	connect(LocatorController::StorageControllerInstance(), &StorageController::StorageReady, this, &BusinessController::storageReady);
-    connect(main_view_, &MainView::changeToCreateView, this, &BusinessController::showCreateView);
     //connect(main_view_, &MainView::changeToModifyView, this, &BusinessController::showModifyView);
 	connect(main_view_, &MainView::openSimulation, this, &BusinessController::openSimulation);
 	connect(main_view_, &MainView::saveWithName, this, &BusinessController::saveSimulationByName);
@@ -80,7 +76,6 @@ void BusinessController::unsubscribeToEvents()
 	LocatorController::StorageControllerInstance()->beforeDestroy.unsubscribe(std::bind(&BusinessController::deleteInterface, this));
 	// Signals
 	disconnect(LocatorController::StorageControllerInstance(), &StorageController::StorageReady, this, &BusinessController::storageReady);
-	disconnect(main_view_, &MainView::changeToCreateView, this, &BusinessController::showCreateView);
 	//disconnect(main_view_, &MainView::changeToModifyView, this, &BusinessController::showModifyView);
 	disconnect(main_view_, &MainView::openSimulation, this, &BusinessController::openSimulation);
 	disconnect(main_view_, &MainView::saveWithName, this, &BusinessController::saveSimulationByName);
@@ -93,8 +88,6 @@ void BusinessController::setDataField(MainView* main_view, QStackedWidget* conte
     main_view_ = main_view;
     content_stack_ = content_stack;
     sidebar_stack_ = sidebar_stack;
-    content_stack_->addWidget(create_view_);
-    content_stack_->addWidget(settings_view_);
     content_stack_->addWidget(default_view_);
 }
 
@@ -102,6 +95,7 @@ void BusinessController::Destroy()
 {
 
 }
+
 void BusinessController::storageReady()
 {
 	subscribeToEvents();
@@ -142,11 +136,6 @@ void BusinessController::showModifyView(AbstractItem* item)
     main_view_->setContentView(content_stack_->indexOf(editor_view_));
 }
 
-void BusinessController::showCreateView()
-{
-    main_view_->setContentView(content_stack_->indexOf(create_view_));
-}
-
 void BusinessController::showCreateCategory()
 {
 	Category* temp = new Category();
@@ -167,6 +156,7 @@ void BusinessController::updateSidebar()
 {
     group_list_view_->setItems(LocatorController::StorageControllerInstance()->GetStorage()->getSensors(0));
 }
+
 void BusinessController::deleteElement(AbstractItem* item)
 {
 	DeleteItem delete_item;
@@ -196,6 +186,7 @@ void BusinessController::deleteElement(AbstractItem* item)
 	group_list_view_->deleteListItem(group_list_view_->getGroupItem(item));
 	item->accept(delete_item);
 }
+
 void BusinessController::deleteFromGraphicalElement(AbstractItem* item)
 {
 	if (item == nullptr) return;

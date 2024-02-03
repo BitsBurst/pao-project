@@ -25,12 +25,9 @@ public:
 private:
     // Available Views
     SingleView * single_view_;
-    DefaultView * default_view_;
-    SingleViewGroup * single_view_group_;
-    GroupListView * group_list_view_;
     EditorView * editor_view_;
-    CreateView * create_view_;
-    SettingsView * settings_view_;
+    GroupListView * group_list_view_;
+    DefaultView * default_view_;
 
     MainView * main_view_;
 
@@ -50,7 +47,6 @@ public slots:
     void showDefaultView();
     void showSingleView(AbstractItem* item);
     void showModifyView(AbstractItem* item);
-    void showCreateView();
     void showCreateCategory();
     void showCreateSensor();
 	void openSimulation();
