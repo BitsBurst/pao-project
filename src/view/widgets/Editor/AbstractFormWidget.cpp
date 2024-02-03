@@ -15,7 +15,7 @@ AbstractFormWidget::AbstractFormWidget(QWidget* parent)
 void AbstractFormWidget::setValues(const AbstractItem& item)
 {
     name_edit_->setText(item.getName());
-    description_edit_->setText("Description");
+    description_edit_->setText(item.getDescription());
 }
 
 void AbstractFormWidget::reset()

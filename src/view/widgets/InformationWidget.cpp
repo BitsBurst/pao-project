@@ -6,8 +6,9 @@ InformationWidget::InformationWidget(AbstractItem* item, bool check_add_btn, QWi
 {
     // Initialization
     title_ = new QLabel(item->getName());
-    title_->setFont(CustomElements::getFontH2());
     description_ = new QLabel(item->getDescription());
+
+    title_->setFont(CustomElements::getFontH2());
     description_->setFont(CustomElements::getFontParagraph());
 
     group_buttons_ = new QWidget(this);
