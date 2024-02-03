@@ -6,9 +6,12 @@ MainView::MainView(QStackedWidget * content, QStackedWidget * sidebar, QWidget* 
 {
     // General Settings
     setMinimumSize(QSize(640, 360));
+	QSize size = qApp->screens()[0]->size();
+	resize(QSize(size.width()*0.5, size.height()*0.5));
+	setScreen(qApp->screens()[0]);
 
-
-    // Initialization
+	setWindowIcon(QIcon(":/icons/logo.jpg"));
+	// Initialization
     content_ = new MainContentContainer(content, this);
     sidebar_ = new SidebarContainer(sidebar, this);
     searchbar_ = static_cast<SidebarContainer*>(sidebar_)->getSearch();
@@ -82,6 +85,9 @@ void MainView::createDefaultView(int content_id, int sidebar_id) {
 
 void MainView::setContentView(int content_id)
 {
+	if(content_->getCurrentView() == content_id) {
+		return;
+	}
     content_->setCurrentView(content_id);
 }
 

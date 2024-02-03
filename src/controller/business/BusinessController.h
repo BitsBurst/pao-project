@@ -48,14 +48,11 @@ private:
 
 public slots:
     void showDefaultView();
-    void showSingleSensorView();
     void showSingleView(AbstractItem* item);
-    void showSingleGroupView();
     void showModifyView(AbstractItem* item);
     void showCreateView();
     void showCreateCategory();
     void showCreateSensor();
-    void showSettingsView();
 	void openSimulation();
 	void saveSimulationByName();
 
