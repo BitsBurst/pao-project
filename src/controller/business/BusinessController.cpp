@@ -178,8 +178,14 @@ void BusinessController::deleteFromGraphicalElement(GroupItemWidget* item)
 	switch (res) {
 	case QMessageBox::Ok:
 
-        if (static_cast<AbstractView*>(content_stack_->currentWidget())->getItem() == item_ ) {
+        if (static_cast<AbstractView*>(content_stack_->currentWidget())->getItem() == item_)
             showDefaultView();
+
+        if (single_view_->getItem() == item_) {
+            single_view_->setItem(new Category());
+        }
+        if (editor_view_->getItem() == item_) {
+            editor_view_->setItem(new Category());
         }
 
         // Delete
@@ -210,8 +216,13 @@ void BusinessController::deleteFromStorageElement(AbstractItem* item)
     switch (res) {
     case QMessageBox::Ok:
 
-        if (static_cast<AbstractView*>(content_stack_->currentWidget())->getItem() == item ) {
-            showDefaultView();
+        showDefaultView();
+
+        if (single_view_->getItem() == item) {
+            single_view_->setItem(new Category());
+        }
+        if (editor_view_->getItem() == item) {
+            editor_view_->setItem(new Category());
         }
 
         // Delete
