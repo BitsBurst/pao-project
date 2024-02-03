@@ -21,19 +21,15 @@ RealtimeChart::RealtimeChart(QWidget * parent, Sensor* sensor)
     // Custom chart settings
     custom_plot_->setInteractions(QCP::iRangeDrag | QCP::iRangeZoom | QCP::iSelectAxes
             | QCP::iSelectLegend | QCP::iSelectPlottables);
-    custom_plot_->xAxis->setRange(0, 6);
+    custom_plot_->xAxis->setRange(0, 30);
     custom_plot_->yAxis->setRange(-5, 5);
 
-    custom_plot_->xAxis->setLabel("x Axis");
     custom_plot_->yAxis->setLabel("y Axis");
 
-    /*
-    custom_plot_->legend->setVisible();
-
-    custom_plot_->legend->setFont(CustomElements::getFontParagraph());
-    custom_plot_->legend->setSelectedFont(CustomElements::getFontParagraph());
-    custom_plot_->legend->setSelectableParts(QCPLegend::spItems);
-    */
+    if (sensor_ != nullptr) {
+        custom_plot_->yAxis->setRange(sensor_->getMinRange() - 5, sensor_->getMaxRange() + 5);
+        custom_plot_->yAxis->setLabel(sensor_->getCategory().getUnitMeasure());
+    }
 
     // Graphs
     addRealtimeGraph();

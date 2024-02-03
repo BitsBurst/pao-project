@@ -8,7 +8,7 @@ public:
 		SENSOR,
 		CATEGORY,
 		SEARCH,
-		DELETE,
+		DELETE_I,
 		EDIT,
 	};
 	static QIcon getIcon(IconType type);

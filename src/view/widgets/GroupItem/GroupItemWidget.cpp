@@ -12,7 +12,7 @@ GroupItemWidget::GroupItemWidget(AbstractItem* item, QWidget* parent)
 {
     // Initialization
     modify_btn_ = new QPushButton(Icons::getIcon(Icons::IconType::EDIT), "");
-    delete_btn_ = new QPushButton(Icons::getIcon(Icons::IconType::DELETE), "");
+    delete_btn_ = new QPushButton(Icons::getIcon(Icons::IconType::DELETE_I), "");
 
 
 

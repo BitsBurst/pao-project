@@ -13,7 +13,7 @@ QIcon Icons::getIcon(Icons::IconType type)
 	case SEARCH:
 		icon = QIcon(":/icons/search.svg");
 		break;
-	case DELETE:
+	case DELETE_I:
 		icon = QIcon(":/icons/trash.svg");
 		break;
 	case EDIT:

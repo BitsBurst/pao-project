@@ -7,6 +7,7 @@ MainView::MainView(QStackedWidget * content, QStackedWidget * sidebar, QWidget* 
     // General Settings
     setMinimumSize(QSize(640, 360));
 
+
     // Initialization
     content_ = new MainContentContainer(content, this);
     sidebar_ = new SidebarContainer(sidebar, this);
