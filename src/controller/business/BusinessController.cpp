@@ -333,4 +333,5 @@ void BusinessController::addNewItem(AbstractItem* item)
     item->accept(add_item);
 
     main_view_->getSearch()->searchItem();
+    showDefaultView();
 }
