@@ -128,6 +128,8 @@ set(PROJECT_SOURCES
         src/model/visitor/AddItem.h
         src/utility/icons/Icons.cpp
         src/utility/icons/Icons.h
+        src/utility/distributionType/DistributionUtility.cpp
+        src/utility/distributionType/DistributionUtility.h
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)

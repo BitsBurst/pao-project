@@ -4,15 +4,17 @@
 #include "../../core/AbstractWidget.h"
 #include "../../views/GroupListView.h"
 #include "../../../model/core/AbstractItem.h"
+#include "../../../model/core/Category.h"
 
 class SingleCategoryWidget : public AbstractWidget {
     Q_OBJECT
 private:
-    GroupListView* group_list_view_;
-
+    QLabel * unit_measure_, * distribution_type_;
 public:
-    explicit SingleCategoryWidget(const QVector<AbstractItem*>& items, QWidget* parent = nullptr);
+    explicit SingleCategoryWidget(Category* item, QWidget* parent = nullptr);
 	~SingleCategoryWidget() override;
+
+    void setItem(Category* item);
 };
 
 #endif //SMARTSENSORS_SINGLECATEGORYWIDGET_H

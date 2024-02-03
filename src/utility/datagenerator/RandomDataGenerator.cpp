@@ -1,4 +1,5 @@
 #include "RandomDataGenerator.h"
+
 /**
  * @brief RandomDataGenerator::RandomDataGenerator
  * @param size size of the data to generate

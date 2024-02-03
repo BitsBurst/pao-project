@@ -13,5 +13,8 @@ void SingleWidgetRender::visit(Sensor& sensor)
 void SingleWidgetRender::visit(Category& category)
 {
     information_widget_->setItem(&category);
+
+    category_widget_->setItem(&category);
+
     view_->setActiveView(1);
 }

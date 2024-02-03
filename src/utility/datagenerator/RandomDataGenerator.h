@@ -6,8 +6,8 @@
 #include <random>
 #include <cmath>
 #include <ctime>
-
-enum DistributionType { SINUSOIDAL, GAUSSIAN, UNIFORM };
+#include <QString>
+#include "../distributionType/DistributionUtility.h"
 
 /**
  * @brief Class that generates random data

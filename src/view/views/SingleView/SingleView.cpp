@@ -12,7 +12,7 @@ SingleView::SingleView(AbstractItem* item, bool check_add_btn, QWidget* parent)
     single_stack_ = new QStackedLayout(this);
 
     sensor_widget_ = new SingleSensorWidget(item_, stack_widget);
-    category_widget_ = new SingleCategoryWidget(QVector<AbstractItem*>(), stack_widget);
+    category_widget_ = new SingleCategoryWidget(new Category(), stack_widget);
     group_widget_ = new SingleViewGroup(item_, stack_widget);
 
     // Single Stack Settings
@@ -30,6 +30,7 @@ SingleView::SingleView(AbstractItem* item, bool check_add_btn, QWidget* parent)
     // Layout Settings
     layout_->addWidget(information_widget_);
     layout_->addWidget(stack_widget);
+    layout_->addItem(CustomElements::getTerminalSpacer(VERTICAL));
 
     // Events
     handleEvents();
