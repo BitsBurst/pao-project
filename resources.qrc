@@ -6,5 +6,10 @@
         <file alias="roboto-medium.ttf">resources/fonts/Roboto/Roboto-Medium.ttf</file>
         <file alias="roboto-regular.ttf">resources/fonts/Roboto/Roboto-Regular.ttf</file>
         <file alias="roboto-thin.ttf">resources/fonts/Roboto/Roboto-Thin.ttf</file>
+        <file alias="icons/list.svg">resources/icons/list.svg</file>
+        <file alias="icons/chart.svg">resources/icons/chart.svg</file>
+        <file alias="icons/search.svg">resources/icons/search.svg</file>
+        <file alias="icons/trash.svg">resources/icons/trash.svg</file>
+        <file alias="icons/pencil.svg">resources/icons/pencil.svg</file>
     </qresource>
 </RCC>

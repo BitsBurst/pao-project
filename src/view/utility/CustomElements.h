@@ -8,7 +8,6 @@
 #include <QFont>
 #include <QSpacerItem>
 
-#include "../../../include/QtAwesome/QtAwesome.h"
 
 enum LayoutPrototype {H_NO_BORDER, V_CONTAINER, SINGLE_SPACING, DOUBLE_SPACING, QUAD_SPACING, H_SINGLE_SPACING};
 enum SpacerDirection {VERTICAL, HORIZONTAL};
@@ -21,8 +20,6 @@ private:
     static QFont* font_h4_instance_;
     static QFont* font_paragraph_instance_;
     static QFont* font_details_instance_;
-
-    static fa::QtAwesome* awesome;
 
 public:
 
@@ -48,7 +45,6 @@ public:
 
     static QLayout* getCustomLayoutPrototype(LayoutPrototype);
 
-    static fa::QtAwesome* getAwsome();
 };
 
 #endif //SMARTSENSORS_CUSTOMELEMENTS_H

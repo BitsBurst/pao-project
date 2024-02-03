@@ -19178,7 +19178,7 @@ void QCPLegend::setTextColor(const QColor &color)
 }
 
 /*!
-  Sets the size of legend icons. Legend items that draw an icon (e.g. a visual
+  Sets the size of legend Icons. Legend items that draw an icon (e.g. a visual
   representation of the graph) will use this size by default.
 */
 void QCPLegend::setIconSize(const QSize &size)

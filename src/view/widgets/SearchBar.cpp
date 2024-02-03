@@ -1,14 +1,14 @@
 #include "SearchBar.h"
 #include "../../controller/LocatorController.h"
+#include "../../utility/icons/Icons.h"
 
 SearchBar::SearchBar(QWidget * parent)
     : AbstractWidget(new QFormLayout, parent), type_(ALL)
 {
     searchbar_ = new QLineEdit("", this);
-    search_btn_ = new QPushButton(CustomElements::getAwsome()->icon(fa::fa_solid, fa::fa_search), "");
-
-    QPushButton * sensor_filter = new QPushButton(CustomElements::getAwsome()->icon(fa::fa_solid, fa::fa_chart_line), "");
-    QPushButton * category_filter = new QPushButton(CustomElements::getAwsome()->icon(fa::fa_solid, fa::fa_list), "");
+    search_btn_ = new QPushButton(Icons::getIcon(Icons::IconType::SEARCH), "");
+    QPushButton * sensor_filter = new QPushButton(Icons::getIcon(Icons::IconType::SENSOR), "");
+    QPushButton * category_filter = new QPushButton(Icons::getIcon(Icons::IconType::CATEGORY), "");
 
     QLayout* row = CustomElements::getCustomLayoutPrototype(H_SINGLE_SPACING);
     row->addWidget(searchbar_);

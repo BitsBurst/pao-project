@@ -4,7 +4,6 @@
 
 #include <QApplication>
 #include "controller/LocatorController.h"
-#include "../include/QtAwesome/QtAwesome.h"
 
 class MyApp: public QApplication {
 private:

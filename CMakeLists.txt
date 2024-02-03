@@ -126,6 +126,8 @@ set(PROJECT_SOURCES
         src/view/views/DefaultView.h
         src/model/visitor/AddItem.cpp
         src/model/visitor/AddItem.h
+        src/utility/icons/Icons.cpp
+        src/utility/icons/Icons.h
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
@@ -151,18 +153,7 @@ add_library(qcustomplot
 )
 target_link_libraries(qcustomplot PUBLIC Qt${QT_VERSION_MAJOR}::Core Qt${QT_VERSION_MAJOR}::PrintSupport)
 
-add_library(QtAwsome
-        include/QtAwesome/QtAwesome.h
-        include/QtAwesome/QtAwesome.cpp
-        include/QtAwesome/QtAwesomeAnim.cpp
-        include/QtAwesome/QtAwesomeAnim.h
-        include/QtAwesome/QtAwesomeEnumGenerated.h
-        include/QtAwesome/QtAwesomeStringGenerated.h
-        include/QtAwesome/QtAwesomeFree.qrc
-)
-target_link_libraries(QtAwsome PUBLIC Qt${QT_VERSION_MAJOR}::Core Qt${QT_VERSION_MAJOR}::Gui Qt${QT_VERSION_MAJOR}::Widgets)
-
-target_link_libraries(SmartSensors PRIVATE Qt${QT_VERSION_MAJOR}::Widgets Qt${QT_VERSION_MAJOR}::Charts qcustomplot QtAwsome)
+target_link_libraries(SmartSensors PRIVATE Qt${QT_VERSION_MAJOR}::Widgets Qt${QT_VERSION_MAJOR}::Charts qcustomplot)
 
 if(${QT_VERSION} VERSION_LESS 6.1.0)
   set(BUNDLE_ID_OPTION MACOSX_BUNDLE_GUI_IDENTIFIER com.example.SmartSensors)
