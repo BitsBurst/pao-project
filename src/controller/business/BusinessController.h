@@ -48,7 +48,6 @@ private:
 
 public slots:
     void showDefaultView();
-    void showSingleSensorView();
     void showSingleView(AbstractItem* item);
     void showSingleGroupView();
     void showModifyView(AbstractItem* item);

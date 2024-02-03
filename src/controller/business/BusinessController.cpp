@@ -67,7 +67,6 @@ void BusinessController::subscribeToEvents()
     LocatorController::StorageControllerInstance()->beforeDestroy.subscribe(std::bind(&BusinessController::deleteInterface, this));
     // Signals
 	connect(LocatorController::StorageControllerInstance(), &StorageController::StorageReady, this, &BusinessController::storageReady);
-    connect(main_view_, &MainView::changeToSingleSensorView, this, &BusinessController::showSingleSensorView);
     connect(main_view_, &MainView::changeToSingleGroupView, this, &BusinessController::showSingleGroupView);
     connect(main_view_, &MainView::changeToCreateView, this, &BusinessController::showCreateView);
     //connect(main_view_, &MainView::changeToModifyView, this, &BusinessController::showModifyView);
@@ -83,7 +82,6 @@ void BusinessController::unsubscribeToEvents()
 	LocatorController::StorageControllerInstance()->beforeDestroy.unsubscribe(std::bind(&BusinessController::deleteInterface, this));
 	// Signals
 	disconnect(LocatorController::StorageControllerInstance(), &StorageController::StorageReady, this, &BusinessController::storageReady);
-	disconnect(main_view_, &MainView::changeToSingleSensorView, this, &BusinessController::showSingleSensorView);
 	disconnect(main_view_, &MainView::changeToSingleGroupView, this, &BusinessController::showSingleGroupView);
 	disconnect(main_view_, &MainView::changeToCreateView, this, &BusinessController::showCreateView);
 	//disconnect(main_view_, &MainView::changeToModifyView, this, &BusinessController::showModifyView);
@@ -139,11 +137,6 @@ void BusinessController::storageReady()
 void BusinessController::showDefaultView()
 {
     main_view_->setContentView(content_stack_->indexOf(default_view_));
-}
-
-void BusinessController::showSingleSensorView()
-{
-    main_view_->setContentView(content_stack_->indexOf(single_view_));
 }
 
 void BusinessController::showSingleGroupView()

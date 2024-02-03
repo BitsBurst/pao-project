@@ -85,6 +85,9 @@ void MainView::createDefaultView(int content_id, int sidebar_id) {
 
 void MainView::setContentView(int content_id)
 {
+	if(content_->getCurrentView() == content_id) {
+		return;
+	}
     content_->setCurrentView(content_id);
 }
 
