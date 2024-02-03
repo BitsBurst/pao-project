@@ -51,6 +51,8 @@ void SingleView::setActiveView(int index)
 }
 
 void SingleView::setItem(AbstractItem* item) {
+	unsubscribeEvents();
+
     item_ = item;
 
     if (item_ != nullptr) {
@@ -64,4 +66,20 @@ void SingleView::setItem(AbstractItem* item) {
 AbstractItem* SingleView::getItem() const
 {
     return item_;
+}
+
+
+void SingleView::onChangeToModifyView()
+{
+	emit changeToModifyView(item_);
+}
+
+void SingleView::onDeleteItem()
+{
+	emit deleteItem(item_);
+}
+
+void SingleView::unsubscribeEvents() {
+	disconnect(information_widget_, &InformationWidget::changeToModify, this, &SingleView::onChangeToModifyView);
+	disconnect(information_widget_, &InformationWidget::deleteItem, this, &SingleView::onDeleteItem);
 }
