@@ -14,7 +14,9 @@ GroupItemWidget::GroupItemWidget(AbstractItem* item, QWidget* parent)
     modify_btn_ = new QPushButton(Icons::getIcon(Icons::IconType::EDIT), "");
     delete_btn_ = new QPushButton(Icons::getIcon(Icons::IconType::DELETE_I), "");
 
-
+    QWidget * container = new QWidget(this);
+    QVBoxLayout* cont_layout = new QVBoxLayout(container);
+    container->setLayout(cont_layout);
 
     if (item_ != nullptr) {
         GroupItemRender item_render(this);
@@ -29,7 +31,8 @@ GroupItemWidget::GroupItemWidget(AbstractItem* item, QWidget* parent)
 
     // Layout Settings
     setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
-    layout_->setSpacing(0);
+    cont_layout->setSpacing(0);
+    cont_layout->setContentsMargins(8,8,8,8);
 
     title_label_->setFont(CustomElements::getFontH4());
     detail_label_->setFont(CustomElements::getFontDetails());
@@ -38,9 +41,11 @@ GroupItemWidget::GroupItemWidget(AbstractItem* item, QWidget* parent)
     btn_layout->addWidget(modify_btn_);
     btn_layout->addWidget(delete_btn_);
 
-    layout_->addWidget(detail_label_);
-    layout_->addWidget(title_label_);
-    layout_->addWidget(row_btn);
+    cont_layout->addWidget(detail_label_);
+    cont_layout->addWidget(title_label_);
+    cont_layout->addWidget(row_btn);
+
+    layout_->addWidget(container);
     // Events
     handleEvents();
 }
@@ -64,7 +69,7 @@ void GroupItemWidget::handleEvents()
 void GroupItemWidget::mousePressEvent(QMouseEvent* event)
 {
     QWidget::mousePressEvent(event);
-    emit showSingleItem(item_);
+    emit showSingleItem(this, item_);
 }
 GroupItemWidget::~GroupItemWidget()
 {

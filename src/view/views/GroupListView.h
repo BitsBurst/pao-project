@@ -21,9 +21,13 @@ private:
     QWidget * scroll_area_list;
     QVBoxLayout * scroll_area_layout;
 
+    GroupItemWidget* current_selected_;
+
+
     QVector<AbstractItem*> items_;
 
     void handleEvents();
+    void handleShowSingleItem(GroupItemWidget* graphical_item, AbstractItem* item);
 
 public:
     explicit GroupListView(const QVector<AbstractItem*>& items,QWidget *parent = nullptr);
@@ -31,6 +35,7 @@ public:
     void setItems(const QVector<AbstractItem*>& items);
 	void deleteListItem(GroupItemWidget* item);
     GroupItemWidget* getGroupItem(AbstractItem * item);
+    void resetCurrentItem();
 
     QVector<AbstractItem*>& getItems();
 

@@ -14,7 +14,7 @@ class GroupItemWidget : public AbstractWidget {
 signals:
     void changeToModifyView(AbstractItem* item);
     void deleteItem(AbstractItem* item);
-    void showSingleItem(AbstractItem* item);
+    void showSingleItem(GroupItemWidget * graphical_item, AbstractItem* item);
 
 private:
     QString icon_src_;
