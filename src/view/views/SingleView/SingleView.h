@@ -35,7 +35,7 @@ public:
 
     void setActiveView(int index);
     void setItem(AbstractItem* item);
-    AbstractItem* getItem() const;
+    AbstractItem* getItem() const override;
 };
 
 #endif //SMARTSENSORS_SINGLEVIEW_H

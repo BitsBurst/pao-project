@@ -59,7 +59,8 @@ public slots:
 
     void updateSidebar();
     void showFilteredList(QString query, SearchType type);
-    void deleteGraphicalItem(GroupItemWidget* item);
+    void deleteFromGraphicalElement(GroupItemWidget* item);
+    void deleteFromStorageElement(AbstractItem* item);
     void addNewItem(AbstractItem* item);
 
     void cancelOperation();

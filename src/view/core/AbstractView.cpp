@@ -7,3 +7,8 @@ AbstractView::AbstractView(QLayout* layout, QWidget* parent)
     setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding );
     layout_->setAlignment(Qt::AlignHCenter | Qt::AlignTop);
 }
+
+AbstractItem* AbstractView::getItem() const
+{
+    return nullptr;
+}

@@ -48,8 +48,8 @@ void BusinessController::subscribeToEvents()
     connect(main_view_, &MainView::changeToCreateSensor, this, &BusinessController::showCreateSensor);
 
     // Delete
-    connect(group_list_view_, &GroupListView::deleteItem, this, &BusinessController::deleteGraphicalItem);
-	// connect(single_view_, &SingleView::deleteItem, this, &BusinessController::deleteGraphicalItem);
+    connect(group_list_view_, &GroupListView::deleteItem, this, &BusinessController::deleteFromGraphicalElement);
+	connect(single_view_, &SingleView::deleteItem, this, &BusinessController::deleteFromStorageElement);
 
     // Update Model
     connect(editor_view_, &EditorView::modelChanged, this, &BusinessController::updateSidebar);
@@ -77,6 +77,7 @@ void BusinessController::Destroy()
 {
 
 }
+
 void BusinessController::storageReady()
 {
 	if(!single_view_)
@@ -161,7 +162,7 @@ void BusinessController::updateSidebar()
     group_list_view_->setItems(LocatorController::StorageControllerInstance()->GetStorage()->getSensors(0));
 }
 
-void BusinessController::deleteGraphicalItem(GroupItemWidget* item)
+void BusinessController::deleteFromGraphicalElement(GroupItemWidget* item)
 {
 	if (item == nullptr) return;
 
@@ -176,6 +177,12 @@ void BusinessController::deleteGraphicalItem(GroupItemWidget* item)
 	AbstractItem* item_ = item->getItem();
 	switch (res) {
 	case QMessageBox::Ok:
+
+        if (static_cast<AbstractView*>(content_stack_->currentWidget())->getItem() == item_ ) {
+            showDefaultView();
+        }
+
+        // Delete
         group_list_view_->deleteListItem(item);
 		item_->accept(delete_item);
 		break;
@@ -186,6 +193,38 @@ void BusinessController::deleteGraphicalItem(GroupItemWidget* item)
 		// should never be reached
 		break;
 	}
+}
+
+void BusinessController::deleteFromStorageElement(AbstractItem* item)
+{
+    if (item == nullptr) return;
+
+    QMessageBox deleteConfirm;
+    deleteConfirm.setText("Eliminazione.");
+    deleteConfirm.setInformativeText("Sei sicuro di voler procedere con l'eliminazione?");
+    deleteConfirm.setStandardButtons(QMessageBox::Ok | QMessageBox::Cancel);
+    deleteConfirm.setDefaultButton(QMessageBox::Ok);
+    int res = deleteConfirm.exec();
+
+    DeleteItem delete_item;
+    switch (res) {
+    case QMessageBox::Ok:
+
+        if (static_cast<AbstractView*>(content_stack_->currentWidget())->getItem() == item ) {
+            showDefaultView();
+        }
+
+        // Delete
+        group_list_view_->deleteListItem(group_list_view_->getGroupItem(item));
+        item->accept(delete_item);
+        break;
+    case QMessageBox::Cancel:
+        // Cancel was clicked
+        break;
+    default:
+        // should never be reached
+        break;
+    }
 }
 
 void BusinessController::showFilteredList(QString query, SearchType type)
@@ -208,7 +247,6 @@ void BusinessController::showSingleView(AbstractItem* item)
     single_view_->setItem(item);
     main_view_->setContentView(content_stack_->indexOf(single_view_));
 }
-
 
 void BusinessController::openSimulation()
 {
@@ -288,8 +326,6 @@ void BusinessController::deleteInterface()
     delete group_list_view_;
 	group_list_view_ = nullptr;
 }
-
-
 
 void BusinessController::addNewItem(AbstractItem* item)
 {

@@ -30,6 +30,7 @@ public:
     ~GroupListView();
     void setItems(const QVector<AbstractItem*>& items);
 	void deleteListItem(GroupItemWidget* item);
+    GroupItemWidget* getGroupItem(AbstractItem * item);
 
     QVector<AbstractItem*>& getItems();
 

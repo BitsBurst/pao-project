@@ -44,7 +44,7 @@ public:
     void update();
 
     void setItem(AbstractItem* item);
-    AbstractItem* getItem() const;
+    AbstractItem* getItem() const override;
     void setActiveForm(int index);
 
     bool isNewObject() const;
