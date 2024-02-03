@@ -14,6 +14,8 @@ GroupItemWidget::GroupItemWidget(AbstractItem* item, QWidget* parent)
     modify_btn_ = new QPushButton(Icons::getIcon(Icons::IconType::EDIT), "");
     delete_btn_ = new QPushButton(Icons::getIcon(Icons::IconType::DELETE), "");
 
+
+
     if (item_ != nullptr) {
         GroupItemRender item_render(this);
         item_->accept(item_render);

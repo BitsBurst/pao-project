@@ -3,12 +3,16 @@
 #include "../../utility/icons/Icons.h"
 
 SearchBar::SearchBar(QWidget * parent)
-    : AbstractWidget(new QFormLayout, parent), type_(ALL)
+    : AbstractWidget(new QFormLayout, parent), type_(ALL), searchbar_(nullptr), search_btn_(nullptr), btn_group_(nullptr)
 {
     searchbar_ = new QLineEdit("", this);
     search_btn_ = new QPushButton(Icons::getIcon(Icons::IconType::SEARCH), "");
-    QPushButton * sensor_filter = new QPushButton(Icons::getIcon(Icons::IconType::SENSOR), "");
-    QPushButton * category_filter = new QPushButton(Icons::getIcon(Icons::IconType::CATEGORY), "");
+    sensor_filter = new QPushButton(Icons::getIcon(Icons::IconType::SENSOR), "");
+    category_filter = new QPushButton(Icons::getIcon(Icons::IconType::CATEGORY), "");
+	sensor_filter->setCheckable(true);
+	category_filter->setCheckable(true);
+	//sensor_filter->setStyleSheet("QPushButton:checked {fill: blue; background-color: yellow}");
+	//category_filter->setStyleSheet("QPushButton:checked {fill: blue; background-color: yellow}");
 
     QLayout* row = CustomElements::getCustomLayoutPrototype(H_SINGLE_SPACING);
     row->addWidget(searchbar_);
@@ -40,6 +44,17 @@ void SearchBar::searchItem()
 void SearchBar::switchButton(int id)
 {
     type_ = static_cast<SearchType>(id);
+	switch (type_)
+	{
+	case SENSOR:
+		category_filter->setChecked(false);
+		sensor_filter->setChecked(true);
+		break;
+	case CATEGORY:
+		sensor_filter->setChecked(false);
+		category_filter->setChecked(true);
+		break;
+	}
     searchItem();
 }
 

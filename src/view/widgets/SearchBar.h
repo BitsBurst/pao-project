@@ -16,6 +16,8 @@ private:
     QLineEdit* searchbar_;
     QPushButton* search_btn_;
     QButtonGroup * btn_group_;
+	QPushButton * sensor_filter;
+	QPushButton * category_filter;
     SearchType type_;
 
     void switchButton(int id);
