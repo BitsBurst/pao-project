@@ -9,6 +9,7 @@ class DistributionUtility {
 private:
 public:
     static QString ToString(DistributionType type);
+    static QVector<QString> type_;
 };
 
 #endif //SMARTSENSORS_DISTRIBUTIONUTILITY_H

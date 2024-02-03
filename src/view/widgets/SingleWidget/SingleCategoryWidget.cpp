@@ -31,6 +31,7 @@ SingleCategoryWidget::SingleCategoryWidget(Category* item, QWidget* parent)
 
     layout_->addWidget(row1);
     layout_->addWidget(row2);
+    layout_->addItem(CustomElements::getTerminalSpacer(VERTICAL));
 }
 SingleCategoryWidget::~SingleCategoryWidget()
 {

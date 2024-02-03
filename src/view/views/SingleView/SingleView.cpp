@@ -30,7 +30,6 @@ SingleView::SingleView(AbstractItem* item, bool check_add_btn, QWidget* parent)
     // Layout Settings
     layout_->addWidget(information_widget_);
     layout_->addWidget(stack_widget);
-    layout_->addItem(CustomElements::getTerminalSpacer(VERTICAL));
 
     // Events
     handleEvents();

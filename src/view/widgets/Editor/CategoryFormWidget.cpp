@@ -12,9 +12,9 @@ CategoryFormWidget::CategoryFormWidget(QWidget* parent)
     units_.push_back("Pa");
     units_.push_back("kW");
 
-    data_gens_.push_back("Lineare");
-    data_gens_.push_back("Casuale");
-    data_gens_.push_back("Distribuzione");
+    for (auto dist : DistributionUtility::type_) {
+        data_gens_.push_back(dist);
+    }
 
     unit_measure_->addItems(units_);
     data_gen_->addItems(data_gens_);
@@ -27,8 +27,8 @@ void CategoryFormWidget::setValues(const Category& item)
 {
     AbstractFormWidget::setValues(item);
 
-    if (units_.contains(item.getUnitMeasure()))
-        unit_measure_->setCurrentText(item.getUnitMeasure());
+    unit_measure_->setCurrentText(item.getUnitMeasure());
+    data_gen_->setCurrentText(DistributionUtility::ToString(item.getDistributionType()));
 }
 
 void CategoryFormWidget::reset()
@@ -44,5 +44,5 @@ void CategoryFormWidget::updateItem(AbstractItem* item)
 	AbstractFormWidget::updateItem(item);
 
 	static_cast<Category*>(item)->setUnitMeasure(unit_measure_->currentText());
-	static_cast<Category*>(item)->setDistributionType(static_cast<DistributionType>(data_gen_->currentIndex() + 1));
+	static_cast<Category*>(item)->setDistributionType(static_cast<DistributionType>(data_gen_->currentIndex()));
 }
