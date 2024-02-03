@@ -49,7 +49,6 @@ private:
 public slots:
     void showDefaultView();
     void showSingleView(AbstractItem* item);
-    void showSingleGroupView();
     void showModifyView(AbstractItem* item);
     void showCreateView();
     void showCreateCategory();
