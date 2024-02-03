@@ -80,12 +80,13 @@ void RealtimeChart::addRealtimeGraph()
 	custom_plot_->graph()->setPen(graphPen);
 
 	custom_plot_->replot();
+	custom_plot_->setOpenGl(true);
 	if(sensor_ != nullptr)
 	{
 		for (auto it = sensor_->data_.begin(); it != sensor_->data_.end() ; ++it) {
 			addRealtimeSample(*it);
 		}
-		sensor_->onDataGenerated.subscribe(std::bind(&RealtimeChart::timerEvent, this, std::placeholders::_1));
+		sensor_->onDataGenerated.subscribe(std::bind(&RealtimeChart::onDataGeneratedEvent, this, std::placeholders::_1));
 		sensor_->startDataGeneration();
 	}
 
@@ -97,23 +98,23 @@ void RealtimeChart::addRealtimeSample(double v)
     for (auto i = data_->begin(); (i + 1) != (data_->end()); ++i) {
         i->value = (i + 1)->value;
     }
-    // add a new datapoint at the start
+    // add a new datap*oint at the start
     (data_->end() - 1)->value = v;
 }
 
-void RealtimeChart::timerEvent(DataGenObj obj)
+void RealtimeChart::onDataGeneratedEvent(DataGenObj obj)
 {
+	addRealtimeSample(obj.getData());
 	emit dataGeneratedSignal(obj);
 }
 void RealtimeChart::dataGenerated(DataGenObj obj)
 {
-	addRealtimeSample(obj.getData());
-	custom_plot_->replot(QCustomPlot::rpImmediateRefresh);
+	custom_plot_->replot(QCustomPlot::rpQueuedReplot);
 }
 RealtimeChart::~RealtimeChart()
 {
 	if(sensor_ != nullptr){
 		sensor_->stopDataGeneration();
-		sensor_->onDataGenerated.unsubscribe(std::bind(&RealtimeChart::timerEvent, this, std::placeholders::_1));
+		sensor_->onDataGenerated.unsubscribe(std::bind(&RealtimeChart::onDataGeneratedEvent, this, std::placeholders::_1));
 	}
 }

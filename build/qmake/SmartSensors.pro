@@ -10,8 +10,9 @@
 QT       += core gui
 
 greaterThan(QT_MAJOR_VERSION, 4):
-QT += widgets charts printsupport
+QT += widgets charts printsupport opengl
 CONFIG += c++17
+CONFIG += QCUSTOMPLOT_USE_OPENGL
 
 SOURCES += ../../main.cpp \ 
 ../../src/view/MainView.cpp \ 

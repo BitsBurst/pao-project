@@ -11,6 +11,10 @@ CategoryFormWidget::CategoryFormWidget(QWidget* parent)
     units_.push_back("F°");
     units_.push_back("Pa");
     units_.push_back("kW");
+	units_.push_back("%");
+	units_.push_back("km/h");
+	units_.push_back("lx");
+
 
     for (auto dist : DistributionUtility::type_) {
         data_gens_.push_back(dist);

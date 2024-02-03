@@ -99,9 +99,7 @@ void StorageWorker::Store()
 	try {
 		StorageObject storage = **storagePointer;
 		StorageUtility::StoreJSON(storage.toJson(), filename_);
-		qDebug() << "Storage stored";
 	} catch (std::exception& e) {
-		qDebug() << "Couldn't store storage";
 		Logger::Log(LogLevel::_ERROR_, __FILE__, __LINE__, __FUNCTION__, QString("Couldn't store storage: %1").arg(e.what()));
 	}
 	Logger::Log(LogLevel::_INFO_, __FILE__, __LINE__, __FUNCTION__, LogMethod::_OUT_);

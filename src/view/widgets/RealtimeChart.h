@@ -25,7 +25,7 @@ private:
 public:
     RealtimeChart(QWidget * parent = nullptr, Sensor* sensor = nullptr);
 	~RealtimeChart() override;
-    void timerEvent(DataGenObj);
+    void onDataGeneratedEvent(DataGenObj obj);
     void addRealtimeSample(double v);
 	void dataGenerated(DataGenObj);
 signals:

@@ -12,8 +12,9 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 # CMAKE_PREFIX_PATH the path where Qt is installed
 set(CMAKE_PREFIX_PATH "$ENV{QT_PATH}/6.6.1/gcc_64/lib/cmake")
 
-find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Widgets Charts Core PrintSupport Gui)
-find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets Charts Core PrintSupport Gui)
+find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Widgets Charts Core PrintSupport Gui OpenGL OpenGLWidgets)
+find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets Charts Core PrintSupport Gui OpenGL OpenGLWidgets)
+add_compile_definitions(QCUSTOMPLOT_USE_OPENGL)
 string(TOLOWER ${CMAKE_BUILD_TYPE} build_type)
 
 set(PROJECT_SOURCES
@@ -153,9 +154,9 @@ add_library(qcustomplot
         include/CustomPlot/qcustomplot.h
         include/CustomPlot/qcustomplot.cpp
 )
-target_link_libraries(qcustomplot PUBLIC Qt${QT_VERSION_MAJOR}::Core Qt${QT_VERSION_MAJOR}::PrintSupport)
+target_link_libraries(qcustomplot PUBLIC Qt${QT_VERSION_MAJOR}::Core Qt${QT_VERSION_MAJOR}::PrintSupport Qt${QT_VERSION_MAJOR}::OpenGL Qt${QT_VERSION_MAJOR}::OpenGLWidgets)
 
-target_link_libraries(SmartSensors PRIVATE Qt${QT_VERSION_MAJOR}::Widgets Qt${QT_VERSION_MAJOR}::Charts qcustomplot)
+target_link_libraries(SmartSensors PRIVATE Qt${QT_VERSION_MAJOR}::Widgets Qt${QT_VERSION_MAJOR}::Charts qcustomplot Qt${QT_VERSION_MAJOR}::OpenGL Qt${QT_VERSION_MAJOR}::OpenGLWidgets)
 
 if(${QT_VERSION} VERSION_LESS 6.1.0)
   set(BUNDLE_ID_OPTION MACOSX_BUNDLE_GUI_IDENTIFIER com.example.SmartSensors)
