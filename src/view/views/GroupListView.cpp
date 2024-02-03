@@ -94,7 +94,8 @@ void GroupListView::setItems(const QVector<AbstractItem*>& items)
 void GroupListView::deleteListItem(GroupItemWidget* item)
 {
     if (item == nullptr) return;
-
+	if(current_selected_ == item)
+		current_selected_ = nullptr;
 	scroll_area_layout->removeWidget(item);
 	item_lists_.erase(std::remove(item_lists_.begin(), item_lists_.end(), item), item_lists_.end());
 	delete item;
@@ -130,11 +131,11 @@ void GroupListView::handleShowSingleItem(GroupItemWidget* graphical_item, Abstra
     emit showSingleItem(item);
 
     if (current_selected_ != nullptr) {
-        current_selected_->setStyleSheet("");
+        current_selected_->setActive(false);
     }
 
-    graphical_item->setStyleSheet("background-color:#CCE4F7;");
     current_selected_ = graphical_item;
+	current_selected_->setActive(true);
 }
 
 void GroupListView::resetCurrentItem()

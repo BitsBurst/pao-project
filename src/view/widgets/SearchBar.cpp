@@ -11,6 +11,7 @@ SearchBar::SearchBar(QWidget * parent)
     category_filter = new QPushButton(Icons::getIcon(Icons::IconType::CATEGORY), "", this);
 	sensor_filter->setCheckable(true);
 	category_filter->setCheckable(true);
+	sensor_filter->setChecked(true);
     QLayout* row = CustomElements::getCustomLayoutPrototype(H_SINGLE_SPACING);
     row->addWidget(searchbar_);
     row->addWidget(search_btn_);
