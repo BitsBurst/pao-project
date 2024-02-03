@@ -10,7 +10,8 @@ MainView::MainView(QStackedWidget * content, QStackedWidget * sidebar, QWidget* 
 	resize(QSize(size.width()*0.5, size.height()*0.5));
 	setScreen(qApp->screens()[0]);
 
-    // Initialization
+	setWindowIcon(QIcon(":/icons/logo.jpg"));
+	// Initialization
     content_ = new MainContentContainer(content, this);
     sidebar_ = new SidebarContainer(sidebar, this);
     searchbar_ = static_cast<SidebarContainer*>(sidebar_)->getSearch();

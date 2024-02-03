@@ -11,6 +11,7 @@
         <file alias="icons/search.svg">resources/icons/search.svg</file>
         <file alias="icons/trash.svg">resources/icons/trash.svg</file>
         <file alias="icons/pencil.svg">resources/icons/pencil.svg</file>
+        <file alias="icons/logo.jpg">resources/icons/logo.jpg</file>
         <file alias="styles/styles.qss">resources/styles/styles.qss</file>
     </qresource>
 </RCC>
