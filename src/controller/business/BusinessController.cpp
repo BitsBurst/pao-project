@@ -2,7 +2,11 @@
 #include "../LocatorController.h"
 #include "../../model/visitor/DeleteItem.h"
 #include "../../model/visitor/AddItem.h"
-
+/**
+ * @brief BusinessController class
+ * @details This class is the controller for the business logic of the application.
+ * It is responsible for handling the communication between the views and the storage.
+ */
 BusinessController::BusinessController():
 	single_view_(nullptr),
 	editor_view_(nullptr),
@@ -12,7 +16,11 @@ BusinessController::BusinessController():
 	content_stack_(nullptr),
 	sidebar_stack_(nullptr)
 {}
-
+/**
+ * @brief Init function
+ * @details This function initializes the BusinessController.
+ * @return bool
+ */
 bool BusinessController::Init()
 {
 	Logger::Log(LogLevel::_INFO_, __FILE__, __LINE__, __FUNCTION__, "Init BusinessController");
@@ -22,6 +30,11 @@ bool BusinessController::Init()
 	subscribeToEvents();
 	return true;
 }
+/**
+ * @brief Subscribe to view events
+ * @details This function subscribes to the events of the view.
+ * @param o AbstractView*
+ */
 void BusinessController::subscribeToViewEvents(AbstractView* o) {
 	if(typeid(*o) == typeid(EditorView)) {
 		connect(editor_view_, &EditorView::modelChanged, this, &BusinessController::updateSidebar);
@@ -40,6 +53,11 @@ void BusinessController::subscribeToViewEvents(AbstractView* o) {
 		Logger::Log(LogLevel::_ERROR_, __FILE__, __LINE__, __FUNCTION__, "Subscribing to unknown view");
 	}
 }
+/**
+ * @brief Unsubscribe to view events
+ * @details This function unsubscribes to the events of the view.
+ * @param o AbstractView*
+ */
 void BusinessController::unsubscribeToViewEvents(AbstractView* o) {
 	if(typeid(*o) == typeid(EditorView)) {
 		disconnect(editor_view_, &EditorView::modelChanged, this, &BusinessController::updateSidebar);
@@ -57,6 +75,10 @@ void BusinessController::unsubscribeToViewEvents(AbstractView* o) {
 		Logger::Log(LogLevel::_ERROR_, __FILE__, __LINE__, __FUNCTION__, "Unsubscribing to unknown view");
 	}
 }
+/**
+ * @brief Subscribe to events
+ * @details This function subscribes to the events of the BusinessController.
+ */
 void BusinessController::subscribeToEvents()
 {
 	unsubscribeToEvents();
@@ -69,7 +91,10 @@ void BusinessController::subscribeToEvents()
     connect(main_view_, &MainView::changeToCreateCategory, this, &BusinessController::showCreateCategory);
     connect(main_view_, &MainView::changeToCreateSensor, this, &BusinessController::showCreateSensor);
 }
-
+/**
+ * @brief Unsubscribe to events
+ * @details This function unsubscribes to the events of the BusinessController.
+ */
 void BusinessController::unsubscribeToEvents()
 {
 	LocatorController::StorageControllerInstance()->beforeDestroy.unsubscribe(std::bind(&BusinessController::deleteInterface, this));
@@ -81,7 +106,13 @@ void BusinessController::unsubscribeToEvents()
 	disconnect(main_view_, &MainView::changeToCreateCategory, this, &BusinessController::showCreateCategory);
 	disconnect(main_view_, &MainView::changeToCreateSensor, this, &BusinessController::showCreateSensor);
 }
-
+/**
+ * @brief Set data field
+ * @details This function sets the data field of the BusinessController.
+ * @param main_view MainView*
+ * @param content_stack QStackedWidget*
+ * @param sidebar_stack QStackedWidget*
+ */
 void BusinessController::setDataField(MainView* main_view, QStackedWidget* content_stack, QStackedWidget* sidebar_stack)
 {
     main_view_ = main_view;
@@ -89,12 +120,18 @@ void BusinessController::setDataField(MainView* main_view, QStackedWidget* conte
     sidebar_stack_ = sidebar_stack;
     content_stack_->addWidget(default_view_);
 }
-
+/**
+ * @brief Destroy function
+ * @details This function destroys the BusinessController.
+ */
 void BusinessController::Destroy()
 {
 
 }
-
+/**
+ * @brief Storage ready
+ * @details This function is called when the storage is ready.
+ */
 void BusinessController::storageReady()
 {
 	subscribeToEvents();
@@ -122,19 +159,29 @@ void BusinessController::storageReady()
 	BusinessController::updateSidebar();
 	LocatorController::WindowControllerInstance()->setDisabled(false);
 }
-
+/**
+ * @brief Show default view
+ * @details This function shows the default view.
+ */
 void BusinessController::showDefaultView()
 {
     main_view_->setContentView(content_stack_->indexOf(default_view_));
 }
-
+/**
+ * @brief Show modify view
+ * @details This function shows the modify view.
+ * @param item AbstractItem*
+ */
 void BusinessController::showModifyView(AbstractItem* item)
 {
     editor_view_->setItem(item);
     editor_view_->setNewObject(false);
     main_view_->setContentView(content_stack_->indexOf(editor_view_));
 }
-
+/**
+ * @brief Show create category
+ * @details This function shows the create category view.
+ */
 void BusinessController::showCreateCategory()
 {
 	Category* temp = new Category();
@@ -142,7 +189,10 @@ void BusinessController::showCreateCategory()
     editor_view_->setNewObject(true);
     main_view_->setContentView(content_stack_->indexOf(editor_view_));
 }
-
+/**
+ * @brief Show create sensor
+ * @details This function shows the create sensor view.
+ */
 void BusinessController::showCreateSensor()
 {
 	Sensor* temp = new Sensor();
@@ -150,12 +200,19 @@ void BusinessController::showCreateSensor()
     editor_view_->setNewObject(true);
     main_view_->setContentView(content_stack_->indexOf(editor_view_));
 }
-
+/**
+ * @brief Update sidebar
+ * @details This function updates the sidebar.
+ */
 void BusinessController::updateSidebar()
 {
     group_list_view_->setItems(LocatorController::StorageControllerInstance()->GetStorage()->getSensors(0));
 }
-
+/**
+ * @brief Delete element
+ * @details This function deletes an element.
+ * @param item AbstractItem*
+ */
 void BusinessController::deleteElement(AbstractItem* item)
 {
 	DeleteItem delete_item;
@@ -185,7 +242,11 @@ void BusinessController::deleteElement(AbstractItem* item)
 	group_list_view_->deleteListItem(group_list_view_->getGroupItem(item));
 	item->accept(delete_item);
 }
-
+/**
+ * @brief Delete from graphical element
+ * @details This function deletes an element from the graphical element.
+ * @param item AbstractItem*
+ */
 void BusinessController::deleteFromGraphicalElement(AbstractItem* item)
 {
 	if (item == nullptr) return;
@@ -210,7 +271,12 @@ void BusinessController::deleteFromGraphicalElement(AbstractItem* item)
 	}
 }
 
-
+/**
+ * @brief Show filtered list
+ * @details This function shows the filtered list.
+ * @param query QString
+ * @param type SearchType
+ */
 void BusinessController::showFilteredList(QString query, SearchType type)
 {
     switch (type) {
@@ -225,14 +291,21 @@ void BusinessController::showFilteredList(QString query, SearchType type)
         break;
     }
 }
-
+/**
+ * @brief Show single view
+ * @details This function shows the single view.
+ * @param item AbstractItem*
+ */
 void BusinessController::showSingleView(AbstractItem* item)
 {
     single_view_->setItem(item);
     main_view_->setContentView(content_stack_->indexOf(single_view_));
 }
 
-
+/**
+ * @brief Open simulation
+ * @details This function opens a simulation.
+ */
 void BusinessController::openSimulation()
 {
 	LocatorController::WindowControllerInstance()->setDisabled(true);
@@ -252,7 +325,10 @@ void BusinessController::openSimulation()
 	}
 	LocatorController::WindowControllerInstance()->setDisabled(false);
 }
-
+/**
+ * @brief Save simulation by name
+ * @details This function saves a simulation by name.
+ */
 void BusinessController::saveSimulationByName()
 {
 	LocatorController::WindowControllerInstance()->setDisabled(true);
@@ -271,7 +347,10 @@ void BusinessController::saveSimulationByName()
 	}
 	LocatorController::WindowControllerInstance()->setDisabled(false);
 }
-
+/**
+ * @brief Cancel operation
+ * @details This function cancels an operation.
+ */
 void BusinessController::cancelOperation()
 {
     QMessageBox cancelConfirm;
@@ -293,7 +372,10 @@ void BusinessController::cancelOperation()
         break;
     }
 }
-
+/**
+ * @brief Delete interface
+ * @details This function deletes the interface.
+ */
 void BusinessController::deleteInterface()
 {
     main_view_->setContentView(content_stack_->indexOf(default_view_));
@@ -313,7 +395,11 @@ void BusinessController::deleteInterface()
     delete group_list_view_;
 	group_list_view_ = nullptr;
 }
-
+/**
+ * @brief Add new item
+ * @details This function adds a new item.
+ * @param item AbstractItem*
+ */
 void BusinessController::addNewItem(AbstractItem* item)
 {
     AddItem add_item;

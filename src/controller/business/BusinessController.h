@@ -12,7 +12,11 @@
 #include "../../view/MainView.h"
 #include "../../view/widgets/SingleWidget/SingleViewGroup.h"
 #include "../../view/views/DefaultView.h"
-
+/**
+ * @brief BusinessController class
+ * @details This class is the controller for the business logic of the application.
+ * It is responsible for handling the communication between the views and the storage.
+ */
 class BusinessController: public AbstractController {
 Q_OBJECT
 public:

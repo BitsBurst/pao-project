@@ -91,21 +91,35 @@ Category& Category::operator=(const Category& category)
 	distribution_type_ = category.distribution_type_;
 	return *this;
 }
-
+/**
+ * @brief Category::accept
+ * @param visitor
+ */
 void Category::accept(IConstVisitor& visitor) const
 {
     visitor.visit(*this);
 }
+/**
+ * @brief Category::accept
+ * @param visitor
+ */
 void Category::accept(IVisitor& visitor)
 {
     visitor.visit(*this);
 }
-
+/**
+ * @brief Category::setDistributionType
+ * @param distribution_type the new distribution type of the category
+ */
 void Category::setDistributionType(DistributionType distribution_type)
 {
 	distribution_type_ = distribution_type;
 	modelChangedEvent.notifyAsync();
 }
+/**
+ * @brief Category::Category
+ * @param obj
+ */
 Category::Category(const Category& obj):AbstractItem(obj), unit_measure_(obj.unit_measure_), distribution_type_(obj.distribution_type_)
 {
 }

@@ -158,19 +158,31 @@ void Sensor::stopDataGeneration()
  */
 void Sensor::dataGenerated(DataGenObj obj)
 {
-	//qDebug() << "Data generated" + QString::number(obj.getTimestamp().toSecsSinceEpoch()) + " " + QString::number(obj.getData());
 	data_.insertLimited(obj.getTimestamp(), obj.getData());
 	onDataGenerated.notify(obj);
 }
-
+/*
+ * @brief Sensor::getData
+ * @details get sensor data
+ * @return sensor data
+ */
 void Sensor::accept(IConstVisitor& visitor) const
 {
     visitor.visit(*this);
 }
+/*
+ * @brief Sensor::accept
+ * @param visitor
+ */
 void Sensor::accept(IVisitor& visitor)
 {
     visitor.visit(*this);
 }
+/*
+ * @brief Sensor::getSeed
+ * @details get sensor seed
+ * @return sensor seed
+ */
 Sensor::Sensor(const Sensor& obj):AbstractItem(obj), onDataGenerated(), data_(maxDataGenerated), min_range_(obj.min_range_), max_range_(obj.max_range_), category_(obj.category_), seed_(obj.seed_), data_generator_worker_(nullptr), generationTime(obj.generationTime)
 {
 }
