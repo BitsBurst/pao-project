@@ -15,6 +15,7 @@ BusinessController::BusinessController():
 
 bool BusinessController::Init()
 {
+	Logger::Log(LogLevel::_INFO_, __FILE__, __LINE__, __FUNCTION__, "Init BusinessController");
 	if(LocatorController::StorageControllerInstance()->isStorageReadyCheck()) {
 		storageReady();
 	}

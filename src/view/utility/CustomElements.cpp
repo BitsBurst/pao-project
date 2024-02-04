@@ -99,12 +99,16 @@ QFont& CustomElements::getFontDetails()
 
 QSpacerItem* CustomElements::getTerminalSpacer(SpacerDirection direction)
 {
-    QSpacerItem *temp;
+    QSpacerItem *temp = new QSpacerItem(0, 0, QSizePolicy::Minimum, QSizePolicy::Expanding);
     switch (direction) {
     case VERTICAL:
+		if(temp != nullptr)
+			delete temp;
         temp = new QSpacerItem(0, 0, QSizePolicy::Minimum, QSizePolicy::Expanding);
         break;
     case HORIZONTAL:
+		if(temp != nullptr)
+			delete temp;
         temp = new QSpacerItem(0, 0, QSizePolicy::Expanding, QSizePolicy::Minimum);
         break;
     }
@@ -174,32 +178,44 @@ QHBoxLayout* CustomElements::getHorizontalLayout(int left_margin, int right_marg
 
 QLayout* CustomElements::getCustomLayoutPrototype(LayoutPrototype prototype)
 {
-    QLayout * temp;
+    QLayout * temp = CustomElements::getVerticalLayout(16);
 
     switch (prototype) {
         case V_CONTAINER:
+			if(temp != nullptr)
+				delete temp;
             temp = CustomElements::getVerticalLayout(16);
             temp->setAlignment(Qt::AlignHCenter | Qt::AlignCenter);
             temp->setSpacing(8);
             break;
         case H_NO_BORDER:
+			if(temp != nullptr)
+				delete temp;
             temp = CustomElements::getHorizontalLayout(0);
             temp->setSpacing(0);
             temp->setAlignment(Qt::AlignHCenter | Qt::AlignCenter);
             break;
         case SINGLE_SPACING:
+			if(temp != nullptr)
+				delete temp;
             temp = CustomElements::getVerticalLayout(0);
             temp->setSpacing(8);
             break;
         case H_SINGLE_SPACING:
+			if(temp != nullptr)
+				delete temp;
             temp = CustomElements::getHorizontalLayout(0);
             temp->setSpacing(8);
             break;
         case DOUBLE_SPACING:
+			if(temp != nullptr)
+				delete temp;
             temp = CustomElements::getVerticalLayout(0);
             temp->setSpacing(16);
             break;
         case QUAD_SPACING:
+			if(temp != nullptr)
+				delete temp;
             temp = CustomElements::getVerticalLayout(0);
             temp->setSpacing(32);
             break;

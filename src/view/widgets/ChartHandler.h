@@ -16,7 +16,6 @@ private:
     QVector<Sensor *> sensor_list_;
 
 public:
-    explicit ChartHandler(int number_charts = 1, QWidget * parent = nullptr);
     explicit ChartHandler(QVector<Sensor *> vector_list, QWidget * parent = nullptr);
 	~ChartHandler() override;
 };
