@@ -24,10 +24,9 @@ signals:
     void changeToSingleSensorView();
     void changeToSingleGroupView();
     void changeToModifyView(AbstractItem& item);
-    void changeToCreateView();
-    void changeToSettingsView();
     void changeToCreateCategory();
     void changeToCreateSensor();
+    void changeToDefaultView();
 	void openSimulation();
 	void saveWithName();
 private:

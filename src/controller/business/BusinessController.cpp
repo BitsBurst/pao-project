@@ -87,11 +87,11 @@ void BusinessController::subscribeToEvents()
     LocatorController::StorageControllerInstance()->beforeDestroy.subscribe(std::bind(&BusinessController::deleteInterface, this));
     // Signals
 	connect(LocatorController::StorageControllerInstance(), &StorageController::StorageReady, this, &BusinessController::storageReady);
-    //connect(main_view_, &MainView::changeToModifyView, this, &BusinessController::showModifyView);
 	connect(main_view_, &MainView::openSimulation, this, &BusinessController::openSimulation);
 	connect(main_view_, &MainView::saveWithName, this, &BusinessController::saveSimulationByName);
     connect(main_view_, &MainView::changeToCreateCategory, this, &BusinessController::showCreateCategory);
     connect(main_view_, &MainView::changeToCreateSensor, this, &BusinessController::showCreateSensor);
+    connect(main_view_, &MainView::changeToDefaultView, this, &BusinessController::showDefaultView);
 }
 /**
  * @brief Unsubscribe to events
@@ -102,11 +102,11 @@ void BusinessController::unsubscribeToEvents()
 	LocatorController::StorageControllerInstance()->beforeDestroy.unsubscribe(std::bind(&BusinessController::deleteInterface, this));
 	// Signals
 	disconnect(LocatorController::StorageControllerInstance(), &StorageController::StorageReady, this, &BusinessController::storageReady);
-	//disconnect(main_view_, &MainView::changeToModifyView, this, &BusinessController::showModifyView);
 	disconnect(main_view_, &MainView::openSimulation, this, &BusinessController::openSimulation);
 	disconnect(main_view_, &MainView::saveWithName, this, &BusinessController::saveSimulationByName);
 	disconnect(main_view_, &MainView::changeToCreateCategory, this, &BusinessController::showCreateCategory);
 	disconnect(main_view_, &MainView::changeToCreateSensor, this, &BusinessController::showCreateSensor);
+    disconnect(main_view_, &MainView::changeToDefaultView, this, &BusinessController::showDefaultView);
 }
 /**
  * @brief Set data field

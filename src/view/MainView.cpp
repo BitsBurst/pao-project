@@ -50,9 +50,11 @@ void MainView::createMenu() {
     QMenu * file = new QMenu("File", menu_bar_);
     QMenu * sensors = new QMenu("Sensori", menu_bar_);
     QMenu * categories = new QMenu("Categorie", menu_bar_);
+    QMenu * help = new QMenu("Help", menu_bar_);
     menu_bar_->addMenu(file);
     menu_bar_->addMenu(sensors);
     menu_bar_->addMenu(categories);
+    menu_bar_->addMenu(help);
 
     // Menu Sensors
     QAction * create_sensor = new QAction("Crea", sensors);
@@ -71,11 +73,17 @@ void MainView::createMenu() {
 
     categories->addAction(create_category);
 
+    // Menu Categories
+    QAction * show_default = new QAction("Mostra Shortcut", help);
+
+    help->addAction(show_default);
+
     // Connect Action
 	connect(opensimulation, &QAction::triggered, this, &MainView::openSimulation);
 	connect(exportsimulation, &QAction::triggered, this, &MainView::saveWithName);
     connect(create_sensor, &QAction::triggered, this, &MainView::changeToCreateSensor);
     connect(create_category, &QAction::triggered, this, &MainView::changeToCreateCategory);
+    connect(show_default, &QAction::triggered, this, &MainView::changeToDefaultView);
 
     setMenuBar(menu_bar_);
 }
