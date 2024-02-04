@@ -1,7 +1,7 @@
 #include "ItemEditor.h"
 
 ItemEditor::ItemEditor(EditorView* editor,SensorFormWidget* sensor_editor, CategoryFormWidget* category_editor)
-    : editor_(editor), sensor_editor_(sensor_editor), category_editor_(category_editor) {}
+    :IConstVisitor(), sensor_editor_(sensor_editor), category_editor_(category_editor), editor_(editor) {}
 
 void ItemEditor::visit(const Sensor& sensor) {
     sensor_editor_->setValues(sensor);

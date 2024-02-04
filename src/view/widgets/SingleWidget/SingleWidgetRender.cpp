@@ -1,7 +1,7 @@
 #include "SingleWidgetRender.h"
 
 SingleWidgetRender::SingleWidgetRender(SingleView* view, SingleSensorWidget* sensor_widget, SingleCategoryWidget* category_widget, InformationWidget* information_widget)
-    : sensor_widget_(sensor_widget), category_widget_(category_widget), view_(view), information_widget_(information_widget) {}
+    :IVisitor(), sensor_widget_(sensor_widget), category_widget_(category_widget), information_widget_(information_widget), view_(view) {}
 
 void SingleWidgetRender::visit(Sensor& sensor)
 {
