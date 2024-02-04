@@ -84,8 +84,8 @@ AbstractItem* GroupItemWidget::getItem()
 void GroupItemWidget::setActive(bool active)
 {
 	if (active) {
-		detail_label_->setStyleSheet("color: yellow;");
-		title_label_->setStyleSheet("color: yellow;");
+		detail_label_->setStyleSheet("color: red;");
+		title_label_->setStyleSheet("color: red;");
 	}
 	else {
 		detail_label_->setStyleSheet("");

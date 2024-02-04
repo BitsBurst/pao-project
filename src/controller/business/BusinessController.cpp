@@ -38,7 +38,6 @@ void BusinessController::subscribeToViewEvents(AbstractView* o) {
 	}
 	else {
 		Logger::Log(LogLevel::_ERROR_, __FILE__, __LINE__, __FUNCTION__, "Subscribing to unknown view");
-		throw NormalException("Subscribing to unknown view");
 	}
 }
 void BusinessController::unsubscribeToViewEvents(AbstractView* o) {
@@ -56,7 +55,6 @@ void BusinessController::unsubscribeToViewEvents(AbstractView* o) {
 		disconnect(single_view_, &SingleView::deleteItem, this, &BusinessController::deleteFromGraphicalElement);
 	} else {
 		Logger::Log(LogLevel::_ERROR_, __FILE__, __LINE__, __FUNCTION__, "Unsubscribing to unknown view");
-		throw NormalException("Unsubscribing to unknown view");
 	}
 }
 void BusinessController::subscribeToEvents()
