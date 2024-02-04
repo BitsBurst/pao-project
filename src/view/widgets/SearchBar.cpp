@@ -3,12 +3,15 @@
 #include "../../utility/icons/Icons.h"
 
 SearchBar::SearchBar(QWidget * parent)
-    : AbstractWidget(new QFormLayout, parent), type_(ALL), searchbar_(nullptr), search_btn_(nullptr), btn_group_(nullptr)
+    :
+	AbstractWidget(new QFormLayout, parent),
+	searchbar_(new QLineEdit("", this)),
+	search_btn_(new QPushButton(Icons::getIcon(Icons::IconType::SEARCH), "", this)),
+	btn_group_(new QButtonGroup(this)),
+	sensor_filter(new QPushButton(Icons::getIcon(Icons::IconType::SENSOR), "", this)),
+	category_filter(new QPushButton(Icons::getIcon(Icons::IconType::CATEGORY), "", this)),
+	type_(ALL)
 {
-    searchbar_ = new QLineEdit("", this);
-    search_btn_ = new QPushButton(Icons::getIcon(Icons::IconType::SEARCH), "", this);
-    sensor_filter = new QPushButton(Icons::getIcon(Icons::IconType::SENSOR), "", this);
-    category_filter = new QPushButton(Icons::getIcon(Icons::IconType::CATEGORY), "", this);
 	sensor_filter->setCheckable(true);
 	category_filter->setCheckable(true);
 	sensor_filter->setChecked(true);
@@ -16,7 +19,6 @@ SearchBar::SearchBar(QWidget * parent)
     row->addWidget(searchbar_);
     row->addWidget(search_btn_);
 
-    btn_group_ = new QButtonGroup(this);
     btn_group_->addButton(sensor_filter, 0);
     btn_group_->addButton(category_filter, 1);
 

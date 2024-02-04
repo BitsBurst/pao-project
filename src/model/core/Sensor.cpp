@@ -8,7 +8,7 @@ double Sensor::generationTimeStatic = 100; // generation time in ms
  * @param name sensor name
  * @param category sensor category
  */
-Sensor::Sensor(QString name, Category category):AbstractItem(name), min_range_(0), max_range_(0), category_(category), seed_(QDateTime::currentDateTime().toSecsSinceEpoch()), data_generator_worker_(nullptr), data_(maxDataGenerated),  generationTime(generationTimeStatic)
+Sensor::Sensor(QString name, Category category):AbstractItem(name), onDataGenerated(), data_(maxDataGenerated), min_range_(0), max_range_(0), category_(category), seed_(QDateTime::currentDateTime().toSecsSinceEpoch()), data_generator_worker_(nullptr),  generationTime(generationTimeStatic)
 {
 
 }
@@ -81,7 +81,7 @@ void Sensor::setCategory(Category category)
  * @brief Sensor::Sensor
  * @details Sensor constructor
  */
-Sensor::Sensor(): AbstractItem(""), min_range_(-5), max_range_(5), category_(Category()), seed_(QDateTime::currentDateTime().toSecsSinceEpoch()), data_(maxDataGenerated), data_generator_worker_(nullptr), generationTime(generationTimeStatic)
+Sensor::Sensor(): AbstractItem(""), onDataGenerated(), data_(maxDataGenerated), min_range_(-5), max_range_(5), category_(Category()), seed_(QDateTime::currentDateTime().toSecsSinceEpoch()), data_generator_worker_(nullptr), generationTime(generationTimeStatic)
 {
 
 }
@@ -171,6 +171,6 @@ void Sensor::accept(IVisitor& visitor)
 {
     visitor.visit(*this);
 }
-Sensor::Sensor(const Sensor& obj):AbstractItem(obj), min_range_(obj.min_range_), max_range_(obj.max_range_), category_(obj.category_), seed_(obj.seed_), data_(maxDataGenerated), data_generator_worker_(nullptr), generationTime(obj.generationTime)
+Sensor::Sensor(const Sensor& obj):AbstractItem(obj), onDataGenerated(), data_(maxDataGenerated), min_range_(obj.min_range_), max_range_(obj.max_range_), category_(obj.category_), seed_(obj.seed_), data_generator_worker_(nullptr), generationTime(obj.generationTime)
 {
 }

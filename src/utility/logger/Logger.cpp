@@ -98,7 +98,7 @@ void Logger::Destroy()
  * @param methodname the method where the log message is logged
  * @param message the message to log
  */
-LoggerObject::LoggerObject(QDateTime dt, LogLevel log_level, QString file, int line, QString methodname, QString message) : time_(dt), log_level_(log_level), file_(file), line_(line), methodname_(methodname), message_(message), is_message_(true)
+LoggerObject::LoggerObject(QDateTime dt, LogLevel log_level, QString file, int line, QString methodname, QString message) : log_level_(log_level), file_(file), line_(line), methodname_(methodname), message_(message), lm_(), is_message_(true), time_(dt)
 {
 }
 /*
@@ -111,7 +111,7 @@ LoggerObject::LoggerObject(QDateTime dt, LogLevel log_level, QString file, int l
  * @param methodname the method where the log message is logged
  * @param lm the method call type
  */
-LoggerObject::LoggerObject(QDateTime dt, LogLevel log_level, QString file, int line, QString methodname, LogMethod lm) : time_(dt), log_level_(log_level), file_(file), line_(line), methodname_(methodname), lm_(lm), is_message_(false)
+LoggerObject::LoggerObject(QDateTime dt, LogLevel log_level, QString file, int line, QString methodname, LogMethod lm) : log_level_(log_level), file_(file), line_(line), methodname_(methodname), message_(), lm_(lm), is_message_(false), time_(dt)
 {
 }
 /*
