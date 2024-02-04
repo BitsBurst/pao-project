@@ -23,6 +23,7 @@ signals:
     void modelChanged();
     void cancelOperation();
     void addNewItem(AbstractItem * item);
+    void changeToSingleView(AbstractItem * item);
 
 private slots:
 	void applyChanges();
@@ -32,7 +33,7 @@ private:
     QWidget * form_;
     QStackedLayout* form_stack_;
     AbstractItem* item_;
-    // TODO[Luca] Remove useless Vector?
+
     QVector<AbstractFormWidget*> editors_;
     QPushButton * ok_button_, * cancel_button_;
 

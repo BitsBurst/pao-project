@@ -84,7 +84,7 @@ void RealtimeChart::addRealtimeGraph()
 
 	// Pen Settings
 	QPen graphPen;
-	graphPen.setColor(QColor(rand()%245+10, rand()%245+10, rand()%245+10));
+	graphPen.setColor(Qt::red);
 	graphPen.setWidthF(2);
 	custom_plot_->graph()->setPen(graphPen);
 

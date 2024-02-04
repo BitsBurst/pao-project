@@ -40,6 +40,7 @@ void BusinessController::subscribeToViewEvents(AbstractView* o) {
 		connect(editor_view_, &EditorView::modelChanged, this, &BusinessController::updateSidebar);
 		connect(editor_view_, &EditorView::addNewItem, this, &BusinessController::addNewItem);
 		connect(editor_view_, &EditorView::cancelOperation, this, &BusinessController::cancelOperation);
+        connect(editor_view_, &EditorView::changeToSingleView, this, &BusinessController::showSingleView);
 	}
 	else if(typeid(*o) == typeid(GroupListView)) {
 		connect(group_list_view_, &GroupListView::showSingleItem, this, &BusinessController::showSingleView);
@@ -63,6 +64,7 @@ void BusinessController::unsubscribeToViewEvents(AbstractView* o) {
 		disconnect(editor_view_, &EditorView::modelChanged, this, &BusinessController::updateSidebar);
 		disconnect(editor_view_, &EditorView::addNewItem, this, &BusinessController::addNewItem);
 		disconnect(editor_view_, &EditorView::cancelOperation, this, &BusinessController::cancelOperation);
+        disconnect(editor_view_, &EditorView::changeToSingleView, this, &BusinessController::showSingleView);
 	}
 	else if(typeid(*o) == typeid(GroupListView)) {
 		disconnect(group_list_view_, &GroupListView::showSingleItem, this, &BusinessController::showSingleView);
@@ -406,5 +408,4 @@ void BusinessController::addNewItem(AbstractItem* item)
     item->accept(add_item);
 
     main_view_->getSearch()->searchItem();
-    showDefaultView();
 }
