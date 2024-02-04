@@ -64,6 +64,7 @@ Category * Category::fromJson(const QJsonObject& obj)
 	Category* category = new Category();
 	category->id_ = abs_item->getId();
 	category->name_ = abs_item->getName();
+	category->description_ = abs_item->getDescription();
 	if(const QJsonValue& unit_measure = obj["unit_measure"]; unit_measure.isString())
 		category->unit_measure_ = unit_measure.toString();
 	if(const QJsonValue& distribution_type = obj["distribution_type"]; distribution_type.isDouble())

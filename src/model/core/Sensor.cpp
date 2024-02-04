@@ -112,6 +112,7 @@ Sensor* Sensor::fromJson(const QJsonObject& object)
 	Sensor* sensor = new Sensor();
 	sensor->id_ = abs_item->getId();
 	sensor->name_ = abs_item->getName();
+	sensor->description_ = abs_item->getDescription();
 	if(const QJsonValue& min_range = object["min_range"]; min_range.isDouble())
 		sensor->min_range_ = min_range.toDouble();
 	if(const QJsonValue& max_range = object["max_range"]; max_range.isDouble())

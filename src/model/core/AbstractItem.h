@@ -19,7 +19,7 @@ public:
 	 virtual ~AbstractItem();
 	 AbstractItem();
 	 AbstractItem(QString);
-	 AbstractItem(AbstractItem const &abstract_item);
+	 AbstractItem(const AbstractItem &abstract_item);
 	 QString getId() const;
 	 void setId(QString id);
 	 QString getName() const;
