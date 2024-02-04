@@ -3,7 +3,9 @@
 
 #include "IVisitor.h"
 #include "../../controller/LocatorController.h"
-
+/**
+ * @brief Visitor to delete an item from the list of items
+ */
 class DeleteItem : public IVisitor{
 public:
     explicit DeleteItem();

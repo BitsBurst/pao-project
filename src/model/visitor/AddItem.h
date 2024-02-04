@@ -4,7 +4,9 @@
 
 #include "IVisitor.h"
 #include "../../controller/LocatorController.h"
-
+/**
+ * @brief Visitor to add an item to the list of items
+ */
 class AddItem : public IVisitor{
 public:
     explicit AddItem();

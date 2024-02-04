@@ -1,6 +1,8 @@
 #include <QMap>
 #include "DistributionUtility.h"
-
+/**
+ * @brief Map of distribution type to string
+ */
 QMap<DistributionType,QString> DistributionUtility::type_ = QMap<DistributionType,QString>({
 	{ DistributionType::WAVE_1, "WAVE_1"},
 	{ DistributionType::WAVE_2, "WAVE_2"},
@@ -10,7 +12,11 @@ QMap<DistributionType,QString> DistributionUtility::type_ = QMap<DistributionTyp
 	{ DistributionType::SINUSOIDAL, "SINUSOIDAL"},
 	{ DistributionType::UNIFORM, "UNIFORM"}
 });
-
+/**
+ * @brief DistributionUtility::ToString
+ * @param v distribution type
+ * @return string representation of the distribution type
+ */
 QString DistributionUtility::ToString(DistributionType v) {
 	return type_[v];
 }

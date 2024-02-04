@@ -1,4 +1,9 @@
 #include "Icons.h"
+/**
+ * @brief Get the icon based on the type
+ * @param type Icon type
+ * @return Icon
+ */
 QIcon Icons::getIcon(Icons::IconType type)
 {
 	QIcon icon;

@@ -2,6 +2,9 @@
 #define SMARTSENSORS_ICONS_H
 
 #include <QIcon>
+/**
+ * @brief Class to get icons
+ */
 class Icons {
 public:
 	enum IconType {

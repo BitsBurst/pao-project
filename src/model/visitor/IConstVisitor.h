@@ -3,7 +3,9 @@
 
 class Sensor;
 class Category;
-
+/**
+ * @brief Interface for a visitor that can visit a sensor or a category
+ */
 class IConstVisitor {
 public:
     virtual ~IConstVisitor() {};

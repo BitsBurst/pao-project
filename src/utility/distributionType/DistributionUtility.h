@@ -2,7 +2,9 @@
 #define SMARTSENSORS_DISTRIBUTIONUTILITY_H
 
 #include <QString>
-
+/**
+ * @brief Enum to represent the distribution type
+ */
 enum DistributionType {
 	WAVE_1,
 	WAVE_2,
@@ -12,7 +14,9 @@ enum DistributionType {
 	SINUSOIDAL,
 	UNIFORM
 };
-
+/**
+ * @brief Class to convert distribution type to string
+ */
 class DistributionUtility {
 private:
 public:
