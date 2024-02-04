@@ -4,6 +4,7 @@
 #include "../core/AbstractController.h"
 #include "../../model/exception/NormalException.h"
 #include "../../model/exception/FatalException.h"
+#include "../../utility/logger/Logger.h"
 /**
  * @brief The ErrorController class
  * @details This class is used to manage the exceptions thrown by the application.

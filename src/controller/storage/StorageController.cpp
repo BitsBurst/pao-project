@@ -98,6 +98,7 @@ void StorageController::storageReadyEvent()
  */
 void StorageController::changeStorageFile(QString filename)
 {
+	Logger::Log(LogLevel::_INFO_, __FILE__, __LINE__, __FUNCTION__, LogMethod::_IN_);
 	try {
 		worker_->onStorageReadyEvent.unsubscribe(std::bind(&StorageController::storageReadyEvent, this));
 		storage_->onModelChangedEvent.unsubscribe(std::bind(&StorageController::modelChanged, this));
@@ -112,14 +113,21 @@ void StorageController::changeStorageFile(QString filename)
 	}catch (...) {
 		Logger::Log(LogLevel::_ERROR_, __FILE__, __LINE__, __FUNCTION__,QString("Couldn't change storage: %1 ").arg(filename));
 	}
+	Logger::Log(LogLevel::_INFO_, __FILE__, __LINE__, __FUNCTION__, LogMethod::_OUT_);
 }
-
+/**
+ * @brief StorageController::saveStorageByName
+ * Save the storage by name
+ * @param filename
+ */
 void StorageController::saveStorageByName(QString filename)
 {
+	Logger::Log(LogLevel::_INFO_, __FILE__, __LINE__, __FUNCTION__, LogMethod::_IN_);
 	try {
 		StorageObject storage = *storage_;
 		StorageUtility::StoreJSON(storage.toJson(), filename);
 	} catch (std::exception& e) {
 		Logger::Log(LogLevel::_ERROR_, __FILE__, __LINE__, __FUNCTION__, QString("Couldn't store storage: %1 %2").arg(filename).arg(e.what()));
 	}
+	Logger::Log(LogLevel::_INFO_, __FILE__, __LINE__, __FUNCTION__, LogMethod::_OUT_);
 }

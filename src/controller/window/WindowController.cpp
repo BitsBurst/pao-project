@@ -7,11 +7,13 @@
  */
 WindowController::WindowController()
 {
+	Logger::Log(LogLevel::_INFO_, __FILE__, __LINE__, __FUNCTION__, LogMethod::_IN_);
 	content_stack_ = new QStackedWidget;
 	sidebar_stack_ = new QStackedWidget;
 
 	main_window_ = new MainView(content_stack_, sidebar_stack_);
 	setDisabled(true);
+	Logger::Log(LogLevel::_INFO_, __FILE__, __LINE__, __FUNCTION__, LogMethod::_OUT_);
 }
 /**
  * @brief WindowController::setDisabled
@@ -22,7 +24,10 @@ WindowController::WindowController()
  */
 void WindowController::setDisabled(bool b)
 {
+	Logger::Log(LogLevel::_INFO_, __FILE__, __LINE__, __FUNCTION__, LogMethod::_IN_);
+	Logger::Log(LogLevel::_INFO_, __FILE__, __LINE__, __FUNCTION__, QString("Setting main window to %1").arg(b ? "disabled" : "enabled"));
 	main_window_->setDisabled(b);
+	Logger::Log(LogLevel::_INFO_, __FILE__, __LINE__, __FUNCTION__, LogMethod::_OUT_);
 }
 /**
  * @brief WindowController::Init
@@ -43,9 +48,18 @@ bool WindowController::Init()
  */
 void WindowController::Destroy()
 {
-
+	Logger::Log(LogLevel::_INFO_, __FILE__, __LINE__, __FUNCTION__, LogMethod::_IN_);
+	Logger::Log(LogLevel::_INFO_, __FILE__, __LINE__, __FUNCTION__, LogMethod::_OUT_);
 }
+/**
+ * @brief WindowController::setTitle
+ * @param title
+ * @details This method is used to set the title of the main window.
+ */
 void WindowController::setTitle(QString title)
 {
+	Logger::Log(LogLevel::_INFO_, __FILE__, __LINE__, __FUNCTION__, LogMethod::_IN_);
+	Logger::Log(LogLevel::_INFO_, __FILE__, __LINE__, __FUNCTION__, QString("Setting main window title to %1").arg(title));
 	main_window_->setWindowTitle(title);
+	Logger::Log(LogLevel::_INFO_, __FILE__, __LINE__, __FUNCTION__, LogMethod::_OUT_);
 }

@@ -75,8 +75,10 @@ bool LocatorController::Init()
  */
 void LocatorController::Destroy()
 {
+	Logger::Log(LogLevel::_INFO_, __FILE__, __LINE__, __FUNCTION__, "Locator Destroying");
 	StorageControllerInstance()->Destroy();
 	WindowControllerInstance()->Destroy();
 	BusinessControllerInstance()->Destroy();
 	ErrorControllerInstance()->Destroy();
+	Logger::Log(LogLevel::_INFO_, __FILE__, __LINE__, __FUNCTION__, "Locator Destroyed");
 }

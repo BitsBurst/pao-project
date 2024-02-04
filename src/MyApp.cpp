@@ -17,10 +17,8 @@ MyApp::~MyApp()
  */
 MyApp::MyApp(int i, char** p_string): QApplication(i, p_string) {
 	try {
-
 		CustomElements::Init();
 		LocatorController::Init();
-
 	}
 	catch (NormalException& e) {
 		LocatorController::ErrorControllerInstance()->manageException(e);

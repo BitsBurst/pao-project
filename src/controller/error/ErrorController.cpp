@@ -23,6 +23,7 @@ bool ErrorController::Init()
  */
 void ErrorController::manageException(NormalException exception)
 {
+	Logger::Log(LogLevel::_INFO_, __FILE__, __LINE__, __FUNCTION__, QString("Error: %1").arg(exception.getMessage()));
 	QMessageBox deleteConfirm;
 	deleteConfirm.setText("Errore");
 	deleteConfirm.setInformativeText(exception.getMessage());
@@ -35,6 +36,7 @@ void ErrorController::manageException(NormalException exception)
  */
 void ErrorController::manageException(FatalException exception)
 {
+	Logger::Log(LogLevel::_INFO_, __FILE__, __LINE__, __FUNCTION__, QString("Fatal error: %1").arg(exception.getMessage()));
 	QMessageBox deleteConfirm;
 	deleteConfirm.setText("Errore Grave");
 	deleteConfirm.setInformativeText(exception.getMessage());
