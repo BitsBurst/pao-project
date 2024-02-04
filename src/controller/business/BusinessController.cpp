@@ -125,10 +125,10 @@ void BusinessController::setDataField(MainView* main_view, QStackedWidget* conte
     content_stack_ = content_stack;
     sidebar_stack_ = sidebar_stack;
     content_stack_->addWidget(default_view_);
-	open_simulation_ = new QShortcut(QKeySequence(Qt::CTRL + Qt::Key_O), main_view_);
-	save = new QShortcut(QKeySequence(Qt::CTRL + Qt::Key_S), main_view_);
-	create_sensor_ = new QShortcut(QKeySequence(Qt::CTRL + Qt::Key_X), main_view_);
-	create_category_ = new QShortcut(QKeySequence(Qt::CTRL + Qt::Key_C), main_view_);
+	open_simulation_ = new QShortcut(QKeySequence(Qt::CTRL, Qt::Key_O), main_view_);
+	save = new QShortcut(QKeySequence(Qt::CTRL, Qt::Key_S), main_view_);
+	create_sensor_ = new QShortcut(QKeySequence(Qt::CTRL, Qt::Key_X), main_view_);
+	create_category_ = new QShortcut(QKeySequence(Qt::CTRL, Qt::Key_C), main_view_);
 }
 /**
  * @brief Destroy function
