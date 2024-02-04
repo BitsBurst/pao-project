@@ -10,6 +10,10 @@
  */
 class SidebarContainer : public AbstractContainer {
     Q_OBJECT
+signals:
+    void createSensor();
+    void createCategory();
+    
 private:
     SidebarLowControlWidget * low_control_widget_;
     SearchBar* search_bar_;

@@ -26,6 +26,9 @@ SidebarContainer::SidebarContainer(QStackedWidget * current_view, QWidget* paren
     layout_->addWidget(search_bar_);
     layout_->addWidget(current_view_);
     layout_->addWidget(low_control_widget_);
+
+    connect(low_control_widget_, &SidebarLowControlWidget::createSensor, this, &SidebarContainer::createSensor);
+    connect(low_control_widget_, &SidebarLowControlWidget::createCategory, this, &SidebarContainer::createCategory);
 }
 /**
  * @brief SidebarContainer::getSearch

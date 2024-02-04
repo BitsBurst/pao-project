@@ -16,10 +16,11 @@ MainView::MainView(QStackedWidget * content, QStackedWidget * sidebar, QWidget* 
 	setScreen(qApp->screens()[0]);
 
 	setWindowIcon(QIcon(":/icons/logo.jpg"));
+
 	// Initialization
     content_ = new MainContentContainer(content, this);
     sidebar_ = new SidebarContainer(sidebar, this);
-    searchbar_ = static_cast<SidebarContainer*>(sidebar_)->getSearch();
+    searchbar_ = sidebar_->getSearch();
 
     // Creation Calls
     createMenu();
@@ -33,6 +34,9 @@ MainView::MainView(QStackedWidget * content, QStackedWidget * sidebar, QWidget* 
     central_widget_->setSizePolicy(QSizePolicy::Maximum, QSizePolicy::Maximum);
 
     setCentralWidget(central_widget_);
+
+    connect(sidebar_, &SidebarContainer::createSensor, this, &MainView::changeToCreateSensor);
+    connect(sidebar_, &SidebarContainer::createCategory, this, &MainView::changeToCreateCategory);
 }
 /**
  * @brief MainView::changeToSingleSensorView is a slot that is used to change the view to the single sensor view.
@@ -51,13 +55,9 @@ void MainView::createMenu() {
     menu_bar_->addMenu(categories);
 
     // Menu Sensors
-    QAction * single_sensor_view = new QAction("Visione Singola", sensors);
-    QAction * single_group_view = new QAction("Visione Singola di gruppo", sensors);
     QAction * create_sensor = new QAction("Crea", sensors);
 
     sensors->addAction(create_sensor);
-    sensors->addAction(single_sensor_view);
-    sensors->addAction(single_group_view);
 
     // Menu File
     QAction * opensimulation = new QAction("Apri file simulazione", file);
@@ -72,10 +72,6 @@ void MainView::createMenu() {
     categories->addAction(create_category);
 
     // Connect Action
-    connect(single_sensor_view, &QAction::triggered, this, &MainView::changeToSingleSensorView);
-    connect(single_group_view, &QAction::triggered, this, &MainView::changeToSingleGroupView);
-
-    //connect(settings_view, &QAction::triggered, this, &MainView::changeToSettingsView);
 	connect(opensimulation, &QAction::triggered, this, &MainView::openSimulation);
 	connect(exportsimulation, &QAction::triggered, this, &MainView::saveWithName);
     connect(create_sensor, &QAction::triggered, this, &MainView::changeToCreateSensor);

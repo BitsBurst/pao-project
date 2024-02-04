@@ -8,6 +8,9 @@
  */
 class SidebarLowControlWidget : public AbstractWidget {
     Q_OBJECT
+signals:
+    void createSensor();
+    void createCategory();
 private:
     QLabel *title_label_;
 

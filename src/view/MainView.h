@@ -34,8 +34,8 @@ private:
     QWidget * central_widget_;
     QLayout * layout_;
 
-    AbstractContainer * sidebar_;
-    AbstractContainer * content_;
+    SidebarContainer * sidebar_;
+    MainContentContainer * content_;
 
     QMenuBar * menu_bar_;
     SearchBar * searchbar_;
