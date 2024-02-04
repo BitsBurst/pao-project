@@ -173,10 +173,13 @@ const QVector<Sensor*>* StorageObject::getSensors() const
  * @return
  * Returns the sensors list as a QVector<AbstractItem*>
  */
-const QVector<AbstractItem*>& StorageObject::getSensors(int) const
+const QVector<AbstractItem*> StorageObject::getSensors(int) const
 {
-	checkSensors();
-	return reinterpret_cast<const QVector<AbstractItem*>&>(sensors_);
+	QVector<AbstractItem*> list;
+	for (auto& i : sensors_) {
+		list.append(i);
+	}
+	return list;
 }
 
 /*
@@ -184,11 +187,13 @@ const QVector<AbstractItem*>& StorageObject::getSensors(int) const
  * @return
  * Returns the categories list as a QVector<AbstractItem*>
  */
-const QVector<AbstractItem*>& StorageObject::getCategories(int) const
+const QVector<AbstractItem*> StorageObject::getCategories(int) const
 {
-	checkCategories();
-
-	return reinterpret_cast<const QVector<AbstractItem*>&>(categories_);
+	QVector<AbstractItem*> list;
+	for (auto& i : categories_) {
+		list.append(i);
+	}
+	return list;
 }
 /*
  * @brief checkCategories
