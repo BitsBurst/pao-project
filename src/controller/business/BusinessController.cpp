@@ -14,7 +14,11 @@ BusinessController::BusinessController():
 	default_view_(new DefaultView()),
 	main_view_(nullptr),
 	content_stack_(nullptr),
-	sidebar_stack_(nullptr)
+	sidebar_stack_(nullptr),
+	open_simulation_(nullptr),
+	save(nullptr),
+	create_sensor_(nullptr),
+	create_category_(nullptr)
 {}
 /**
  * @brief Init function
@@ -121,6 +125,10 @@ void BusinessController::setDataField(MainView* main_view, QStackedWidget* conte
     content_stack_ = content_stack;
     sidebar_stack_ = sidebar_stack;
     content_stack_->addWidget(default_view_);
+	open_simulation_ = new QShortcut(QKeySequence(Qt::CTRL + Qt::Key_O), main_view_);
+	save = new QShortcut(QKeySequence(Qt::CTRL + Qt::Key_S), main_view_);
+	create_sensor_ = new QShortcut(QKeySequence(Qt::CTRL + Qt::Key_X), main_view_);
+	create_category_ = new QShortcut(QKeySequence(Qt::CTRL + Qt::Key_C), main_view_);
 }
 /**
  * @brief Destroy function
@@ -136,6 +144,7 @@ void BusinessController::Destroy()
  */
 void BusinessController::storageReady()
 {
+	subscribeToShurtcuts();
 	subscribeToEvents();
 	if(!single_view_){
 		single_view_ = new SingleView(new Category());
@@ -311,6 +320,7 @@ void BusinessController::showSingleView(AbstractItem* item)
 void BusinessController::openSimulation()
 {
 	LocatorController::WindowControllerInstance()->setDisabled(true);
+	unsubscribeToShurtcuts();
 	QString selfilter = tr("JSON (*.json)");
 	QString fileName = QFileDialog::getOpenFileName(
 			main_view_,
@@ -323,6 +333,7 @@ void BusinessController::openSimulation()
 		LocatorController::StorageControllerInstance()->changeStorageFile(fileName);
 		LocatorController::WindowControllerInstance()->setTitle("SmartSensors - " + fileName);
 	} else {
+		subscribeToShurtcuts();
 		Logger::Log(LogLevel::_WARNING_, __FILE__, __LINE__, __FUNCTION__, "No file selected");
 	}
 	LocatorController::WindowControllerInstance()->setDisabled(false);
@@ -334,6 +345,7 @@ void BusinessController::openSimulation()
 void BusinessController::saveSimulationByName()
 {
 	LocatorController::WindowControllerInstance()->setDisabled(true);
+	unsubscribeToShurtcuts();
 	QString selfilter = tr("JSON (*.json)");
 	QString fileName = QFileDialog::getSaveFileName(
 			main_view_,
@@ -347,6 +359,7 @@ void BusinessController::saveSimulationByName()
 	} else {
 		Logger::Log(LogLevel::_WARNING_, __FILE__, __LINE__, __FUNCTION__, "No file name selected");
 	}
+	subscribeToShurtcuts();
 	LocatorController::WindowControllerInstance()->setDisabled(false);
 }
 /**
@@ -408,4 +421,26 @@ void BusinessController::addNewItem(AbstractItem* item)
     item->accept(add_item);
 
     main_view_->getSearch()->searchItem();
+}
+/**
+ * @brief Subscribe to shurtcuts
+ * @details This function subscribes to the shurtcuts.
+ */
+void BusinessController::subscribeToShurtcuts()
+{
+	connect(open_simulation_, &QShortcut::activated, this, &BusinessController::openSimulation);
+	connect(save, &QShortcut::activated, this, &BusinessController::saveSimulationByName);
+	connect(create_sensor_, &QShortcut::activated, this, &BusinessController::showCreateSensor);
+	connect(create_category_, &QShortcut::activated, this, &BusinessController::showCreateCategory);
+}
+/**
+ * @brief Unsubscribe to shurtcuts
+ * @details This function unsubscribes to the shurtcuts.
+ */
+void BusinessController::unsubscribeToShurtcuts()
+{
+	disconnect(open_simulation_, &QShortcut::activated, this, &BusinessController::openSimulation);
+	disconnect(save, &QShortcut::activated, this, &BusinessController::saveSimulationByName);
+	disconnect(create_sensor_, &QShortcut::activated, this, &BusinessController::showCreateSensor);
+	disconnect(create_category_, &QShortcut::activated, this, &BusinessController::showCreateCategory);
 }
