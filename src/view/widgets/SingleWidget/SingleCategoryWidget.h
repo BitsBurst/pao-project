@@ -5,7 +5,10 @@
 #include "../../views/GroupListView.h"
 #include "../../../model/core/AbstractItem.h"
 #include "../../../model/core/Category.h"
-
+/**
+ * @brief The SingleCategoryWidget class
+ * This class is the widget for the single category.
+ */
 class SingleCategoryWidget : public AbstractWidget {
     Q_OBJECT
 private:

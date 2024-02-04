@@ -1,5 +1,8 @@
 #include "SidebarLowControlWidget.h"
-
+/**
+ * @brief SidebarLowControlWidget::SidebarLowControlWidget
+ * @param parent
+ */
 SidebarLowControlWidget::SidebarLowControlWidget(QWidget* parent)
     : AbstractWidget(new QVBoxLayout, parent) {
 
@@ -9,6 +12,9 @@ SidebarLowControlWidget::SidebarLowControlWidget(QWidget* parent)
     // Layout Widgets
     layout_->addWidget(title_label_);
 }
+/**
+ * @brief SidebarLowControlWidget::~SidebarLowControlWidget
+ */
 SidebarLowControlWidget::~SidebarLowControlWidget()
 {
 

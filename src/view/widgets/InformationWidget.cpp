@@ -1,6 +1,11 @@
 #include "InformationWidget.h"
 #include "../utility/CustomElements.h"
-
+/**
+ * @brief InformationWidget::InformationWidget
+ * @param item
+ * @param check_add_btn
+ * @param parent
+ */
 InformationWidget::InformationWidget(AbstractItem* item, bool check_add_btn, QWidget* parent)
     :AbstractWidget(CustomElements::getCustomLayoutPrototype(SINGLE_SPACING), parent), add_btn_(nullptr)
 {
@@ -36,16 +41,22 @@ InformationWidget::InformationWidget(AbstractItem* item, bool check_add_btn, QWi
     // Events
     buttonEvent();
 }
-
+/**
+ * @brief InformationWidget::changeToModify
+ */
 void InformationWidget::buttonEvent()
 {
     connect(modify_btn_, &QPushButton::released, this, &InformationWidget::changeToModify);
 	connect(delete_btn_, &QPushButton::released, this, &InformationWidget::deleteItem);
 }
-
+/**
+ * @brief InformationWidget::changeToModify
+ */
 InformationWidget::~InformationWidget()
 {}
-
+/**
+ * @brief InformationWidget::changeToModify
+ */
 void InformationWidget::setItem(AbstractItem* item)
 {
     title_->setText(item->getName());

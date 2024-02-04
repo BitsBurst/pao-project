@@ -10,7 +10,11 @@
 
 enum LayoutPrototype {H_NO_BORDER, V_CONTAINER, SINGLE_SPACING, DOUBLE_SPACING, QUAD_SPACING, H_SINGLE_SPACING};
 enum SpacerDirection {VERTICAL, HORIZONTAL};
-
+/**
+ * @brief The CustomElements class
+ * This class is a utility class that provides a set of static methods to create custom elements
+ * such as fonts, layouts, and spacers.
+ */
 class CustomElements : QObject {
 private:
     static QFont* font_h1_instance_;

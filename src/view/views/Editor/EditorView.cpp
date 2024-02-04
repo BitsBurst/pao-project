@@ -2,7 +2,11 @@
 #include "EditorView.h"
 #include "../../widgets/Editor/ItemEditor.h"
 #include "../../../controller/LocatorController.h"
-
+/**
+ * @brief EditorView::EditorView
+ * @param item
+ * @param parent
+ */
 EditorView::EditorView(AbstractItem* item, QWidget* parent)
         :AbstractView(CustomElements::getCustomLayoutPrototype(SINGLE_SPACING), parent), item_(item), newObject_(false)
 {
@@ -51,7 +55,10 @@ EditorView::EditorView(AbstractItem* item, QWidget* parent)
     setActiveForm(0);
 	handleEvents();
 }
-
+/**
+ * @brief EditorView::setItem
+ * @param item
+ */
 void EditorView::setItem(AbstractItem* item)
 {
     item_ = item;
@@ -61,12 +68,17 @@ void EditorView::setItem(AbstractItem* item)
         item_->accept(editor_visitor);
     }
 }
-
+/**
+ * @brief EditorView::update
+ */
 void EditorView::update()
 {
     QWidget::update();
 }
-
+/**
+ * @brief EditorView::setActiveForm
+ * @param index
+ */
 void EditorView::setActiveForm(int index)
 {
     form_stack_->setCurrentIndex(index);
@@ -75,12 +87,16 @@ void EditorView::setActiveForm(int index)
         static_cast<AbstractFormWidget*>(form_stack_->currentWidget())->reset();
     }
 }
-
+/**
+ * @brief EditorView::handleEvents
+ */
 void EditorView::handleEvents() {
 	connect(ok_button_, &QPushButton::released, this, &EditorView::applyChanges);
     connect(cancel_button_, &QPushButton::released, this, &EditorView::cancelOperation);
 }
-
+/**
+ * @brief EditorView::applyChanges
+ */
 void EditorView::applyChanges() {
 
     if (newObject_) {
@@ -91,17 +107,26 @@ void EditorView::applyChanges() {
 
    // emit modelChanged();
 }
-
+/**
+ * @brief EditorView::isNewObject
+ * @return
+ */
 bool EditorView::isNewObject() const
 {
     return newObject_;
 }
-
+/**
+ * @brief EditorView::setNewObject
+ * @param newObject
+ */
 void EditorView::setNewObject(bool newObject)
 {
     newObject_ = newObject;
 }
-
+/**
+ * @brief EditorView::getItem
+ * @return
+ */
 AbstractItem* EditorView::getItem() const
 {
     return item_;

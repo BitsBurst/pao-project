@@ -5,7 +5,9 @@
 #include <QChartView>
 #include "../../../../include/CustomPlot/qcustomplot.h"
 #include "../ChartHandler.h"
-
+/**
+ * @brief The SingleSensorWidget class
+ */
 class SingleSensorWidget : public AbstractWidget {
     Q_OBJECT
 private:

@@ -3,7 +3,9 @@
 
 #include <QVBoxLayout>
 #include "AbstractGraphicalElement.h"
-
+/**
+ * @brief The AbstractWidget class
+ */
 class AbstractWidget : public AbstractGraphicalElement {
     Q_OBJECT
 private:

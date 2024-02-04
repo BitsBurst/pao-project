@@ -5,7 +5,10 @@
 #include <QComboBox>
 #include "AbstractFormWidget.h"
 #include "../../../model/core/Category.h"
-
+/**
+ * @brief The CategoryFormWidget class
+ * This class is the form widget for the Category.
+ */
 class CategoryFormWidget : public AbstractFormWidget {
     Q_OBJECT
 private:

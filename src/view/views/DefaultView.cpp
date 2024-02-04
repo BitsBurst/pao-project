@@ -1,5 +1,8 @@
 #include "DefaultView.h"
-
+/**
+ * @brief DefaultView::DefaultView is the constructor of the class.
+ * @param parent is the parent widget of the view.
+ */
 DefaultView::DefaultView(QWidget* parent)
     : AbstractView(CustomElements::getCustomLayoutPrototype(SINGLE_SPACING), parent)
 {

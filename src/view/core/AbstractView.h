@@ -5,7 +5,9 @@
 #include <QLayout>
 #include "AbstractGraphicalElement.h"
 #include "../../model/core/AbstractItem.h"
-
+/**
+ * @brief The AbstractView class
+ */
 class AbstractView : public AbstractGraphicalElement {
     Q_OBJECT
 public:

@@ -1,7 +1,10 @@
 #include "SearchBar.h"
 #include "../../controller/LocatorController.h"
 #include "../../utility/icons/Icons.h"
-
+/**
+ * @brief SearchBar::SearchBar
+ * @param parent
+ */
 SearchBar::SearchBar(QWidget * parent)
     :
 	AbstractWidget(new QFormLayout, parent),
@@ -35,12 +38,17 @@ SearchBar::SearchBar(QWidget * parent)
 
     connect(btn_group_, &QButtonGroup::idReleased, this, &SearchBar::switchButton );
 }
-
+/**
+ * @brief SearchBar::searchItem
+ */
 void SearchBar::searchItem()
 {
     LocatorController::BusinessControllerInstance()->showFilteredList(searchbar_->text(), type_);
 }
-
+/**
+ * @brief SearchBar::switchButton
+ * @param id
+ */
 void SearchBar::switchButton(int id)
 {
     type_ = static_cast<SearchType>(id);
@@ -61,7 +69,9 @@ void SearchBar::switchButton(int id)
 	}
     searchItem();
 }
-
+/**
+ * @brief SearchBar::~SearchBar
+ */
 SearchBar::~SearchBar()
 {
 

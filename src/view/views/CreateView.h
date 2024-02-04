@@ -4,7 +4,9 @@
 #include <QLabel>
 #include "../utility/CustomElements.h"
 #include "../core/AbstractView.h"
-
+/**
+ * @brief The CreateView class
+ */
 class CreateView : public AbstractView {
     Q_OBJECT
 private:

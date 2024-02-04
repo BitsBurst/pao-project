@@ -2,11 +2,22 @@
 #include "GroupItemWidget.h"
 #include "GroupItemRender.h"
 #include "../../../utility/icons/Icons.h"
-
+/**
+ * @brief GroupItemWidget::GroupItemWidget
+ * This is the constructor of the class.
+ * @param item
+ * @param parent
+ */
 void GroupItemWidget::refresh(){
 	GroupItemRender item_render(this);
 	item_->accept(item_render);
 }
+/**
+ * @brief GroupItemWidget::GroupItemWidget
+ * This is the constructor of the class.
+ * @param item
+ * @param parent
+ */
 GroupItemWidget::GroupItemWidget(AbstractItem* item, QWidget* parent)
         : AbstractWidget(CustomElements::getCustomLayoutPrototype(SINGLE_SPACING), parent), title_label_(new QLabel), detail_label_(new QLabel), item_(item)
 {
@@ -49,38 +60,67 @@ GroupItemWidget::GroupItemWidget(AbstractItem* item, QWidget* parent)
     // Events
     handleEvents();
 }
-
+/**
+ * @brief GroupItemWidget::setTitle
+ * This method sets the title of the item.
+ * @param title
+ */
 void GroupItemWidget::setTitle(const QString& title)
 {
     title_label_->setText(title);
 }
-
+/**
+ * @brief GroupItemWidget::setDetail
+ * This method sets the detail of the item.
+ * @param detail
+ */
 void GroupItemWidget::setDetail(const QString& detail)
 {
     detail_label_->setText(detail);
 }
-
+/**
+ * @brief GroupItemWidget::handleEvents
+ * This method handles the events of the widget.
+ */
 void GroupItemWidget::handleEvents()
 {
     connect(modify_btn_, &QPushButton::released, [this] { emit changeToModifyView(item_); });
 	connect(delete_btn_, &QPushButton::released, [this] { emit deleteItem(item_); });
 }
-
+/**
+ * @brief GroupItemWidget::mousePressEvent
+ * This method handles the mouse press event.
+ * @param event
+ */
 void GroupItemWidget::mousePressEvent(QMouseEvent* event)
 {
     QWidget::mousePressEvent(event);
     emit showSingleItem(this, item_);
 }
+/**
+ * @brief GroupItemWidget::~GroupItemWidget
+ * This is the destructor of the class.
+ */
 GroupItemWidget::~GroupItemWidget()
 {
 	if (item_ != nullptr) {
 		item_->modelChangedEvent.unsubscribe(std::bind(&GroupItemWidget::refresh, this));
 	}
 }
+/**
+ * @brief GroupItemWidget::getItem
+ * This method returns the item.
+ * @return
+ */
 AbstractItem* GroupItemWidget::getItem()
 {
 	return item_;
 }
+/**
+ * @brief GroupItemWidget::setActive
+ * This method sets the active state of the widget.
+ * @param active
+ */
 void GroupItemWidget::setActive(bool active)
 {
 	if (active) {

@@ -7,7 +7,9 @@
 #include "../widgets/GroupItem/GroupItemWidget.h"
 #include "../utility/CustomElements.h"
 #include "../../model/core/AbstractItem.h"
-
+/**
+ * @brief GroupListView is a class that inherits from AbstractView and is used to display a list of items.
+ */
 class GroupListView : public AbstractView {
     Q_OBJECT
 signals:

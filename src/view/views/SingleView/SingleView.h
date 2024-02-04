@@ -10,7 +10,9 @@
 #include "../../widgets/SingleWidget/SingleSensorWidget.h"
 #include "../../widgets/SingleWidget/SingleViewGroup.h"
 #include "../../widgets/SingleWidget/SingleCategoryWidget.h"
-
+/**
+ * @brief The SingleView class
+ */
 class SingleView : public AbstractView {
     Q_OBJECT
 

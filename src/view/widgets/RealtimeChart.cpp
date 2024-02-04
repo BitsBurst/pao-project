@@ -1,7 +1,9 @@
 #include "RealtimeChart.h"
-#include "../../model/core/Category.h"
-#include "../../model/core/Sensor.h"
-
+/**
+ * @brief RealtimeChart::RealtimeChart
+ * @param parent
+ * @param sensor
+ */
 RealtimeChart::RealtimeChart(QWidget * parent, Sensor* sensor)
         : AbstractWidget(CustomElements::getCustomLayoutPrototype(H_NO_BORDER) ,parent), sensor_(sensor)
 {
@@ -38,7 +40,10 @@ RealtimeChart::RealtimeChart(QWidget * parent, Sensor* sensor)
     connect(custom_plot_, &QCustomPlot::mousePress, this, &RealtimeChart::mousePress);
 	connect(this, &RealtimeChart::dataGeneratedSignal, this, &RealtimeChart::dataGenerated);
 }
-
+/**
+ * @brief RealtimeChart::RealtimeChart
+ * @param parent
+ */
 void RealtimeChart::mousePress()
 {
     if (custom_plot_->xAxis->selectedParts().testFlag(QCPAxis::spAxis))
@@ -48,7 +53,9 @@ void RealtimeChart::mousePress()
     else
         custom_plot_->axisRect()->setRangeDrag(Qt::Horizontal | Qt::Vertical);
 }
-
+/**
+ * @brief RealtimeChart::mouseWheel
+ */
 void RealtimeChart::mouseWheel()
 {
     if (custom_plot_->xAxis->selectedParts().testFlag(QCPAxis::spAxis))
@@ -58,7 +65,9 @@ void RealtimeChart::mouseWheel()
     else
         custom_plot_->axisRect()->setRangeZoom(Qt::Horizontal | Qt::Vertical);
 }
-
+/**
+ * @brief RealtimeChart::addRealtimeGraph
+ */
 void RealtimeChart::addRealtimeGraph()
 {
 	custom_plot_->addGraph();
@@ -91,7 +100,10 @@ void RealtimeChart::addRealtimeGraph()
 	}
 
 }
-
+/**
+ * @brief RealtimeChart::addRealtimeSample
+ * @param v
+ */
 void RealtimeChart::addRealtimeSample(double v)
 {
     // shift the values
@@ -101,16 +113,25 @@ void RealtimeChart::addRealtimeSample(double v)
     // add a new datap*oint at the start
     (data_->end() - 1)->value = v;
 }
-
+/**
+ * @brief RealtimeChart::onDataGeneratedEvent
+ * @param obj
+ */
 void RealtimeChart::onDataGeneratedEvent(DataGenObj obj)
 {
 	addRealtimeSample(obj.getData());
 	emit dataGeneratedSignal(obj);
 }
+/**
+ * @brief RealtimeChart::dataGenerated
+ */
 void RealtimeChart::dataGenerated()
 {
 	custom_plot_->replot(QCustomPlot::rpQueuedReplot);
 }
+/**
+ * @brief RealtimeChart::~RealtimeChart
+ */
 RealtimeChart::~RealtimeChart()
 {
 	if(sensor_ != nullptr){

@@ -6,7 +6,10 @@
 #include <QFormLayout>
 #include "AbstractFormWidget.h"
 #include "../../../model/core/Sensor.h"
-
+/**
+ * @brief The SensorFormWidget class
+ * This class is the form widget for the Sensor.
+ */
 class SensorFormWidget : public AbstractFormWidget {
     Q_OBJECT
 private:

@@ -1,6 +1,10 @@
 #include "SidebarContainer.h"
 #include "../../utility/logger/Logger.h"
-
+/**
+ * @brief SidebarContainer::SidebarContainer
+ * @param current_view
+ * @param parent
+ */
 SidebarContainer::SidebarContainer(QStackedWidget * current_view, QWidget* parent)
     : AbstractContainer(current_view, parent)
 {
@@ -23,7 +27,11 @@ SidebarContainer::SidebarContainer(QStackedWidget * current_view, QWidget* paren
     layout_->addWidget(current_view_);
     layout_->addWidget(low_control_widget_);
 }
-
+/**
+ * @brief SidebarContainer::getSearch
+ * @details This method is used to get the search bar
+ * @return the search bar
+ */
 SearchBar* SidebarContainer::getSearch() const
 {
     return search_bar_;

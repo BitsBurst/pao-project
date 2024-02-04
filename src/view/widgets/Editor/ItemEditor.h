@@ -5,7 +5,10 @@
 #include "SensorFormWidget.h"
 #include "CategoryFormWidget.h"
 #include "../../views/Editor/EditorView.h"
-
+/**
+ * @brief The ItemEditor class
+ * This class is the visitor for the item.
+ */
 class ItemEditor : public IConstVisitor {
 private:
     SensorFormWidget* sensor_editor_;

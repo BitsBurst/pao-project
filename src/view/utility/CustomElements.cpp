@@ -10,7 +10,11 @@ QFont *CustomElements::font_h3_instance_ = nullptr;
 QFont *CustomElements::font_h4_instance_ = nullptr;
 QFont *CustomElements::font_paragraph_instance_ = nullptr;
 QFont *CustomElements::font_details_instance_ = nullptr;
-
+/**
+ * @brief CustomElements::getFontH1
+ * @return
+ * Returns a reference to the H1 font
+ */
 QFont& CustomElements::getFontH1()
 {
     if (font_h1_instance_ == nullptr)
@@ -24,7 +28,11 @@ QFont& CustomElements::getFontH1()
 
     return *font_h1_instance_;
 }
-
+/**
+ * @brief CustomElements::getFontH2
+ * @return
+ * Returns a reference to the H2 font
+ */
 QFont& CustomElements::getFontH2()
 {
     if (font_h2_instance_ == nullptr)
@@ -38,7 +46,11 @@ QFont& CustomElements::getFontH2()
 
     return *font_h2_instance_;
 }
-
+/**
+ * @brief CustomElements::getFontH3
+ * @return
+ * Returns a reference to the H3 font
+ */
 QFont& CustomElements::getFontH3()
 {
     if (font_h3_instance_ == nullptr)
@@ -52,7 +64,11 @@ QFont& CustomElements::getFontH3()
 
     return *font_h3_instance_;
 }
-
+/**
+ * @brief CustomElements::getFontH4
+ * @return
+ * Returns a reference to the H4 font
+ */
 QFont& CustomElements::getFontH4()
 {
     if (font_h4_instance_ == nullptr)
@@ -66,7 +82,11 @@ QFont& CustomElements::getFontH4()
 
     return *font_h4_instance_;
 }
-
+/**
+ * @brief CustomElements::getFontParagraph
+ * @return
+ * Returns a reference to the paragraph font
+ */
 QFont& CustomElements::getFontParagraph()
 {
     if (font_paragraph_instance_ == nullptr)
@@ -80,7 +100,11 @@ QFont& CustomElements::getFontParagraph()
 
     return *font_paragraph_instance_;
 }
-
+/**
+ * @brief CustomElements::getFontDetails
+ * @return
+ * Returns a reference to the details font
+ */
 QFont& CustomElements::getFontDetails()
 {
     if (font_details_instance_ == nullptr)
@@ -96,7 +120,12 @@ QFont& CustomElements::getFontDetails()
 
     return *font_details_instance_;
 }
-
+/**
+ * @brief CustomElements::getTerminalSpacer
+ * @param direction
+ * @return
+ * Returns a spacer item
+ */
 QSpacerItem* CustomElements::getTerminalSpacer(SpacerDirection direction)
 {
     QSpacerItem *temp = new QSpacerItem(0, 0, QSizePolicy::Minimum, QSizePolicy::Expanding);
@@ -115,7 +144,10 @@ QSpacerItem* CustomElements::getTerminalSpacer(SpacerDirection direction)
 
     return temp;
 }
-
+/**
+ * @brief CustomElements::Init
+ * Initializes the custom elements
+ */
 void CustomElements::Init()
 {
     // Import Fonts
@@ -129,21 +161,40 @@ void CustomElements::Init()
 	styleFile.open(QFile::ReadOnly);
 	qApp->setStyleSheet(styleFile.readAll());
 }
-
+/**
+ * @brief CustomElements::getVerticalLayout
+ * @param margin
+ * @return
+ * Returns a vertical layout with the specified margin
+ */
 QVBoxLayout* CustomElements::getVerticalLayout(int margin)
 {
     auto * temp = new QVBoxLayout;
     temp->setContentsMargins(margin, margin, margin, margin);
     return temp;
 }
-
+/**
+ * @brief CustomElements::getVerticalLayout
+ * @param h_margin
+ * @param v_margin
+ * @return
+ * Returns a vertical layout with the specified horizontal and vertical margins
+ */
 QVBoxLayout* CustomElements::getVerticalLayout(int h_margin, int v_margin)
 {
     auto * temp = new QVBoxLayout;
     temp->setContentsMargins(h_margin,v_margin,h_margin,v_margin);
     return temp;
 }
-
+/**
+ * @brief CustomElements::getVerticalLayout
+ * @param left_margin
+ * @param right_margin
+ * @param top_margin
+ * @param bottom_margin
+ * @return
+ * Returns a vertical layout with the specified left, right, top, and bottom margins
+ */
 QVBoxLayout* CustomElements::getVerticalLayout(int left_margin, int right_margin, int top_margin, int bottom_margin)
 {
     auto * temp = new QVBoxLayout;
@@ -151,7 +202,12 @@ QVBoxLayout* CustomElements::getVerticalLayout(int left_margin, int right_margin
 
     return temp;
 }
-
+/**
+ * @brief CustomElements::getHorizontalLayout
+ * @param margin
+ * @return
+ * Returns a horizontal layout with the specified margin
+ */
 QHBoxLayout* CustomElements::getHorizontalLayout(int margin)
 {
     auto * temp = new QHBoxLayout;
@@ -159,7 +215,13 @@ QHBoxLayout* CustomElements::getHorizontalLayout(int margin)
 
     return temp;
 }
-
+/**
+ * @brief CustomElements::getHorizontalLayout
+ * @param h_margin
+ * @param v_margin
+ * @return
+ * Returns a horizontal layout with the specified horizontal and vertical margins
+ */
 QHBoxLayout* CustomElements::getHorizontalLayout(int h_margin, int v_margin)
 {
     auto * temp = new QHBoxLayout;
@@ -167,7 +229,15 @@ QHBoxLayout* CustomElements::getHorizontalLayout(int h_margin, int v_margin)
 
     return temp;
 }
-
+/**
+ * @brief CustomElements::getHorizontalLayout
+ * @param left_margin
+ * @param right_margin
+ * @param top_margin
+ * @param bottom_margin
+ * @return
+ * Returns a horizontal layout with the specified left, right, top, and bottom margins
+ */
 QHBoxLayout* CustomElements::getHorizontalLayout(int left_margin, int right_margin, int top_margin, int bottom_margin)
 {
     auto * temp = new QHBoxLayout;
@@ -175,7 +245,12 @@ QHBoxLayout* CustomElements::getHorizontalLayout(int left_margin, int right_marg
 
     return temp;
 }
-
+/**
+ * @brief CustomElements::getCustomLayoutPrototype
+ * @param prototype
+ * @return
+ * Returns a custom layout prototype
+ */
 QLayout* CustomElements::getCustomLayoutPrototype(LayoutPrototype prototype)
 {
     QLayout * temp = CustomElements::getVerticalLayout(16);

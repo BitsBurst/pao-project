@@ -9,7 +9,9 @@
 #include "../utility/CustomElements.h"
 #include "AbstractView.h"
 #include "AbstractGraphicalElement.h"
-
+/**
+ * @brief The AbstractContainer class
+ */
 class AbstractContainer : public AbstractGraphicalElement {
     Q_OBJECT
 protected:

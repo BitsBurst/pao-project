@@ -7,7 +7,9 @@
 
 // Model
 #include "../../model/core/AbstractItem.h"
-
+/**
+ * @brief The InformationWidget class
+ */
 class InformationWidget : public AbstractWidget {
     Q_OBJECT
 

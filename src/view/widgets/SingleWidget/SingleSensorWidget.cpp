@@ -1,6 +1,10 @@
 #include <QLineSeries>
 #include "SingleSensorWidget.h"
-
+/**
+ * @brief SingleSensorWidget::SingleSensorWidget
+ * @param item
+ * @param parent
+ */
 SingleSensorWidget::SingleSensorWidget(AbstractItem* item, QWidget * parent)
     :AbstractWidget(CustomElements::getCustomLayoutPrototype(SINGLE_SPACING), parent)
 {
@@ -11,7 +15,10 @@ SingleSensorWidget::SingleSensorWidget(AbstractItem* item, QWidget * parent)
 
     layout_->addWidget(chart_);
 }
-
+/**
+ * @brief SingleSensorWidget::setItem
+ * @param item
+ */
 void SingleSensorWidget::setItem(Sensor* item)
 {
 	layout_->removeWidget(chart_);
@@ -23,7 +30,9 @@ void SingleSensorWidget::setItem(Sensor* item)
 
 	layout_->addWidget(chart_);
 }
-
+/**
+ * @brief SingleSensorWidget::update
+ */
 SingleSensorWidget::~SingleSensorWidget()
 {
 

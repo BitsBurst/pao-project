@@ -1,5 +1,8 @@
 #include "CreateView.h"
-
+/**
+ * @brief CreateView::CreateView
+ * @param parent
+ */
 CreateView::CreateView(QWidget* parent)
         : AbstractView(CustomElements::getCustomLayoutPrototype(SINGLE_SPACING), parent)
 {

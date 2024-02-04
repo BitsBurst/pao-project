@@ -1,7 +1,11 @@
 #include <QFormLayout>
 #include "SensorFormWidget.h"
 #include "../../../controller/LocatorController.h"
-
+/**
+ * @brief SensorFormWidget::SensorFormWidget
+ * This is the constructor of the class. It creates the min and max range fields and the category field.
+ * @param parent
+ */
 SensorFormWidget::SensorFormWidget(QWidget* parent)
     : AbstractFormWidget(parent)
 {

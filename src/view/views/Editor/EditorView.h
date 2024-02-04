@@ -11,7 +11,11 @@
 #include "../../widgets/Editor/AbstractFormWidget.h"
 #include "../../widgets/Editor/SensorFormWidget.h"
 #include "../../widgets/Editor/CategoryFormWidget.h"
-
+/**
+ * @brief The EditorView class
+ * The EditorView class is a view that allows the user to edit the properties of an AbstractItem.
+ * The view is composed by a title, a form and two buttons to confirm or cancel the operation.
+ */
 class EditorView : public AbstractView {
     Q_OBJECT
 

@@ -15,7 +15,9 @@
 #include "views/Editor/EditorView.h"
 #include "views/SettingsView.h"
 #include "views/CreateView.h"
-
+/**
+ * @brief MainView is a class that inherits from QMainWindow and is used to display the main view of the application.
+ */
 class MainView : public QMainWindow {
     Q_OBJECT
 signals:

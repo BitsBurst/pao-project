@@ -1,5 +1,10 @@
 #include "SingleCategoryWidget.h"
-
+/**
+ * @brief SingleCategoryWidget::SingleCategoryWidget
+ * This is the constructor of the class.
+ * @param item
+ * @param parent
+ */
 SingleCategoryWidget::SingleCategoryWidget(Category* item, QWidget* parent)
     :AbstractWidget(CustomElements::getCustomLayoutPrototype(SINGLE_SPACING), parent)
 {
@@ -33,11 +38,19 @@ SingleCategoryWidget::SingleCategoryWidget(Category* item, QWidget* parent)
     layout_->addWidget(row2);
     layout_->addItem(CustomElements::getTerminalSpacer(VERTICAL));
 }
+/**
+ * @brief SingleCategoryWidget::~SingleCategoryWidget
+ * This is the destructor of the class.
+ */
 SingleCategoryWidget::~SingleCategoryWidget()
 {
 
 }
-
+/**
+ * @brief SingleCategoryWidget::setItem
+ * This method sets the item of the widget.
+ * @param item
+ */
 void SingleCategoryWidget::setItem(Category* item)
 {
     if (item != nullptr) {

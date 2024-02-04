@@ -3,7 +3,10 @@
 
 #include "../../../model/visitor/IConstVisitor.h"
 #include "GroupItemWidget.h"
-
+/**
+ * @brief The GroupItemRender class
+ * This class is the visitor for the group item.
+ */
 class GroupItemRender : public IConstVisitor {
 
 private:

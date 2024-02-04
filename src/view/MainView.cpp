@@ -1,6 +1,11 @@
 #include "MainView.h"
 #include "widgets/SingleWidget/SingleSensorWidget.h"
-
+/**
+ * @brief MainView::MainView is the constructor of the class.
+ * @param content is the content widget of the view.
+ * @param sidebar is the sidebar widget of the view.
+ * @param parent is the parent widget of the view.
+ */
 MainView::MainView(QStackedWidget * content, QStackedWidget * sidebar, QWidget* parent)
     : QMainWindow(parent), central_widget_(new QWidget), layout_(CustomElements::getCustomLayoutPrototype(H_NO_BORDER))
 {
@@ -29,7 +34,9 @@ MainView::MainView(QStackedWidget * content, QStackedWidget * sidebar, QWidget* 
 
     setCentralWidget(central_widget_);
 }
-
+/**
+ * @brief MainView::changeToSingleSensorView is a slot that is used to change the view to the single sensor view.
+ */
 void MainView::createMenu() {
 
     // Initialization
@@ -76,13 +83,17 @@ void MainView::createMenu() {
 
     setMenuBar(menu_bar_);
 }
-
+/**
+ * @brief MainView::changeToSingleSensorView is a slot that is used to change the view to the single sensor view.
+ */
 void MainView::createDefaultView(int content_id, int sidebar_id) {
     content_->setCurrentView(content_id);
     sidebar_->setCurrentView(sidebar_id);
 }
 
-
+/**
+ * @brief MainView::changeToSingleSensorView is a slot that is used to change the view to the single sensor view.
+ */
 void MainView::setContentView(int content_id)
 {
 	if(content_->getCurrentView() == content_id) {
@@ -90,18 +101,25 @@ void MainView::setContentView(int content_id)
 	}
     content_->setCurrentView(content_id);
 }
-
+/**
+ * @brief MainView::changeToSingleSensorView is a slot that is used to change the view to the single sensor view.
+ */
 void MainView::setSidebarView(int sidebar_id)
 {
     sidebar_->setCurrentView(sidebar_id);
 }
 
 // Slots
+/**
+ * @brief MainView::changeToSingleSensorView is a slot that is used to change the view to the single sensor view.
+ */
 void MainView::emitChangeToModifyView(AbstractItem& item)
 {
     emit changeToModifyView(item);
 }
-
+/**
+ * @brief MainView::changeToSingleSensorView is a slot that is used to change the view to the single sensor view.
+ */
 SearchBar* MainView::getSearch() const
 {
     return searchbar_;

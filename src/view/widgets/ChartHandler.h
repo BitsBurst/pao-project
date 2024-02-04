@@ -7,7 +7,9 @@
 
 // Model
 #include "../../model/core/Sensor.h"
-
+/**
+ * @brief The ChartHandler class
+ */
 class ChartHandler : public AbstractWidget {
 Q_OBJECT
 private:

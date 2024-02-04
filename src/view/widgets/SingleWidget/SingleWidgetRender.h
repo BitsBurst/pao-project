@@ -5,7 +5,9 @@
 #include "SingleSensorWidget.h"
 #include "SingleCategoryWidget.h"
 #include "../../views/SingleView/SingleView.h"
-
+/**
+ * @brief The SingleWidgetRender class
+ */
 class SingleWidgetRender : public IVisitor {
 private:
     SingleSensorWidget * sensor_widget_;

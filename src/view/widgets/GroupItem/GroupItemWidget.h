@@ -7,7 +7,10 @@
 #include "../../core/AbstractWidget.h"
 #include "../../utility/CustomElements.h"
 #include "../../../model/core/AbstractItem.h"
-
+/**
+ * @brief The GroupItemWidget class
+ * This class is the widget for the group item.
+ */
 class GroupItemWidget : public AbstractWidget {
     Q_OBJECT
 

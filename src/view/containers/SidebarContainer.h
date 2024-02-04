@@ -5,7 +5,9 @@
 #include "../core/AbstractContainer.h"
 #include "../widgets/SidebarLowControlWidget.h"
 #include "../widgets/SearchBar.h"
-
+/**
+ * @brief The SidebarContainer class
+ */
 class SidebarContainer : public AbstractContainer {
     Q_OBJECT
 private:

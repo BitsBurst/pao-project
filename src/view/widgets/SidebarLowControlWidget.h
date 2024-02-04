@@ -3,7 +3,9 @@
 
 #include <QLabel>
 #include "../core/AbstractWidget.h"
-
+/**
+ * @brief The SidebarLowControlWidget class
+ */
 class SidebarLowControlWidget : public AbstractWidget {
     Q_OBJECT
 private:

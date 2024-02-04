@@ -6,7 +6,10 @@
 #include <QPushButton>
 #include "../../core/AbstractWidget.h"
 #include "../../../model/core/AbstractItem.h"
-
+/**
+ * @brief The AbstractFormWidget class
+ * This class is the base class for the form widgets.
+ */
 class AbstractFormWidget : public AbstractWidget {
     Q_OBJECT
 protected:

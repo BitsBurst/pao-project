@@ -1,6 +1,10 @@
 #include "GroupListView.h"
 #include "../../utility/logger/Logger.h"
-
+/**
+ * @brief GroupListView::GroupListView is the constructor of the class.
+ * @param items is a vector of AbstractItem pointers.
+ * @param parent is the parent widget of the view.
+ */
 GroupListView::GroupListView(const QVector<AbstractItem*>& items, QWidget* parent)
     : AbstractView(CustomElements::getCustomLayoutPrototype(SINGLE_SPACING), parent), scroll_area_(new QScrollArea), current_selected_(nullptr)
 {
@@ -44,7 +48,10 @@ GroupListView::GroupListView(const QVector<AbstractItem*>& items, QWidget* paren
     // Events
     handleEvents();
 }
-
+/**
+ * @brief GroupListView::changeToModifyView is a slot that is used to change the view to the modify view.
+ * @param item is a pointer to an AbstractItem.
+ */
 void GroupListView::handleEvents()
 {
     for (auto element : item_lists_) {
@@ -52,7 +59,10 @@ void GroupListView::handleEvents()
 		subscribeToGroupItemsEvents(element);
     }
 }
-
+/**
+ * @brief GroupListView::changeToModifyView is a slot that is used to change the view to the modify view.
+ * @param item is a pointer to an AbstractItem.
+ */
 void GroupListView::setItems(const QVector<AbstractItem*>& items)
 {
     scroll_area_layout->deleteLater();
@@ -90,7 +100,10 @@ void GroupListView::setItems(const QVector<AbstractItem*>& items)
 
     handleEvents();
 }
-
+/**
+ * @brief GroupListView::changeToModifyView is a slot that is used to change the view to the modify view.
+ * @param item is a pointer to an AbstractItem.
+ */
 void GroupListView::deleteListItem(GroupItemWidget* item)
 {
     if (item == nullptr) return;
@@ -100,7 +113,10 @@ void GroupListView::deleteListItem(GroupItemWidget* item)
 	item_lists_.erase(std::remove(item_lists_.begin(), item_lists_.end(), item), item_lists_.end());
 	delete item;
 }
-
+/**
+ * @brief GroupListView::changeToModifyView is a slot that is used to change the view to the modify view.
+ * @param item is a pointer to an AbstractItem.
+ */
 GroupItemWidget * GroupListView::getGroupItem(AbstractItem * item)
 {
     for (auto graphical_item : item_lists_) {
@@ -110,12 +126,18 @@ GroupItemWidget * GroupListView::getGroupItem(AbstractItem * item)
 
     return nullptr;
 }
-
+/**
+ * @brief GroupListView::changeToModifyView is a slot that is used to change the view to the modify view.
+ * @param item is a pointer to an AbstractItem.
+ */
 QVector<AbstractItem*>& GroupListView::getItems()
 {
     return items_;
 }
-
+/**
+ * @brief GroupListView::changeToModifyView is a slot that is used to change the view to the modify view.
+ * @param item is a pointer to an AbstractItem.
+ */
 GroupListView::~GroupListView()
 {
 	resetCurrentItem();
@@ -126,7 +148,10 @@ GroupListView::~GroupListView()
         delete item;
     }
 }
-
+/**
+ * @brief GroupListView::changeToModifyView is a slot that is used to change the view to the modify view.
+ * @param item is a pointer to an AbstractItem.
+ */
 void GroupListView::handleShowSingleItem(GroupItemWidget* graphical_item, AbstractItem* item) {
     emit showSingleItem(item);
 
@@ -137,17 +162,28 @@ void GroupListView::handleShowSingleItem(GroupItemWidget* graphical_item, Abstra
     current_selected_ = graphical_item;
 	current_selected_->setActive(true);
 }
-
+/**
+ * @brief GroupListView::changeToModifyView is a slot that is used to change the view to the modify view.
+ * @param item is a pointer to an AbstractItem.
+ */
 void GroupListView::resetCurrentItem()
 {
     current_selected_ = nullptr;
 }
+/**
+ * @brief GroupListView::changeToModifyView is a slot that is used to change the view to the modify view.
+ * @param item is a pointer to an AbstractItem.
+ */
 void GroupListView::subscribeToGroupItemsEvents(GroupItemWidget * element)
 {
 	connect(element, &GroupItemWidget::changeToModifyView, this, &GroupListView::changeToModifyView);
 	connect(element, &GroupItemWidget::deleteItem, this, &GroupListView::deleteItem);
 	connect(element, &GroupItemWidget::showSingleItem, this, &GroupListView::handleShowSingleItem);
 }
+/**
+ * @brief GroupListView::changeToModifyView is a slot that is used to change the view to the modify view.
+ * @param item is a pointer to an AbstractItem.
+ */
 void GroupListView::unsubscribeToGroupItemsEvents(GroupItemWidget * element)
 {
 	disconnect(element, &GroupItemWidget::changeToModifyView, this, &GroupListView::changeToModifyView);

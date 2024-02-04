@@ -1,5 +1,9 @@
 #include "ChartHandler.h"
-
+/**
+ * @brief ChartHandler::ChartHandler
+ * @param sensor_list
+ * @param parent
+ */
 ChartHandler::ChartHandler(QVector<Sensor *> sensor_list, QWidget* parent)
         : AbstractWidget(CustomElements::getCustomLayoutPrototype(SINGLE_SPACING), parent), sensor_list_(sensor_list)
 {
@@ -26,6 +30,9 @@ ChartHandler::ChartHandler(QVector<Sensor *> sensor_list, QWidget* parent)
         }
     }
 }
+/**
+ * @brief ChartHandler::~ChartHandler
+ */
 ChartHandler::~ChartHandler()
 {
 	for (auto & chart : chart_list_) {

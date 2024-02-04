@@ -3,7 +3,10 @@
 
 #include <QLabel>
 #include "../core/AbstractContainer.h"
-
+/**
+ * @brief The MainContentContainer class
+ * This class is used to store the main content of the application
+ */
 class MainContentContainer : public AbstractContainer {
     Q_OBJECT
 

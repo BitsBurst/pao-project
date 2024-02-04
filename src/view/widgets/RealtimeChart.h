@@ -6,7 +6,9 @@
 #include "../utility/CustomElements.h"
 #include "../../model/datagen/DataGenObj.h"
 #include "../../model/core/Sensor.h"
-
+/**
+ * @brief The RealtimeChart class
+ */
 class RealtimeChart : public AbstractWidget {
 Q_OBJECT
 private:

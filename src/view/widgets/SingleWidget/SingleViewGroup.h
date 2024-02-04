@@ -8,7 +8,9 @@
 
 // Model Include
 #include "../../../model/core/Sensor.h"
-
+/**
+ * @brief The SingleViewGroup class
+ */
 class SingleViewGroup : public AbstractWidget {
     Q_OBJECT
 private:

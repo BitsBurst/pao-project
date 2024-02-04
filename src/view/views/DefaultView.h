@@ -4,7 +4,9 @@
 #include <QLabel>
 #include "../core/AbstractView.h"
 #include "../utility/CustomElements.h"
-
+/**
+ * @brief DefaultView is a class that inherits from AbstractView and is used to display the default view of the application.
+ */
 class DefaultView : public AbstractView {
     Q_OBJECT
 public:

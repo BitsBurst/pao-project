@@ -1,5 +1,8 @@
 #include "SettingsView.h"
-
+/**
+ * @brief SettingsView::SettingsView is the constructor of the class.
+ * @param parent is the parent widget of the view.
+ */
 SettingsView::SettingsView(QWidget* parent)
         : AbstractView(CustomElements::getCustomLayoutPrototype(SINGLE_SPACING), parent)
 {

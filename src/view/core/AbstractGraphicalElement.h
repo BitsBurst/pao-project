@@ -2,7 +2,9 @@
 #define SMARTSENSORS_ABSTRACTGRAPHICALELEMENT_H
 
 #include <QWidget>
-
+/**
+ * @brief The AbstractGraphicalElement class
+ */
 class AbstractGraphicalElement : public QWidget {
     Q_OBJECT
 

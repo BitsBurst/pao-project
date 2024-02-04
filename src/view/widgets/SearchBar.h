@@ -7,8 +7,10 @@
 #include "../core/AbstractWidget.h"
 #include "../utility/CustomElements.h"
 
-enum SearchType { SENSOR, CATEGORY, ALL };
-
+enum SearchType { SENSOR, CATEGORY, ALL }; // SearchType enum
+/**
+ * @brief The SearchBar class
+ */
 class SearchBar : public AbstractWidget {
     Q_OBJECT
 

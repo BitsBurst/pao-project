@@ -1,7 +1,12 @@
 #include "SingleView.h"
 #include "../../../controller/LocatorController.h"
 #include "../../widgets/SingleWidget/SingleWidgetRender.h"
-
+/**
+ * @brief SingleView::SingleView
+ * @param item
+ * @param check_add_btn
+ * @param parent
+ */
 SingleView::SingleView(AbstractItem* item, bool check_add_btn, QWidget* parent)
         : AbstractView(CustomElements::getCustomLayoutPrototype(SINGLE_SPACING), parent), item_(item)
 {
@@ -38,18 +43,26 @@ SingleView::SingleView(AbstractItem* item, bool check_add_btn, QWidget* parent)
         setActiveView(0);
     }
 }
-
+/**
+ * @brief SingleView::handleEvents
+ */
 void SingleView::handleEvents()
 {
     connect(information_widget_, &InformationWidget::changeToModify, this, &SingleView::onChangeToModifyView);
 	connect(information_widget_, &InformationWidget::deleteItem, this, &SingleView::onDeleteItem);
 }
-
+/**
+ * @brief SingleView::setActiveView
+ * @param index
+ */
 void SingleView::setActiveView(int index)
 {
     single_stack_->setCurrentIndex(index);
 }
-
+/**
+ * @brief SingleView::setItem
+ * @param item
+ */
 void SingleView::setItem(AbstractItem* item) {
 	if(item_ == item) return;
 
@@ -64,23 +77,32 @@ void SingleView::setItem(AbstractItem* item) {
 
     handleEvents();
 }
-
+/**
+ * @brief SingleView::getItem
+ * @return item_
+ */
 AbstractItem* SingleView::getItem() const
 {
     return item_;
 }
 
-
+/**
+ * @brief SingleView::onChangeToModifyView
+ */
 void SingleView::onChangeToModifyView()
 {
 	emit changeToModifyView(item_);
 }
-
+/**
+ * @brief SingleView::onDeleteItem
+ */
 void SingleView::onDeleteItem()
 {
 	emit deleteItem(item_);
 }
-
+/**
+ * @brief SingleView::unsubscribeEvents
+ */
 void SingleView::unsubscribeEvents() {
 	disconnect(information_widget_, &InformationWidget::changeToModify, this, &SingleView::onChangeToModifyView);
 	disconnect(information_widget_, &InformationWidget::deleteItem, this, &SingleView::onDeleteItem);
