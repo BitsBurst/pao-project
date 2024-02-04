@@ -1,3 +1,4 @@
+#include <QMessageBox>
 #include "ErrorController.h"
 /**
  * @brief ErrorController::ErrorController
@@ -22,7 +23,11 @@ bool ErrorController::Init()
  */
 void ErrorController::manageException(NormalException exception)
 {
-
+	QMessageBox deleteConfirm;
+	deleteConfirm.setText("Errore");
+	deleteConfirm.setInformativeText(exception.getMessage());
+	deleteConfirm.setStandardButtons(QMessageBox::Ok);
+	deleteConfirm.setDefaultButton(QMessageBox::Ok);
 }
 /**
  * @brief ErrorController::manageException
@@ -30,7 +35,11 @@ void ErrorController::manageException(NormalException exception)
  */
 void ErrorController::manageException(FatalException exception)
 {
-
+	QMessageBox deleteConfirm;
+	deleteConfirm.setText("Errore Grave");
+	deleteConfirm.setInformativeText(exception.getMessage());
+	deleteConfirm.setStandardButtons(QMessageBox::Ok);
+	deleteConfirm.setDefaultButton(QMessageBox::Ok);
 }
 /**
  * @brief ErrorController::Destroy

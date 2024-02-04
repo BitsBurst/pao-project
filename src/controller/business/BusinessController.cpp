@@ -105,7 +105,7 @@ void BusinessController::storageReady()
 		content_stack_->addWidget(single_view_);
 	}
 	if(!editor_view_){
-		editor_view_ = new EditorView(new Category());
+		editor_view_ = new EditorView(new Category(), nullptr);
 		subscribeToViewEvents(editor_view_);
 		content_stack_->addWidget(editor_view_);
 	}
@@ -177,7 +177,7 @@ void BusinessController::deleteElement(AbstractItem* item)
 		unsubscribeToViewEvents(editor_view_);
 		content_stack_->removeWidget(editor_view_);
 		delete editor_view_;
-		editor_view_ = new EditorView(new Category());
+		editor_view_ = new EditorView(new Category(), nullptr);
 		subscribeToViewEvents(editor_view_);
 		editor_view_->setItem(new Category());
 		content_stack_->addWidget(editor_view_);

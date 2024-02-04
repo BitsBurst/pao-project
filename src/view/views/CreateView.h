@@ -10,7 +10,7 @@ class CreateView : public AbstractView {
 private:
     QLabel *label1_, *label2_;
 public:
-    explicit CreateView(QLayout * layout = nullptr, QWidget *parent = nullptr);
+    explicit CreateView(QWidget* parent);
 };
 
 #endif //SMARTSENSORS_CREATEVIEW_H

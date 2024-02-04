@@ -17,7 +17,7 @@ private:
 
 public:
     explicit SingleViewGroup(QVector<Sensor *> sensor_list, QWidget *parent = nullptr);
-    explicit SingleViewGroup(AbstractItem* item, QWidget *parent = nullptr);
+    explicit SingleViewGroup(QWidget* parent);
     void update();
 	~SingleViewGroup() override;
 

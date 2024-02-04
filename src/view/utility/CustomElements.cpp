@@ -128,17 +128,15 @@ void CustomElements::Init()
 
 QVBoxLayout* CustomElements::getVerticalLayout(int margin)
 {
-    QVBoxLayout * temp = new QVBoxLayout;
+    auto * temp = new QVBoxLayout;
     temp->setContentsMargins(margin, margin, margin, margin);
-
     return temp;
 }
 
 QVBoxLayout* CustomElements::getVerticalLayout(int h_margin, int v_margin)
 {
-    QVBoxLayout * temp = new QVBoxLayout;
+    auto * temp = new QVBoxLayout;
     temp->setContentsMargins(h_margin,v_margin,h_margin,v_margin);
-
     return temp;
 }
 

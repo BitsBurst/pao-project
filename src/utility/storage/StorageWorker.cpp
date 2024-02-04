@@ -53,7 +53,7 @@ void StorageWorker::run() {
 		QDateTime currentDateTime = lastUpdate;
 		int diff = 0;
 		int wait = 0;
-		while (diff = lastUpdate.msecsTo(currentDateTime) < 250) {
+		while ((diff = lastUpdate.msecsTo(currentDateTime)) < 250) {
 			wait += diff;
 			if (wait > 5000) {
 				break;

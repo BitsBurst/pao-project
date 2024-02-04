@@ -13,7 +13,7 @@ SingleView::SingleView(AbstractItem* item, bool check_add_btn, QWidget* parent)
 
     sensor_widget_ = new SingleSensorWidget(item_, stack_widget);
     category_widget_ = new SingleCategoryWidget(new Category(), stack_widget);
-    group_widget_ = new SingleViewGroup(item_, stack_widget);
+    group_widget_ = new SingleViewGroup(stack_widget);
 
     // Single Stack Settings
     stack_widget->setLayout(single_stack_);

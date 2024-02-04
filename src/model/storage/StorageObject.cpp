@@ -130,7 +130,7 @@ QVector<AbstractItem*> StorageObject::filterSensorsByName(const QString& name) c
         if (i->getName().toLower().contains(name.toLower()))
             list.push_back(i);
     }
-    return reinterpret_cast<QVector<AbstractItem*>&>(list);
+    return list;
 }
 
 /*
@@ -141,12 +141,12 @@ QVector<AbstractItem*> StorageObject::filterSensorsByName(const QString& name) c
  */
 QVector<AbstractItem*> StorageObject::filterCategoriesByName(QString name)
 {
-    QVector<Category*> list;
+    QVector<AbstractItem*> list;
     for (auto& i : categories_) {
         if (i->getName().toLower().contains(name.toLower()))
             list.append(i);
     }
-    return reinterpret_cast<QVector<AbstractItem*>&>(list);
+    return list;
 }
 /*
  * @brief getCategories
@@ -187,6 +187,7 @@ const QVector<AbstractItem*>& StorageObject::getSensors(int) const
 const QVector<AbstractItem*>& StorageObject::getCategories(int) const
 {
 	checkCategories();
+
 	return reinterpret_cast<const QVector<AbstractItem*>&>(categories_);
 }
 /*
@@ -255,8 +256,9 @@ QJsonObject StorageObject::toJson() const
 }
 Category* StorageObject::getCategory(int index) const
 {
-    if (categories_.isEmpty())
-        return nullptr;
+	if (categories_.isEmpty()) {
+		return nullptr;
+	}
 	return categories_.value(index);
 }
 

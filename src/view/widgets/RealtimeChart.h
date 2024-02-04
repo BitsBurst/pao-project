@@ -27,7 +27,7 @@ public:
 	~RealtimeChart() override;
     void onDataGeneratedEvent(DataGenObj obj);
     void addRealtimeSample(double v);
-	void dataGenerated(DataGenObj);
+	void dataGenerated();
 signals:
 	void dataGeneratedSignal(DataGenObj);
 };

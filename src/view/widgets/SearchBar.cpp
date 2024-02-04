@@ -52,6 +52,10 @@ void SearchBar::switchButton(int id)
 		sensor_filter->setChecked(false);
 		category_filter->setChecked(true);
 		break;
+	case ALL:
+		sensor_filter->setChecked(true);
+		category_filter->setChecked(true);
+	break;
 	}
     searchItem();
 }

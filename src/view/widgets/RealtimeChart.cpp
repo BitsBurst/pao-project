@@ -107,7 +107,7 @@ void RealtimeChart::onDataGeneratedEvent(DataGenObj obj)
 	addRealtimeSample(obj.getData());
 	emit dataGeneratedSignal(obj);
 }
-void RealtimeChart::dataGenerated(DataGenObj obj)
+void RealtimeChart::dataGenerated()
 {
 	custom_plot_->replot(QCustomPlot::rpQueuedReplot);
 }

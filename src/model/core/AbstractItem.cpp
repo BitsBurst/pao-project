@@ -133,10 +133,10 @@ AbstractItem::AbstractItem(const AbstractItem& abstract_item)
 	description_ = abstract_item.description_;
 }
 
-void AbstractItem::accept(IConstVisitor& visitor) const {
+void AbstractItem::accept(IConstVisitor&) const {
     throw NormalException("Unable to set editor data.");
 }
 
-void AbstractItem::accept(IVisitor& visitor) {
+void AbstractItem::accept(IVisitor&) {
     throw NormalException("Unable to set editor data.");
 }

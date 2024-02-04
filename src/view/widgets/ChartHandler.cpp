@@ -21,6 +21,7 @@ ChartHandler::ChartHandler(int number_charts, QWidget* parent)
             curr_row->addWidget(temp);
             layout_->addWidget(row);
         } else {
+			if(curr_row != nullptr)
             curr_row->addWidget(temp);
         }
     }
@@ -46,6 +47,7 @@ ChartHandler::ChartHandler(QVector<Sensor *> sensor_list, QWidget* parent)
             curr_row->addWidget(temp);
             layout_->addWidget(row);
         } else {
+			if(curr_row != nullptr)
             curr_row->addWidget(temp);
         }
     }

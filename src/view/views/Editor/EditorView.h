@@ -40,7 +40,7 @@ private:
     void handleEvents();
 
 public:
-    explicit EditorView(AbstractItem* item, QLayout * layout = nullptr, QWidget *parent = nullptr);
+    explicit EditorView(AbstractItem* item, QWidget* parent);
     void update();
 
     void setItem(AbstractItem* item);

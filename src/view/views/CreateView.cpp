@@ -1,6 +1,6 @@
 #include "CreateView.h"
 
-CreateView::CreateView(QLayout* layout, QWidget* parent)
+CreateView::CreateView(QWidget* parent)
         : AbstractView(CustomElements::getCustomLayoutPrototype(SINGLE_SPACING), parent)
 {
     /*

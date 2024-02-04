@@ -3,7 +3,7 @@
 #include "../../widgets/Editor/ItemEditor.h"
 #include "../../../controller/LocatorController.h"
 
-EditorView::EditorView(AbstractItem* item, QLayout* layout, QWidget* parent)
+EditorView::EditorView(AbstractItem* item, QWidget* parent)
         :AbstractView(CustomElements::getCustomLayoutPrototype(SINGLE_SPACING), parent), item_(item), newObject_(false)
 {
     // Initialization

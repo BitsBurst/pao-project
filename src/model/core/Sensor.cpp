@@ -8,7 +8,7 @@ double Sensor::generationTimeStatic = 100; // generation time in ms
  * @param name sensor name
  * @param category sensor category
  */
-Sensor::Sensor(QString name, Category category):AbstractItem(name), min_range_(0), max_range_(0), category_(category), seed_(QDateTime::currentDateTime().toSecsSinceEpoch()), data_(maxDataGenerated), data_generator_worker_(nullptr), generationTime(generationTimeStatic)
+Sensor::Sensor(QString name, Category category):AbstractItem(name), min_range_(0), max_range_(0), category_(category), seed_(QDateTime::currentDateTime().toSecsSinceEpoch()), data_generator_worker_(nullptr), data_(maxDataGenerated),  generationTime(generationTimeStatic)
 {
 
 }

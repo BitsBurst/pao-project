@@ -10,7 +10,7 @@ SingleViewGroup::SingleViewGroup(QVector<Sensor *> sensor_list, QWidget * parent
     layout_->addWidget(chart_);
 }
 
-SingleViewGroup::SingleViewGroup(AbstractItem* item, QWidget * parent)
+SingleViewGroup::SingleViewGroup(QWidget* parent)
         : AbstractWidget(CustomElements::getCustomLayoutPrototype(SINGLE_SPACING), parent)
 {
     // Initialization
