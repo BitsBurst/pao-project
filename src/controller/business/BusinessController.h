@@ -39,11 +39,19 @@ private:
     QStackedWidget * content_stack_;
     QStackedWidget * sidebar_stack_;
 
+	// Shurtcuts
+	QShortcut *open_simulation_;
+	QShortcut *save;
+	QShortcut *create_sensor_;
+	QShortcut *create_category_;
+
 	void unsubscribeToEvents();
 	void subscribeToEvents();
 	void subscribeToViewEvents(AbstractView*);
 	void unsubscribeToViewEvents(AbstractView*);
 	void storageReady();
+	void subscribeToShurtcuts();
+	void unsubscribeToShurtcuts();
 
     void deleteInterface();
 

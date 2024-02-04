@@ -64,7 +64,6 @@ void SingleView::setActiveView(int index)
  * @param item
  */
 void SingleView::setItem(AbstractItem* item) {
-	if(item_ == item) return;
 
 	unsubscribeEvents();
 
