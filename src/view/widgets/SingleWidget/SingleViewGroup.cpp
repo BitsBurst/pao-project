@@ -39,7 +39,6 @@ void SingleViewGroup::setSensors(QVector<Sensor*> sensor_list)
  */
 void SingleViewGroup::update()
 {
-    // TODO[Luca]: Move insede ChartHandler
     QWidget::update();
     layout_->removeWidget(chart_);
     chart_->deleteLater();
