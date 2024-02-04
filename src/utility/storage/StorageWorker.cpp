@@ -45,7 +45,9 @@ void StorageWorker::run() {
 	onStorageReadyEvent.notifyAsync();
 	storageInitialized = true;
 	while(!destroy) {
-		while (!changed && !destroy);
+		while (!changed && !destroy){
+			msleep(10);
+		}
 		writingMutex.lock();
 		changed = false;
 		QDateTime currentDateTime = lastUpdate;
