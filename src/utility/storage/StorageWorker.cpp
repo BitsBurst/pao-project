@@ -21,7 +21,7 @@ void StorageWorker::SaveStorage()
  * @param filename filename of the storage
  * @param parent parent of the StorageWorker
  */
-StorageWorker::StorageWorker(StorageObject** pp, QString filename, QObject *parent) :QThread(parent), storagePointer(pp), changed(false), destroy(false), lastUpdate(QDateTime::currentDateTime()), filename_(filename), writingMutex(), storageInitialized(false), closing(false) {
+StorageWorker::StorageWorker(StorageObject** pp, QString filename, QObject *parent) :QThread(parent), onStorageReadyEvent(), storagePointer(pp), writingMutex(), filename_(filename), changed(false), closing(false), destroy(false), lastUpdate(QDateTime::currentDateTime()), storageInitialized(false) {
 }
 /**
  * @brief StorageWorker::~StorageWorker
